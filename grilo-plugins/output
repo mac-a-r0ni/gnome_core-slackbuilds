@@ -1,0 +1,507 @@
+grilo-plugins-0.3.15/
+grilo-plugins-0.3.15/.gitlab-ci.yml
+grilo-plugins-0.3.15/.mailmap
+grilo-plugins-0.3.15/AUTHORS
+grilo-plugins-0.3.15/COPYING
+grilo-plugins-0.3.15/NEWS
+grilo-plugins-0.3.15/README.md
+grilo-plugins-0.3.15/grilo-plugins-0.3.pc.in
+grilo-plugins-0.3.15/grilo-plugins.doap
+grilo-plugins-0.3.15/help/
+grilo-plugins-0.3.15/help/C/
+grilo-plugins-0.3.15/help/C/grilo-plugins.xml
+grilo-plugins-0.3.15/help/C/legal.xml
+grilo-plugins-0.3.15/help/LINGUAS
+grilo-plugins-0.3.15/help/ca/
+grilo-plugins-0.3.15/help/ca/ca.po
+grilo-plugins-0.3.15/help/cs/
+grilo-plugins-0.3.15/help/cs/cs.po
+grilo-plugins-0.3.15/help/da/
+grilo-plugins-0.3.15/help/da/da.po
+grilo-plugins-0.3.15/help/de/
+grilo-plugins-0.3.15/help/de/de.po
+grilo-plugins-0.3.15/help/es/
+grilo-plugins-0.3.15/help/es/es.po
+grilo-plugins-0.3.15/help/eu/
+grilo-plugins-0.3.15/help/eu/eu.po
+grilo-plugins-0.3.15/help/examples/
+grilo-plugins-0.3.15/help/examples/example-tmdb.c
+grilo-plugins-0.3.15/help/examples/meson.build
+grilo-plugins-0.3.15/help/gl/
+grilo-plugins-0.3.15/help/gl/gl.po
+grilo-plugins-0.3.15/help/hu/
+grilo-plugins-0.3.15/help/hu/hu.po
+grilo-plugins-0.3.15/help/meson.build
+grilo-plugins-0.3.15/help/nl/
+grilo-plugins-0.3.15/help/nl/nl.po
+grilo-plugins-0.3.15/help/pl/
+grilo-plugins-0.3.15/help/pl/pl.po
+grilo-plugins-0.3.15/help/pt_BR/
+grilo-plugins-0.3.15/help/pt_BR/pt_BR.po
+grilo-plugins-0.3.15/help/sv/
+grilo-plugins-0.3.15/help/sv/sv.po
+grilo-plugins-0.3.15/help/uk/
+grilo-plugins-0.3.15/help/uk/uk.po
+grilo-plugins-0.3.15/meson.build
+grilo-plugins-0.3.15/meson_options.txt
+grilo-plugins-0.3.15/po/
+grilo-plugins-0.3.15/po/LINGUAS
+grilo-plugins-0.3.15/po/POTFILES.in
+grilo-plugins-0.3.15/po/ab.po
+grilo-plugins-0.3.15/po/as.po
+grilo-plugins-0.3.15/po/be.po
+grilo-plugins-0.3.15/po/bg.po
+grilo-plugins-0.3.15/po/bs.po
+grilo-plugins-0.3.15/po/ca.po
+grilo-plugins-0.3.15/po/ca@valencia.po
+grilo-plugins-0.3.15/po/cs.po
+grilo-plugins-0.3.15/po/da.po
+grilo-plugins-0.3.15/po/de.po
+grilo-plugins-0.3.15/po/el.po
+grilo-plugins-0.3.15/po/en_GB.po
+grilo-plugins-0.3.15/po/eo.po
+grilo-plugins-0.3.15/po/es.po
+grilo-plugins-0.3.15/po/eu.po
+grilo-plugins-0.3.15/po/fi.po
+grilo-plugins-0.3.15/po/fr.po
+grilo-plugins-0.3.15/po/fur.po
+grilo-plugins-0.3.15/po/gl.po
+grilo-plugins-0.3.15/po/he.po
+grilo-plugins-0.3.15/po/hr.po
+grilo-plugins-0.3.15/po/hu.po
+grilo-plugins-0.3.15/po/id.po
+grilo-plugins-0.3.15/po/it.po
+grilo-plugins-0.3.15/po/ja.po
+grilo-plugins-0.3.15/po/ka.po
+grilo-plugins-0.3.15/po/ko.po
+grilo-plugins-0.3.15/po/lt.po
+grilo-plugins-0.3.15/po/lv.po
+grilo-plugins-0.3.15/po/meson.build
+grilo-plugins-0.3.15/po/ml.po
+grilo-plugins-0.3.15/po/ms.po
+grilo-plugins-0.3.15/po/nb.po
+grilo-plugins-0.3.15/po/ne.po
+grilo-plugins-0.3.15/po/nl.po
+grilo-plugins-0.3.15/po/oc.po
+grilo-plugins-0.3.15/po/pa.po
+grilo-plugins-0.3.15/po/pl.po
+grilo-plugins-0.3.15/po/pt.po
+grilo-plugins-0.3.15/po/pt_BR.po
+grilo-plugins-0.3.15/po/ro.po
+grilo-plugins-0.3.15/po/ru.po
+grilo-plugins-0.3.15/po/sk.po
+grilo-plugins-0.3.15/po/sl.po
+grilo-plugins-0.3.15/po/sr.po
+grilo-plugins-0.3.15/po/sr@latin.po
+grilo-plugins-0.3.15/po/sv.po
+grilo-plugins-0.3.15/po/tr.po
+grilo-plugins-0.3.15/po/uk.po
+grilo-plugins-0.3.15/po/zh_CN.po
+grilo-plugins-0.3.15/po/zh_HK.po
+grilo-plugins-0.3.15/po/zh_TW.po
+grilo-plugins-0.3.15/src/
+grilo-plugins-0.3.15/src/bookmarks/
+grilo-plugins-0.3.15/src/bookmarks/bookmarks-resource.c
+grilo-plugins-0.3.15/src/bookmarks/bookmarks-resource.h
+grilo-plugins-0.3.15/src/bookmarks/grl-bookmarks.c
+grilo-plugins-0.3.15/src/bookmarks/grl-bookmarks.h
+grilo-plugins-0.3.15/src/bookmarks/meson.build
+grilo-plugins-0.3.15/src/chromaprint/
+grilo-plugins-0.3.15/src/chromaprint/grl-chromaprint.c
+grilo-plugins-0.3.15/src/chromaprint/grl-chromaprint.h
+grilo-plugins-0.3.15/src/chromaprint/meson.build
+grilo-plugins-0.3.15/src/dleyna/
+grilo-plugins-0.3.15/src/dleyna/com.intel.dLeynaServer.Manager.xml
+grilo-plugins-0.3.15/src/dleyna/com.intel.dLeynaServer.MediaDevice.xml
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-server.c
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-server.h
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-servers-manager.c
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-servers-manager.h
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-source.c
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-source.h
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-utils.c
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna-utils.h
+grilo-plugins-0.3.15/src/dleyna/grl-dleyna.c
+grilo-plugins-0.3.15/src/dleyna/meson.build
+grilo-plugins-0.3.15/src/dleyna/org.gnome.UPnP.MediaServer2.xml
+grilo-plugins-0.3.15/src/dmap/
+grilo-plugins-0.3.15/src/dmap/grl-common.c
+grilo-plugins-0.3.15/src/dmap/grl-common.h
+grilo-plugins-0.3.15/src/dmap/grl-daap-compat.h
+grilo-plugins-0.3.15/src/dmap/grl-daap-db.c
+grilo-plugins-0.3.15/src/dmap/grl-daap-db.h
+grilo-plugins-0.3.15/src/dmap/grl-daap-record-factory.c
+grilo-plugins-0.3.15/src/dmap/grl-daap-record-factory.h
+grilo-plugins-0.3.15/src/dmap/grl-daap-record.c
+grilo-plugins-0.3.15/src/dmap/grl-daap-record.h
+grilo-plugins-0.3.15/src/dmap/grl-daap.c
+grilo-plugins-0.3.15/src/dmap/grl-daap.h
+grilo-plugins-0.3.15/src/dmap/grl-dmap-compat.h
+grilo-plugins-0.3.15/src/dmap/grl-dpap-compat.h
+grilo-plugins-0.3.15/src/dmap/grl-dpap-db.c
+grilo-plugins-0.3.15/src/dmap/grl-dpap-db.h
+grilo-plugins-0.3.15/src/dmap/grl-dpap-record-factory.c
+grilo-plugins-0.3.15/src/dmap/grl-dpap-record-factory.h
+grilo-plugins-0.3.15/src/dmap/grl-dpap-record.c
+grilo-plugins-0.3.15/src/dmap/grl-dpap-record.h
+grilo-plugins-0.3.15/src/dmap/grl-dpap.c
+grilo-plugins-0.3.15/src/dmap/grl-dpap.h
+grilo-plugins-0.3.15/src/dmap/meson.build
+grilo-plugins-0.3.15/src/filesystem/
+grilo-plugins-0.3.15/src/filesystem/TODO
+grilo-plugins-0.3.15/src/filesystem/grl-filesystem.c
+grilo-plugins-0.3.15/src/filesystem/grl-filesystem.h
+grilo-plugins-0.3.15/src/filesystem/meson.build
+grilo-plugins-0.3.15/src/flickr/
+grilo-plugins-0.3.15/src/flickr/flickr-oauth.c
+grilo-plugins-0.3.15/src/flickr/flickr-oauth.h
+grilo-plugins-0.3.15/src/flickr/gflickr.c
+grilo-plugins-0.3.15/src/flickr/gflickr.h
+grilo-plugins-0.3.15/src/flickr/grl-flickr.c
+grilo-plugins-0.3.15/src/flickr/grl-flickr.h
+grilo-plugins-0.3.15/src/flickr/meson.build
+grilo-plugins-0.3.15/src/freebox/
+grilo-plugins-0.3.15/src/freebox/free.png
+grilo-plugins-0.3.15/src/freebox/freebox-monitor.c
+grilo-plugins-0.3.15/src/freebox/freebox-monitor.h
+grilo-plugins-0.3.15/src/freebox/freebox.gresource.xml
+grilo-plugins-0.3.15/src/freebox/grl-freebox.c
+grilo-plugins-0.3.15/src/freebox/grl-freebox.h
+grilo-plugins-0.3.15/src/freebox/meson.build
+grilo-plugins-0.3.15/src/freebox/radios.m3u
+grilo-plugins-0.3.15/src/gravatar/
+grilo-plugins-0.3.15/src/gravatar/grl-gravatar.c
+grilo-plugins-0.3.15/src/gravatar/grl-gravatar.h
+grilo-plugins-0.3.15/src/gravatar/meson.build
+grilo-plugins-0.3.15/src/local-metadata/
+grilo-plugins-0.3.15/src/local-metadata/grl-local-metadata.c
+grilo-plugins-0.3.15/src/local-metadata/grl-local-metadata.h
+grilo-plugins-0.3.15/src/local-metadata/meson.build
+grilo-plugins-0.3.15/src/lua-factory/
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-common.h
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-factory.c
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-factory.gresource.xml
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-factory.h
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-library-operations.c
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-library-operations.h
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-library.c
+grilo-plugins-0.3.15/src/lua-factory/grl-lua-library.h
+grilo-plugins-0.3.15/src/lua-factory/lua-library/
+grilo-plugins-0.3.15/src/lua-factory/lua-library/htmlentity.gperf
+grilo-plugins-0.3.15/src/lua-factory/lua-library/htmlentity.h
+grilo-plugins-0.3.15/src/lua-factory/lua-library/inspect.lua
+grilo-plugins-0.3.15/src/lua-factory/lua-library/lua-json.c
+grilo-plugins-0.3.15/src/lua-factory/lua-library/lua-libraries.h
+grilo-plugins-0.3.15/src/lua-factory/lua-library/lua-xml.c
+grilo-plugins-0.3.15/src/lua-factory/meson.build
+grilo-plugins-0.3.15/src/lua-factory/sources/
+grilo-plugins-0.3.15/src/lua-factory/sources/euronews.svg
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-acoustid.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-appletrailers.gresource.xml
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-appletrailers.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-euronews.gresource.xml
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-euronews.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-guardianvideos.gresource.xml
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-guardianvideos.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-itunes-podcast.gresource.xml
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-itunes-podcast.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-lastfm-cover.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-musicbrainz-coverart.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-radiofrance.gresource.xml
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-radiofrance.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-steam-store.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-theaudiodb-cover.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-thegamesdb.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/grl-video-title-parsing.lua
+grilo-plugins-0.3.15/src/lua-factory/sources/guardianvideos.svg
+grilo-plugins-0.3.15/src/lua-factory/sources/itunes-podcast.png
+grilo-plugins-0.3.15/src/lua-factory/sources/meson.build
+grilo-plugins-0.3.15/src/lua-factory/sources/radiofrance.png
+grilo-plugins-0.3.15/src/lua-factory/sources/trailers.svg
+grilo-plugins-0.3.15/src/magnatune/
+grilo-plugins-0.3.15/src/magnatune/grl-magnatune.c
+grilo-plugins-0.3.15/src/magnatune/grl-magnatune.h
+grilo-plugins-0.3.15/src/magnatune/meson.build
+grilo-plugins-0.3.15/src/meson.build
+grilo-plugins-0.3.15/src/metadata-store/
+grilo-plugins-0.3.15/src/metadata-store/grl-metadata-store.c
+grilo-plugins-0.3.15/src/metadata-store/grl-metadata-store.h
+grilo-plugins-0.3.15/src/metadata-store/meson.build
+grilo-plugins-0.3.15/src/opensubtitles/
+grilo-plugins-0.3.15/src/opensubtitles/grl-opensubtitles.c
+grilo-plugins-0.3.15/src/opensubtitles/grl-opensubtitles.h
+grilo-plugins-0.3.15/src/opensubtitles/meson.build
+grilo-plugins-0.3.15/src/optical-media/
+grilo-plugins-0.3.15/src/optical-media/grl-optical-media.c
+grilo-plugins-0.3.15/src/optical-media/grl-optical-media.h
+grilo-plugins-0.3.15/src/optical-media/meson.build
+grilo-plugins-0.3.15/src/podcasts/
+grilo-plugins-0.3.15/src/podcasts/TODO
+grilo-plugins-0.3.15/src/podcasts/grl-podcasts.c
+grilo-plugins-0.3.15/src/podcasts/grl-podcasts.h
+grilo-plugins-0.3.15/src/podcasts/meson.build
+grilo-plugins-0.3.15/src/raitv/
+grilo-plugins-0.3.15/src/raitv/channel-rai.svg
+grilo-plugins-0.3.15/src/raitv/grl-raitv.c
+grilo-plugins-0.3.15/src/raitv/grl-raitv.h
+grilo-plugins-0.3.15/src/raitv/meson.build
+grilo-plugins-0.3.15/src/raitv/raitv.gresource.xml
+grilo-plugins-0.3.15/src/shoutcast/
+grilo-plugins-0.3.15/src/shoutcast/grl-shoutcast.c
+grilo-plugins-0.3.15/src/shoutcast/grl-shoutcast.h
+grilo-plugins-0.3.15/src/shoutcast/meson.build
+grilo-plugins-0.3.15/src/thetvdb/
+grilo-plugins-0.3.15/src/thetvdb/grl-thetvdb.c
+grilo-plugins-0.3.15/src/thetvdb/grl-thetvdb.h
+grilo-plugins-0.3.15/src/thetvdb/meson.build
+grilo-plugins-0.3.15/src/thetvdb/thetvdb-resources-episodes.c
+grilo-plugins-0.3.15/src/thetvdb/thetvdb-resources-fuzzy-names.c
+grilo-plugins-0.3.15/src/thetvdb/thetvdb-resources-series.c
+grilo-plugins-0.3.15/src/thetvdb/thetvdb-resources.h
+grilo-plugins-0.3.15/src/tmdb/
+grilo-plugins-0.3.15/src/tmdb/grl-tmdb-request.c
+grilo-plugins-0.3.15/src/tmdb/grl-tmdb-request.h
+grilo-plugins-0.3.15/src/tmdb/grl-tmdb.c
+grilo-plugins-0.3.15/src/tmdb/grl-tmdb.h
+grilo-plugins-0.3.15/src/tmdb/meson.build
+grilo-plugins-0.3.15/src/tracker/
+grilo-plugins-0.3.15/src/tracker/grl-tracker-request-queue.c
+grilo-plugins-0.3.15/src/tracker/grl-tracker-request-queue.h
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source-api.c
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source-api.h
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source-cache.c
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source-cache.h
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source-notif.c
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source-notif.h
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source-priv.h
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source.c
+grilo-plugins-0.3.15/src/tracker/grl-tracker-source.h
+grilo-plugins-0.3.15/src/tracker/grl-tracker-utils.c
+grilo-plugins-0.3.15/src/tracker/grl-tracker-utils.h
+grilo-plugins-0.3.15/src/tracker/grl-tracker.c
+grilo-plugins-0.3.15/src/tracker/grl-tracker.h
+grilo-plugins-0.3.15/src/tracker/meson.build
+grilo-plugins-0.3.15/src/tracker3/
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-api.c
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-api.h
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-cache.c
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-cache.h
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-notif.c
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-notif.h
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-priv.h
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-statements.c
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source-statements.h
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source.c
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-source.h
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-utils.c
+grilo-plugins-0.3.15/src/tracker3/grl-tracker-utils.h
+grilo-plugins-0.3.15/src/tracker3/grl-tracker.c
+grilo-plugins-0.3.15/src/tracker3/grl-tracker.h
+grilo-plugins-0.3.15/src/tracker3/meson.build
+grilo-plugins-0.3.15/src/youtube/
+grilo-plugins-0.3.15/src/youtube/TODO
+grilo-plugins-0.3.15/src/youtube/channel-youtube.svg
+grilo-plugins-0.3.15/src/youtube/grl-youtube.c
+grilo-plugins-0.3.15/src/youtube/grl-youtube.h
+grilo-plugins-0.3.15/src/youtube/meson.build
+grilo-plugins-0.3.15/src/youtube/youtube.gresource.xml
+grilo-plugins-0.3.15/subprojects/
+grilo-plugins-0.3.15/subprojects/grilo.wrap
+grilo-plugins-0.3.15/tests/
+grilo-plugins-0.3.15/tests/chromaprint/
+grilo-plugins-0.3.15/tests/chromaprint/data/
+grilo-plugins-0.3.15/tests/chromaprint/data/sample.flac
+grilo-plugins-0.3.15/tests/chromaprint/data/sample.ogg
+grilo-plugins-0.3.15/tests/chromaprint/meson.build
+grilo-plugins-0.3.15/tests/chromaprint/test_chromaprint_resolve.c
+grilo-plugins-0.3.15/tests/chromaprint/test_chromaprint_utils.c
+grilo-plugins-0.3.15/tests/chromaprint/test_chromaprint_utils.h
+grilo-plugins-0.3.15/tests/dleyna/
+grilo-plugins-0.3.15/tests/dleyna/data/
+grilo-plugins-0.3.15/tests/dleyna/data/helloworld.txt
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/dleyna-server-mock
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/dleyna-server-mock.service.in
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/dleynamanager.py
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/dleynamediacontainer.py
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/dleynamediadevice.py
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/dleynamediaobject.py
+grilo-plugins-0.3.15/tests/dleyna/dbusmock/items.py
+grilo-plugins-0.3.15/tests/dleyna/meson.build
+grilo-plugins-0.3.15/tests/dleyna/test_dleyna.c
+grilo-plugins-0.3.15/tests/dleyna/test_dleyna_utils.c
+grilo-plugins-0.3.15/tests/dleyna/test_dleyna_utils.h
+grilo-plugins-0.3.15/tests/games/
+grilo-plugins-0.3.15/tests/games/data/
+grilo-plugins-0.3.15/tests/games/data/network-data.ini
+grilo-plugins-0.3.15/tests/games/data/resolve-asterix.data
+grilo-plugins-0.3.15/tests/games/data/resolve-getgame-asterix.data
+grilo-plugins-0.3.15/tests/games/data/resolve-getgame-kirby-gb.data
+grilo-plugins-0.3.15/tests/games/data/resolve-getgame-kirby.data
+grilo-plugins-0.3.15/tests/games/data/resolve-getgame-shatterhand.data
+grilo-plugins-0.3.15/tests/games/data/resolve-getgame-sonic-sms.data
+grilo-plugins-0.3.15/tests/games/data/resolve-getgame-sonic.data
+grilo-plugins-0.3.15/tests/games/data/resolve-getgame-strider.data
+grilo-plugins-0.3.15/tests/games/data/resolve-kirby-gb.data
+grilo-plugins-0.3.15/tests/games/data/resolve-kirby.data
+grilo-plugins-0.3.15/tests/games/data/resolve-shatterhand.data
+grilo-plugins-0.3.15/tests/games/data/resolve-sonic-sms.data
+grilo-plugins-0.3.15/tests/games/data/resolve-sonic.data
+grilo-plugins-0.3.15/tests/games/data/resolve-strider.data
+grilo-plugins-0.3.15/tests/games/meson.build
+grilo-plugins-0.3.15/tests/games/test_games.c
+grilo-plugins-0.3.15/tests/local-metadata/
+grilo-plugins-0.3.15/tests/local-metadata/meson.build
+grilo-plugins-0.3.15/tests/local-metadata/test_local_metadata.c
+grilo-plugins-0.3.15/tests/lua-factory/
+grilo-plugins-0.3.15/tests/lua-factory/data/
+grilo-plugins-0.3.15/tests/lua-factory/data/config.ini
+grilo-plugins-0.3.15/tests/lua-factory/data/grl-media-test-all-metadata.json
+grilo-plugins-0.3.15/tests/lua-factory/data/grl-media-test-related-keys.json
+grilo-plugins-0.3.15/tests/lua-factory/data/test-source-grl-media.lua
+grilo-plugins-0.3.15/tests/lua-factory/data/test-source-lua-errors.lua
+grilo-plugins-0.3.15/tests/lua-factory/data/test-source-xml-parser.lua
+grilo-plugins-0.3.15/tests/lua-factory/data/xml-parser-test-simple-table.lua
+grilo-plugins-0.3.15/tests/lua-factory/data/xml-parser-test-simple.xml
+grilo-plugins-0.3.15/tests/lua-factory/meson.build
+grilo-plugins-0.3.15/tests/lua-factory/sources/
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/acoustid_ludovico_einaudi_primavera.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/acoustid_norah_jones_chasing_pirates.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/acoustid_philip_glass_the_passion_of.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/acoustid_radiohead_paranoid_android.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/acoustid_trombone_shorty_buckjump.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/chromaprint_ludovico_einaudi_primavera.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/chromaprint_norah_jones_chasing_pirates.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/chromaprint_philip_glass_the_passion_of.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/chromaprint_radiohead_paranoid_android.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/chromaprint_trombone_shorty_buckjump.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/config.ini
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/lyrics_back_it_up.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/lyrics_bohemian_rhapsody.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/lyrics_nobodys_perfect.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/lyrics_ring_of_fire.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/theaudiodb_coldplay.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/theaudiodb_pixies_doolittle.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/theaudiodb_radiohead_nevermind.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/data/theaudiodb_systemofadown.txt
+grilo-plugins-0.3.15/tests/lua-factory/sources/meson.build
+grilo-plugins-0.3.15/tests/lua-factory/sources/test_lua_acoustid.c
+grilo-plugins-0.3.15/tests/lua-factory/sources/test_lua_acoustid.gresource.xml
+grilo-plugins-0.3.15/tests/lua-factory/sources/test_lua_factory_utils.c
+grilo-plugins-0.3.15/tests/lua-factory/sources/test_lua_factory_utils.h
+grilo-plugins-0.3.15/tests/lua-factory/sources/test_lua_theaudiodb.c
+grilo-plugins-0.3.15/tests/lua-factory/test_lua_factory_grl_media.c
+grilo-plugins-0.3.15/tests/lua-factory/test_lua_factory_source_errors.c
+grilo-plugins-0.3.15/tests/lua-factory/test_lua_factory_tests.gresource.xml
+grilo-plugins-0.3.15/tests/lua-factory/test_lua_factory_xml_parser.c
+grilo-plugins-0.3.15/tests/meson.build
+grilo-plugins-0.3.15/tests/steam-store/
+grilo-plugins-0.3.15/tests/steam-store/data/
+grilo-plugins-0.3.15/tests/steam-store/data/network-data.ini
+grilo-plugins-0.3.15/tests/steam-store/data/resolve-641990.data
+grilo-plugins-0.3.15/tests/steam-store/meson.build
+grilo-plugins-0.3.15/tests/steam-store/test_steam_store.c
+grilo-plugins-0.3.15/tests/thetvdb/
+grilo-plugins-0.3.15/tests/thetvdb/data/
+grilo-plugins-0.3.15/tests/thetvdb/data/adventure_time_get_series.txt
+grilo-plugins-0.3.15/tests/thetvdb/data/adventure_time_series_all_en.zip
+grilo-plugins-0.3.15/tests/thetvdb/data/boardwalk_empire_get_series.txt
+grilo-plugins-0.3.15/tests/thetvdb/data/boardwalk_empire_series_all_en.zip
+grilo-plugins-0.3.15/tests/thetvdb/data/config.ini
+grilo-plugins-0.3.15/tests/thetvdb/data/csi_miami_get_series.txt
+grilo-plugins-0.3.15/tests/thetvdb/data/csi_miami_series_all_en.zip
+grilo-plugins-0.3.15/tests/thetvdb/data/felicity_get_series.txt
+grilo-plugins-0.3.15/tests/thetvdb/data/felicity_series_all_en.zip
+grilo-plugins-0.3.15/tests/thetvdb/data/house_get_series.txt
+grilo-plugins-0.3.15/tests/thetvdb/data/house_series_all_en.zip
+grilo-plugins-0.3.15/tests/thetvdb/data/les_experts_miami_get_series.txt
+grilo-plugins-0.3.15/tests/thetvdb/data/naruto_get_series.txt
+grilo-plugins-0.3.15/tests/thetvdb/data/naruto_series_all_en.zip
+grilo-plugins-0.3.15/tests/thetvdb/meson.build
+grilo-plugins-0.3.15/tests/thetvdb/test_thetvdb_resolve_episodes.c
+grilo-plugins-0.3.15/tests/thetvdb/test_thetvdb_resolve_shows.c
+grilo-plugins-0.3.15/tests/thetvdb/test_thetvdb_resolve_stress.c
+grilo-plugins-0.3.15/tests/thetvdb/test_thetvdb_utils.c
+grilo-plugins-0.3.15/tests/thetvdb/test_thetvdb_utils.h
+grilo-plugins-0.3.15/tests/tmdb/
+grilo-plugins-0.3.15/tests/tmdb/data/
+grilo-plugins-0.3.15/tests/tmdb/data/configuration.txt
+grilo-plugins-0.3.15/tests/tmdb/data/details.txt
+grilo-plugins-0.3.15/tests/tmdb/data/empty-data.ini
+grilo-plugins-0.3.15/tests/tmdb/data/fast-by-id.ini
+grilo-plugins-0.3.15/tests/tmdb/data/multiple.txt
+grilo-plugins-0.3.15/tests/tmdb/data/no-details.ini
+grilo-plugins-0.3.15/tests/tmdb/data/search.txt
+grilo-plugins-0.3.15/tests/tmdb/data/sherlock.ini
+grilo-plugins-0.3.15/tests/tmdb/meson.build
+grilo-plugins-0.3.15/tests/tmdb/test_tmdb_fast_resolution.c
+grilo-plugins-0.3.15/tests/tmdb/test_tmdb_fast_resolution_by_id.c
+grilo-plugins-0.3.15/tests/tmdb/test_tmdb_full_resolution.c
+grilo-plugins-0.3.15/tests/tmdb/test_tmdb_missing_configuration.c
+grilo-plugins-0.3.15/tests/tmdb/test_tmdb_preconditions.c
+grilo-plugins-0.3.15/tests/tmdb/test_tmdb_utils.c
+grilo-plugins-0.3.15/tests/tmdb/test_tmdb_utils.h
+grilo-plugins-0.3.15/tests/tracker3/
+grilo-plugins-0.3.15/tests/tracker3/data/
+grilo-plugins-0.3.15/tests/tracker3/data/sample.flac
+grilo-plugins-0.3.15/tests/tracker3/data/sample.mp3
+grilo-plugins-0.3.15/tests/tracker3/data/sample.ogg
+grilo-plugins-0.3.15/tests/tracker3/data/sample.ogv
+grilo-plugins-0.3.15/tests/tracker3/data/sample.png
+grilo-plugins-0.3.15/tests/tracker3/meson.build
+grilo-plugins-0.3.15/tests/tracker3/test_tracker3.c
+The Meson build system
+Version: 0.63.1
+Source dir: /tmp/jbl/grilo-plugins-0.3.15
+Build dir: /tmp/jbl/grilo-plugins-0.3.15/build
+Build type: native build
+Project name: grilo-plugins
+Project version: 0.3.15
+C compiler for the host machine: ccache cc (gcc 12.2.0 "cc (GCC) 12.2.0")
+C linker for the host machine: cc ld.bfd 2.39-slack151
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Found pkg-config: /usr/bin/pkg-config (0.29.2)
+Run-time dependency glib-2.0 found: YES 2.72.3
+Run-time dependency gmodule-2.0 found: YES 2.72.3
+Run-time dependency gobject-2.0 found: YES 2.72.3
+Run-time dependency grilo-0.3 found: YES 0.3.15
+Configuring grilo-plugins-0.3.pc using configuration
+Run-time dependency avahi-client found: YES 0.8
+Run-time dependency avahi-glib found: YES 0.8
+Run-time dependency avahi-gobject found: YES 0.8
+Run-time dependency gio-2.0 found: YES 2.72.3
+Run-time dependency gio-unix-2.0 found: YES 2.72.3
+Run-time dependency goa-1.0 found: YES 3.44.0
+Run-time dependency gom-1.0 found: YES 0.4
+Run-time dependency grilo-net-0.3 found: YES 0.3.15
+../meson.build:60: WARNING: Project targets '>= 0.47.0' but uses feature introduced in '0.51.0': dependency.get_variable.
+../meson.build:60: WARNING: Project targets '>= 0.47.0' but uses feature introduced in '0.58.0': Positional argument to dependency.get_variable().
+Run-time dependency grilo-pls-0.3 found: YES 0.3.15
+Run-time dependency gstreamer-1.0 found: YES 1.20.3
+Run-time dependency gthread-2.0 found: YES 2.72.3
+Run-time dependency json-glib-1.0 found: YES 1.6.6
+Run-time dependency libarchive found: YES 3.6.1
+Run-time dependency libdmapsharing-4.0 found: YES 3.9.10
+Run-time dependency libmediaart-2.0 found: YES 1.9.6
+Run-time dependency libsoup-3.0 found: YES 3.0.7
+Found CMake: /usr/bin/cmake (3.24.1)
+Run-time dependency unresolvable-dep found: NO (tried pkgconfig and cmake)
+Run-time dependency unresolvable-dep found: NO (tried pkgconfig and cmake)
+Run-time dependency libxml-2.0 found: YES 2.9.14
+Run-time dependency oauth found: YES 1.0.3
+Run-time dependency sqlite3 found: YES 3.39.2
+Run-time dependency totem-plparser found: YES 3.26.6
+Run-time dependency totem-plparser-mini found: YES 3.26.6
+Run-time dependency tracker-sparql-2.0 found: NO (tried pkgconfig and cmake)
+Run-time dependency tracker-sparql-3.0 found: YES 3.3.2
+Run-time dependency tracker-testutils-3.0 found: YES 3.3.2
+Run-time dependency lua found: NO (tried pkgconfig and cmake)
+Run-time dependency lua5.3 found: YES 5.3.6
+Program gperf found: YES (/usr/bin/gperf)
+Program glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+
+../meson.build:164:16: ERROR: Problem encountered: Missing dependencies for opensubtitles plugin
+
+A full log can be found at /tmp/jbl/grilo-plugins-0.3.15/build/meson-logs/meson-log.txt

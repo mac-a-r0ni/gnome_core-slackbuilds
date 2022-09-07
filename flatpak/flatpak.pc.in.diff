@@ -1,0 +1,11 @@
+--- a/flatpak.pc.in
++++ b/flatpak.pc.in
+@@ -6,6 +6,7 @@
+ datadir=@datadir@
+ 
+ interfaces_dir=${datadir}/dbus-1/interfaces/
++httpbackend=@http_backend@
+ 
+ Name: flatpak
+ Description: Application sandboxing framework
+

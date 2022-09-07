@@ -1,0 +1,8 @@
+PRGNAM="geoclue2"
+VERSION="2.6.0"
+HOMEPAGE="https://www.freedesktop.org/wiki/Software/GeoClue"
+DOWNLOAD="https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/2.6.0/geoclue-2.6.0.tar.bz2"
+MD5SUM="07ed45bc145e87d7f76fa521d5412f29"
+REQUIRES="avahi"
+MAINTAINER=""
+EMAIL=""

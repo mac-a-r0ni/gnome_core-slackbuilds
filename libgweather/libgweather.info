@@ -1,0 +1,8 @@
+PRGNAM="libgweather"
+VERSION="4.1.0"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/libgweather"
+DOWNLOAD="https://download.gnome.org/sources/libgweather/4.1/libgweather-4.1.0.tar.xz"
+MD5SUM="dbdef2d9eb042b0bf0600f40f6c0c58f"
+REQUIRES="geocode-glib"
+MAINTAINER=""
+EMAIL=""

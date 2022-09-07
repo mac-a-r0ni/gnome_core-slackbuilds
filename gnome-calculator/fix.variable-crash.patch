@@ -1,0 +1,46 @@
+diff --git a/src/math-variable-popover.vala b/src/math-variable-popover.vala
+index 2318934d5ed3555bc5ba31586c0ee4b7bbe7a6c9..76b17eea8391e03b17e06603c7f8f2da6b542971 100644
+--- a/src/math-variable-popover.vala
++++ b/src/math-variable-popover.vala
+@@ -42,11 +42,14 @@ public class MathVariablePopover : MathPopover<MathVariable>
+     [GtkChild]
+     private unowned Gtk.Button store_variable_button;
+ 
++    private ulong changed_handler;
++
+     public MathVariablePopover (MathEquation equation, ListStore model, CompareDataFunc compare_func)
+     {
+         base(equation, model, (a,b) => MathVariable.name_compare_func(a as MathVariable,b as MathVariable));
+ 
+         variable_list.bind_model (model, (variable) => make_item_row (variable as MathVariable));
++        changed_handler = variable_name_entry.changed.connect (variable_name_changed_cb);
+         equation.history_signal.connect (this.handler);
+         item_deleted.connect (delete_variable_cb);
+     }
+@@ -72,11 +75,12 @@ public class MathVariablePopover : MathPopover<MathVariable>
+         equation.insert (variable.name);
+     }
+ 
+-    [GtkCallback]
+     private void variable_name_changed_cb (Gtk.Editable editable)
+     {
+         var entry = editable as Gtk.Entry;
++        SignalHandler.block (entry, changed_handler);
+         entry.text = entry.text.replace (" ", "_");
++        SignalHandler.unblock (entry, changed_handler);
+         store_variable_button.sensitive = (entry.text != "");
+     }
+ 
+diff --git a/src/ui/math-variable-popover.ui b/src/ui/math-variable-popover.ui
+index cb98fc4998151b8550ca8605d806f7cb91f6f5bb..17ed4c8a10f4e148494af7874261cc4f2903a4e4 100644
+--- a/src/ui/math-variable-popover.ui
++++ b/src/ui/math-variable-popover.ui
+@@ -30,7 +30,6 @@
+               <object class="GtkEntry" id="variable_name_entry">
+                 <property name="placeholder_text" translatable="yes">Variable name</property>
+                 <property name="receives_default">True</property>
+-                <signal name="changed" handler="variable_name_changed_cb" swapped="no"/>
+                 <signal name="activate" handler="store_variable_cb" swapped="no"/>
+               </object>
+             </child>
+

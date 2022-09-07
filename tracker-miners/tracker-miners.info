@@ -1,0 +1,8 @@
+PRGNAM="Tracker Miners"
+VERSION="3.4.0.alpha"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/tracker-miners"
+DOWNLOAD="https://download.gnome.org/sources/tracker-miners/3.4/tracker-miners-3.4.0.alpha.tar.xz"
+MD5SUM="d676db87efab9db2f7f109d847256c81"
+REQUIRES="%README% tracker"
+MAINTAINER=""
+EMAIL=""

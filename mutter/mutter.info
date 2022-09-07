@@ -1,0 +1,8 @@
+PRGNAM="mutter"
+VERSION="42.2"
+HOMEPAGE="https://wiki.gnome.org/Projects/Mutter"
+DOWNLOAD="https://download.gnome.org/sources/mutter/42/mutter-42.2.tar.xz"
+MD5SUM="4c04e90c7720fa0e7b0436e9d17e5ebc"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

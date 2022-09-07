@@ -1,0 +1,12 @@
+diff -Naur gnome-bluetooth-42.0/lib/meson.build gnome-bluetooth-42.0-patched/lib/meson.build
+--- gnome-bluetooth-42.2/lib/meson.build	2022-03-18 22:01:00.000000000 +0000
++++ gnome-bluetooth-42.2-patched/lib/meson.build	2022-04-27 18:02:28.881190948 +0000
+@@ -184,7 +184,7 @@
+   description: 'Bluetooth libraries for gnome-control-center',
+   filebase: gnomebt_ui_api_name,
+   subdirs: gnomebt_api_name,
+-  requires: ui_deps,
++  requires: deps,
+   variables: 'exec_prefix=${prefix}',
+ )
+ 

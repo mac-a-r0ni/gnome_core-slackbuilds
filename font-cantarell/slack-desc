@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+              |-----handy-ruler------------------------------------------------------|
+font-cantarell: font-cantarell (The Cantarell typeface family)
+font-cantarell:
+font-cantarell: The Cantarell typeface family is a contemporary Humanist sans serif,
+font-cantarell: and is used by the GNOME project for its user interface and the
+font-cantarell: Fedora project.)
+font-cantarell: Cantarell was originally designed by Dave Crossland as part of his
+font-cantarell: coursework for the MA Typeface Design programme at the Department
+font-cantarell: of Typography in the University of Reading, England.
+font-cantarell:
+font-cantarell: Homepage: https://gitlab.gnome.org/GNOME/cantarell-fonts
+font-cantarell:

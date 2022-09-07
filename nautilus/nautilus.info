@@ -1,0 +1,8 @@
+PRGNAM="nautilus"
+VERSION="42.2"
+HOMEPAGE="https://wiki.gnome.org/Apps/Files"
+DOWNLOAD="https://download.gnome.org/core/42/42.2/sources/nautilus-42.2.tar.xz"
+MD5SUM="21928ad0600f3693326e82693bb89f30"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

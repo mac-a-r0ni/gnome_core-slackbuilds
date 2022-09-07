@@ -1,0 +1,769 @@
+grilo-0.3.15/
+grilo-0.3.15/.editorconfig
+grilo-0.3.15/.gitlab-ci.yml
+grilo-0.3.15/.mailmap
+grilo-0.3.15/AUTHORS
+grilo-0.3.15/COPYING
+grilo-0.3.15/NEWS
+grilo-0.3.15/README.md
+grilo-0.3.15/TODO
+grilo-0.3.15/bindings/
+grilo-0.3.15/bindings/meson.build
+grilo-0.3.15/bindings/vala/
+grilo-0.3.15/bindings/vala/Grl-0.3.metadata
+grilo-0.3.15/bindings/vala/GrlNet-0.3.metadata
+grilo-0.3.15/bindings/vala/grilo-0.3-custom.vala
+grilo-0.3.15/bindings/vala/grilo-0.3.deps
+grilo-0.3.15/bindings/vala/grilo-net-0.3-custom.vala
+grilo-0.3.15/bindings/vala/grilo-net-0.3.deps
+grilo-0.3.15/bindings/vala/meson.build
+grilo-0.3.15/doc/
+grilo-0.3.15/doc/grilo/
+grilo-0.3.15/doc/grilo/environment-setup.xml
+grilo-0.3.15/doc/grilo/grilo-docs.sgml
+grilo-0.3.15/doc/grilo/grilo-overrides.txt
+grilo-0.3.15/doc/grilo/grilo-sections.txt
+grilo-0.3.15/doc/grilo/grilo.types
+grilo-0.3.15/doc/grilo/meson.build
+grilo-0.3.15/doc/grilo/overview.xml
+grilo-0.3.15/doc/grilo/plugins-sources.xml
+grilo-0.3.15/doc/grilo/plugins-testing.xml
+grilo-0.3.15/doc/grilo/quick-start.xml
+grilo-0.3.15/doc/grilo/writing-apps.xml
+grilo-0.3.15/doc/man/
+grilo-0.3.15/doc/man/grilo-test-ui-0.3.1
+grilo-0.3.15/doc/man/grl-inspect-0.3.1
+grilo-0.3.15/doc/man/grl-launch-0.3.1
+grilo-0.3.15/doc/man/meson.build
+grilo-0.3.15/doc/meson.build
+grilo-0.3.15/examples/
+grilo-0.3.15/examples/browsing-pls.c
+grilo-0.3.15/examples/browsing.c
+grilo-0.3.15/examples/configuring-plugins.c
+grilo-0.3.15/examples/efficient-metadata-resolution.c
+grilo-0.3.15/examples/loading-plugins.c
+grilo-0.3.15/examples/meson.build
+grilo-0.3.15/examples/multivalues.c
+grilo-0.3.15/examples/searching.c
+grilo-0.3.15/grilo.doap
+grilo-0.3.15/libs/
+grilo-0.3.15/libs/meson.build
+grilo-0.3.15/libs/net/
+grilo-0.3.15/libs/net/grl-net-mock-private.h
+grilo-0.3.15/libs/net/grl-net-mock.c
+grilo-0.3.15/libs/net/grl-net-wc-private.h
+grilo-0.3.15/libs/net/grl-net-wc.c
+grilo-0.3.15/libs/net/grl-net-wc.h
+grilo-0.3.15/libs/net/grl-net.h
+grilo-0.3.15/libs/net/meson.build
+grilo-0.3.15/libs/pls/
+grilo-0.3.15/libs/pls/grl-pls.c
+grilo-0.3.15/libs/pls/grl-pls.h
+grilo-0.3.15/libs/pls/meson.build
+grilo-0.3.15/meson.build
+grilo-0.3.15/meson_options.txt
+grilo-0.3.15/po/
+grilo-0.3.15/po/LINGUAS
+grilo-0.3.15/po/POTFILES.in
+grilo-0.3.15/po/ab.po
+grilo-0.3.15/po/as.po
+grilo-0.3.15/po/be.po
+grilo-0.3.15/po/bg.po
+grilo-0.3.15/po/bs.po
+grilo-0.3.15/po/ca.po
+grilo-0.3.15/po/ca@valencia.po
+grilo-0.3.15/po/cs.po
+grilo-0.3.15/po/da.po
+grilo-0.3.15/po/de.po
+grilo-0.3.15/po/el.po
+grilo-0.3.15/po/en_GB.po
+grilo-0.3.15/po/eo.po
+grilo-0.3.15/po/es.po
+grilo-0.3.15/po/eu.po
+grilo-0.3.15/po/fa.po
+grilo-0.3.15/po/fi.po
+grilo-0.3.15/po/fr.po
+grilo-0.3.15/po/fur.po
+grilo-0.3.15/po/gl.po
+grilo-0.3.15/po/he.po
+grilo-0.3.15/po/hr.po
+grilo-0.3.15/po/hu.po
+grilo-0.3.15/po/id.po
+grilo-0.3.15/po/it.po
+grilo-0.3.15/po/ja.po
+grilo-0.3.15/po/ka.po
+grilo-0.3.15/po/ko.po
+grilo-0.3.15/po/lt.po
+grilo-0.3.15/po/lv.po
+grilo-0.3.15/po/meson.build
+grilo-0.3.15/po/ml.po
+grilo-0.3.15/po/ms.po
+grilo-0.3.15/po/nb.po
+grilo-0.3.15/po/ne.po
+grilo-0.3.15/po/nl.po
+grilo-0.3.15/po/oc.po
+grilo-0.3.15/po/pa.po
+grilo-0.3.15/po/pl.po
+grilo-0.3.15/po/pt.po
+grilo-0.3.15/po/pt_BR.po
+grilo-0.3.15/po/ro.po
+grilo-0.3.15/po/ru.po
+grilo-0.3.15/po/sk.po
+grilo-0.3.15/po/sl.po
+grilo-0.3.15/po/sr.po
+grilo-0.3.15/po/sr@latin.po
+grilo-0.3.15/po/sv.po
+grilo-0.3.15/po/tg.po
+grilo-0.3.15/po/tr.po
+grilo-0.3.15/po/uk.po
+grilo-0.3.15/po/zh_CN.po
+grilo-0.3.15/po/zh_HK.po
+grilo-0.3.15/po/zh_TW.po
+grilo-0.3.15/src/
+grilo-0.3.15/src/data/
+grilo-0.3.15/src/data/grl-config.c
+grilo-0.3.15/src/data/grl-config.h
+grilo-0.3.15/src/data/grl-data.c
+grilo-0.3.15/src/data/grl-data.h
+grilo-0.3.15/src/data/grl-media.c
+grilo-0.3.15/src/data/grl-media.h
+grilo-0.3.15/src/data/grl-related-keys.c
+grilo-0.3.15/src/data/grl-related-keys.h
+grilo-0.3.15/src/grilo.c
+grilo-0.3.15/src/grilo.h
+grilo-0.3.15/src/grl-caps.c
+grilo-0.3.15/src/grl-caps.h
+grilo-0.3.15/src/grl-definitions.h
+grilo-0.3.15/src/grl-error.h
+grilo-0.3.15/src/grl-log-priv.h
+grilo-0.3.15/src/grl-log.c
+grilo-0.3.15/src/grl-log.h
+grilo-0.3.15/src/grl-marshal.list
+grilo-0.3.15/src/grl-metadata-key-priv.h
+grilo-0.3.15/src/grl-metadata-key.c
+grilo-0.3.15/src/grl-metadata-key.h
+grilo-0.3.15/src/grl-multiple.c
+grilo-0.3.15/src/grl-multiple.h
+grilo-0.3.15/src/grl-operation-options-priv.h
+grilo-0.3.15/src/grl-operation-options.c
+grilo-0.3.15/src/grl-operation-options.h
+grilo-0.3.15/src/grl-operation-priv.h
+grilo-0.3.15/src/grl-operation.c
+grilo-0.3.15/src/grl-operation.h
+grilo-0.3.15/src/grl-plugin-priv.h
+grilo-0.3.15/src/grl-plugin.c
+grilo-0.3.15/src/grl-plugin.h
+grilo-0.3.15/src/grl-range-value.c
+grilo-0.3.15/src/grl-range-value.h
+grilo-0.3.15/src/grl-registry-priv.h
+grilo-0.3.15/src/grl-registry.c
+grilo-0.3.15/src/grl-registry.h
+grilo-0.3.15/src/grl-source.c
+grilo-0.3.15/src/grl-source.h
+grilo-0.3.15/src/grl-sync-priv.h
+grilo-0.3.15/src/grl-sync.c
+grilo-0.3.15/src/grl-type-builtins.c.template
+grilo-0.3.15/src/grl-type-builtins.h.template
+grilo-0.3.15/src/grl-util.c
+grilo-0.3.15/src/grl-util.h
+grilo-0.3.15/src/grl-value-helper.c
+grilo-0.3.15/src/grl-value-helper.h
+grilo-0.3.15/src/meson.build
+grilo-0.3.15/tests/
+grilo-0.3.15/tests/autoptr.c
+grilo-0.3.15/tests/lib-net.c
+grilo-0.3.15/tests/media.c
+grilo-0.3.15/tests/meson.build
+grilo-0.3.15/tests/operations.c
+grilo-0.3.15/tests/python/
+grilo-0.3.15/tests/python/constants.py
+grilo-0.3.15/tests/python/test_fs.py
+grilo-0.3.15/tests/python/test_media.py
+grilo-0.3.15/tests/python/test_net.py
+grilo-0.3.15/tests/python/test_options.py
+grilo-0.3.15/tests/python/test_plugin.py
+grilo-0.3.15/tests/python/test_registry.py
+grilo-0.3.15/tests/python/testrunner.py
+grilo-0.3.15/tests/python/util.py.in
+grilo-0.3.15/tests/registry.c
+grilo-0.3.15/tools/
+grilo-0.3.15/tools/grilo-inspect/
+grilo-0.3.15/tools/grilo-inspect/generate_core_keys.py
+grilo-0.3.15/tools/grilo-inspect/grl-inspect.c
+grilo-0.3.15/tools/grilo-inspect/meson.build
+grilo-0.3.15/tools/grilo-launch/
+grilo-0.3.15/tools/grilo-launch/grl-launch.c
+grilo-0.3.15/tools/grilo-launch/meson.build
+grilo-0.3.15/tools/grilo-test-ui/
+grilo-0.3.15/tools/grilo-test-ui/TODO
+grilo-0.3.15/tools/grilo-test-ui/flickr-oauth.c
+grilo-0.3.15/tools/grilo-test-ui/flickr-oauth.h
+grilo-0.3.15/tools/grilo-test-ui/main.c
+grilo-0.3.15/tools/grilo-test-ui/meson.build
+grilo-0.3.15/tools/meson.build
+The Meson build system
+Version: 0.63.1
+Source dir: /tmp/jbl/grilo-0.3.15
+Build dir: /tmp/jbl/grilo-0.3.15/build
+Build type: native build
+Project name: grilo
+Project version: 0.3.15
+C compiler for the host machine: ccache cc (gcc 12.2.0 "cc (GCC) 12.2.0")
+C linker for the host machine: cc ld.bfd 2.39-slack151
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Found pkg-config: /usr/bin/pkg-config (0.29.2)
+Run-time dependency gio-2.0 found: YES 2.72.3
+Run-time dependency glib-2.0 found: YES 2.72.3
+Run-time dependency gmodule-2.0 found: YES 2.72.3
+Run-time dependency gobject-2.0 found: YES 2.72.3
+Run-time dependency libxml-2.0 found: YES 2.9.14
+Run-time dependency libsoup-3.0 found: YES 3.0.7
+Run-time dependency totem-plparser found: YES 3.26.6
+Program g-ir-scanner found: YES (/usr/bin/g-ir-scanner)
+Program vapigen found: YES (/usr/bin/vapigen)
+Run-time dependency gtk+-3.0 found: YES 3.24.34
+Run-time dependency oauth found: YES 1.0.3
+Run-time dependency gobject-introspection-1.0 found: YES 1.72.0
+Run-time dependency vapigen found: YES 0.56.2
+Found pkg-config: /usr/bin/pkg-config (0.29.2)
+Program glib-genmarshal found: YES (/usr/bin/glib-genmarshal)
+Program glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Program glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Configuring config.h using configuration
+Dependency gobject-introspection-1.0 found: YES 1.72.0 (cached)
+Dependency gobject-introspection-1.0 found: YES 1.72.0 (cached)
+Program g-ir-scanner found: YES (/usr/bin/g-ir-scanner)
+Dependency gobject-introspection-1.0 found: YES 1.72.0 (cached)
+Program g-ir-compiler found: YES (/usr/bin/g-ir-compiler)
+Configuring config.h using configuration
+Configuring config.h using configuration
+Program vapigen found: YES (/usr/bin/vapigen)
+Program vapigen found: YES (/usr/bin/vapigen)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Program python found: YES (/usr/bin/python)
+Configuring config.h using configuration
+Configuring config.h using configuration
+Configuring config.h using configuration
+Configuring grilo.types using configuration
+../doc/grilo/meson.build:8: WARNING: Got an empty configuration_data() object and found no substitutions in the input file 'grilo.types'. If you want to copy a file to the build dir, use the 'copy:' keyword argument added in 0.47.0
+Program gtkdoc-scan found: YES (/usr/bin/gtkdoc-scan)
+Program gtkdoc-scangobj found: YES (/usr/bin/gtkdoc-scangobj)
+Program gtkdoc-mkdb found: YES (/usr/bin/gtkdoc-mkdb)
+Program gtkdoc-mkhtml found: YES (/usr/bin/gtkdoc-mkhtml)
+Program gtkdoc-fixxref found: YES (/usr/bin/gtkdoc-fixxref)
+Build targets in project: 88
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'dependency.get_pkgconfig_variable'}
+ * 0.62.0: {'pkgconfig.generate variable for builtin directories'}
+
+grilo 0.3.15
+
+  User defined options
+    buildtype           : release
+    includedir          : /usr/lib64
+    libdir              : /usr/lib64
+    localstatedir       : /var
+    mandir              : /usr/man
+    prefix              : /usr
+    sysconfdir          : /etc
+    enable-grl-net      : true
+    enable-grl-pls      : true
+    enable-gtk-doc      : true
+    enable-introspection: true
+    enable-test-ui      : true
+    enable-vala         : true
+
+Found ninja-1.11.1 at /usr/bin/ninja
+[1/125] Compiling C object libs/net/libgrlnet-0.3.so.0.315.0.p/grl-net-mock.c.o
+../libs/net/grl-net-mock.c: In function ‘get_url_mocked’:
+../libs/net/grl-net-mock.c:88:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+   88 |     g_simple_async_result_set_error (G_SIMPLE_ASYNC_RESULT (result),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/glib-2.0/gio/gio.h:139,
+                 from ../libs/net/grl-net-mock.c:30:
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-mock.c:94:5: warning: ‘g_simple_async_result_complete_in_idle’ is deprecated [-Wdeprecated-declarations]
+   94 |     g_simple_async_result_complete_in_idle (G_SIMPLE_ASYNC_RESULT (result));
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:106:21: note: declared here
+  106 | void                g_simple_async_result_complete_in_idle (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-mock.c:101:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  101 |     g_simple_async_result_set_error (G_SIMPLE_ASYNC_RESULT (result),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-mock.c:108:5: warning: ‘g_simple_async_result_complete_in_idle’ is deprecated [-Wdeprecated-declarations]
+  108 |     g_simple_async_result_complete_in_idle (G_SIMPLE_ASYNC_RESULT (result));
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:106:21: note: declared here
+  106 | void                g_simple_async_result_complete_in_idle (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-mock.c:119:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  119 |     g_simple_async_result_set_error (G_SIMPLE_ASYNC_RESULT (result),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-mock.c:124:5: warning: ‘g_simple_async_result_complete_in_idle’ is deprecated [-Wdeprecated-declarations]
+  124 |     g_simple_async_result_complete_in_idle (G_SIMPLE_ASYNC_RESULT (result));
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:106:21: note: declared here
+  106 | void                g_simple_async_result_complete_in_idle (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-mock.c:135:3: warning: ‘g_simple_async_result_set_op_res_gpointer’ is deprecated [-Wdeprecated-declarations]
+  135 |   g_simple_async_result_set_op_res_gpointer (G_SIMPLE_ASYNC_RESULT (result),
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:75:21: note: declared here
+   75 | void                g_simple_async_result_set_op_res_gpointer (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-mock.c:138:3: warning: ‘g_simple_async_result_complete_in_idle’ is deprecated [-Wdeprecated-declarations]
+  138 |   g_simple_async_result_complete_in_idle (G_SIMPLE_ASYNC_RESULT (result));
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:106:21: note: declared here
+  106 | void                g_simple_async_result_complete_in_idle (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2/125] Generating po/ab/LC_MESSAGES/grilo-ab.mo with a custom command
+[3/125] Compiling C object libs/net/libgrlnet-0.3.so.0.315.0.p/grl-net-wc.c.o
+../libs/net/grl-net-wc.c: In function ‘parse_error’:
+../libs/net/grl-net-wc.c:479:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  479 |     g_simple_async_result_set_error (result, GRL_NET_WC_ERROR,
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/glib-2.0/gio/gio.h:139,
+                 from /usr/include/libsoup-3.0/libsoup/soup-types.h:9,
+                 from /usr/include/libsoup-3.0/libsoup/soup-cache.h:25,
+                 from ../libs/net/grl-net-wc.c:45:
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:486:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  486 |     g_simple_async_result_set_error (result, GRL_NET_WC_ERROR,
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:491:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  491 |     g_simple_async_result_set_error (result, GRL_NET_WC_ERROR,
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:498:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  498 |     g_simple_async_result_set_error (result, GRL_NET_WC_ERROR,
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:512:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  512 |     g_simple_async_result_set_error (result, G_IO_ERROR,
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c: In function ‘read_async_cb’:
+../libs/net/grl-net-wc.c:578:10: warning: ‘g_simple_async_result_get_op_res_gpointer’ is deprecated [-Wdeprecated-declarations]
+  578 |   struct request_res *rr = g_simple_async_result_get_op_res_gpointer (result);;
+      |          ^~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:79:21: note: declared here
+   79 | gpointer            g_simple_async_result_get_op_res_gpointer (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:615:7: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  615 |       g_simple_async_result_set_error (result, G_IO_ERROR,
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:619:7: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  619 |       g_simple_async_result_set_error (result, G_IO_ERROR,
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:626:5: warning: ‘g_simple_async_result_complete’ is deprecated [-Wdeprecated-declarations]
+  626 |     g_simple_async_result_complete (result);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:104:21: note: declared here
+  104 | void                g_simple_async_result_complete         (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:653:3: warning: ‘g_simple_async_result_complete’ is deprecated [-Wdeprecated-declarations]
+  653 |   g_simple_async_result_complete (result);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:104:21: note: declared here
+  104 | void                g_simple_async_result_complete         (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c: In function ‘reply_cb’:
+../libs/net/grl-net-wc.c:668:10: warning: ‘g_simple_async_result_get_op_res_gpointer’ is deprecated [-Wdeprecated-declarations]
+  668 |   struct request_res *rr = g_simple_async_result_get_op_res_gpointer (result);
+      |          ^~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:79:21: note: declared here
+   79 | gpointer            g_simple_async_result_get_op_res_gpointer (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:679:7: warning: ‘g_simple_async_result_set_from_error’ is deprecated [-Wdeprecated-declarations]
+  679 |       g_simple_async_result_set_from_error (result, error);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:113:21: note: declared here
+  113 | void                g_simple_async_result_set_from_error   (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:681:7: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  681 |       g_simple_async_result_set_error (result, G_IO_ERROR,
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:687:5: warning: ‘g_simple_async_result_complete’ is deprecated [-Wdeprecated-declarations]
+  687 |     g_simple_async_result_complete (result);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:104:21: note: declared here
+  104 | void                g_simple_async_result_complete         (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c: In function ‘get_url_now’:
+../libs/net/grl-net-wc.c:720:3: warning: ‘g_simple_async_result_set_op_res_gpointer’ is deprecated [-Wdeprecated-declarations]
+  720 |   g_simple_async_result_set_op_res_gpointer (G_SIMPLE_ASYNC_RESULT (result),
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:75:21: note: declared here
+   75 | void                g_simple_async_result_set_op_res_gpointer (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:740:5: warning: ‘g_simple_async_result_set_error’ is deprecated [-Wdeprecated-declarations]
+  740 |     g_simple_async_result_set_error (G_SIMPLE_ASYNC_RESULT (result),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:122:21: note: declared here
+  122 | void                g_simple_async_result_set_error        (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:745:5: warning: ‘g_simple_async_result_complete’ is deprecated [-Wdeprecated-declarations]
+  745 |     g_simple_async_result_complete (G_SIMPLE_ASYNC_RESULT (result));
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:104:21: note: declared here
+  104 | void                g_simple_async_result_complete         (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c: In function ‘grl_net_wc_request_with_headers_hash_async’:
+../libs/net/grl-net-wc.c:1006:3: warning: ‘g_simple_async_result_new’ is deprecated: Use 'g_task_new' instead [-Wdeprecated-declarations]
+ 1006 |   result = g_simple_async_result_new (G_OBJECT (self),
+      |   ^~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:51:21: note: declared here
+   51 | GSimpleAsyncResult *g_simple_async_result_new              (GObject                 *source_object,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c: In function ‘grl_net_wc_request_finish’:
+../libs/net/grl-net-wc.c:1044:3: warning: ‘g_simple_async_result_get_source_tag’ is deprecated [-Wdeprecated-declarations]
+ 1044 |   g_warn_if_fail (g_simple_async_result_get_source_tag (res) ==
+      |   ^~~~~~~~~~~~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:99:21: note: declared here
+   99 | gpointer            g_simple_async_result_get_source_tag   (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:1047:3: warning: ‘g_simple_async_result_get_op_res_gpointer’ is deprecated [-Wdeprecated-declarations]
+ 1047 |   void *op = g_simple_async_result_get_op_res_gpointer (res);
+      |   ^~~~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:79:21: note: declared here
+   79 | gpointer            g_simple_async_result_get_op_res_gpointer (GSimpleAsyncResult      *simple);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../libs/net/grl-net-wc.c:1049:3: warning: ‘g_simple_async_result_propagate_error’ is deprecated [-Wdeprecated-declarations]
+ 1049 |   if (g_simple_async_result_propagate_error (res, error) == TRUE) {
+      |   ^~
+/usr/include/glib-2.0/gio/gsimpleasyncresult.h:119:21: note: declared here
+  119 | gboolean            g_simple_async_result_propagate_error  (GSimpleAsyncResult      *simple,
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[4/125] Compiling C object libs/pls/libgrlpls-0.3.so.0.315.0.p/grl-pls.c.o
+[5/125] Generating po/as/LC_MESSAGES/grilo-as.mo with a custom command
+[6/125] Generating po/be/LC_MESSAGES/grilo-be.mo with a custom command
+[7/125] Generating po/bg/LC_MESSAGES/grilo-bg.mo with a custom command
+[8/125] Generating po/bs/LC_MESSAGES/grilo-bs.mo with a custom command
+[9/125] Generating po/ca/LC_MESSAGES/grilo-ca.mo with a custom command
+[10/125] Generating po/ca@valencia/LC_MESSAGES/grilo-ca@valencia.mo with a custom command
+[11/125] Generating po/cs/LC_MESSAGES/grilo-cs.mo with a custom command
+[12/125] Generating po/da/LC_MESSAGES/grilo-da.mo with a custom command
+[13/125] Generating po/de/LC_MESSAGES/grilo-de.mo with a custom command
+[14/125] Generating po/el/LC_MESSAGES/grilo-el.mo with a custom command
+[15/125] Generating po/en_GB/LC_MESSAGES/grilo-en_GB.mo with a custom command
+[16/125] Generating po/eo/LC_MESSAGES/grilo-eo.mo with a custom command
+[17/125] Generating po/es/LC_MESSAGES/grilo-es.mo with a custom command
+[18/125] Generating po/eu/LC_MESSAGES/grilo-eu.mo with a custom command
+[19/125] Generating src/grl-marshal_h with a custom command
+INFO: Reading ../src/grl-marshal.list...
+[20/125] Generating po/fa/LC_MESSAGES/grilo-fa.mo with a custom command
+[21/125] Generating po/fi/LC_MESSAGES/grilo-fi.mo with a custom command
+[22/125] Generating po/fr/LC_MESSAGES/grilo-fr.mo with a custom command
+[23/125] Generating po/fur/LC_MESSAGES/grilo-fur.mo with a custom command
+[24/125] Generating po/gl/LC_MESSAGES/grilo-gl.mo with a custom command
+[25/125] Generating po/he/LC_MESSAGES/grilo-he.mo with a custom command
+[26/125] Generating po/hr/LC_MESSAGES/grilo-hr.mo with a custom command
+[27/125] Generating po/hu/LC_MESSAGES/grilo-hu.mo with a custom command
+[28/125] Generating po/id/LC_MESSAGES/grilo-id.mo with a custom command
+[29/125] Generating po/ja/LC_MESSAGES/grilo-ja.mo with a custom command
+[30/125] Generating po/it/LC_MESSAGES/grilo-it.mo with a custom command
+[31/125] Generating po/ka/LC_MESSAGES/grilo-ka.mo with a custom command
+[32/125] Generating po/ko/LC_MESSAGES/grilo-ko.mo with a custom command
+[33/125] Generating po/lt/LC_MESSAGES/grilo-lt.mo with a custom command
+[34/125] Generating po/lv/LC_MESSAGES/grilo-lv.mo with a custom command
+[35/125] Generating po/ml/LC_MESSAGES/grilo-ml.mo with a custom command
+[36/125] Generating po/ms/LC_MESSAGES/grilo-ms.mo with a custom command
+[37/125] Generating po/ne/LC_MESSAGES/grilo-ne.mo with a custom command
+[38/125] Generating po/nl/LC_MESSAGES/grilo-nl.mo with a custom command
+[39/125] Generating po/nb/LC_MESSAGES/grilo-nb.mo with a custom command
+[40/125] Generating po/oc/LC_MESSAGES/grilo-oc.mo with a custom command
+[41/125] Generating po/pl/LC_MESSAGES/grilo-pl.mo with a custom command
+[42/125] Generating src/grl-marshal_c with a custom command
+INFO: Reading ../src/grl-marshal.list...
+[43/125] Generating po/pt/LC_MESSAGES/grilo-pt.mo with a custom command
+[44/125] Generating po/pt_BR/LC_MESSAGES/grilo-pt_BR.mo with a custom command
+[45/125] Generating po/pa/LC_MESSAGES/grilo-pa.mo with a custom command
+[46/125] Generating po/ro/LC_MESSAGES/grilo-ro.mo with a custom command
+[47/125] Generating po/ru/LC_MESSAGES/grilo-ru.mo with a custom command
+[48/125] Generating po/sk/LC_MESSAGES/grilo-sk.mo with a custom command
+[49/125] Generating po/sl/LC_MESSAGES/grilo-sl.mo with a custom command
+[50/125] Generating po/sr/LC_MESSAGES/grilo-sr.mo with a custom command
+[51/125] Generating po/sr@latin/LC_MESSAGES/grilo-sr@latin.mo with a custom command
+[52/125] Generating po/sv/LC_MESSAGES/grilo-sv.mo with a custom command
+[53/125] Generating po/tg/LC_MESSAGES/grilo-tg.mo with a custom command
+[54/125] Generating po/tr/LC_MESSAGES/grilo-tr.mo with a custom command
+[55/125] Generating po/uk/LC_MESSAGES/grilo-uk.mo with a custom command
+[56/125] Generating po/zh_CN/LC_MESSAGES/grilo-zh_CN.mo with a custom command
+[57/125] Generating po/zh_HK/LC_MESSAGES/grilo-zh_HK.mo with a custom command
+[58/125] Generating po/zh_TW/LC_MESSAGES/grilo-zh_TW.mo with a custom command
+[59/125] Compiling C object tools/grilo-inspect/grl-inspect-0.3.p/grl-inspect.c.o
+[60/125] Compiling C object tools/grilo-launch/grl-launch-0.3.p/grl-launch.c.o
+[61/125] Compiling C object tools/grilo-test-ui/grilo-test-ui-0.3.p/flickr-oauth.c.o
+../tools/grilo-test-ui/flickr-oauth.c: In function ‘flickroauth_get_request_token’:
+../tools/grilo-test-ui/flickr-oauth.c:108:3: warning: ‘oauth_http_get2’ is deprecated [-Wdeprecated-declarations]
+  108 |   http_reply = oauth_http_get2 (url, NULL, NULL);
+      |   ^~~~~~~~~~
+In file included from ../tools/grilo-test-ui/flickr-oauth.c:7:
+/usr/include/oauth.h:595:7: note: declared here
+  595 | char *oauth_http_get2 (const char *u, const char *q, const char *customheader) attribute_deprecated;
+      |       ^~~~~~~~~~~~~~~
+../tools/grilo-test-ui/flickr-oauth.c: In function ‘flickroauth_get_access_token’:
+../tools/grilo-test-ui/flickr-oauth.c:166:3: warning: ‘oauth_http_get2’ is deprecated [-Wdeprecated-declarations]
+  166 |   http_reply = oauth_http_get2 (url, NULL, NULL);
+      |   ^~~~~~~~~~
+/usr/include/oauth.h:595:7: note: declared here
+  595 | char *oauth_http_get2 (const char *u, const char *q, const char *customheader) attribute_deprecated;
+      |       ^~~~~~~~~~~~~~~
+[62/125] Compiling C object tools/grilo-test-ui/grilo-test-ui-0.3.p/main.c.o
+[63/125] Compiling C object tests/autoptr.p/autoptr.c.o
+[64/125] Compiling C object tests/media.p/media.c.o
+[65/125] Compiling C object tests/registry.p/registry.c.o
+[66/125] Compiling C object tests/operations.p/operations.c.o
+[67/125] Compiling C object tests/lib-net.p/lib-net.c.o
+[68/125] Compiling C object examples/browsing.p/browsing.c.o
+[69/125] Compiling C object examples/efficient-metadata-resolution.p/efficient-metadata-resolution.c.o
+[70/125] Compiling C object examples/configuring-plugins.p/configuring-plugins.c.o
+[71/125] Compiling C object examples/loading-plugins.p/loading-plugins.c.o
+[72/125] Compiling C object examples/multivalues.p/multivalues.c.o
+[73/125] Compiling C object examples/searching.p/searching.c.o
+[74/125] Compiling C object examples/browsing-pls.p/browsing-pls.c.o
+[75/125] Generating src/grl-type-builtins.h with a custom command (wrapped by meson to capture output)
+[76/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/data_grl-config.c.o
+[77/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/meson-generated_.._grl-marshal.c.o
+[78/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/data_grl-data.c.o
+[79/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/data_grl-media.c.o
+[80/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/data_grl-related-keys.c.o
+[81/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-caps.c.o
+[82/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grilo.c.o
+[83/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-log.c.o
+[84/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-metadata-key.c.o
+[85/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-operation-options.c.o
+[86/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-multiple.c.o
+[87/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-operation.c.o
+[88/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-range-value.c.o
+[89/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-plugin.c.o
+[90/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-registry.c.o
+[91/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-source.c.o
+[92/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-sync.c.o
+[93/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-util.c.o
+[94/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/grl-value-helper.c.o
+[95/125] Generating src/grl-type-builtins.c with a custom command (wrapped by meson to capture output)
+[96/125] Compiling C object src/libgrilo-0.3.so.0.315.1.p/meson-generated_.._grl-type-builtins.c.o
+[97/125] Linking target src/libgrilo-0.3.so.0.315.1
+[98/125] Generating symbol file src/libgrilo-0.3.so.0.315.1.p/libgrilo-0.3.so.0.315.1.symbols
+[99/125] Linking target tools/grilo-inspect/grl-inspect-0.3
+[100/125] Linking target tools/grilo-launch/grl-launch-0.3
+[101/125] Linking target libs/pls/libgrlpls-0.3.so.0.315.0
+[102/125] Linking target examples/browsing
+[103/125] Linking target libs/net/libgrlnet-0.3.so.0.315.0
+[104/125] Linking target examples/configuring-plugins
+[105/125] Linking target tools/grilo-test-ui/grilo-test-ui-0.3
+[106/125] Linking target examples/efficient-metadata-resolution
+[107/125] Linking target examples/loading-plugins
+[108/125] Linking target examples/multivalues
+[109/125] Generating symbol file libs/pls/libgrlpls-0.3.so.0.315.0.p/libgrlpls-0.3.so.0.315.0.symbols
+[110/125] Generating symbol file libs/net/libgrlnet-0.3.so.0.315.0.p/libgrlnet-0.3.so.0.315.0.symbols
+[111/125] Linking target examples/searching
+[112/125] Linking target examples/browsing-pls
+[113/125] Linking target tests/media
+[114/125] Linking target tests/autoptr
+[115/125] Linking target tests/registry
+[116/125] Linking target tests/operations
+[117/125] Linking target tests/lib-net
+[118/125] Generating libs/net/GrlNet-0.3.gir with a custom command (wrapped by meson to set env)
+[119/125] Generating src/Grl-0.3.gir with a custom command (wrapped by meson to set env)
+[120/125] Generating libs/net/GrlNet-0.3.typelib with a custom command
+[121/125] Generating bindings/vala/grilo-net-0.3.vapi with a custom command
+Soup-3.0.gir:32.7-32.40: warning: Creation method of abstract class cannot be public.
+Soup-3.0.gir:934.7-934.21: warning: Virtual method `Soup.AuthDomain.accepts' conflicts with method of the same name
+[122/125] Generating src/Grl-0.3.typelib with a custom command
+[123/125] Generating bindings/vala/grilo-0.3.vapi with a custom command
+[124/125] Generating libs/pls/GrlPls-0.3.gir with a custom command (wrapped by meson to set env)
+[125/125] Generating libs/pls/GrlPls-0.3.typelib with a custom command
+[0/1] Installing files.
+Installing src/libgrilo-0.3.so.0.315.1 to /tmp/jbl/package-grilo/usr/lib64
+Installing src/Grl-0.3.gir to /tmp/jbl/package-grilo/usr/share/gir-1.0
+Installing src/Grl-0.3.typelib to /tmp/jbl/package-grilo/usr/lib64/girepository-1.0
+Installing libs/net/libgrlnet-0.3.so.0.315.0 to /tmp/jbl/package-grilo/usr/lib64
+Installing libs/net/GrlNet-0.3.gir to /tmp/jbl/package-grilo/usr/share/gir-1.0
+Installing libs/net/GrlNet-0.3.typelib to /tmp/jbl/package-grilo/usr/lib64/girepository-1.0
+Installing libs/pls/libgrlpls-0.3.so.0.315.0 to /tmp/jbl/package-grilo/usr/lib64
+Installing libs/pls/GrlPls-0.3.gir to /tmp/jbl/package-grilo/usr/share/gir-1.0
+Installing libs/pls/GrlPls-0.3.typelib to /tmp/jbl/package-grilo/usr/lib64/girepository-1.0
+Installing bindings/vala/grilo-0.3.vapi to /tmp/jbl/package-grilo/usr/share/vala/vapi
+Installing bindings/vala/grilo-net-0.3.vapi to /tmp/jbl/package-grilo/usr/share/vala/vapi
+Installing po/ab/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ab/LC_MESSAGES
+Installing po/as/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/as/LC_MESSAGES
+Installing po/be/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/be/LC_MESSAGES
+Installing po/bg/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/bg/LC_MESSAGES
+Installing po/bs/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/bs/LC_MESSAGES
+Installing po/ca/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ca/LC_MESSAGES
+Installing po/ca@valencia/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ca@valencia/LC_MESSAGES
+Installing po/cs/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/cs/LC_MESSAGES
+Installing po/da/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/da/LC_MESSAGES
+Installing po/de/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/de/LC_MESSAGES
+Installing po/el/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/el/LC_MESSAGES
+Installing po/en_GB/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/en_GB/LC_MESSAGES
+Installing po/eo/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/eo/LC_MESSAGES
+Installing po/es/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/es/LC_MESSAGES
+Installing po/eu/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/eu/LC_MESSAGES
+Installing po/fa/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/fa/LC_MESSAGES
+Installing po/fi/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/fi/LC_MESSAGES
+Installing po/fr/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/fr/LC_MESSAGES
+Installing po/fur/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/fur/LC_MESSAGES
+Installing po/gl/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/gl/LC_MESSAGES
+Installing po/he/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/he/LC_MESSAGES
+Installing po/hr/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/hr/LC_MESSAGES
+Installing po/hu/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/hu/LC_MESSAGES
+Installing po/id/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/id/LC_MESSAGES
+Installing po/it/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/it/LC_MESSAGES
+Installing po/ja/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ja/LC_MESSAGES
+Installing po/ka/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ka/LC_MESSAGES
+Installing po/ko/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ko/LC_MESSAGES
+Installing po/lt/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/lt/LC_MESSAGES
+Installing po/lv/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/lv/LC_MESSAGES
+Installing po/ml/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ml/LC_MESSAGES
+Installing po/ms/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ms/LC_MESSAGES
+Installing po/ne/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ne/LC_MESSAGES
+Installing po/nl/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/nl/LC_MESSAGES
+Installing po/nb/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/nb/LC_MESSAGES
+Installing po/oc/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/oc/LC_MESSAGES
+Installing po/pa/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/pa/LC_MESSAGES
+Installing po/pl/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/pl/LC_MESSAGES
+Installing po/pt/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/pt/LC_MESSAGES
+Installing po/pt_BR/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/pt_BR/LC_MESSAGES
+Installing po/ro/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ro/LC_MESSAGES
+Installing po/ru/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/ru/LC_MESSAGES
+Installing po/sk/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/sk/LC_MESSAGES
+Installing po/sl/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/sl/LC_MESSAGES
+Installing po/sr/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/sr/LC_MESSAGES
+Installing po/sr@latin/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/sr@latin/LC_MESSAGES
+Installing po/sv/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/sv/LC_MESSAGES
+Installing po/tg/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/tg/LC_MESSAGES
+Installing po/tr/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/tr/LC_MESSAGES
+Installing po/uk/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/uk/LC_MESSAGES
+Installing po/zh_CN/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/zh_CN/LC_MESSAGES
+Installing po/zh_HK/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/zh_HK/LC_MESSAGES
+Installing po/zh_TW/LC_MESSAGES/grilo.mo to /tmp/jbl/package-grilo/usr/share/locale/zh_TW/LC_MESSAGES
+Installing tools/grilo-inspect/grl-inspect-0.3 to /tmp/jbl/package-grilo/usr/bin
+Installing tools/grilo-launch/grl-launch-0.3 to /tmp/jbl/package-grilo/usr/bin
+Installing tools/grilo-test-ui/grilo-test-ui-0.3 to /tmp/jbl/package-grilo/usr/bin
+Installing /tmp/jbl/grilo-0.3.15/src/data/grl-config.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/data/grl-data.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/data/grl-media.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/data/grl-related-keys.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grilo.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-caps.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-definitions.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-error.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-log.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-metadata-key.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-multiple.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-operation-options.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-operation.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-plugin.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-range-value.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-registry.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-source.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-util.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/src/grl-value-helper.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/
+Installing /tmp/jbl/grilo-0.3.15/libs/net/grl-net.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/net/
+Installing /tmp/jbl/grilo-0.3.15/libs/net/grl-net-wc.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/net/
+Installing /tmp/jbl/grilo-0.3.15/libs/pls/grl-pls.h to /tmp/jbl/package-grilo/usr/lib64/grilo-0.3/pls/
+Installing /tmp/jbl/grilo-0.3.15/doc/man/grilo-test-ui-0.3.1 to /tmp/jbl/package-grilo/usr/man/man1
+Installing /tmp/jbl/grilo-0.3.15/doc/man/grl-inspect-0.3.1 to /tmp/jbl/package-grilo/usr/man/man1
+Installing /tmp/jbl/grilo-0.3.15/doc/man/grl-launch-0.3.1 to /tmp/jbl/package-grilo/usr/man/man1
+Installing /tmp/jbl/grilo-0.3.15/build/meson-private/grilo-0.3.pc to /tmp/jbl/package-grilo/usr/lib64/pkgconfig
+Installing /tmp/jbl/grilo-0.3.15/build/meson-private/grilo-net-0.3.pc to /tmp/jbl/package-grilo/usr/lib64/pkgconfig
+Installing /tmp/jbl/grilo-0.3.15/build/meson-private/grilo-pls-0.3.pc to /tmp/jbl/package-grilo/usr/lib64/pkgconfig
+Installing /tmp/jbl/grilo-0.3.15/build/meson-private/grilo-0.3.deps to /tmp/jbl/package-grilo/usr/share/vala/vapi
+Installing /tmp/jbl/grilo-0.3.15/build/meson-private/grilo-net-0.3.deps to /tmp/jbl/package-grilo/usr/share/vala/vapi
+Installing symlink pointing to libgrilo-0.3.so.0.315.1 to /tmp/jbl/package-grilo/usr/lib64/libgrilo-0.3.so.0
+Installing symlink pointing to libgrilo-0.3.so.0 to /tmp/jbl/package-grilo/usr/lib64/libgrilo-0.3.so
+Installing symlink pointing to libgrlnet-0.3.so.0.315.0 to /tmp/jbl/package-grilo/usr/lib64/libgrlnet-0.3.so.0
+Installing symlink pointing to libgrlnet-0.3.so.0 to /tmp/jbl/package-grilo/usr/lib64/libgrlnet-0.3.so
+Installing symlink pointing to libgrlpls-0.3.so.0.315.0 to /tmp/jbl/package-grilo/usr/lib64/libgrlpls-0.3.so.0
+Installing symlink pointing to libgrlpls-0.3.so.0 to /tmp/jbl/package-grilo/usr/lib64/libgrlpls-0.3.so
+Running custom install script '/usr/bin/meson --internal gtkdoc --sourcedir=/tmp/jbl/grilo-0.3.15 --builddir=/tmp/jbl/grilo-0.3.15/build --subdir=doc/grilo --headerdirs=/tmp/jbl/grilo-0.3.15/src@@/tmp/jbl/grilo-0.3.15/libs --mainfile=grilo-docs.sgml --modulename=grilo --moduleversion= --mode=auto --gtkdoc-scan=/usr/bin/gtkdoc-scan --gtkdoc-scangobj=/usr/bin/gtkdoc-scangobj --gtkdoc-mkdb=/usr/bin/gtkdoc-mkdb --gtkdoc-mkhtml=/usr/bin/gtkdoc-mkhtml --gtkdoc-fixxref=/usr/bin/gtkdoc-fixxref --htmlargs= --scanargs=--ignore-headers=grl-sync-priv.h grl-sync-priv.h grl-log-priv.h grl-metadata-key-priv.h grl-registry-priv.h grl-plugin-priv.h grl-operation-priv.h grl-operation-options-priv.h --scanobjsargs= --gobjects-types-file=/tmp/jbl/grilo-0.3.15/build/doc/grilo/grilo.types --fixxrefargs= --mkdbargs= --html-assets= --content-files=/tmp/jbl/grilo-0.3.15/doc/grilo/environment-setup.xml@@/tmp/jbl/grilo-0.3.15/doc/grilo/plugins-sources.xml@@/tmp/jbl/grilo-0.3.15/doc/grilo/plugins-testing.xml@@/tmp/jbl/grilo-0.3.15/doc/grilo/quick-start.xml@@/tmp/jbl/grilo-0.3.15/doc/grilo/writing-apps.xml@@/tmp/jbl/grilo-0.3.15/doc/grilo/overview.xml@@/tmp/jbl/grilo-0.3.15/examples/configuring-plugins.c@@/tmp/jbl/grilo-0.3.15/examples/browsing.c@@/tmp/jbl/grilo-0.3.15/examples/searching.c@@/tmp/jbl/grilo-0.3.15/examples/multivalues.c@@/tmp/jbl/grilo-0.3.15/examples/efficient-metadata-resolution.c --expand-content-files= --ignore-headers= --installdir= --cc=ccache cc --ld=cc --cflags=-I/tmp/jbl/grilo-0.3.15/src/. -I/tmp/jbl/grilo-0.3.15/build/src/. -I/tmp/jbl/grilo-0.3.15/src/data -I/tmp/jbl/grilo-0.3.15/build/src/data -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/libxml2 -O2 -fPIC --ldflags=-L/tmp/jbl/grilo-0.3.15/build/src -Wl,-rpath,/tmp/jbl/grilo-0.3.15/build/src -lgrilo-0.3 -lglib-2.0 -lgobject-2.0 -lgmodule-2.0 -pthread -lgio-2.0 -lxml2 -O2 -fPIC'
+
+Slackware package maker, version 3.14159265.
+
+Searching for symbolic links:
+usr/lib64/libgrilo-0.3.so	libgrilo-0.3.so.0
+usr/lib64/libgrilo-0.3.so.0	libgrilo-0.3.so.0.315.1
+usr/lib64/libgrlnet-0.3.so	libgrlnet-0.3.so.0
+usr/lib64/libgrlnet-0.3.so.0	libgrlnet-0.3.so.0.315.0
+usr/lib64/libgrlpls-0.3.so	libgrlpls-0.3.so.0
+usr/lib64/libgrlpls-0.3.so.0	libgrlpls-0.3.so.0.315.0
+
+Making symbolic link creation script:
+( cd usr/lib64 ; rm -rf libgrilo-0.3.so )
+( cd usr/lib64 ; ln -sf libgrilo-0.3.so.0 libgrilo-0.3.so )
+( cd usr/lib64 ; rm -rf libgrilo-0.3.so.0 )
+( cd usr/lib64 ; ln -sf libgrilo-0.3.so.0.315.1 libgrilo-0.3.so.0 )
+( cd usr/lib64 ; rm -rf libgrlnet-0.3.so )
+( cd usr/lib64 ; ln -sf libgrlnet-0.3.so.0 libgrlnet-0.3.so )
+( cd usr/lib64 ; rm -rf libgrlnet-0.3.so.0 )
+( cd usr/lib64 ; ln -sf libgrlnet-0.3.so.0.315.0 libgrlnet-0.3.so.0 )
+( cd usr/lib64 ; rm -rf libgrlpls-0.3.so )
+( cd usr/lib64 ; ln -sf libgrlpls-0.3.so.0 libgrlpls-0.3.so )
+( cd usr/lib64 ; rm -rf libgrlpls-0.3.so.0 )
+( cd usr/lib64 ; ln -sf libgrlpls-0.3.so.0.315.0 libgrlpls-0.3.so.0 )
+
+It is recommended that you make these lines your new installation script.
+
+Would you like to make this stuff the install script for this package
+and remove the symbolic links ([y]es, [n]o)? y
+
+
+Removing symbolic links:
+removed './usr/lib64/libgrlnet-0.3.so'
+removed './usr/lib64/libgrilo-0.3.so'
+removed './usr/lib64/libgrlpls-0.3.so'
+removed './usr/lib64/libgrlpls-0.3.so.0'
+removed './usr/lib64/libgrlnet-0.3.so.0'
+removed './usr/lib64/libgrilo-0.3.so.0'
+
+Creating your new ./install/doinst.sh...
+
+This next step is optional - you can set the directories in your package
+to some sane permissions. If any of the directories in your package have
+special permissions, then DO NOT reset them here!
+
+Would you like to reset all directory permissions to 755 (drwxr-xr-x) and
+directory ownerships to root.root ([y]es, [n]o)? n
+
+Creating Slackware package:  /tmp/grilo-0.3.15-x86_64-1_jbl.txz
+
+
+Slackware package /tmp/grilo-0.3.15-x86_64-1_jbl.txz created.
+

@@ -1,0 +1,8 @@
+PRGNAM="libwpe"
+VERSION="1.12.0"
+HOMEPAGE="https://wpewebkit.org"
+DOWNLOAD="https://wpewebkit.org/releases/libwpe-1.12.0.tar.xz"
+MD5SUM="5a3f11789535d826370ba465ea141393"
+REQUIRES=""
+MAINTAINER="Willy Sudiarto Raharjo"
+EMAIL="willysr@slackbuilds.org"

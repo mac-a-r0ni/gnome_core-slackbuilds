@@ -1,0 +1,9 @@
+Grilo is a framework focused on making media discovery and browsing easy for
+applications and application developers.
+
+Required dependencies:
+- totem-pl-parser
+
+Optional dependencies:
+- avahi
+- liboauth

@@ -1,0 +1,8 @@
+PRGNAM="tracker"
+VERSION="3.4.0.alpha"
+HOMEPAGE="http://projects.gnome.org/tracker/"
+DOWNLOAD="https://download.gnome.org/sources/tracker/3.4/tracker-3.4.0.alpha.tar.xz"
+MD5SUM="8265d440f2b0df7d6e4c34e0cd0794a8"
+REQUIRES=""
+MAINTAINER=""
+EMAIL=""

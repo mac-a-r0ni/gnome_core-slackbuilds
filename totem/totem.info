@@ -1,0 +1,8 @@
+PRGNAM="totem"
+VERSION="42.0"
+HOMEPAGE="https://wiki.gnome.org/Apps/Videos"
+DOWNLOAD="https://download.gnome.org/sources/totem/42/totem-42.0.tar.xz"
+MD5SUM="33ecc1021d12e789183a189ddac6646f "
+REQUIRES=""
+MAINTAINER=""
+EMAIL=""

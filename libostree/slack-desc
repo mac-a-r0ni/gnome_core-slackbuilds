@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+         |-----handy-ruler------------------------------------------------------|
+libostree: libostree (tool for immutable filesystem trees)
+libostree:
+libostree: libostree is a tool that combines a "git-like" model for committing
+libostree: and downloading bootable filesystem trees, along with a layer for
+libostree: deploying them and managing the bootloader configuration.
+libostree:
+libostree:
+libostree: Homepage: https://github.com/ostreedev/ostree/
+libostree:
+libostree:
+libostree:

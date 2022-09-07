@@ -1,0 +1,8 @@
+PRGNAM="gnome-weather"
+VERSION="43.alpha"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-weather"
+DOWNLOAD="https://download.gnome.org/sources/gnome-weather/43/gnome-weather-43.alpha.tar.xz"
+MD5SUM="7477f5fcb3ae256d756d929194a87169"
+REQUIRES="%README% libadwaita libhandy libgweather"
+MAINTAINER=""
+EMAIL=""

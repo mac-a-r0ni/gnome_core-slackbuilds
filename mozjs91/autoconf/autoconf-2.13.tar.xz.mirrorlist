@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Mirror List</title>
+  <link type="text/css" rel="stylesheet" href="/css/mblist.css" />
+</head>
+
+<body>
+<div id="mirrorbrain-details">
+  <h2>Mirrors for <a href="/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">autoconf-2.13.tar.xz</a></h2>
+<div id="mirrorbrain-fileinfo">
+<h3>File information</h3>
+<ul>
+  <li><span class="mirrorbrain-label">Filename:</span> autoconf-2.13.tar.xz</li>
+  <li><span class="mirrorbrain-label">Path:</span> /slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</li>
+  <li><span class="mirrorbrain-label">Size:</span> 293K (300116 bytes)</li>
+  <li><span class="mirrorbrain-label">Last modified:</span> Fri, 15 Jan 1999 21:03:31 GMT (Unix time: 916434211)</li>
+  <li><span class="mirrorbrain-label"><a href="/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz.sha256">SHA-256 Hash</a>:</span> <tt>4836b640f3679f02b4bcaf4ee3ef439a3e55f335d56b11b1ca134e0762efccd3</tt></li>
+  <li><span class="mirrorbrain-label"><a href="/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz.sha1">SHA-1 Hash</a>:</span> <tt>60c9bf4289e8dc6e6362f1d2659137b1a5a54e80</tt></li>
+  <li><span class="mirrorbrain-label"><a href="/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz.md5">MD5 Hash</a>:</span> <tt>f2994d302cf736e7e71974edfa51da3c</tt></li>
+</ul>
+<p><a href="/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz" class="mirrorbrain-btn">Download file from preferred mirror</a></p>
+</div>
+
+<div id="mirrorbrain-links">
+<h3>Reliable downloads</h3>
+<div class="mirrorbrain-links-grp">
+<h4>Metalink</h4>
+<ul>
+  <li><a href="/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz.meta4">/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz.meta4</a> (IETF Metalink)</li>
+  <li><a href="/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz.metalink">/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz.metalink</a> (old (v3) Metalink)</li>
+</ul>
+</div>
+</div>
+
+<div id="mirrorbrain-mirrors">
+<h3>Mirrors</h3>
+<p>List of best mirrors for IP address 86.133.18.200, located at 53.796700,-2.235300 in United Kingdom (GB).</p>
+
+<p><a href="https://maps.google.com/maps/api/staticmap?size=640x512&amp;visual_refresh=true&amp;scale=2&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:red|53.796700,-2.235300&amp;markers=color:yellow|label:1|51.495998,-0.122000&amp;markers=color:yellow|label:2|51.495998,-0.122000&amp;markers=color:yellow|label:3|51.495998,-0.122000&amp;markers=color:yellow|label:4|51.266998,1.083000&amp;markers=color:yellow|label:5|48.862999,2.329000&amp;markers=color:yellow|label:6|48.858002,2.339000&amp;markers=color:yellow|label:7|48.858002,2.339000&amp;markers=color:yellow|label:8|52.382000,4.899000&amp;markers=color:yellow|label:9|52.382000,4.899000">Map showing the closest mirrors</a></p>
+
+<div class="mirrorbrain-mirrors-grp">
+<h4>Found 4 mirrors which handle this country (GB)</h4>
+<ul>
+ <li><a href="http://slackware.uk/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.uk/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (gb, prio 100)</li>
+ <li><a href="https://mirror.bytemark.co.uk/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.bytemark.co.uk/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (gb, prio 100)</li>
+ <li><a href="https://lon.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://lon.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (gb, prio 100)</li>
+ <li><a href="https://www.mirrorservice.org/sites/ftp.slackware.com/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://www.mirrorservice.org/sites/ftp.slackware.com/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (gb, prio 100)</li>
+</ul>
+</div>
+
+<div class="mirrorbrain-mirrors-grp">
+<h4>Found 38 mirrors in other countries, but same continent (EU)</h4>
+<ul>
+  <li><a href="http://nephtys.lip6.fr/pub/linux/distributions/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://nephtys.lip6.fr/pub/linux/distributions/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (fr, prio 100)</li>
+  <li><a href="http://bear.alienbase.nl/mirrors/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://bear.alienbase.nl/mirrors/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (nl, prio 100)</li>
+  <li><a href="http://slackware.mirrors.ovh.net/ftp.slackware.com/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.mirrors.ovh.net/ftp.slackware.com/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (fr, prio 50)</li>
+  <li><a href="https://mirror.nl.leaseweb.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.nl.leaseweb.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (nl, prio 100)</li>
+  <li><a href="https://mirror.koddos.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.koddos.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (nl, prio 100)</li>
+  <li><a href="https://ftp.nluug.nl/os/Linux/distr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://ftp.nluug.nl/os/Linux/distr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (nl, prio 100)</li>
+  <li><a href="https://mirror.netcologne.de/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.netcologne.de/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (de, prio 100)</li>
+  <li><a href="https://linux.rz.rub.de/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://linux.rz.rub.de/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (de, prio 100)</li>
+  <li><a href="http://mirrors.nav.ro/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://mirrors.nav.ro/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (de, prio 100)</li>
+  <li><a href="https://mirror.de.leaseweb.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.de.leaseweb.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (de, prio 100)</li>
+  <li><a href="http://download.dlackware.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://download.dlackware.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (de, prio 100)</li>
+  <li><a href="https://ftp6.gwdg.de/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://ftp6.gwdg.de/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (de, prio 100)</li>
+  <li><a href="http://slackware.qontinuum.space/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.qontinuum.space/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (mc, prio 100)</li>
+  <li><a href="https://mirrors.dotsrc.org/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.dotsrc.org/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (dk, prio 100)</li>
+  <li><a href="http://ftp.tu-chemnitz.de/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.tu-chemnitz.de/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (de, prio 100)</li>
+  <li><a href="https://ftp.rnl.tecnico.ulisboa.pt/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://ftp.rnl.tecnico.ulisboa.pt/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (pt, prio 100)</li>
+  <li><a href="http://ftp.linux.cz/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.linux.cz/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (cz, prio 100)</li>
+  <li><a href="http://mirror.slackware.hr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://mirror.slackware.hr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (hr, prio 100)</li>
+  <li><a href="https://ftpmirror.infania.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://ftpmirror.infania.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (se, prio 100)</li>
+  <li><a href="https://ftp.acc.umu.se/mirror/slackware.com/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://ftp.acc.umu.se/mirror/slackware.com/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (se, prio 100)</li>
+  <li><a href="https://quantum-mirror.hu/mirrors/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://quantum-mirror.hu/mirrors/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (hu, prio 100)</li>
+  <li><a href="https://mirror.wheel.sk/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.wheel.sk/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (sk, prio 100)</li>
+  <li><a href="https://slackware.mirror.garr.it/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://slackware.mirror.garr.it/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (it, prio 100)</li>
+  <li><a href="http://mirror.onet.pl/pub/mirrors/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://mirror.onet.pl/pub/mirrors/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (pl, prio 100)</li>
+  <li><a href="https://mirrors.atviras.lt/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.atviras.lt/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (lt, prio 100)</li>
+  <li><a href="http://slackware.telecoms.bg/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.telecoms.bg/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (bg, prio 100)</li>
+  <li><a href="https://mirror.telepoint.bg/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.telepoint.bg/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (bg, prio 100)</li>
+  <li><a href="https://mirrors.netix.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.netix.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (bg, prio 100)</li>
+  <li><a href="https://mirrors.nxthost.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.nxthost.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ro, prio 100)</li>
+  <li><a href="http://mirrors.slackware.bg/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://mirrors.slackware.bg/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (bg, prio 100)</li>
+  <li><a href="http://mirror.datacenter.by/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://mirror.datacenter.by/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (by, prio 100)</li>
+  <li><a href="http://ftp.ntua.gr/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.ntua.gr/pub/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (gr, prio 100)</li>
+  <li><a href="http://slackware.ip-connect.info/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.ip-connect.info/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ua, prio 100)</li>
+  <li><a href="https://mirror.ihost.md/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.ihost.md/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (md, prio 100)</li>
+  <li><a href="https://mirrors.nix.org.ua/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.nix.org.ua/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ua, prio 100)</li>
+  <li><a href="https://ftp.cc.uoc.gr/mirrors/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://ftp.cc.uoc.gr/mirrors/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (gr, prio 100)</li>
+  <li><a href="http://ftp.linux.org.tr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.linux.org.tr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (tr, prio 100)</li>
+  <li><a href="https://mirror.yandex.ru/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.yandex.ru/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ru, prio 100)</li>
+</ul>
+</div>
+
+<div class="mirrorbrain-mirrors-grp">
+<h4>Found 33 mirrors in other parts of the world</h4>
+<ul>
+  <li><a href="https://mirror.lyrahosting.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.lyrahosting.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (sa, prio 100)</li>
+  <li><a href="https://mirror.its.dal.ca/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.its.dal.ca/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ca, prio 100)</li>
+  <li><a href="https://mirror.cs.princeton.edu/pub/mirrors/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.cs.princeton.edu/pub/mirrors/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="https://mirror.csclub.uwaterloo.ca/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.csclub.uwaterloo.ca/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ca, prio 100)</li>
+  <li><a href="https://mirror.slackbuilds.org/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.slackbuilds.org/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="http://slackware.absolutehosting.net/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.absolutehosting.net/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="http://ftp.slackware-brasil.com.br/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.slackware-brasil.com.br/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (br, prio 100)</li>
+  <li><a href="https://ftp.ussg.indiana.edu/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://ftp.ussg.indiana.edu/linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="https://plug-mirror.rcac.purdue.edu/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://plug-mirror.rcac.purdue.edu/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="http://ftp.is.co.za/mirror/ftp.slackware.com/pub/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.is.co.za/mirror/ftp.slackware.com/pub/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (za, prio 100)</li>
+  <li><a href="http://linorg.usp.br/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://linorg.usp.br/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (br, prio 100)</li>
+  <li><a href="http://slackware.mirror.ac.za/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.mirror.ac.za/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (za, prio 100)</li>
+  <li><a href="https://mirrors.ucr.ac.cr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.ucr.ac.cr/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (cr, prio 100)</li>
+  <li><a href="https://mirror.cedia.org.ec/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.cedia.org.ec/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ec, prio 100)</li>
+  <li><a href="http://slackware.mirrors.tds.net/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.mirrors.tds.net/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="https://dfw.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://dfw.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="https://slackware.zero.com.ar/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://slackware.zero.com.ar/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ar, prio 100)</li>
+  <li><a href="http://slackware.cs.utah.edu/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://slackware.cs.utah.edu/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="https://mirrors.xmission.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.xmission.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="https://mirrors.bfsu.edu.cn/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.bfsu.edu.cn/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (cn, prio 100)</li>
+  <li><a href="http://download.nus.edu.sg/mirror/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://download.nus.edu.sg/mirror/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (sg, prio 100)</li>
+  <li><a href="https://mirror-hk.koddos.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror-hk.koddos.net/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (hk, prio 100)</li>
+  <li><a href="https://hkg.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://hkg.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (hk, prio 100)</li>
+  <li><a href="http://ftp.slackware.com/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.slackware.com/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="https://mirrors.kernel.org/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirrors.kernel.org/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (us, prio 100)</li>
+  <li><a href="http://mirror.rise.ph/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://mirror.rise.ph/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (ph, prio 100)</li>
+  <li><a href="http://ftp.riken.jp/Linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.riken.jp/Linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (jp, prio 100)</li>
+  <li><a href="http://ftp.nara.wide.ad.jp/pub/Linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.nara.wide.ad.jp/pub/Linux/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (jp, prio 100)</li>
+  <li><a href="https://syd.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://syd.mirror.rackspace.com/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (au, prio 100)</li>
+  <li><a href="http://mirror.internode.on.net/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://mirror.internode.on.net/pub/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (au, prio 100)</li>
+  <li><a href="http://ftp.swin.edu.au/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">http://ftp.swin.edu.au/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (au, prio 100)</li>
+  <li><a href="https://slackware.mirror.digitalpacific.com.au/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://slackware.mirror.digitalpacific.com.au/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (au, prio 100)</li>
+  <li><a href="https://mirror.lagoon.nc/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz">https://mirror.lagoon.nc/slackware/slackware64-current/source/l/mozjs78/autoconf/autoconf-2.13.tar.xz</a> (nc, prio 100)</li>
+</ul>
+</div>
+
+</div>
+<address>Powered by <a href="http://mirrorbrain.org/">MirrorBrain</a></address>
+</div><!-- mirrorbrain-details -->
+<!--
+<html>
+<a href="http://mirrorbrain.org/">MirrorBrain</a>
+powered by <a href="http://slackware.com/">Slackware</a>!
+</html>
+-->
