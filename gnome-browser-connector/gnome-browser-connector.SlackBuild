@@ -24,6 +24,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-browser-connector
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+VER=${VER:-42.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_jbl}
 
@@ -91,15 +92,15 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | \
   grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+mkdir -p $PKG/usr/doc/$PRGNAM-$VER
 cp -a \
   LICENSE NEWS README.md \
-  $PKG/usr/doc/$PRGNAM-$VERSION
+  $PKG/usr/doc/$PRGNAM-$VER
 
 # If there's a ChangeLog, installing at least part of the recent history
 # is useful, but don't let it get totally out of control:
 if [ -r ChangeLog ]; then
-  DOCSDIR=$(echo $PKG/usr/doc/${PRGNAM}-$VERSION)
+  DOCSDIR=$(echo $PKG/usr/doc/${PRGNAM}-$VER)
   cat ChangeLog | head -n 1000 > $DOCSDIR/ChangeLog
   touch -r ChangeLog $DOCSDIR/ChangeLog
 fi
@@ -109,4 +110,4 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.txz
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VER-$ARCH-$BUILD$TAG.txz
