@@ -6,11 +6,11 @@
 # customary to leave one space after the ':'.
 
        |-----handy-ruler------------------------------------------------------|
-pyatspi: pyatspi
+pyatspi: pyatspi (D-BUS at-spi protocol)
 pyatspi:
 pyatspi:
 pyatspi:
-pyatspi:
+pyatspi: Homepage: https://gitlab.gnome.org/GNOME/pyatspi2
 pyatspi:
 pyatspi:
 pyatspi:

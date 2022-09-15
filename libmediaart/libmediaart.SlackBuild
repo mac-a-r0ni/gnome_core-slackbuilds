@@ -25,7 +25,7 @@
 PRGNAM=libmediaart
 VERSION=${VERSION:-1.9.6}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_jbl}
+TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
@@ -42,10 +42,10 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/jbl}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/pkg-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
-JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 2 ) "}
+JOBS=${JOBS:-" -j$(expr $(nproc) \+ 1 ) "}
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -54,6 +54,9 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
@@ -93,7 +96,7 @@ meson .. \
  --localstatedir=/var \
  -Ddefault_library=shared \
  -Dimage_library=qt5 \
- -Dgtk_doc=true
+ -Dgtk_doc=false
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install

@@ -1,8 +1,0 @@
-PRGNAM="libstemmer"
-VERSION="20140325"
-HOMEPAGE="https://snowballstem.org/"
-DOWNLOAD="https://dev.gentoo.org/~graaff/libstemmer_c-20140325.tgz"
-MD5SUM="fc7f6930d843bc65e69f9151262f4153"
-REQUIRES=""
-MAINTAINER="Rafael Tavares"
-EMAIL="mdrafaeltavares@gmail.com"

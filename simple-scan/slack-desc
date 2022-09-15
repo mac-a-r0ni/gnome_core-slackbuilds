@@ -6,7 +6,7 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-simple-scan: simple-scan
+simple-scan: simple-scan (simple scanning utility)
 simple-scan:
 simple-scan: A really easy way to scan both text and images. You can crop out the
 simple-scan: bad parts of an image and rotate it if it is the wrong way round. You
@@ -15,4 +15,6 @@ simple-scan: image formats.
 simple-scan: This app uses the SANE framework to support most existing scanners.
 simple-scan:
 simple-scan: Homepage: https://apps.gnome.org/app/simple-scan/
+simple-scan:
+simple-scan:
 

@@ -11,5 +11,5 @@ libgrss:
 libgrss: The libgrss package contains a library designed to manipulate RSS and
 libgrss: Atom feeds.
 libgrss:
-libgrss: https://wiki.gnome.org/Projects/Libgrss
+libgrss: Homepage: https://wiki.gnome.org/Projects/Libgrss
 libgrss:

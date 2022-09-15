@@ -6,12 +6,12 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
         |-----handy-ruler------------------------------------------------------|
-libhandy: libhandy (additional UI components for gtk+3)
+libhandy: libhandy (GTK+ widgets for mobile)
 libhandy:
 libhandy: The aim of the Handy library is to help with developing UI for mobile
 libhandy: devices using GTK/GNOME.
 libhandy:
-libhandy:
+libhandy: Homepage: https://gitlab.gnome.org/GNOME/libhandy
 libhandy:
 libhandy:
 libhandy:

@@ -11,7 +11,7 @@ lua53:
 lua53: This package contains lua version 5.3.x that won't conflicts with lua
 lua53: version 5.1.x and 5.2.x
 lua53:
-lua53:
+lua53: Homepage: https://www.lua.org/
 lua53:
 lua53:
 lua53:

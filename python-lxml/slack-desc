@@ -12,7 +12,7 @@ python-lxml: python-lxml is a Pythonic binding for the libxml2 and libxslt
 python-lxml: libaries. It is unique in that it combines the speed and feature
 python-lxml: completeness of these libraries with the simplicity of a native
 python-lxml: Python API.
-python-lxml: 
+python-lxml:
 python-lxml:
 python-lxml:
 python-lxml: Homepage: https://python-lxml.de/

@@ -6,7 +6,7 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-mm-common: mm-common (gnome c bindings)
+mm-common: mm-common (GNOME Developement C Bindings)
 mm-common:
 mm-common: The mm-common module provides the build infrastructure and utilities
 mm-common: shared among the GNOME C++ binding libraries.  It is only a required

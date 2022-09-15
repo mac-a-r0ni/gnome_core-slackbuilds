@@ -5,15 +5,15 @@
 # You must make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
-       |-----handy-ruler------------------------------------------------------|
-libmediaart: libmediaart 
+           |-----handy-ruler------------------------------------------------------|
+libmediaart: libmediaart (managing, extracting & handling media art caches)
 libmediaart:
-libmediaart: Library tasked with managing, extracting and handling media art 
-libmediaart: caches 
-libmediaart:
+libmediaart: Homepage: https://gitlab.gnome.org/GNOME/libmediaart
 libmediaart:
 libmediaart:
 libmediaart:
 libmediaart:
-libmediaart: https://gitlab.gnome.org/GNOME/libmediaart
+libmediaart:
+libmediaart:
+libmediaart:
 libmediaart:

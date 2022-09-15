@@ -10,7 +10,7 @@ libportal: libportal (Flatpak portal library)
 libportal:
 libportal: libportal provides GIO-style async APIs for most Flatpak portals.
 libportal:
-libportal: homepage: https://github.com/flatpak/libportal
+libportal: Homepage: https://github.com/flatpak/libportal
 libportal:
 libportal:
 libportal:
