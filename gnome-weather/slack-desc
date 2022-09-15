@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
              |-----handy-ruler------------------------------------------------------|
-gnome-weather: GNOME Weather 
+gnome-weather: GNOME Weather (GNOME weather widget)
 gnome-weather:
 gnome-weather: GNOME Weather is a small application that allows you to monitor the
 gnome-weather: current weather conditions for your city, or anywhere in the world,
 gnome-weather: and to access updated forecasts provided by various internet
 gnome-weather: services.
-gnome-weather: 
 gnome-weather:
-gnome-weather: 
-gnome-weather: https://wiki.gnome.org/Apps/Weather
+gnome-weather:
+gnome-weather:
+gnome-weather: Homepage: https://wiki.gnome.org/Apps/Weather
 gnome-weather:
