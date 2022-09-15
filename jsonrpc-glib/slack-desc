@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
             |-----handy-ruler------------------------------------------------------|
-jsonrpc-glib:
-jsonrpc-glib: Jsonrpc-GLib
+jsonrpc-glib: JSONRPC-GLib (a JSON-RPC library for Glib)
 jsonrpc-glib:
 jsonrpc-glib: Jsonrpc-GLib is a library to communicate with JSON-RPC based peers in
 jsonrpc-glib: either a synchronous or asynchronous fashion.
 jsonrpc-glib:
+jsonrpc-glib: Homepage: https://gitlab.gnome.org/GNOME/jsonrpc-glib
 jsonrpc-glib:
 jsonrpc-glib:
 jsonrpc-glib:
-jsonrpc-glib: https://gitlab.gnome.org/GNOME/jsonrpc-glib
+jsonrpc-glib:
 jsonrpc-glib:

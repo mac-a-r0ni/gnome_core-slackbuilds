@@ -11,8 +11,8 @@ gspell:
 gspell: gspell provides a flexible API to add spell-checking to
 gspell: a GTK+ application.
 gspell:
-gspell: More details:
-gspell: https://gitlab.gnome.org/GNOME/gspell
+gspell:
+gspell: Homepage: https://gitlab.gnome.org/GNOME/gspell
 gspell:
 gspell:
 gspell:
