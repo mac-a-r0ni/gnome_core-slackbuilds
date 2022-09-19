@@ -93,7 +93,6 @@ cd build
 	-DENABLE_MINIBROWSER=ON \
 	-DENABLE_JOURNALD_LOG=OFF \
 	-DUSE_SOUP2=OFF \
-	-DUSE_GTK4=ON \
         -Wno-dev \
         -G Ninja \
         ..
