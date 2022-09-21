@@ -16,4 +16,4 @@ cogl:
 cogl: Having other backends, besides OpenGL, such as drm, Gallium or D3D are
 cogl: options we are interested in for the future.
 cogl:
-cogl: https://www.gnome.org/
+cogl: Homepage: https://rib.github.io/cogl/
