@@ -55,10 +55,6 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
 
-zcat $CWD/41.2-optional-introspection.patch.gz | patch -p1 || exit
-zcat $CWD/41.2-webkitgtk40.patch.gz | patch -p1 || exit
-zcat $CWD/41.2-meson-0.61.patch.gz | patch -p1 || exit
-
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -81,7 +77,6 @@ cd build
     -D strip=true \
     -D plugin_emacs=true \
     -D plugin_gedit=true \
-    -D introspection=true \
     -D plugin_vim=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
