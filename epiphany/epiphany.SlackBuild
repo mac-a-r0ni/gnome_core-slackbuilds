@@ -86,11 +86,7 @@ meson .. \
  --localstatedir=/var \
  --mandir=/usr/man \
  --buildtype=release \
- -Ddeveloper_mode=false \
  -Dlibportal=enabled \
- -Dnetwork_tests=disabled \
- -Dtech_preview=false \
- -Dunit_tests=disabled \
  -Dsoup2=disabled
 
 ninja $JOBS || ninja
