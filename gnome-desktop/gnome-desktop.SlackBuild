@@ -95,6 +95,7 @@ cd build
     --buildtype=release \
     -Dsystemd=disabled \
     -Ddesktop_docs=false \
+    -gnome_distributor=slackware.lngn.net \
     -Dgtk_doc=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
