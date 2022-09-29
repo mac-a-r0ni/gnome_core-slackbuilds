@@ -79,8 +79,10 @@ tar xvf $CWD/$PKGNAM-$VERSION.tar.?z || exit 1
 cd $PKGNAM-$VERSION || exit 1
 
 # Add slackware to OS options
-patch -p1 < $CWD/polkit-meson-opt-slack.diff
-patch -p1 < $CWD/polkit-meson-slackware.diff
+zcat $CWD/dont-set-wheel-group-as-admin.diff.gz | patch -p1 --verbose || exit 1
+zcat $CWD/102.diff.gz | patch -p1 --verbose || exit 1
+patch -p1 < $CWD/polkit-meson-opt-slack.diff || exit 1
+patch -p1 < $CWD/polkit-meson-slackware.diff || exit 1
 
 # Make sure ownerships and permissions are sane:
 chown -R root:root .
