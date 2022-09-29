@@ -26,12 +26,12 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=webkit2gtk4.1
 SRCNAM=webkitgtk
-VERSION=${VERSION:-2.36.7}
+VERSION=${VERSION:-2.38.0}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_jbl}
+TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
-TMP=${TMP:-/tmp/jbl}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -102,11 +102,11 @@ cd build
 "${NINJA:=ninja}" -j$(expr $(nproc) + 1)
 DESTDIR=$PKG $NINJA -j1 install
 
-mkdir -p $PKG/usr/share/gtk-doc/html/webkit{2,dom}gtk-4.1
-install -m 0644 ../Documentation/webkit2gtk-4.0/html/* \
+mkdir -p $PKG/usr/share/gtk-doc/html/webkit2gtk-4.1
+install -m 0644 ../Documentation/webkit2gtk-4.1/* \
   $PKG/usr/share/gtk-doc/html/webkit2gtk-4.1
-install -m 0644 ../Documentation/webkitdomgtk-4.0/html/* \
-  $PKG/usr/share/gtk-doc/html/webkitdomgtk-4.1
+install -m 0644 ../Documentation/webkit2gtk-web-extension-4.1/* \
+  $PKG/usr/share/gtk-doc/html/webkit2gtk-web-extension-4.1
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a ../NEWS $PKG/usr/doc/$PRGNAM-$VERSION

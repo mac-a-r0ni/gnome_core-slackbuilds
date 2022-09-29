@@ -93,30 +93,9 @@ meson .. \
  --mandir=/usr/man \
  --localstatedir=/var \
  -Ddefault_library=shared \
- -Dplatform=gnome \
- -Dviewer=true \
- -Dpreviewer=true \
- -Dthumbnailer=true \
- -Dnautilus=true \
- -Dcomics=enabled \
- -Ddjvu=enabled \
- -Ddvi=enabled \
- -Dpdf=enabled \
- -Dps=enabled \
- -Dtiff=enabled \
- -Dxps=enabled \
- -Dgtk_doc=true \
- -Duser_doc=true \
- -Dintrospection=true \
- -Ddbus=true \
- -Dkeyring=enabled \
- -Dgtk_unix_print=enabled \
- -Dthumbnail_cache=enabled \
- -Dmultimedia=enabled \
- -Dgspell=enabled \
+ -Dgtk_doc=false \
+ -Dnautilus=false \
  -Dsystemduserunitdir=no
-
-# -Dbrowser_plugin_dir
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install

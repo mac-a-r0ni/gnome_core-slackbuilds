@@ -1,0 +1,6 @@
+mozjs is Mozilla SpiderMonkey.
+
+SpiderMonkey is the JavaScript and WebAssembly implementation library
+of the Mozilla Firefox web browser. The implementation behaviour is 
+defined by the ECMAScript and WebAssembly specifications.
+

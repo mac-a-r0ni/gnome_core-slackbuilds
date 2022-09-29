@@ -93,10 +93,7 @@ cd build
     --mandir=/usr/man \
     --infodir=/usr/info \
     --buildtype=release \
-    -Dsystemd=disabled \
-    -Ddesktop_docs=false \
-    -Dgnome_distributor=slackware.lngn.net \
-    -Dgtk_doc=false
+    -Dsystemd=disabled
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..

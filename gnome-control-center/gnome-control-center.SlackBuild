@@ -68,7 +68,7 @@ tar xfv $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
 
 # epic slackware logo's by Frank Honolka (snuk), too good not to include
-zcat $CWD/distro-logo.patch.gz | patch -p1 || exit
+#zcat $CWD/distro-logo.patch.gz | patch -p1 || exit
 
 chown -R root:root .
 

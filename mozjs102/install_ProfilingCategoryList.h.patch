@@ -1,0 +1,18 @@
+diff --git a/js/src/build/Makefile.in b/js/src/build/Makefile.in
+--- a/js/src/build/Makefile.in
++++ b/js/src/build/Makefile.in
+@@ -29,10 +29,13 @@
+ 	$(SYSINSTALL) $(JS_LIBRARY_NAME).pc $(DESTDIR)$(libdir)/pkgconfig
+ 
+ install:: ../js-config.h
+ 	$(SYSINSTALL) $^ $(DESTDIR)$(includedir)/$(JS_LIBRARY_NAME)
+ 
++install:: ../../../mozglue/baseprofiler/public/ProfilingCategoryList.h
++	$(SYSINSTALL) $^ $(DESTDIR)$(includedir)/$(JS_LIBRARY_NAME)/js
++
+ ######################################################
+ # BEGIN SpiderMonkey header installation
+ #
+ # Mozilla/Gecko/Firefox mostly doesn't concern itself with defining a sensible
+ # install target, because it's shipping primarily packaged builds.  And even if
+

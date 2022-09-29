@@ -67,9 +67,6 @@ rm -rf $PRGNAM-$VERSION
 tar xfv $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
 
-# Allow disabling calls to gst-inspect (sandbox issue)
-zcat $CWD/3.38.0-gst-inspect-sandbox.patch.gz | patch -p1 || exit
-
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -96,7 +93,6 @@ meson .. \
  -Denable-python=yes \
  -Dwith-plugins=all \
  -Denable-gtk-doc=false \
- -Dgst-inspect=false \
  -Dprofile=default
 
 ninja $JOBS || ninja

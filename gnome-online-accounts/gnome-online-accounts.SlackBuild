@@ -3,7 +3,6 @@
 # Slackware build script for gnome-online-accounts
 
 # Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -81,50 +80,30 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+mkdir build
+cd build
+
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-./configure \
+meson .. \
+ --buildtype=release \
  --prefix=/usr \
  --libdir=/usr/lib${LIBDIRSUFFIX} \
  --sysconfdir=/etc \
  --localstatedir=/var \
- --mandir=/usr/man \
- --docdir=/usr/doc/$PRGNAM-$VERSION \
- --enable-documentation=yes \
- --enable-gtk-doc-html=yes \
- --enable-introspection=yes \
- --enable-vala=yes \
- --enable-backend=yes \
- --enable-inspector=yes \
- --enable-exchange=yes \
- --enable-flickr=yes \
- --enable-foursquare=yes \
- --enable-google=yes \
- --enable-imap-smtp=yes \
- --enable-media-server=yes \
- --enable-owncloud=yes \
- --enable-facebook=yes \
- --enable-windows-live=yes \
- --enable-kerberos=yes \
- --enable-lastfm=yes \
- --enable-compile-warnings=no \
- --enable-shared=yes \
- --disable-static \
- --build=$ARCH-slackware-linux
+ --mandir=/usr/man
 
-make
-make install DESTDIR=$PKG
+ninja
+DESTDIR=$PKG ninja install
+cd ..
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a ABOUT-NLS COPYING NEWS README \
+cp -a COPYING NEWS README \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

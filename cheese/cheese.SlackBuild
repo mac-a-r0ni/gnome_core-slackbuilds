@@ -5,7 +5,6 @@
 # Copyright 2016,2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
 # Based on Linux From Scratch online book (Thanks!!!):
 # https://www.linuxfromscratch.org/blfs/view/svn/gnome/cheese.html
-# Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,13 +24,11 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=cheese
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -83,7 +80,7 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-  
+
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
@@ -97,10 +94,7 @@ meson .. \
  --mandir=/usr/man \
  --localstatedir=/var \
  -Ddefault_library=shared \
- -Dtests=false \
- -Dintrospection=true \
- -Dgtk_doc=false \
- -Dman=true
+ -Dgtk_doc=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..

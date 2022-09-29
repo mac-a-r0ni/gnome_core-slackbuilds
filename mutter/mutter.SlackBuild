@@ -69,8 +69,6 @@ rm -rf $PRGNAM-$VERSION
 tar xfv $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
 
-zcat $CWD/mutter-42.0-Disable-anonymous-file-test.patch.gz | patch -p1 || exit
-
 chown -R root:root .
 
 find -L . \

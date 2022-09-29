@@ -25,7 +25,7 @@
 
 PRGNAM=gnome-shell
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 
 if [ -z "$ARCH" ]; then
@@ -70,9 +70,6 @@ cd $PRGNAM-$VERSION
 
 chown -R root:root .
 
-zcat $CWD/42.0-optional-bluetooth.patch.gz | patch -p1 || exit
-zcat $CWD/40.0-defaults.patch.gz | patch -p1 || exit
-
 mkdir -p build
 cd build
 
@@ -90,12 +87,6 @@ meson .. \
  -Dsystemd=false \
  -Dtests=false \
  -Dsoup2=true
-# -Dbluetooth=true \
-# -Dextensions_tool=true \
-# -Dextensions_app=true \
-# -Dgtk_doc=true \
-# -Dman=true \
-# -Dnetworkmanager=true \
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install

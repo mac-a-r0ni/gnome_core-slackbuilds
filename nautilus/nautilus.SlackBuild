@@ -27,7 +27,7 @@
 PRGNAM=nautilus
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_jbl}
+TAG=${TAG:-_gcs}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -38,7 +38,7 @@ if [ -z "$ARCH" ]; then
 fi
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/jbl}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 JOBS=${JOBS:-" -j$(expr $(nproc) +1) "}
@@ -73,8 +73,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-zcat $CWD/3.30.5-docs-build.patch.gz | patch -p1 || exit
-zcat $CWD/42.0-optional-gstreamer.patch.gz | patch -p1 || exit
+#zcat $CWD/3.30.5-docs-build.patch.gz | patch -p1 || exit
+#zcat $CWD/42.0-optional-gstreamer.patch.gz | patch -p1 || exit
 
 mkdir -p build
 cd build
@@ -91,7 +91,6 @@ meson .. \
  -Ddocs=true \
  -Dextensions=true \
  -Dintrospection=true \
- -Dlibportal=true \
  -Dpackagekit=false \
  -Dselinux=false \
  -Dprofiling=false \

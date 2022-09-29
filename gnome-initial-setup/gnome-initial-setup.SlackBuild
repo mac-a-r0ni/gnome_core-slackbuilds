@@ -89,7 +89,6 @@ meson .. \
  --mandir=/usr/man \
  --localstatedir=/var \
  -Ddefault_library=shared \
- -Dcheese=enabled \
  -Dibus=enabled \
  -Dsystemd=false \
  -Dparental_controls=enabled

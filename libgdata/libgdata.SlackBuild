@@ -100,14 +100,8 @@ cd build
     --sbindir=/usr/sbin \
     --includedir=/usr/include \
     --datadir=/usr/share \
-    -Dstrip=true \
-    -Dgtk=enabled \
-    -Dgnome=enabled \
-    -Dgoa=enabled \
     -Dalways_build_tests=false \
-    -Dgtk_doc=true \
-    -Dintrospection=true \
-    -Dman=true
+    -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..

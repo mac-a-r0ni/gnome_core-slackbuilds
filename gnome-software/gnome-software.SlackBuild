@@ -26,8 +26,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-software
-VERSION=${VERSION:-42.4}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -95,13 +95,10 @@ CFLAGS="$SLKCFLAGS" \
     -Dtests=false \
     -Dfwupd=false \
     -Dgudev=true \
-    -Dvalgrind=false \
     -Dexternal_appstream=true \
-    -Dhardcoded_popular=false \
     -Dmalcontent=true \
     -Dpackagekit=false \
     -Dgtk_doc=false \
-    -Dsoup2=true \
     -Dprofile=slackware64-current
 
 #-Dmogwai=true

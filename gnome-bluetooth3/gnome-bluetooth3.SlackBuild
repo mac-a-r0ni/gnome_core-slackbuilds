@@ -28,7 +28,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 SRCNAM=gnome-bluetooth
 PRGNAM=gnome-bluetooth3
-VERSION=${VERSION:-42.3}
+VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}

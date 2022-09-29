@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+        |-----handy-ruler------------------------------------------------------|
+libpanel: libpanel (A dock/panel library for GTK4)
+libpanel:
+libpanel: Libpanel helps you create IDE-like applications using GTK 4 and
+libpanel: libadwaita. It has widgets for panels, docks, columns and grids of
+libpanel: pages. Primarily, it's design and implementation focus around GNOME
+libpanel: Builder and Drafting projects.
+libpanel:
+libpanel:
+libpanel: Homepage: https://gitlab.gnome.org/GNOME/libpanel
+libpanel:
+libpanel:

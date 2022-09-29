@@ -93,15 +93,15 @@ meson .. \
  --infodir=/usr/info \
  --mandir=/usr/man \
  --localstatedir=/var \
- -Denable_gtk=true \
+ -Dgtk=true \
  -Dlibsysprof=true \
- -Dwith_sysprofd=bundled \
+ -Dsysprofd=bundled \
  -Dsystemdunitdir=/usr/lib/systemd/system \
  -Dhelp=true \
  -Dlibunwind=true \
- -Denable_tools=true \
- -Denable_tests=false \
- -Denable_examples=false
+ -Dtools=true \
+ -Dtests=false \
+ -Dexamples=false
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install

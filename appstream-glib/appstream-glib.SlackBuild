@@ -27,7 +27,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 PRGNAM=appstream-glib
 VERSION=${VERSION:-0.8.1}
 SRCVERSION=$(echo "$PRGNAM" | tr - _)_$(echo "$VERSION" | tr . _)
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
