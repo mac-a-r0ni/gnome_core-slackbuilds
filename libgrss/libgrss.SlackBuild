@@ -40,7 +40,7 @@ TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/pkg-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 CWD=$(pwd)
-JOBS=${JOBS:-$(echo -j"$(getconf _NPROCESSORS_ONLN)")}
+JOBS=${JOBS:- " -j$(expr $(nproc) + 1) "}
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"

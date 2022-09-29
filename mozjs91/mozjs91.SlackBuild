@@ -94,7 +94,7 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \+
 
-# We need to use the incredibly ancient autoconf-2.13 for this  :/                                                                                             
+# We need to use the incredibly ancient autoconf-2.13 for this  :/
 ( cd $CWD/autoconf ; ./autoconf.build )
 PATH=$TMP/autoconf-tmp/usr/bin:$PATH
 
@@ -105,7 +105,7 @@ zcat $CWD/patches/tests-increase-timeout.patch.gz | patch -p1 --verbose || exit 
 zcat $CWD/patches/icu_sources_data.py-Decouple-from-Mozilla-build-system.patch.gz | patch -p1 --verbose || exit 1
 zcat $CWD/patches/icu_sources_data-Write-command-output-to-our-stderr.patch.gz | patch -p1 --verbose || exit 1
 zcat $CWD/patches/emitter.patch.gz | patch -p1 --verbose || exit 1
-zcat $CWD/patches/tests-Use-native-TemporaryDirectory.patch.gz | patch -p1 --verbose || exit 1 
+zcat $CWD/patches/tests-Use-native-TemporaryDirectory.patch.gz | patch -p1 --verbose || exit 1
 zcat $CWD/patches/init_patch.patch.gz | patch -p1 --verbose || exit 1
 zcat $CWD/patches/remove-sloppy-m4-detection-from-bundled-autoconf.patch.gz | patch -p1 --verbose || exit 1
 zcat $CWD/patches/spidermonkey_checks_disable.patch.gz | patch -p1 --verbose || exit 1

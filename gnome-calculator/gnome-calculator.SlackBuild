@@ -76,6 +76,7 @@ find -L . \
 
 # crash boom bang fix
 cat $CWD/fix.function-crash.patch | patch -p1
+cat $CWD/fix.variable-crash.patch | patch -p1
 
 mkdir -p build
 cd build

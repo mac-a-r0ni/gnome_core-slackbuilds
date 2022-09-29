@@ -68,9 +68,10 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xfv $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
-zcat $CWD/mutter-42.0-Disable-anonymous-file-test.patch.gz | patch -p1 || exit
-chown -R root:root .
 
+zcat $CWD/mutter-42.0-Disable-anonymous-file-test.patch.gz | patch -p1 || exit
+
+chown -R root:root .
 
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -78,24 +79,14 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# ...fix a race condition that sometimes occurs due to meson dependency ordering (Linux From Scratch)
-#sed -i '/libmutter_dep = declare_dependency(/a sources: mutter_built_sources,' src/meson.build
-
 mkdir -p build
 cd build
-
-# -Dverbose=false
-# -Dxwayland_path
-# -Dxwayland_grab_default_access_rules
-# -Dxwayland_initfd
-# -Dxwayland_ignore_executables
-# -Dudev_dir=/etc/udev \
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 meson .. \
  --prefix=/usr \
- --buildtype=debugoptimized \
+ --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
  --sysconfdir=/etc \
  --infodir=/usr/info \

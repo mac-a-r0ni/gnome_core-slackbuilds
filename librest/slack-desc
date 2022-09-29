@@ -5,15 +5,15 @@
 # You must make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
-    |-----handy-ruler------------------------------------------------------|
-rest: rest (RESTful Library)
-rest:
-rest: This library has been designed to make it easier to access web
-rest: services that claim to be "RESTful".
-rest:
-rest: Homepage: https://gitlab.gnome.org/GNOME/librest
-rest:
-rest:
-rest:
-rest:
-rest:
+       |-----handy-ruler------------------------------------------------------|
+librest: librest (RESTful Library)
+librest:
+librest: This library has been designed to make it easier to access web
+librest: services that claim to be "RESTful".
+librest:
+librest: Homepage: https://gitlab.gnome.org/GNOME/librest
+librest:
+librest:
+librest:
+librest:
+librest:
