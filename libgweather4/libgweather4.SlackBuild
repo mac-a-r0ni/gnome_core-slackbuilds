@@ -97,7 +97,7 @@ cd build
     -Denable_vala=true \
     -Dgtk_doc=false \
     -Dintrospection=true \
-    -Dsoup2=true
+    -Dsoup2=false
 
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
