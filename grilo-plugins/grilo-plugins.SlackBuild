@@ -94,7 +94,7 @@ meson .. \
  -Denable-chromaprint=yes \
  -Denable-dleyna=yes \
  -Ddleyna-service-name=yes \
- -Denable-dmap=yes \
+ -Denable-dmap=no \
  -Denable-filesystem=yes \
  -Denable-flickr=yes \
  -Denable-freebox=yes \
