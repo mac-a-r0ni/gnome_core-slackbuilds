@@ -1,0 +1,20 @@
+--- /home/jbl/polkit/polkit-0.121/meson.build
++++ /home/jbl/polkit/polkit-master/meson.build
+@@ -275,6 +275,7 @@
+     ['suse', '/etc/SuSE-release'],
+     ['debian', '/etc/debian_version'],
+     ['gentoo', '/etc/gentoo-release'],
++    ['slackware', '/etc/slackware-release'],
+     ['pardus', '/etc/pardus-release'],
+   ]
+ 
+@@ -306,7 +307,7 @@
+       'PAM_FILE_INCLUDE_PASSWORD': 'system',
+       'PAM_FILE_INCLUDE_SESSION': 'system',
+     }
+-  #if ['redhat', 'gentoo', 'pardus'].contains(os_type)
++  #if ['redhat', 'gentoo', 'slackware', 'pardus'].contains(os_type)
+   else
+     pam_conf = {
+       'PAM_FILE_INCLUDE_AUTH': 'system-auth',
+
