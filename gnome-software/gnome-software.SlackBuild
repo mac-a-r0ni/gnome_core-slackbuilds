@@ -99,6 +99,7 @@ CFLAGS="$SLKCFLAGS" \
     -Dmalcontent=true \
     -Dpackagekit=false \
     -Dgtk_doc=false \
+    -Dsoup2=true \
     -Dprofile=slackware64-current
 
 #-Dmogwai=true
