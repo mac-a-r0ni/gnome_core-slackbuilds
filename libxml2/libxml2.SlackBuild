@@ -140,10 +140,8 @@ rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
 
-mv $PKG/usr/share/doc/libxml2-python-$VERSION $PKG/usr/doc/libxml2-$VERSION
-rmdir $PKG/usr/share/doc
 cp -a \
-  AUTHORS* COPYING* Copyright* INSTALL* NEWS* README* TODO* \
+  INSTALL* NEWS* README* TODO* \
   $PKG/usr/doc/libxml2-$VERSION
 find $PKG/usr/doc/libxml2-$VERSION -type f | xargs chmod 644
 
