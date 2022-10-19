@@ -25,18 +25,12 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-shell-extension-appindicator
-VERSION=${VERSION:-42}
+VERSION=${VERSION:-46}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
-if [ -z "$ARCH" ]; then
-case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-    *) ARCH=$( uname -m ) ;;
-esac
-fi
+ARCH=noarch
 
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
@@ -66,12 +60,11 @@ else
 fi
 
 set -e
-
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/v$VERSION.tar.gz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -82,7 +75,7 @@ find -L . \
 
 mkdir -p build
 cd build
-CFLAGS="$SLKCFLAGS" \
+  CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
   meson .. \
     --buildtype=release \
@@ -109,6 +102,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+#cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

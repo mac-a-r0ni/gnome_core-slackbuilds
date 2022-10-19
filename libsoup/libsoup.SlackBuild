@@ -50,7 +50,7 @@ NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PKGNAM
-OUTPUT=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"

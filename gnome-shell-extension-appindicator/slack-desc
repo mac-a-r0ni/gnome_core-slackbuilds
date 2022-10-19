@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                                   |-----handy-ruler------------------------------------------------------|
-gnome-shell-extension-appindicator: gnome-shell-extension-appindicator (GNOME support for tray icons)
+gnome-shell-extension-appindicator: appindicator (gnome-shell-extension)
 gnome-shell-extension-appindicator:
 gnome-shell-extension-appindicator: This extension integrates Ubuntu AppIndicators and KStatusNotifier
 gnome-shell-extension-appindicator: (KDE's blessed successor of the systray) into GNOME shell.
 gnome-shell-extension-appindicator: Including support for legacy tray icons.
 gnome-shell-extension-appindicator:
 gnome-shell-extension-appindicator:
-gnome-shell-extension-appindicator:
+gnome-shell-extension-appindicator: Homepage:
 gnome-shell-extension-appindicator: https://github.com/ubuntu/gnome-shell-extension-appindicator
 gnome-shell-extension-appindicator:
 gnome-shell-extension-appindicator:
