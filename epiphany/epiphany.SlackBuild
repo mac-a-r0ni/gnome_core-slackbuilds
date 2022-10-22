@@ -54,6 +54,9 @@ elif [ "$ARCH" = "i686" ]; then
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
@@ -88,8 +91,8 @@ meson build \
 meson compile -C build
 meson install -C build --destdir $PKG
 
-install -Dm 755 $CWD/epiphany.csh -t $PKG/etc/profile.d/
-install -Dm 755 $CWD/epiphany.sh -t $PKG/etc/profile.d/
+#install -Dm 755 $CWD/epiphany.csh -t $PKG/etc/profile.d/
+#install -Dm 755 $CWD/epiphany.sh -t $PKG/etc/profile.d/
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
