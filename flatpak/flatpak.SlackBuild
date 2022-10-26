@@ -159,8 +159,8 @@ preserve_perms() {
 preserve_perms etc/profile.d/flatpak.sh.new
 
 
-# Make the flathub repository available to live user:
-chroot --userspec=live:users . \
+# Make the flathub/gnome-nightly repositories available systemwide:
+chroot . \
   /usr/bin/flatpak remote-add --user --if-not-exists \
   flathub /etc/flatpak/remotes.d/flathub.flatpakrepo
   /usr/bin/flatpak remote-add --user --if-not-exists \
