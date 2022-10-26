@@ -162,7 +162,6 @@ preserve_perms etc/profile.d/flatpak.sh.new
 chroot --userspec=live:users . \
   /usr/bin/flatpak remote-add --user --if-not-exists \
   flathub /etc/flatpak/remotes.d/flathub.flatpakrepo
-chroot --userspec=live:users . \
   /usr/bin/flatpak remote-add --user --if-not-exists \
   gnome-nightly /etc/flatpak/remotes.d/gnome-nightly.flatpakrepo
 EOINS
