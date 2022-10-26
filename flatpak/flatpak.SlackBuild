@@ -3,6 +3,11 @@
 # Slackware build script for flatpak
 
 # Copyright 2017, 2018, 2019 Vincent Batts <vbatts@hashbangbash.com>
+# Major modifications Copyright 2022 by Eric Hamleers (alien@slackware.com)
+#
+# I lifted a bunch of logic from Eric's recent script to test with GNOME
+# Liveslak... I lift all Eric's stuff ;) - mac-a-r0ni
+#
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -29,7 +34,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=flatpak
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -94,6 +99,8 @@ CXXFLAGS="$SLKCFLAGS" \
   --build=$ARCH-slackware-linux \
   --with-system-bubblewrap \
   --with-system-dbus-proxy \
+  --with-privileged-group=wheel \
+  --with-system-helper-user=flatpak \
   --with-dbus-config-dir=/usr/share/dbus-1/system.d
 
 make
@@ -104,7 +111,63 @@ gzip -9 $PKG/usr/man/man*/*
 # Don't ship .la files:
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
-chmod +x $PKG/etc/profile.d/flatpak.sh
+# Flatpak would create this otherwise, and by creating it in the package,
+# removepkg can track the content changes:
+mkdir -p $PKG/var/lib/flatpak
+
+# Add flathub definition.
+# The doinst.sh will actually install it as a flatpak remote repository:
+install -D -m 0644 -t $PKG/etc/flatpak/remotes.d $CWD/flathub.flatpakrepo
+
+# We want flatpak enabled out of the box:
+chmod 0755 $PKG/etc/profile.d/flatpak.sh
+
+# Preserve customized profile script:
+mv -i $PKG/etc/profile.d/flatpak.sh{,.new}
+
+# Add this to the doinst.sh:
+mkdir -p $PKG/install
+cat <<EOINS >> $PKG/install/doinst.sh
+# Handle the incoming configuration files:
+config() {
+  for infile in \$1; do
+    NEW="\$infile"
+    OLD="\$(dirname \$NEW)/\$(basename \$NEW .new)"
+    # If there's no config file by that name, mv it over:
+    if [ ! -r \$OLD ]; then
+      mv \$NEW \$OLD
+    elif [ "\$(cat \$OLD | md5sum)" = "\$(cat \$NEW | md5sum)" ]; then
+      # toss the redundant copy
+      rm \$NEW
+    fi
+    # Otherwise, we leave the .new copy for the admin to consider...
+  done
+}
+
+preserve_perms() {
+  NEW="\$1"
+  OLD="\$(dirname \$NEW)/\$(basename \$NEW .new)"
+  if [ -e \$OLD ]; then
+    cp -a \$OLD \${NEW}.incoming
+    cat \$NEW > \${NEW}.incoming
+    mv \${NEW}.incoming \$NEW
+  fi
+  config \$NEW
+}
+
+preserve_perms etc/profile.d/flatpak.sh.new
+
+
+# Make the flathub repository available to live user:
+chroot --userspec=live:users . \
+  /usr/bin/flatpak remote-add --user --if-not-exists \
+  flathub /etc/flatpak/remotes.d/flathub.flatpakrepo
+chroot --userspec=live:users . \
+  /usr/bin/flatpak remote-add --user --if-not-exists \
+  gnome-nightly /etc/flatpak/remotes.d/gnome-nightly.flatpakrepo
+EOINS
+
+#chmod +x $PKG/etc/profile.d/flatpak.sh
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a README.md COPYING NEWS $PKG/usr/doc/$PRGNAM-$VERSION
