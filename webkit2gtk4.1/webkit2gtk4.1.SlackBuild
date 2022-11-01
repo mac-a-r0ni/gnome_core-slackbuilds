@@ -57,6 +57,9 @@ elif [ "$ARCH" = "i686" ]; then
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
@@ -94,12 +97,14 @@ cd build
 	-DENABLE_MINIBROWSER=ON \
 	-DENABLE_JOURNALD_LOG=OFF \
 	-DUSE_SOUP2=OFF \
+	-DENABLE_BUBBLEWRAP_SANDBOX=OFF \
+	-DUSE_SYSTEM_MALLOC=ON \
         -Wno-dev \
         -G Ninja \
         ..
 
-# The build might crash on high specs machines because ninja eat all
-# of the resources, so let's try to limit it to half the available ones
+# This will likely crash on a machine if you don't have the resources to use
+# all of your CPU, adjust as you see fit. I go all-in with 100% ;)
 "${NINJA:=ninja}" -j$(expr $(nproc) + 1)
 DESTDIR=$PKG $NINJA -j1 install
 
