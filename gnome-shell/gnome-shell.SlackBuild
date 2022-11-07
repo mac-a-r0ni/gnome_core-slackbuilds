@@ -85,8 +85,7 @@ meson .. \
  --localstatedir=/var \
  -Ddefault_library=shared \
  -Dsystemd=false \
- -Dtests=false \
- -Dsoup2=true
+ -Dtests=false
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install
