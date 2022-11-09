@@ -24,7 +24,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=glib2
 VERSION=${VERSION:-$(echo glib-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_gcs}
 
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
@@ -74,6 +74,9 @@ cd $TMP
 rm -rf glib-$VERSION
 tar xvf $CWD/glib-$VERSION.tar.?z* || exit 1
 cd glib-$VERSION || exit 1
+
+#fix gnome-keyring always using 100% cpu core
+patch -Np1 -i $CWD/glib-2.74.1-revert-fd-handling.patch || exit 1
 
 chown -R root:root .
 find . \
@@ -143,7 +146,7 @@ fi
 
 mkdir -p $PKG/usr/doc/glib-$VERSION
 cp -a \
-  AUTHORS COPYING* NEWS README* \
+  CODE_OF_CONDUCT.* CONTRIBUTING.* COPYING* HACKING.* INSTALL.* NEWS README* \
   $PKG/usr/doc/glib-$VERSION
   rm -f $PKG/usr/doc/glib-$VERSION/README.{in,win32}
 
