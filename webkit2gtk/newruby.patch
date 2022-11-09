@@ -1,0 +1,28 @@
+--- webkitgtk-2.38.0/Source/JavaScriptCore/offlineasm/parser.rb~	2022-08-31 07:59:51.000000000 +0000
++++ webkitgtk-2.38.0/Source/JavaScriptCore/offlineasm/parser.rb	2022-09-24 23:46:59.496056272 +0000
+@@ -840,10 +840,10 @@
+                     additionsDirectoryName = "#{@buildProductsDirectory}#{@headersFolderPath}/WebKitAdditions/"
+                 end
+                 fileName = IncludeFile.new(moduleName, additionsDirectoryName).fileName
+-                if not File.exists?(fileName)
++                if not File.exist?(fileName)
+                     fileName = IncludeFile.new(moduleName, @tokens[@idx].codeOrigin.fileName.dirname).fileName
+                 end
+-                fileExists = File.exists?(fileName)
++                fileExists = File.exist?(fileName)
+                 raise "File not found: #{fileName}" if not fileExists and not isOptional
+                 list << parse(fileName, @options, @sources) if fileExists
+             else
+@@ -876,10 +876,10 @@
+                     additionsDirectoryName = "#{@buildProductsDirectory}#{@headersFolderPath}/WebKitAdditions/"
+                 end
+                 fileName = IncludeFile.new(moduleName, additionsDirectoryName).fileName
+-                if not File.exists?(fileName)
++                if not File.exist?(fileName)
+                     fileName = IncludeFile.new(moduleName, @tokens[@idx].codeOrigin.fileName.dirname).fileName
+                 end
+-                fileExists = File.exists?(fileName)
++                fileExists = File.exist?(fileName)
+                 raise "File not found: #{fileName}" if not fileExists and not isOptional
+                 if fileExists
+                     parser = Parser.new(readTextFile(fileName), SourceFile.new(fileName), options)
