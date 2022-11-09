@@ -1,6 +1,11 @@
-These SlackBuilds are what I use to create the liveslak system with GNOME. Many of these are 
-the work of others, some are mine. Either way, they are just text files. I find it hard to put 
+These SlackBuilds are what I use to create the liveslak system with GNOME. Many of these are
+the work of others, some are mine. Either way, they are just text files. I find it hard to put
 "copyright" on some text. This isn't a book and these are general build instructions for any distro
-but tailored for Slackware systems.
+but tailored for Slackware systems. That said, all of these are copyrighted by thier authors,
+so don't go around stealing others work, and removing thier names from it for the fame. There is no
+fame, and you'll just be mocked and scolded by the community for being an idiot.
+
+ISOs: https://slackware.lngn.net/gnome-43-1-liveslak/
+Installation/HowTo: https://slackware.lngn.net/repo-usage-installation/
 
 News/blog/packages/repositories are available at my site: https://slackware.lngn.net/
