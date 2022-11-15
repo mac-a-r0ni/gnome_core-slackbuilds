@@ -97,9 +97,6 @@ make install DESTDIR=$PKG || exit 1
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mv $PKG/etc/xdg/user-dirs.conf $PKG/etc/xdg/user-dirs.conf.new
-mv $PKG/etc/xdg/user-dirs.defaults $PKG/etc/xdg/user-dirs.defaults.new
-
 # Compress manual pages:
 find $PKG/usr/man -type f -exec gzip -9 {} \+
 for i in $( find $PKG/usr/man -type l ) ; do
