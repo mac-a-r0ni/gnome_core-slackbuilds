@@ -24,7 +24,7 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-# wget https://archive.mozilla.org/pub/firefox/releases/102.5.0esr/source/firefox-102.5.0esr.source.tar.xz
+wget https://archive.mozilla.org/pub/firefox/releases/102.5.0esr/source/firefox-102.5.0esr.source.tar.xz | exit 1
 
 PRGNAM=mozjs102
 SRCNAM=firefox
