@@ -25,6 +25,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
+wget https://download.gnome.org/sources/amtk/5.6/amtk-5.6.1.tar.xz
+
 PRGNAM=amtk
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
