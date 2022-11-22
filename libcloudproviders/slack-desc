@@ -8,8 +8,8 @@
                  |-----handy-ruler------------------------------------------------------|
 libcloudproviders: libcloudproviders (DBus API for cloud sync clients)
 libcloudproviders:
-libcloudproviders: libcloudproviders is a DBus API that allows cloud storage sync clients
-libcloudproviders: to expose their services.
+libcloudproviders: libcloudproviders is a DBus API that allows cloud storage sync
+libcloudproviders: clients to expose their services.
 libcloudproviders:
 libcloudproviders:
 libcloudproviders:
