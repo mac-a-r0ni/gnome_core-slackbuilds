@@ -92,7 +92,9 @@ CFLAGS="$SLKCFLAGS" \
     --localstatedir=/var \
     --mandir=/usr/man \
     --prefix=/usr \
-    --sysconfdir=/etc
+    --sysconfdir=/etc \
+    -Dexamples=false \
+    -Dmanpages=false
 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
