@@ -30,7 +30,7 @@
 # 20220307 bkw: Modified by SlackBuilds.org, BUILD=2:
 # - remove useless INSTALL and ABOUT-NLS from doc dir.
 
-wget https://github.com/flatpak/flatpak/releases/download/1.14.1/flatpak-1.14.1.tar.xz
+wget -c --no-check-certificate https://github.com/flatpak/flatpak/releases/download/1.14.1/flatpak-1.14.1.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -160,7 +160,6 @@ preserve_perms() {
 
 preserve_perms etc/profile.d/flatpak.sh.new
 
-
 # Make the flathub/gnome-nightly repositories available systemwide:
 chroot . \
   /usr/bin/flatpak remote-add --user --if-not-exists \
@@ -168,8 +167,6 @@ chroot . \
   /usr/bin/flatpak remote-add --user --if-not-exists \
   gnome-nightly /etc/flatpak/remotes.d/gnome-nightly.flatpakrepo
 EOINS
-
-#chmod +x $PKG/etc/profile.d/flatpak.sh
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a README.md COPYING NEWS $PKG/usr/doc/$PRGNAM-$VERSION

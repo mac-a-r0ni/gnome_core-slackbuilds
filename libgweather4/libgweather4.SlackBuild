@@ -24,6 +24,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
+wget -c --no-check-certificate https://download.gnome.org/sources/libgweather/4.2/libgweather-4.2.0.tar.xz
+
 PKGNAM=libgweather4
 SRCNAM=libgweather
 VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -85,7 +87,7 @@ mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
@@ -94,10 +96,8 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
-    -Denable_vala=true \
     -Dgtk_doc=false \
-    -Dintrospection=true \
-    -Dsoup2=false
+    -Dtests=false
 
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
