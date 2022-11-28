@@ -6,7 +6,7 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|
-libgusb: libgusb (Glib Wrapper)
+libgusb: libgusb (glib libusb1 wrapper)
 libgusb:
 libgusb: GUsb is a GObject wrapper for libusb1 that makes it easy to do
 libgusb: asynchronous control, bulk and interrupt transfers with proper
@@ -15,5 +15,5 @@ libgusb:
 libgusb: This makes it easy to integrate low level USB transfers with your
 libgusb: high-level application or system daemon.
 libgusb:
-libgusb: Project URL: https://github.com/hughsie/libgusb
+libgusb: Homepage: https://github.com/hughsie/libgusb
 libgusb:
