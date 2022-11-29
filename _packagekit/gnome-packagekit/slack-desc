@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                |-----handy-ruler------------------------------------------------------|
+gnome-packagekit: gnome-packagekit (Integrated PackageKit interface for GNOME)
+gnome-packagekit:
+gnome-packagekit: Formally, PackageKit is a D-Bus abstraction layer that allows the
+gnome-packagekit: session user to manage packages in a secure way using a cross-distro,
+gnome-packagekit: cross-architecture API.
+gnome-packagekit:
+gnome-packagekit: Homepage: https://www.freedesktop.org/software/PackageKit/
+gnome-packagekit:
+gnome-packagekit:
+gnome-packagekit:
+gnome-packagekit:
