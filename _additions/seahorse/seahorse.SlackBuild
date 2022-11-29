@@ -3,7 +3,7 @@
 # Slackware build script for seahorse
 # Copyright 20XX Andrew Rowland (weibullguy@gmail.com)
 # Updated to version 3.8.1 by Andrew Rowland
-# Updated for 42.0 by Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Updated for 43.0 by Jay Lanagan (j@lngn.net), Detroit, MI, USA
 #
 # All rights reserved.
 #
@@ -24,13 +24,14 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/seahorse/43/seahorse-43.0.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=seahorse
-VERSION=${VERSION:-42.0}
+VERSION=${VERSION:-43.0}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_gfs}
+TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
@@ -46,7 +47,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/gfs}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
@@ -58,6 +59,9 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
