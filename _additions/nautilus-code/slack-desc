@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+             |-----handy-ruler------------------------------------------------------|
+nautilus-code: nautilus-code (An extension for Nautilus)
+nautilus-code:
+nautilus-code: An extension for Nautilus (GNOME Files) File Manager which adds
+nautilus-code: right-click menu options to open current/selected folder in Code
+nautilus-code: Editors and IDEs like VSCode or GNOME Builder (if they are installed)
+nautilus-code:
+nautilus-code: Homepage: https://github.com/realmazharhussain/nautilus-code
+nautilus-code:
+nautilus-code:
+nautilus-code:
+nautilus-code:

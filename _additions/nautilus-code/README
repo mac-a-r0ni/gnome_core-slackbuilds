@@ -1,0 +1,5 @@
+An extension for Nautilus (GNOME Files) File Manager
+which adds right-click menu options to 
+open current/selected folder in Code Editors and IDEs
+like VSCode or GNOME Builder
+(if they are installed)
