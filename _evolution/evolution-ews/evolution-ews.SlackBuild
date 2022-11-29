@@ -22,15 +22,17 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/evolution-ews/3.46/evolution-ews-3.46.1.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evolution-ews
-VERSION=${VERSION:-3.46.0}
+VERSION=${VERSION:-3.46.1}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-tgz}
+TAG=${TAG:-_gcs}
+PKGTYPE=${PKGTYPE:-txz}
 
-GCOV=${GCOV:-no}
+GCOV=${GCOV:-yes}
 TESTING:${TESTING:-no}
 
 if [ -z "$ARCH" ]; then
@@ -58,7 +60,7 @@ else
   TESTINGP="OFF"
 fi
 
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -69,6 +71,9 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
@@ -104,10 +109,10 @@ cd build
     -DSYSCONF_INSTALL_DIR=/etc \
     -DCMAKE_BUILD_TYPE=Release .. \
     -G Ninja
-  
+
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
-  
+
 cd ..
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la

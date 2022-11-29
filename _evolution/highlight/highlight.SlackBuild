@@ -22,15 +22,17 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c http://www.andre-simon.de/zip/highlight-4.4.tar.bz2
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=highlight
 VERSION=${VERSION:-4.4}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_gfs}
+TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
-TMP=${TMP:-/tmp/gfs}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -68,8 +70,14 @@ find -L . \
 #Patch so gui links with lua5.3 instead of lua5.1 and fail.
 patch -p1 < $CWD/lua-qt.patch
 
+# create symlink for build with qmake and remove after build
+ln -s /usr/bin/qmake-qt5 /usr/bin/qmake
+
 make cli gui
 make -j1 install install-gui DESTDIR=$PKG
+
+# remove qmake symlink
+rm /usr/bin/qmake
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null

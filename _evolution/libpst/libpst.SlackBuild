@@ -43,12 +43,14 @@
 # - upgrade to 0.6.63
 # - make install-strip instead of slow find stuff
 
+wget -c https://github.com/pst-format/libpst/releases/download/libpst-0.6.76/libpst-0.6.76.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libpst
 VERSION=${VERSION:-0.6.76}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_gfs}
+TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
@@ -64,7 +66,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/gfs}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 

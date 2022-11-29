@@ -22,20 +22,22 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/evolution/3.46/evolution-3.46.1.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evolution
-VERSION=${VERSION:-3.46.0}
+VERSION=${VERSION:-3.46.1}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-tgz}
+TAG=${TAG:-_gcs}
+PKGTYPE=${PKGTYPE:-txz}
 
-GCOV=${GCOV:-no}
+GCOV=${GCOV:-yes}
 GTKDOC=${GTKDOC:-no}
 TESTS=${TESTS:-no}
 BOGOFILTER=${BOGOFILTER:-no}
 SPAMASSASION=${SPAMASSASION:-no}
-GNOMEDESKTOP=${GNOMEDESKTOP:-no}
+GNOMEDESKTOP=${GNOMEDESKTOP:-yes}
 
 if [ "$GCOV" = "yes" ]; then
   GCOVP="ON"
@@ -86,7 +88,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -97,6 +99,9 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
@@ -132,8 +137,8 @@ cd build
     -DENABLE_GNOME_DESKTOP="$GNOMEDESKTOP" \
     -DENABLE_GTK_DOC="$GTKDOC"   \
     -DENABLE_INSTALLED_TESTS="$TESTS"  \
-	-DENABLE_SMIME=ON            \
-	-DENABLE_PST_IMPORT=ON       \
+    -DENABLE_SMIME=ON            \
+    -DENABLE_PST_IMPORT=ON       \
     -DENABLE_GTKSPELL=OFF        \
     -DENABLE_YTNEF=ON            \
     -DENABLE_CONTACT_MAPS=ON     \
@@ -149,7 +154,7 @@ cd build
     -DENABLE_MARKDOWN=ON         \
     -DCMAKE_BUILD_TYPE=Release .. \
     -G Ninja
-  
+
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
