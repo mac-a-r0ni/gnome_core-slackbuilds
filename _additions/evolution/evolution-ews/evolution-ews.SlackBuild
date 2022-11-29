@@ -32,7 +32,7 @@ BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
-GCOV=${GCOV:-yes}
+GCOV=${GCOV:-no}
 TESTING:${TESTING:-no}
 
 if [ -z "$ARCH" ]; then

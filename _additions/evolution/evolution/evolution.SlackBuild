@@ -32,7 +32,7 @@ BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
-GCOV=${GCOV:-yes}
+GCOV=${GCOV:-no}
 GTKDOC=${GTKDOC:-no}
 TESTS=${TESTS:-no}
 BOGOFILTER=${BOGOFILTER:-no}
