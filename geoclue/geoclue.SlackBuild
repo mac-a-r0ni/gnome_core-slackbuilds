@@ -83,7 +83,7 @@ mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --buildtype=release \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
     --localstatedir=/var \
