@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-rhythmbox: 
+rhythmbox: Rhythmbox (GNOME music player)
 rhythmbox:
-rhythmbox: Rhythmbox is a music playing application for GNOME. 
-rhythmbox: 
-rhythmbox: 
-rhythmbox: 
-rhythmbox: 
+rhythmbox: Rhythmbox which takes its inspiration from Apple's iTunes application,
+rhythmbox: lets you do everything from importing your audio cd's into mp3 or Ogg
+rhythmbox: Vorbis format, and play these music files and other music files you
+rhythmbox: have. Play your music with an assortment of visualization plugins
+rhythmbox: and burn new audio cd's from your music files. It is a one-stop
+rhythmbox: shopping application for all your music needs.
 rhythmbox:
-rhythmbox: 
-rhythmbox: https://wiki.gnome.org/Apps/Rhythmbox
+rhythmbox: Homepage: http://rhythmbox.org
 rhythmbox:
