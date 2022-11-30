@@ -27,7 +27,7 @@ wget -c https://gitlab.gnome.org/GNOME/gnome-terminal/-/archive/3.46.6/gnome-ter
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-terminal
-VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
