@@ -1,0 +1,8 @@
+PRGNAM="pika-backup"
+VERSION="0.4.2"
+HOMEPAGE="https://apps.gnome.org/app/org.gnome.World.PikaBackup/"
+DOWNLOAD="https://gitlab.gnome.org/World/pika-backup/-/archive/v0.4.2/pika-backup-v0.4.2.tar.gz"
+MD5SUM="12b4ed083210218dd388ea36c6816786"
+REQUIRES="borgbackup"
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"

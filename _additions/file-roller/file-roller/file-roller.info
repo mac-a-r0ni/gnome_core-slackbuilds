@@ -1,0 +1,8 @@
+PRGNAM="file-roller"
+VERSION="3.42.0"
+HOMEPAGE="https://wiki.gnome.org/Apps/FileRoller"
+DOWNLOAD="https://download.gnome.org/sources/file-roller/3.42/file-roller-3.42.0.tar.xz"
+MD5SUM="c7564ff0532df8b7379a46c895ab4fcd "
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"
