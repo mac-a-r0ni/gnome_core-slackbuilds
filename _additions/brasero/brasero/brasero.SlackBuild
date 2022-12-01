@@ -30,7 +30,7 @@ PRGNAM=brasero
 VERSION=${VERSION:-3.12.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
-PKGTYPE=${PKGTYPE:-tgz}
+PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
