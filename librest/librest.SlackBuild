@@ -28,7 +28,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 SRCNAM=rest
 PKGNAM=librest
 VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -77,6 +77,10 @@ cd $TMP
 rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.xz
 cd $SRCNAM-$VERSION
+
+#patch a crashing situation
+patch -Np1 -i $CWD/30.patch
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -99,7 +103,8 @@ cd build-slack
  --mandir=/usr/man \
  --localstatedir=/var \
  -Dvapi=true \
- -Dgtk_doc=false
+ -Dgtk_doc=false \
+ -Dtests=false
 
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
