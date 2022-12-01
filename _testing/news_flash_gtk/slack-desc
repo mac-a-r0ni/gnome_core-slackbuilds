@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+              |-----handy-ruler------------------------------------------------------|
+news_flash_gtk: NewsFlash (RSS blog and newsfeed)
+news_flash_gtk:
+news_flash_gtk: NewsFlash is a program designed to complement an already existing web-
+news_flash_gtk: based RSS reader account. It combines all the advantages of web based
+news_flash_gtk: services like syncing across all your devices with everything you
+news_flash_gtk: expect from a modern desktop program: Desktop notifications, fast
+news_flash_gtk: search and filtering, tagging, handy keyboard shortcuts and having
+news_flash_gtk: access to all your articles as long as you like.
+news_flash_gtk:
+news_flash_gtk:
+news_flash_gtk: Homepage: https://gitlab.com/news-flash/news_flash_gtk
