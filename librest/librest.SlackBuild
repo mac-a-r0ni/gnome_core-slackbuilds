@@ -93,7 +93,7 @@ CXXFLAGS="$SLKCFLAGS" \
 
 mkdir build-slack
 cd build-slack
-  meson .. \
+  meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
