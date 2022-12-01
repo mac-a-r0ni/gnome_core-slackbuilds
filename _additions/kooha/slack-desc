@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+     |-----handy-ruler------------------------------------------------------|
+kooha: kooha
+kooha:
+kooha: Capture your screen in a intuitive and straightforward way without
+kooha: distractions.
+kooha: Kooha is a simple screen recorder with a minimalist interface. You
+kooha: can just click the record button without having to configure a
+kooha: bunch of settings.
+kooha:
+kooha:
+kooha: Homepage: https://apps.gnome.org/app/io.github.seadve.Kooha/
+kooha:
