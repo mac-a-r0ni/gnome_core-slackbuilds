@@ -28,6 +28,8 @@
 # - fix PRINT_PACKAGE_NAME when ARCH not set in environment.
 # - i486 => i586.
 
+wget -c --no-check-certificate http://sourceforge.net/projects/liboauth/files/liboauth-1.0.3.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=liboauth
