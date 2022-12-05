@@ -26,10 +26,12 @@
 # - remove .la files.
 # - remove useless INSTALL and ABOUT-NLS from doc dir.
 
+wget -c https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/1.14.1/xdg-desktop-portal-gtk-1.14.1.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=xdg-desktop-portal-gtk
-VERSION=${VERSION:-1.14.0}
+VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
