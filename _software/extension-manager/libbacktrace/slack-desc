@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+            |-----handy-ruler------------------------------------------------------|
+libbacktrace: libbacktrace (library to produce symbolic backtraces)
+libbacktrace:
+libbacktrace: The libbacktrace library may be linked into a program or library and
+libbacktrace: used to produce symbolic backtraces. Sample uses would be to print a
+libbacktrace: detailed backtrace when an error occurs or to gather detailed
+libbacktrace: profiling information. In general the functions provided by this
+libbacktrace: library are async-signal-safe, meaning that they may be safely
+libbacktrace: called from a signal handler.
+libbacktrace:
+libbacktrace: Homepage: https://github.com/ianlancetaylor/libbacktrace
+libbacktrace:

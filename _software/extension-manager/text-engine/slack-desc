@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+           |-----handy-ruler------------------------------------------------------|
+text-engine: text-engine (GTK4 rich-text framework)
+text-engine:
+text-engine: Text Engine is a rich-text editing framework for GTK 4. The primary
+text-engine: user of this library is bluetype but it can be used wherever rich
+text-engine: text display and editing is needed.
+text-engine:
+text-engine: Homepage: https://github.com/mjakeman/text-engine
+text-engine:
+text-engine:
+text-engine:
+text-engine:
