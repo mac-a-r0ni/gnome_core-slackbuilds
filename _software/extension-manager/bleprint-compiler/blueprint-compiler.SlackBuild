@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for iagno (GNOME Reversi)
+# Slackware build script for blueprint-compiler
 
 # Copyright 2022 Jay Lanagan (j@lngn.net), Detroit, MI, USA
 # All rights reserved.
