@@ -28,7 +28,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 SRCNAM=rest
 PKGNAM=librest
 VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-3}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -104,7 +104,8 @@ cd build-slack
  --localstatedir=/var \
  -Dvapi=true \
  -Dgtk_doc=false \
- -Dtests=false
+ -Dtests=false \
+ -Dexamples=false
 
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
