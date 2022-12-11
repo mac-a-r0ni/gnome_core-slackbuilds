@@ -24,7 +24,7 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-wget https://download.gnome.org/sources/gupnp/1.4/gupnp-1.4.4.tar.xz
+wget -c https://download.gnome.org/sources/gupnp/1.4/gupnp-1.4.4.tar.xz
 
 PRGNAM=gupnp
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
