@@ -24,6 +24,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/cheese/43/cheese-43.0.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=cheese
@@ -85,7 +87,7 @@ mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
