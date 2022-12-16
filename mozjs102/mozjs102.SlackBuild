@@ -24,11 +24,11 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-wget https://archive.mozilla.org/pub/firefox/releases/102.5.0esr/source/firefox-102.5.0esr.source.tar.xz | exit 1
+wget -c https://archive.mozilla.org/pub/firefox/releases/102.6.0esr/source/firefox-102.6.0esr.source.tar.xz | exit 1
 
 PRGNAM=mozjs102
 SRCNAM=firefox
-VERSION=${VERSION:-102.5.0}
+VERSION=${VERSION:-102.6.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
