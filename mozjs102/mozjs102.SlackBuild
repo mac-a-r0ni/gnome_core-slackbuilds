@@ -57,10 +57,10 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC -DLINUX"
+  SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -fPIC -DLINUX"
+  SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -97,7 +97,7 @@ mk_add_options MOZ_OBJDIR="$MOZOBJ"
 ac_add_options --enable-release
 ac_add_options --enable-hardening
 ac_add_options --enable-optimize
-ac_add_options --enable-rust-simd
+ac_add_options --disable-rust-simd
 ac_add_options --enable-linker=lld
 ac_add_options --disable-bootstrap
 ac_add_options --disable-debug
@@ -110,6 +110,7 @@ ac_add_options --enable-readline
 ac_add_options --enable-shared-js
 ac_add_options --enable-tests
 ac_add_options --with-intl-api
+ac_add_options --disable-lto
 EOF
 
 export MOZBUILD_STATE_PATH="$(pwd)/.mozbuild"
