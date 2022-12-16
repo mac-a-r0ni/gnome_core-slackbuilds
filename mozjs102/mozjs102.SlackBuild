@@ -114,6 +114,7 @@ EOF
 
 export MOZBUILD_STATE_PATH="$(pwd)/.mozbuild"
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none
+export CARGO_PROFILE_RELEASE_LTO=true
 
 ./mach build
 
