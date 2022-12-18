@@ -1,8 +1,8 @@
 #!/bin/bash
-#
-# Slackware build script for webkit2gtk4.1
-#
-# Copyright 2022 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
+
+# Slackware build script for mozjs102
+
+# Copyright 2022 Bob Funk, Winnipeg Canada
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,20 +22,16 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://webkitgtk.org/releases/webkitgtk-2.38.2.tar.xz
-
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=webkit2gtk4.1
-SRCNAM=webkitgtk
-VERSION=${VERSION:-2.38.2}
-BUILD=${BUILD:-2}
+wget -c https://archive.mozilla.org/pub/firefox/releases/102.6.0esr/source/firefox-102.6.0esr.source.tar.xz | exit 1
+
+PRGNAM=mozjs102
+SRCNAM=firefox
+VERSION=${VERSION:-102.6.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
-
-TMP=${TMP:-/tmp/gcs}
-PKG=$TMP/package-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -49,6 +45,10 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
 fi
+
+TMP=${TMP:-/tmp/gcs}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"
@@ -67,13 +67,13 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -eu
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $SRCNAM-$VERSION
-tar xvf $CWD/$SRCNAM-$VERSION.tar.xz
+tar xvf $CWD/$SRCNAM-${VERSION}esr.source.tar.xz
 cd $SRCNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -82,42 +82,69 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-patch -p1 < $CWD/unhide-deprecated-api.patch
-patch -p1 < $CWD/newruby.patch
+# Patch mozjs102 build to install ProfilingCategoryList.h.
+# https://hg.mozilla.org/integration/autoland/rev/eb2b21f037a5
+#patch -Np1 -i $CWD/install_ProfilingCategoryList.h.patch
 
-mkdir -p build
-cd build
-  cmake -DPORT=GTK \
-	-DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-	-DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_SKIP_RPATH=ON \
-	-DCMAKE_INSTALL_PREFIX=/usr \
-	-DLIB_INSTALL_DIR=/usr/lib${LIBDIRSUFFIX} \
-	-DLIBEXEC_INSTALL_DIR=/usr/lib${LIBDIRSUFFIX}/webkit2gtk-4.1 \
-	-DENABLE_GAMEPAD=OFF \
-	-DENABLE_MINIBROWSER=ON \
-	-DENABLE_JOURNALD_LOG=OFF \
-	-DUSE_SOUP2=OFF \
-	-DENABLE_BUBBLEWRAP_SANDBOX=OFF \
-	-DUSE_SYSTEM_MALLOC=ON \
-        -Wno-dev \
-        -G Ninja \
-        ..
+# We're going to try using the provided mach build system.
+# First we need to provide a MOZCONFIG.
+MOZOBJ="$(pwd)/obj"
+cat > ./.mozconfig << EOF
+ac_add_options --prefix=/usr
+ac_add_options --libdir=/usr/lib${LIBDIRSUFFIX}
+ac_add_options --enable-application=js
+mk_add_options MOZ_OBJDIR="$MOZOBJ"
+ac_add_options --enable-release
+ac_add_options --enable-hardening
+ac_add_options --enable-optimize
+ac_add_options --disable-rust-simd
+ac_add_options --enable-linker=lld
+ac_add_options --disable-bootstrap
+ac_add_options --disable-debug
+ac_add_options --disable-debug-symbols
+ac_add_options --disable-jemalloc
+ac_add_options --disable-strip
+ac_add_options --with-system-zlib
+ac_add_options --without-system-icu
+ac_add_options --enable-readline
+ac_add_options --enable-shared-js
+ac_add_options --enable-tests
+ac_add_options --with-intl-api
+ac_add_options --disable-lto
+EOF
 
-# This will likely crash on a machine if you don't have the resources to use
-# all of your CPU, adjust as you see fit. I go all-in with 100% ;)
-"${NINJA:=ninja}" -j$(expr $(nproc) + 1)
-DESTDIR=$PKG $NINJA -j1 install
+export MOZBUILD_STATE_PATH="$(pwd)/.mozbuild"
+#export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none
+export MACH_USE_SYSTEM_PYTHON=1
+export CARGO_PROFILE_RELEASE_LTO=true
 
-mkdir -p $PKG/usr/share/gtk-doc/html/webkit2gtk-4.1
-install -m 0644 ../Documentation/webkit2gtk-4.1/* \
-  $PKG/usr/share/gtk-doc/html/webkit2gtk-4.1
-install -m 0644 ../Documentation/webkit2gtk-web-extension-4.1/* \
-  $PKG/usr/share/gtk-doc/html/webkit2gtk-web-extension-4.1
+./mach build
+
+cd $MOZOBJ
+make install DESTDIR=$PKG
+
+cd ..
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+# No need for the huge static library:
+rm -f $PKG/usr/lib${LIBDIRSUFFIX}/libjs_static.*
+
+# Don't ship -config:
+rm -f $PKG/usr/bin/js*-config
+
+# Rename shared library to have a proper soname:
+mv $PKG/usr/lib${LIBDIRSUFFIX}/libmozjs-102.so $PKG/usr/lib${LIBDIRSUFFIX}/libmozjs-102.so.0.0.0
+( cd $PKG/usr/lib${LIBDIRSUFFIX}
+  ln -sf libmozjs-102.so.0.0.0 libmozjs-102.so.0
+  ln -sf libmozjs-102.so.0 libmozjs-102.so
+)
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a ../NEWS $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  README.txt \
+  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
