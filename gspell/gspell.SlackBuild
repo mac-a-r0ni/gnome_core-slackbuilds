@@ -26,11 +26,13 @@
 # - fix PRINT_PACKAGE_NAME (PKGTYPE wasn't set).
 # - remove useless ABOUT-NLS and INSTALL from doc dir.
 
+wget -c https://download.gnome.org/sources/gspell/1.12/gspell-1.12.0.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gspell
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
