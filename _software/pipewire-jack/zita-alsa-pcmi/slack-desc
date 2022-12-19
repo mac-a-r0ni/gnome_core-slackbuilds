@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+              |-----handy-ruler------------------------------------------------------|
+zita-alsa-pcmi: zita-alsa-pcmi (provides easy access to ALSA PCM devices)
+zita-alsa-pcmi:
+zita-alsa-pcmi: zita-alsa-pcmi is the successor of clalsadrv.
+zita-alsa-pcmi: It provides easy access to ALSA PCM devices, taking care of the
+zita-alsa-pcmi: many functions required to open, initialise and use a hw: device
+zita-alsa-pcmi: in mmap mode, and providing floating point audio data.
+zita-alsa-pcmi:
+zita-alsa-pcmi:
+zita-alsa-pcmi:
+zita-alsa-pcmi: See also: https://kokkinizita.linuxaudio.org/linuxaudio/
+zita-alsa-pcmi:
