@@ -90,7 +90,7 @@ find -L . \
 cd build
 CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
@@ -109,8 +109,6 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 find $PKG -name '*.la' -delete
-
-
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a NEWS README.md LICENSES/LGPL-3.0-or-later.txt \
