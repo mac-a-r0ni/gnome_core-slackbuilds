@@ -29,7 +29,7 @@ PKGNAM=pipewire-jack
 SRCNAM=pipewire
 VERSION=${VERSION:-0.3.63}
 BUILD=${BUILD:-1}
-TAG=${TAG:-alien}
+TAG=${TAG:-_gcs}
 
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then

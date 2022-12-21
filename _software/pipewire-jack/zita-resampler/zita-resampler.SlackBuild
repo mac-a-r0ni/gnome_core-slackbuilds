@@ -46,7 +46,7 @@ PRGNAM=zita-resampler
 VERSION=${VERSION:-1.8.0}
 BUILD=${BUILD:-1}
 NUMJOBS=${NUMJOBS:-" -j$(nproc) "}
-TAG=${TAG:-alien}
+TAG=${TAG:-_gcs}
 
 DOCS="AUTHORS README docs/*"
 
@@ -54,7 +54,7 @@ DOCS="AUTHORS README docs/*"
 SRCDIR=$(cd $(dirname $0); pwd)
 
 # Place to build (TMP) package (PKG) and output (OUTPUT) the program:
-TMP=${TMP:-/tmp/build}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 

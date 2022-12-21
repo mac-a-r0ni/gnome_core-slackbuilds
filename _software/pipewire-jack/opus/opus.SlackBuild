@@ -44,7 +44,7 @@ PRGNAM=opus
 VERSION=${VERSION:-1.1}
 BUILD=${BUILD:-1}
 NUMJOBS=${NUMJOBS:" -j4 "}
-TAG=${TAG:-alien}
+TAG=${TAG:-_gcs}
 
 DOCS="AUTHORS COPYING INSTALL README"
 
@@ -52,7 +52,7 @@ DOCS="AUTHORS COPYING INSTALL README"
 SRCDIR=$(cd $(dirname $0); pwd)
 
 # Place to build (TMP) package (PKG) and output (OUTPUT) the program:
-TMP=${TMP:-/tmp/build}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
