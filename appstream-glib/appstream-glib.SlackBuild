@@ -72,9 +72,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf appstream-glib-$PRGNAM-$SRCVERSION
-tar xvf $CWD/appstream-glib-$PRGNAM-$SRCVERSION.tar.gz
-cd appstream-glib-$PRGNAM-$SRCVERSION
+rm -rf appstream_glib_$SRCVERSION
+tar xvf $CWD/appstream-glib-appstream_glib_$SRCVERSION.tar.gz
+cd appstream-glib-appstream_glib_$SRCVERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
