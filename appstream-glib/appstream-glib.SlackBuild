@@ -92,7 +92,7 @@ meson setup .. \
   --sysconfdir=/etc \
   --mandir=/usr/man \
   -Drpm=false \
-  -man=false
+  -Dman=false
 
 # not sure why this is necessary
 sed -i "/^ COMMAND = \\/usr\\/bin\\/g-ir-scanner/s/-lyaml//" build.ninja
