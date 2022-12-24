@@ -91,8 +91,7 @@ meson setup .. \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
   --mandir=/usr/man \
-  -Drpm=false \
-  -Dgtk-doc=false
+  -Drpm=false
 
 # not sure why this is necessary
 sed -i "/^ COMMAND = \\/usr\\/bin\\/g-ir-scanner/s/-lyaml//" build.ninja
