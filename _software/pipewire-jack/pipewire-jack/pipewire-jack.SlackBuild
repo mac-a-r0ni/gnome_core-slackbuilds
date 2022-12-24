@@ -70,7 +70,7 @@ case "$ARCH" in
     *)       TARGET=$ARCH-slackware-linux ;;
 esac
 
-TMP=${TMP:-/tmp}
+TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PKGNAM
 SCRATCH=$TMP/tmp-$PKGNAM
 
@@ -142,6 +142,6 @@ cat $CWD/slack-required > $PKG/install/slack-required
 
 # Build the package:
 cd $PKG
-/sbin/makepkg -l y -c n $TMP/${PKGNAM}-${VERSION}-${ARCH}-${BUILD}${TAG}.txz
-cat $PKG/install/slack-required > $TMP/${PKGNAM}-${VERSION}-${ARCH}-${BUILD}${TAG}.dep
+/sbin/makepkg -l y -c n /tmp/${PKGNAM}-${VERSION}-${ARCH}-${BUILD}${TAG}.txz
+#cat $PKG/install/slack-required > /tmp/${PKGNAM}-${VERSION}-${ARCH}-${BUILD}${TAG}.dep
 
