@@ -26,7 +26,7 @@ wget -c https://www.freedesktop.org/software/appstream/releases/AppStream-0.15.6
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-SRCNAM=Appstream
+SRCNAM=AppStream
 PRGNAM=appstream
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
