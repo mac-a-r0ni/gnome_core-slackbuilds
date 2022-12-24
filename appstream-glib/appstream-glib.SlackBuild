@@ -22,10 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://github.com/hughsie/appstream-glib/archive/refs/tags/appstream_glib_0_8_2.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=appstream-glib
-VERSION=${VERSION:-0.8.1}
+VERSION=${VERSION:-0.8.2}
 SRCVERSION=$(echo "$PRGNAM" | tr - _)_$(echo "$VERSION" | tr . _)
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
@@ -84,14 +86,13 @@ mkdir -p build
 cd build
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson \
+meson setup .. \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
   --mandir=/usr/man \
   -Drpm=false \
-  -Dgtk-doc=false \
-  ..
+  -Dgtk-doc=false
 
 # not sure why this is necessary
 sed -i "/^ COMMAND = \\/usr\\/bin\\/g-ir-scanner/s/-lyaml//" build.ninja
