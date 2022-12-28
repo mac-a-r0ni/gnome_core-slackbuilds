@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                   |-----handy-ruler------------------------------------------------------|
+python-cryptography: python-cryptography (cryptographic recipes and primitives for devs)
+python-cryptography:
+python-cryptography: cryptography includes both high level recipes and low level
+python-cryptography: interfaces to common cryptographic algorithms such as symmetric
+python-cryptography: ciphers, message digests, and key derivation functions.
+python-cryptography:
+python-cryptography: Homepage: https://github.com/pyca/cryptography
+python-cryptography:
+python-cryptography:
+python-cryptography:
+python-cryptography:
