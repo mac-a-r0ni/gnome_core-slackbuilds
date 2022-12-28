@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for borgbackup
+# Slackware build script for python-google-api-python-client
 
-# Copyright 2020 Andrzej Telszewski, Szczecin
+# Copyright 2022 Jay Lanagan (j@lngn.net), Detroit, MI, USA
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,12 +22,14 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://github.com/borgbackup/borg/releases/download/1.2.3/borgbackup-1.2.3.tar.gz
-
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=borgbackup
-VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+wget -c https://files.pythonhosted.org/packages/a8/fe/71091bf1a9f2fa50c06a6caa94b579da7d354d83ac01a4c34b139808d332/google-api-python-client-2.70.0.tar.gz
+
+PKGNAM=python-google-api-python-client
+SRCNAM=google-api-python-client
+VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+#VERSION=${VERSION:-2.70}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -71,9 +73,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+rm -rf $SRCNAM-$VERSION
+tar xvf $CWD/$SRCNAM-$VERSION.tar.?z
+cd $SRCNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -81,34 +83,18 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-export BORG_OPENSSL_PREFIX=/lib${LIBDIRSUFFIX}
 python3 setup.py install --root=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-if [ -x /usr/bin/sphinx-build ]; then
-  cd docs
-
-  make html
-  mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-  cp -a _build/html $PKG/usr/doc/$PRGNAM-$VERSION
-
-  make man
-  mkdir -p $PKG/usr/man/man1
-  cp -a _build/man/*.1 $PKG/usr/man/man1
-  gzip -9 $PKG/usr/man/man1/*.1
-
-  cd ..
-fi
-
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS CHANGES.rst LICENSE README.rst SECURITY.md \
-    $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
+cp -a LICENSE README.md $PKG/usr/doc/$PKGNAM-$VERSION
+cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
 
 mkdir -p $PKG/install
+#cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

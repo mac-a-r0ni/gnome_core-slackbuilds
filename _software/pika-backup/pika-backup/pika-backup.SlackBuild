@@ -22,9 +22,13 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+cd $(dirname $0) ; CWD=$(pwd)
+
+wget -c https://gitlab.gnome.org/World/pika-backup/-/archive/v0.4.2/pika-backup-v0.4.2.tar.gz
+
 PRGNAM=pika-backup
-#VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-VERSION=${VERSION:-0.4.2}
+VERSION=${VERSION:-$(echo $PRGNAM-v*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+#VERSION=${VERSION:-0.4.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -70,9 +74,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-v$VERSION
-tar xfv $CWD/$PRGNAM-v$VERSION.tar.?z*
-cd $PRGNAM-v$VERSION
+rm -rf $PRGNAM-$VERSION
+tar xfv $CWD/$PRGNAM-$VERSION.tar.?z*
+cd $PRGNAM-$VERSION
 
 chown -R root:root .
 find -L . \
