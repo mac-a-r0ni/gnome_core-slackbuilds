@@ -22,12 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://gitlab.gnome.org/World/Authenticator/-/archive/4.1.6/Authenticator-4.1.6.tar.gz
+wget -c https://gitlab.gnome.org/World/Authenticator/uploads/a3932d77c82d884091535a7034e37f7b/authenticator-4.2.0.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=Authenticator
-VERSION=${VERSION:-4.1.6}
+VERSION=${VERSION:-4.2.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -85,7 +85,7 @@ mkdir -p build
 cd build
 CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
