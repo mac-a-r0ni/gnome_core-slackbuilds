@@ -22,7 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://gitlab.gnome.org/World/Authenticator/uploads/a3932d77c82d884091535a7034e37f7b/authenticator-4.2.0.tar.xz
+wget -c https://gitlab.gnome.org/World/Authenticator/-/archive/4.2.0/Authenticator-4.2.0.tar.bz2
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -72,7 +72,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
