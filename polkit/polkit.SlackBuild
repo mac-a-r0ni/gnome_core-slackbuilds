@@ -106,7 +106,7 @@ LIBELOGIND_CFLAGS="$(pkg-config --cflags libelogind)" \
 LIBELOGIND_LIBS="$(pkg-config --libs libelogind)" \
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
   --buildtype=release \
   --infodir=/usr/info \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
