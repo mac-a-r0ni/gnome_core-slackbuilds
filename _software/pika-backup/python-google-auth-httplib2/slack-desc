@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                           |-----handy-ruler------------------------------------------------------|
+python-google-auth-httplib2: python-google-auth-httplib2 (Google Auth Library: httplib2 transport)
+python-google-auth-httplib2:
+python-google-auth-httplib2: This library provides an httplib2 transport for google-auth.
+python-google-auth-httplib2:
+python-google-auth-httplib2: Homepage:
+python-google-auth-httplib2: github.com/GoogleCloudPlatform/google-auth-library-python-httplib2
+python-google-auth-httplib2:
+python-google-auth-httplib2:
+python-google-auth-httplib2:
+python-google-auth-httplib2:
+python-google-auth-httplib2:
