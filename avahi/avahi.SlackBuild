@@ -27,6 +27,8 @@
 # - don't include empty /run dir in package.
 # - remove useless INSTALL from doc dir.
 
+wget -c https://github.com/lathiat/avahi/releases/download/v0.8/avahi-0.8.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=avahi
@@ -99,7 +101,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
