@@ -8,6 +8,8 @@
 # ---------------------------------------------------
 #
 
+wget -c https://download.gnome.org/sources/libadwaita/1.2/libadwaita-1.2.1.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=libadwaita
@@ -39,9 +41,6 @@ elif [ "$ARCH" = "i686" ]; then
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
-elif [ "$ARCH" = "armv7hl" ]; then
-  SLKCFLAGS="-O2 -march=armv7-a -mfpu=vfpv3-d16"
-  LIBDIRSUFFIX=""
 elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
@@ -77,7 +76,7 @@ cd build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
  --prefix=/usr \
  --datadir=/usr/share \
  --includedir=/usr/include \

@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                             |-----handy-ruler------------------------------------------------------|
+python-google-resumable-media: python-google-resumable-media (Utils for Google Downloads & Uploads)
+python-google-resumable-media:
+python-google-resumable-media: Utilities for Google Media Downloads and Resumable Uploads
+python-google-resumable-media:
+python-google-resumable-media: Homepage: https://github.com/googleapis/google-resumable-media-python
+python-google-resumable-media:
+python-google-resumable-media:
+python-google-resumable-media:
+python-google-resumable-media:
+python-google-resumable-media:
+python-google-resumable-media:

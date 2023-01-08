@@ -22,6 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/gi-docgen/2023/gi-docgen-2023.1.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 SRCNAM=gi-docgen

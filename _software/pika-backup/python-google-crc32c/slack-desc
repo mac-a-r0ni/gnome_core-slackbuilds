@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                    |-----handy-ruler------------------------------------------------------|
+python-google-crc32c: python-google-crc32c (python wrapper of C library 'Google CRC32C')
+python-google-crc32c:
+python-google-crc32c: This package wraps the google/crc32c hardware-based implementation of
+python-google-crc32c: the CRC32C hashing algorithm. Multiple wheels are distributed as well
+python-google-crc32c: as source. If a wheel is not published for the python version and
+python-google-crc32c: platform you are using, you will need to compile crc32c using a C
+python-google-crc32c: toolchain.
+python-google-crc32c:
+python-google-crc32c: Homepage: https://github.com/googleapis/python-crc32c
+python-google-crc32c:
+python-google-crc32c:

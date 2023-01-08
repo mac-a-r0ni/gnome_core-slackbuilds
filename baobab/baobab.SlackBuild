@@ -23,7 +23,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget https://download.gnome.org/sources/baobab/43/baobab-43.0.tar.xz | exit 1
+wget -c https://download.gnome.org/sources/baobab/43/baobab-43.0.tar.xz | exit 1
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -84,11 +84,11 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
-cd build
-  CFLAGS="$SLKCFLAGS" \
-  CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+mkdir meson-build
+cd meson-build
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+  meson setup .. \
     --buildtype=release \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
     --localstatedir=/var \
