@@ -22,12 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/evolution/3.46/evolution-3.46.3.tar.xz
+wget -c https://download.gnome.org/sources/evolution/3.47/evolution-3.47.1.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evolution
-VERSION=${VERSION:-3.46.3}
+VERSION=${VERSION:-3.47.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
