@@ -20,6 +20,8 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/core/43/43.2/sources/glibmm-2.66.5.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=glibmm

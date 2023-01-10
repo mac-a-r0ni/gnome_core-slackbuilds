@@ -85,7 +85,7 @@ find -L . \
 
 mkdir build
 cd build
-  meson .. \
+  meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \

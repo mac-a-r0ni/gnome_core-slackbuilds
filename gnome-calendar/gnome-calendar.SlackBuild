@@ -23,6 +23,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/core/43/43.2/sources/gnome-calendar-43.1.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-calendar
@@ -83,7 +85,7 @@ find -L . \
 
 mkdir build
 cd build
-  meson .. \
+  meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
@@ -94,18 +96,15 @@ cd build
  --localstatedir=/var \
  -Ddefault_library=shared \
  -Dtracing=false \
- -Dprofile=default 
-  
+ -Dprofile=default
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
-
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
-
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a COPYING NEWS *.md  $PKG/usr/doc/$PRGNAM-$VERSION

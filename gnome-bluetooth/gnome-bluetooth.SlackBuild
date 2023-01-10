@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Slackware build script for gnome-bluetooth-42.0.tar.xz
+# Slackware build script for gnome-bluetooth
 
 # Copyright 2016, 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
 # Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
@@ -22,6 +22,8 @@
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+wget -c https://download.gnome.org/sources/gnome-bluetooth/3.34/gnome-bluetooth-3.34.5.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -87,14 +89,14 @@ find -L . \
 
 mkdir build
 cd build
-  meson .. \
+  meson setup .. \
  --prefix=/usr \
  --libdir=/usr/lib${LIBDIRSUFFIX} \
  --sysconfdir=/etc \
  --localstatedir=/var \
  --mandir=/usr/man \
  --buildtype=release \
- -Dgtk_doc=true \
+ -Dgtk_doc=false \
  -Dicon_update=false \
 
   "${NINJA:=ninja}"
@@ -117,7 +119,6 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

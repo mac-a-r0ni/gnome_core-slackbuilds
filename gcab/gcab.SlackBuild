@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Slackware build script for "gcab".
-
+# Slackware build script for gcab.
+#
 # Copyright 2015 Marcel Saegebarth <marc@mos6581.de>
 # Modifications 2022 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
@@ -24,6 +24,8 @@
 # THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+wget -c https://download.gnome.org/core/43/43.2/sources/gcab-1.5.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -85,7 +87,7 @@ find -L . \
 
 mkdir build
 cd build
-  meson .. \
+  meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
@@ -100,8 +102,20 @@ cd build
   DESTDIR=$PKG $NINJA install
 cd ..
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+# Compress and link manpages, if any:
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+    for manpagedir in $(find . -type d -name "man*") ; do
+      ( cd $manpagedir
+        for eachpage in $( find . -type l -maxdepth 1) ; do
+          ln -s $( readlink $eachpage ).gz $eachpage.gz
+          rm $eachpage
+        done
+        gzip -9 *.*
+      )
+    done
+  )
+fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a COPYING NEWS README.md RELEASE $PKG/usr/doc/$PRGNAM-$VERSION
