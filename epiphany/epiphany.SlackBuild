@@ -3,6 +3,7 @@
 # Slackware build script for epiphany
 
 # Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
+# Modifications 2022 Frank Honolka (slackernetuk@gmail.com)
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -21,10 +22,9 @@
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#  -----------------------------------------------------------------------------
-#  MODIFIED BY FRANK HONOLKA <slackernetuk@gmail.com>
-#  -----------------------------------------------------------------------------
 #
+
+wget -c https://download.gnome.org/core/43/43.2/sources/epiphany-43.0.tar.xz
 
 PRGNAM=epiphany
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -43,7 +43,7 @@ TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 CWD=$(pwd)
-JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 4 ) "}
+JOBS=${JOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -97,8 +97,20 @@ meson install -C build --destdir $PKG
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+# Compress and link manpages, if any:
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+    for manpagedir in $(find . -type d -name "man*") ; do
+      ( cd $manpagedir
+        for eachpage in $( find . -type l -maxdepth 1) ; do
+          ln -s $( readlink $eachpage ).gz $eachpage.gz
+          rm $eachpage
+        done
+        gzip -9 *.*
+      )
+    done
+  )
+fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 DOCS="CONTRIBUTING.md COPYING HACKING.md NEWS TODO README.md"

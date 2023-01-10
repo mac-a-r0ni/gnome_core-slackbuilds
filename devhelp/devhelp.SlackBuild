@@ -4,6 +4,8 @@
 
 # Written by Andrew Rowland (darowland@ieee.org)
 
+wget -c https://download.gnome.org/core/43/43.2/sources/devhelp-43.0.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=devhelp
@@ -66,7 +68,7 @@ mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
