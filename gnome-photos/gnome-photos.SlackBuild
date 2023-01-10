@@ -84,7 +84,7 @@ mkdir -p build
 cd build
 CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
@@ -92,7 +92,7 @@ CFLAGS="$SLKCFLAGS" \
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Dmanuals=true
+    -Dmanuals=false
 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install

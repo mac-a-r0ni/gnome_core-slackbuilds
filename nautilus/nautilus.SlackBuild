@@ -90,7 +90,7 @@ meson setup .. \
  --localstatedir=/var \
  --mandir=/usr/man \
  --buildtype=release \
- -Ddocs=true \
+ -Ddocs=false \
  -Dextensions=true \
  -Dintrospection=true \
  -Dpackagekit=false \
