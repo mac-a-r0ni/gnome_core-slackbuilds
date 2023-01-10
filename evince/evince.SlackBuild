@@ -22,6 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/core/43/43.2/sources/evince-43.1.tar.xz
+
 PRGNAM=evince
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
@@ -78,12 +80,13 @@ find -L . \
 # Do not depend on adwaita-icon-theme, bug #326855, #391859
 # https://gitlab.freedesktop.org/xdg/default-icon-theme/issues/7
 sed -i '/adwaita_icon_theme_dep/d' meson.build shell/meson.build || exit 1
+
 mkdir -p build
 cd build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
@@ -100,13 +103,14 @@ meson .. \
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install
 
+cd ..
+
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
-cd ..
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a AUTHORS COPYING ChangeLog.pre-git MAINTAINERS NEWS NOTES README.commits TODO *.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
