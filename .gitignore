@@ -9,3 +9,10 @@ _software/pika-backup/python-googleapis-common-protos/googleapis-common-protos-1
 _software/pika-backup/python-httplib2/httplib2-0.21.0.tar.gz
 _software/pika-backup/python-protobuf/protobuf-4.21.12.tar.gz
 _software/pika-backup/python-rsa/rsa-4.9.tar.gz
+_software/pika-backup/python-cachetools/cachetools-5.2.0.tar.gz
+_software/pika-backup/python-google-auth-httplib2/google-auth-httplib2-0.1.0.tar.gz
+_software/pika-backup/python-google-crc32c/google-crc32c-1.5.0.tar.gz
+_software/pika-backup/python-google-resumable-media/google-resumable-media-2.4.0.tar.gz
+_software/pika-backup/python-pyasn1-modules/pyasn1-modules-0.2.8.tar.gz
+_software/pika-backup/python-pyasn1/pyasn1-0.4.8.tar.gz
+_software/pika-backup/python-uritemplate/uritemplate-4.1.1.tar.gz
