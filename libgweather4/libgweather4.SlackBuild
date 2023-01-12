@@ -29,7 +29,7 @@ wget -c --no-check-certificate https://download.gnome.org/sources/libgweather/4.
 PKGNAM=libgweather4
 SRCNAM=libgweather
 VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
