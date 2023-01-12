@@ -103,16 +103,17 @@ meson setup \
   --localstatedir=/var \
   --buildtype=release \
   -Dman-pages=true \
-  -Ddemos=true \
+  -Ddemos=false \
   -Dgtk_doc=false \
   -Dbroadway-backend=true \
   -Dbuild-examples=false \
   -Dbuild-tests=false \
-  -Dinstall-tests=false \
   -Dwayland-backend=true \
   -Dcloudproviders=enabled \
   -Dtracker=enabled \
   -Dcolord=enabled \
+  -Dsysprof=enabled \
+  -Dvulkan=enabled \
   .. || exit 1
   "${NINJA:=ninja}" $NUMJOBS || exit 1
   DESTDIR=$PKG $NINJA install || exit 1
