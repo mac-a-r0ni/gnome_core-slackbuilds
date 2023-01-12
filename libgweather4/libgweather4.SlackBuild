@@ -97,7 +97,6 @@ cd build
     --sysconfdir=/etc \
     -Dstrip=true \
     -Dgtk_doc=false \
-    -Dsoup2=false \
     -Dtests=false
 
   "${NINJA:=ninja}"
