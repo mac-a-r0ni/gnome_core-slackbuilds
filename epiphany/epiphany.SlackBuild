@@ -24,7 +24,8 @@
 #  -----------------------------------------------------------------------------
 #  MODIFIED BY FRANK HONOLKA <slackernetuk@gmail.com>
 #  -----------------------------------------------------------------------------
-#
+
+wget -c https://download.gnome.org/sources/epiphany/44/epiphany-44.alpha.tar.xz
 
 PRGNAM=epiphany
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
