@@ -95,8 +95,9 @@ cd meson-build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Dspell=yes \
-    -Duser_documentation=true \
+    -Dgtk_doc=false \
+    -Duser_documentation=false \
+    -Drequire_all_tests=false \
     -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
