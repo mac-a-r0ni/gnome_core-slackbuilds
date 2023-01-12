@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+    |-----handy-ruler------------------------------------------------------|
+orca: orca (flexible, and extensible screen reader)
+orca:
+orca: Orca works with applications and toolkits that support the assistive 
+orca: technology service provider interface (AT-SPI), which is the
+orca: primary assistive technology infrastructure for the Solaris
+orca: and Linux operating environments.  Applications and toolkits 
+orca: supporting AT-SPI.
+orca:
+orca: See also
+orca: http://wiki.gnome.org/Projects/Orca
+orca:
