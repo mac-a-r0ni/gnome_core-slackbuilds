@@ -81,7 +81,7 @@ find -L . \
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson build \
+meson setup meson-build \
  --prefix=/usr \
  --libdir=/usr/lib${LIBDIRSUFFIX} \
  --sysconfdir=/etc \
@@ -89,8 +89,8 @@ meson build \
  --libexecdir=/usr/libexec \
  --mandir=/usr/man \
  --buildtype=release
-meson compile -C build
-meson install -C build --destdir $PKG
+meson compile -C meson-build
+meson install -C meson-build --destdir $PKG
 
 #install -Dm 755 $CWD/epiphany.csh -t $PKG/etc/profile.d/
 #install -Dm 755 $CWD/epiphany.sh -t $PKG/etc/profile.d/
