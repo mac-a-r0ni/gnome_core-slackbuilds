@@ -4,9 +4,11 @@
 # ----------------------------------------------------
 #
 # MODIFIED BY FRANK HONOLKA <slackernetuk@gmail.com>
-# 
+#
 # ---------------------------------------------------
 #
+
+wget -c https://download.gnome.org/core/42/42.8/sources/libadwaita-1.1.6.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
