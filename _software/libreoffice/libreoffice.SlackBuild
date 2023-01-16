@@ -409,8 +409,8 @@ USE_JAVA=$(echo $USE_JAVA | tr 'a-z' 'A-Z')
 #SRCVER=${SRCVER:-5.0.0.2git}
 #SRCVER=${SRCVER:-5.0.0.2}
 
-SRCVER=${SRCVER:-7.3.7}
-SUBVER=""
+SRCVER=${SRCVER:-7.4.4}
+SUBVER=".2"
 PKG_SUBVER=""
 
 # Under what directory will the script download all sources:
