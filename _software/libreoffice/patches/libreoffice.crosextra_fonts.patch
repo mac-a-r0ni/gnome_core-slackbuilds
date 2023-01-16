@@ -1,0 +1,201 @@
+From 2158e8bf85e139fd3cf59d00059ed2e2026f6a4a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Wed, 23 Oct 2013 14:57:32 +0100
+Subject: [PATCH] bundle Carlito and Caladea
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Change-Id: Ibb68ad33764bcbab88e68c35805a00287177a5c8
+Reviewed-on: https://gerrit.libreoffice.org/6586
+Reviewed-by: Caolán McNamara <caolanm@redhat.com>
+Tested-by: Caolán McNamara <caolanm@redhat.com>
+---
+ Makefile.fetch                        |    2 ++
+ download.lst                          |    2 ++
+ more_fonts/ExternalPackage_caladea.mk |   21 +++++++++++++++++++++
+ more_fonts/ExternalPackage_carlito.mk |   21 +++++++++++++++++++++
+ more_fonts/Module_more_fonts.mk       |    4 ++++
+ more_fonts/UnpackedTarball_caladea.mk |   14 ++++++++++++++
+ more_fonts/UnpackedTarball_carlito.mk |   14 ++++++++++++++
+ scp2/source/ooo/file_font_ooo.scp     |    4 ++++
+ scp2/source/ooo/module_hidden_ooo.scp |    2 ++
+ 9 files changed, 84 insertions(+), 0 deletions(-)
+ create mode 100644 more_fonts/ExternalPackage_caladea.mk
+ create mode 100644 more_fonts/ExternalPackage_carlito.mk
+ create mode 100644 more_fonts/UnpackedTarball_caladea.mk
+ create mode 100644 more_fonts/UnpackedTarball_carlito.mk
+
+diff --git a/Makefile.fetch b/Makefile.fetch
+index e743d62..cde2e86 100644
+--- a/Makefile.fetch
++++ b/Makefile.fetch
+@@ -96,6 +96,8 @@ $(WORKDIR)/download: $(BUILDDIR)/config_host.mk $(SRCDIR)/download.lst $(SRCDIR)
+ 		$(call fetch_Optional,EPM,$(EPM_TARBALL)) \
+ 		$(call fetch_Optional,EXPAT,$(EXPAT_TARBALL)) \
+ 		$(call fetch_Optional,MARIADB,$(MARIADB_TARBALL)) \
++		$(call fetch_Optional,MORE_FONTS,$(FONT_CALADEA_TARBALL)) \
++		$(call fetch_Optional,MORE_FONTS,$(FONT_CARLITO_TARBALL)) \
+ 		$(call fetch_Optional,MORE_FONTS,$(FONT_DEJAVU_TARBALL)) \
+ 		$(call fetch_Optional,MORE_FONTS,$(FONT_GENTIUM_TARBALL)) \
+ 		$(call fetch_Optional,MORE_FONTS,$(FONT_LIBERATION_NARROW_TARBALL)) \
+diff --git a/download.lst b/download.lst
+index 996a509..ea91017 100644
+--- a/download.lst
++++ b/download.lst
+@@ -24,6 +24,8 @@ export DBGHELP_DLL := 13fbc2e8b37ddf28181dd6d8081c2b8e-dbghelp.dll
+ export EPM_TARBALL := 3ade8cfe7e59ca8e65052644fed9fca4-epm-3.7.tar.gz
+ export EXPAT_TARBALL := dd7dab7a5fea97d2a6a43f511449b7cd-expat-2.1.0.tar.gz
+ export FONTCONFIG_TARBALL := 77e15a92006ddc2adbb06f840d591c0e-fontconfig-2.8.0.tar.gz
++export FONT_CALADEA_TARBALL := 368f114c078f94214a308a74c7e991bc-crosextrafonts-20130214.tar.gz
++export FONT_CARLITO_TARBALL := c74b7223abe75949b4af367942d96c7a-crosextrafonts-carlito-20130920.tar.gz
+ export FONT_DEJAVU_TARBALL := f872f4ac066433d8ff92f5e316b36ff9-dejavu-fonts-ttf-2.33.zip
+ export FONT_GENTIUM_TARBALL := 35efabc239af896dfb79be7ebdd6e6b9-gentiumbasic-fonts-1.10.zip
+ export FONT_LIBERATION_NARROW_TARBALL := 0be45d54cc5e1c2e3102e32b8c190346-liberation-fonts-ttf-1.07.1.tar.gz
+diff --git a/more_fonts/ExternalPackage_caladea.mk b/more_fonts/ExternalPackage_caladea.mk
+new file mode 100644
+index 0000000..668fb5b
+--- /dev/null
++++ b/more_fonts/ExternalPackage_caladea.mk
+@@ -0,0 +1,21 @@
++# -*- Mode: makefile-gmake; tab-width: 4; indent-tabs-mode: t -*-
++#
++# This file is part of the LibreOffice project.
++#
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++#
++
++$(eval $(call gb_ExternalPackage_ExternalPackage,fonts_caladea,font_caladea))
++
++$(eval $(call gb_ExternalPackage_set_outdir,fonts_caladea,$(INSTDIR)))
++
++$(eval $(call gb_ExternalPackage_add_unpacked_files,fonts_caladea,share/fonts/truetype,\
++	Caladea-Italic.ttf \
++	Caladea-Regular.ttf \
++	Caladea-BoldItalic.ttf \
++	Caladea-Bold.ttf \
++))
++
++# vim: set noet sw=4 ts=4:
+diff --git a/more_fonts/ExternalPackage_carlito.mk b/more_fonts/ExternalPackage_carlito.mk
+new file mode 100644
+index 0000000..e0a9cff
+--- /dev/null
++++ b/more_fonts/ExternalPackage_carlito.mk
+@@ -0,0 +1,21 @@
++# -*- Mode: makefile-gmake; tab-width: 4; indent-tabs-mode: t -*-
++#
++# This file is part of the LibreOffice project.
++#
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++#
++
++$(eval $(call gb_ExternalPackage_ExternalPackage,fonts_carlito,font_carlito))
++
++$(eval $(call gb_ExternalPackage_set_outdir,fonts_carlito,$(INSTDIR)))
++
++$(eval $(call gb_ExternalPackage_add_unpacked_files,fonts_carlito,share/fonts/truetype,\
++	Carlito-BoldItalic.ttf \
++	Carlito-Regular.ttf \
++	Carlito-Italic.ttf \
++	Carlito-Bold.ttf \
++))
++
++# vim: set noet sw=4 ts=4:
+diff --git a/more_fonts/Module_more_fonts.mk b/more_fonts/Module_more_fonts.mk
+index c9a7514..3f4a653 100644
+--- a/more_fonts/Module_more_fonts.mk
++++ b/more_fonts/Module_more_fonts.mk
+@@ -11,6 +11,8 @@ $(eval $(call gb_Module_Module,more_fonts))
+ 
+ $(eval $(call gb_Module_add_targets,more_fonts,\
+ 	Package_conf \
++	ExternalPackage_caladea \
++	ExternalPackage_carlito \
+ 	ExternalPackage_dejavu \
+ 	ExternalPackage_gentium \
+ 	ExternalPackage_liberation \
+@@ -20,6 +22,8 @@ $(eval $(call gb_Module_add_targets,more_fonts,\
+ 	ExternalPackage_ptserif \
+ 	ExternalPackage_sourcecode \
+ 	ExternalPackage_sourcesans \
++	UnpackedTarball_caladea \
++	UnpackedTarball_carlito \
+ 	UnpackedTarball_dejavu \
+ 	UnpackedTarball_gentium \
+ 	UnpackedTarball_liberation \
+diff --git a/more_fonts/UnpackedTarball_caladea.mk b/more_fonts/UnpackedTarball_caladea.mk
+new file mode 100644
+index 0000000..7f5d65c
+--- /dev/null
++++ b/more_fonts/UnpackedTarball_caladea.mk
+@@ -0,0 +1,14 @@
++# -*- Mode: makefile-gmake; tab-width: 4; indent-tabs-mode: t -*-
++#
++# This file is part of the LibreOffice project.
++#
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++#
++
++$(eval $(call gb_UnpackedTarball_UnpackedTarball,font_caladea))
++
++$(eval $(call gb_UnpackedTarball_set_tarball,font_caladea,$(FONT_CALADEA_TARBALL)))
++
++# vim: set noet sw=4 ts=4:
+diff --git a/more_fonts/UnpackedTarball_carlito.mk b/more_fonts/UnpackedTarball_carlito.mk
+new file mode 100644
+index 0000000..d14f291
+--- /dev/null
++++ b/more_fonts/UnpackedTarball_carlito.mk
+@@ -0,0 +1,14 @@
++# -*- Mode: makefile-gmake; tab-width: 4; indent-tabs-mode: t -*-
++#
++# This file is part of the LibreOffice project.
++#
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++#
++
++$(eval $(call gb_UnpackedTarball_UnpackedTarball,font_carlito))
++
++$(eval $(call gb_UnpackedTarball_set_tarball,font_carlito,$(FONT_CARLITO_TARBALL)))
++
++# vim: set noet sw=4 ts=4:
+diff --git a/scp2/source/ooo/file_font_ooo.scp b/scp2/source/ooo/file_font_ooo.scp
+index e7a2da3..ccc1327 100644
+--- a/scp2/source/ooo/file_font_ooo.scp
++++ b/scp2/source/ooo/file_font_ooo.scp
+@@ -58,6 +58,10 @@ STD_FONT_FILELIST(gid_File_Fnt_SourceSans, "fonts_sourcesans.filelist")
+ // Source Code Pro fonts
+ STD_FONT_FILELIST(gid_File_Fnt_SourceCode, "fonts_sourcecode.filelist")
+ 
++//Carlito and Caladea fonts
++STD_FONT_FILELIST(gid_File_Fnt_Carlito, "fonts_carlito.filelist")
++STD_FONT_FILELIST(gid_File_Fnt_Caladea, "fonts_caladea.filelist")
++
+ #endif
+ 
+ // fontconfig updates to allow proper use of local fonts
+diff --git a/scp2/source/ooo/module_hidden_ooo.scp b/scp2/source/ooo/module_hidden_ooo.scp
+index f75f131..696b47b 100644
+--- a/scp2/source/ooo/module_hidden_ooo.scp
++++ b/scp2/source/ooo/module_hidden_ooo.scp
+@@ -473,6 +473,8 @@ Module gid_Module_Root_Fonts_OOo_Hidden
+ 	Default = YES;
+ 	Styles = (HIDDEN_ROOT);
+ 	Files = (gid_File_Fnt_Opensymb,
++	gid_File_Fnt_Caladea,
++	gid_File_Fnt_Carlito,
+ 	gid_File_Fnt_DejaVu,
+ 	gid_File_Fnt_Gentium,
+ 	gid_File_Fnt_LibSansNarrow,
+-- 
+1.7.1
+

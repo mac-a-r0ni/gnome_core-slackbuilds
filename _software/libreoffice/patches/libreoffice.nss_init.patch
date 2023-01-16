@@ -1,0 +1,42 @@
+From bf9ab0b486ee336bd4fb91e5ad2320d25593d696 Mon Sep 17 00:00:00 2001
+From: Markus Mohrhard <markus.mohrhard@googlemail.com>
+Date: Fri, 04 May 2012 13:12:21 +0000
+Subject: more robust nss initialization, related fdo#45171
+
+fall back to without profile if path is invalid or profile does not
+exist
+
+Change-Id: Ic9a73fbaaa288f8bc99dab2b1d679c2cbe6baa89
+(cherry picked from commit 7ead068be9f865327da7aef1cdc01614f25fc4a6)
+
+Signed-off-by: Caolán McNamara <caolanm@redhat.com>
+---
+diff --git a/xmlsecurity/source/xmlsec/nss/nssinitializer.cxx b/xmlsecurity/source/xmlsec/nss/nssinitializer.cxx
+index 2090235..3383aaf 100644
+--- a/xmlsecurity/source/xmlsec/nss/nssinitializer.cxx
++++ b/xmlsecurity/source/xmlsec/nss/nssinitializer.cxx
+@@ -261,6 +261,7 @@ bool nsscrypto_initialize( const css::uno::Reference< css::lang::XMultiServiceFa
+ 
+     PR_Init( PR_USER_THREAD, PR_PRIORITY_NORMAL, 1 ) ;
+ 
++    bool bSuccess = true;
+     // there might be no profile
+     if ( sCertDir.getLength() > 0 )
+     {
+@@ -272,10 +273,11 @@ bool nsscrypto_initialize( const css::uno::Reference< css::lang::XMultiServiceFa
+             PR_GetErrorText(error);
+             if (error)
+                 xmlsec_trace("%s",error);
+-            return false ;
++            bSuccess = false;
+         }
+     }
+-    else
++
++    if( sCertDir.isEmpty() || !bSuccess )
+     {
+         xmlsec_trace("Initializing NSS without profile.");
+         if ( NSS_NoDB_Init(NULL) != SECSuccess )
+--
+cgit v0.9.0.2-2-gbebe
+

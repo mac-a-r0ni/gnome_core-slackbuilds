@@ -1,0 +1,13 @@
+Add missing semicolon to fix build with icu 65.1
+
+--- src/lib/libfreehand_utils.cpp.orig	2019-10-08 21:05:45.546891345 +0200
++++ src/lib/libfreehand_utils.cpp	2019-10-08 21:06:34.700922635 +0200
+@@ -162,7 +162,7 @@
+   while (j < length)
+   {
+     UChar32 c;
+-    U16_NEXT(s, j, length, c)
++    U16_NEXT(s, j, length, c);
+     unsigned char outbuf[U8_MAX_LENGTH+1];
+     int i = 0;
+     U8_APPEND_UNSAFE(&outbuf[0], i, c);

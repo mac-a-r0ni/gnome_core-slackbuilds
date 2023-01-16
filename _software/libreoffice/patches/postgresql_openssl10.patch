@@ -1,0 +1,20 @@
+--- libreoffice-6.0.4.2/external/postgresql/ExternalProject_postgresql.mk.orig	2018-05-04 15:30:05.000000000 +0200
++++ libreoffice-6.0.4.2/external/postgresql/ExternalProject_postgresql.mk	2018-05-11 21:38:27.158554784 +0200
+@@ -41,6 +41,9 @@
+ ifeq ($(SYSTEM_OPENSSL),)
+ postgresql_CPPFLAGS += -I$(call gb_UnpackedTarball_get_dir,openssl)/include
+ postgresql_LDFLAGS  += -L$(call gb_UnpackedTarball_get_dir,openssl)/
++else
++postgresql_CPPFLAGS += -I/usr/include/openssl-1.0
++postgresql_LDFLAGS  += -L/usr/lib@LIBDIRSUFFIX@/openssl-1.0/
+ endif
+ endif
+ 
+@@ -66,6 +69,7 @@
+ 				$(if $(WITH_GSSAPI),--with-gssapi)) \
+ 			CPPFLAGS="$(postgresql_CPPFLAGS)" \
+ 			LDFLAGS="$(postgresql_LDFLAGS)" \
++			LIBS="$(postgresql_LDFLAGS)" \
+ 			EXTRA_LDAP_LIBS="-llber -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4" \
+ 		&& cd src/interfaces/libpq \
+ 		&& MAKEFLAGS= && $(MAKE) all-static-lib)

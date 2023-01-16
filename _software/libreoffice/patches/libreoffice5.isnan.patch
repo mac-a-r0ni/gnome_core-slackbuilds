@@ -1,0 +1,14 @@
+# Thanks to Alt Linux:
+# http://packages.altlinux.org/en/Sisyphus/srpms/LibreOffice/patches/alt-004-isnan.patch
+
+--- libreoffice-5.1.1.1/xmloff/source/draw/ximp3dscene.cxx        2016-02-24 10:10:44.846933536 +0000
++++ libreoffice-5.1.1.1/xmloff/source/draw/ximp3dscene.cxx            2016-02-24 10:09:13.449015777 +0000
+@@ -66,7 +66,7 @@
+             {
+                 ::basegfx::B3DVector aVal;
+                 SvXMLUnitConverter::convertB3DVector(aVal, sValue);
+-                if (!isnan(aVal.getX()) && !isnan(aVal.getY()) && !isnan(aVal.getZ()))
++                if (!std::isnan(aVal.getX()) && !std::isnan(aVal.getY()) && !std::isnan(aVal.getZ()))
+                 {
+                     maDirection = aVal;
+                 }

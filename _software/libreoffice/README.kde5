@@ -1,0 +1,12 @@
+In order to build LibreOffice with support for KDE5 (Plasma5), the following
+set of additional packages is required.
+None of them are run-time dependencies, so the packages can be built with
+Plasma5 support and then installed and used on a computer without Plasma5.
+
+The packages mentioned below can be obtained from https://slackware.nl/alien-kde/current/
+
+Qt5 support:
+libdbusmenu-qt5
+
+Plasma5 support:
+All of Frameworks.

@@ -1,0 +1,10 @@
+--- libreoffice-7.2.0.4/external/skia/UnpackedTarball_skia.mk.orig	2021-08-16 21:56:28.000000000 +0200
++++ libreoffice-7.2.0.4/external/skia/UnpackedTarball_skia.mk	2021-08-25 08:36:26.702302354 +0200
+@@ -39,6 +39,7 @@
+     fast-png-write.patch.1 \
+     skia_sk_cpu_sse_level_0_by_default.patch.1 \
+     fix-warnings.patch.1 \
++    skia_freetype211.patch \
+ 
+ $(eval $(call gb_UnpackedTarball_set_patchlevel,skia,1))
+ 

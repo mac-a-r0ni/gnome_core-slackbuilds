@@ -1,0 +1,34 @@
+---
+ officecfg/registry/data/org/openoffice/Setup.xcu |    2 +-
+ scp2/source/ooo/common_brand.scp                 |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git officecfg/registry/data/org/openoffice/Setup.xcu officecfg/registry/data/org/openoffice/Setup.xcu
+index 8e18ca5..7c0b95d 100644
+--- officecfg/registry/data/org/openoffice/Setup.xcu
++++ officecfg/registry/data/org/openoffice/Setup.xcu
+@@ -788,7 +788,7 @@
+           <value>10</value>
+         </prop>
+         <prop oor:name="VersionIdentifiers">
+-          <value oor:separator=",">Openofice.org 3=openoffice.org/3,OpenOffice.org 2=openoffice.org2,StarOffice 8=staroffice8,StarSuite 8=starsuite8</value>
++          <value oor:separator=",">Openoffice.org 3=ooo3,OpenOffice.org 2=ooo-2.0,StarOffice 8=staroffice8,StarSuite 8=starsuite8</value>
+         </prop>
+         <node oor:name="MigrationSteps">
+           <node oor:name="Datasources" oor:op="replace">
+diff --git scp2/source/ooo/common_brand.scp scp2/source/ooo/common_brand.scp
+index 7bbf873..0b235a0 100644
+--- scp2/source/ooo/common_brand.scp
++++ scp2/source/ooo/common_brand.scp
+@@ -774,7 +774,7 @@ ProfileItem gid_Brand_Profileitem_Bootstrap_Userinstall
+   #elif defined MACOSX
+     Value = "$SYSUSERCONFIG/%ONEWORDPRODUCTNAME/%USERDIRPRODUCTVERSION";
+   #else
+-    Value = "$SYSUSERCONFIG/.%LCONEWORDPRODUCTNAME/%USERDIRPRODUCTVERSION";
++    Value = "$SYSUSERCONFIG/.ooo3";
+   #endif
+ End
+ 
+-- 
+1.7.0.1
+

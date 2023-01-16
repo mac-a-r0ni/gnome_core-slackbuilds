@@ -1,0 +1,11 @@
+--- libreoffice-5.4.1.2/configure.ac.orig	2017-09-11 12:47:19.596433327 +0200
++++ libreoffice-5.4.1.2/configure.ac	2017-09-11 14:21:42.704702009 +0200
+@@ -9179,7 +9179,7 @@
+ 
+ libo_CHECK_SYSTEM_MODULE([harfbuzz],[HARFBUZZ],[harfbuzz-icu >= 0.9.42],
+                          ["-I${WORKDIR}/UnpackedTarball/harfbuzz/src"],
+-                         ["-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz"])
++                         ["-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz -lharfbuzz-icu"])
+ 
+ if test "$COM" = "MSC"; then # override the above
+     GRAPHITE_LIBS="${WORKDIR}/LinkTarget/StaticLibrary/graphite.lib"

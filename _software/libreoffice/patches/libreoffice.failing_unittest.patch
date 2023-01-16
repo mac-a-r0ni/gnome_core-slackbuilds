@@ -1,0 +1,10 @@
+--- libreoffice-4.4.0.3/sc/Module_sc.mk.orig	2015-01-22 21:05:28.000000000 +0100
++++ libreoffice-4.4.0.3/sc/Module_sc.mk	2015-01-31 23:42:57.623394013 +0100
+@@ -45,7 +45,6 @@
+ endif
+ 
+ $(eval $(call gb_Module_add_check_targets,sc,\
+-    CppunitTest_sc_ucalc \
+     CppunitTest_sc_filters_test \
+     CppunitTest_sc_rangelst_test \
+ ))

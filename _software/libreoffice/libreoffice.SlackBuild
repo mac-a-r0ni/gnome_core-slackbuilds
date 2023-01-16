@@ -1,0 +1,1953 @@
+#!/bin/sh
+# $Id: libreoffice.SlackBuild,v 1.176 2023/01/12 20:07:45 root Exp root $
+# Copyright 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Eric Hameleers, Eindhoven, NL
+# All rights reserved.
+#
+#   Permission to use, copy, modify, and distribute this software for
+#   any purpose with or without fee is hereby granted, provided that
+#   the above copyright notice and this permission notice appear in all
+#   copies.
+#
+#   THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+#   WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+#   IN NO EVENT SHALL THE AUTHORS AND COPYRIGHT HOLDERS AND THEIR
+#   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+#   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+#   USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+#   ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+#   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+#   OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+#   SUCH DAMAGE.
+# -----------------------------------------------------------------------------
+#
+# Slackware SlackBuild script
+# ===========================
+# By:         Eric Hameleers <alien@slackware.com>
+# For:        libreoffice
+# Descr:      free office suite
+# URL:        http://www.libreoffice.org/
+# Needs:      (Slackware-current: boost-compat, icu4c-compat)
+#             openjdk11
+# Build-time: perl-archive-zip, openjdk11, apache-ant.
+#             (for Slackware 14.2 you need to upgrade gcc to the 9.2.0 version
+#              in 'unsupported' and you can revert back to 5.5.0 after
+#              compilation is completed. You also need to compile/upgrade to
+#              the version of gperf as found in Slackware 15.0. And Python3
+#              is now an external dependency.
+#              Reinstall gpgme because its headers may have been overwritten
+#              by kdepimlibs4).
+# Changelog:
+# 20101010-1: 10/oct/2010 by Eric Hameleers <alien@slackware.com>
+#             * Initial build from git. I will refine this SlackBuild, once a
+#               stable software version becomes available.
+# 20101012-1: 12/oct/2010 by Eric Hameleers <alien@slackware.com>
+#             * Add the internal version number to the package name,
+#               so that the package version will be like "3.2.99.2_20101012".
+#               Remove the slack-required file, since this package has no
+#               run-time dependencies any more.
+# 3.2.99.3-1: 21/nov/2010 by Eric Hameleers <alien@slackware.com>
+#             * LibreOffice 3.3-beta3.
+#               Fix permissions of LICENSE.odt file.
+# 3.2.99.3-2: 28/nov/2010 by Eric Hameleers <alien@slackware.com>
+#             * Do not create a language pack for the default language.
+#               Compile -without "-O2" - this seems to be required to stay
+#               compatible with OOo extensions.
+#               Use the correct location of apache-ant in Slackware.conf.in.
+#               Make preparations for off-line build (the SlackBuild downloads
+#               all sources first).
+# 3.3.0.1-1:  06/dec/2010 by Eric Hameleers <alien@slackware.com>
+#             * Update to 3.3.0-rc1
+# 3.3.0.2-1:  24/dec/2010 by Eric Hameleers <alien@slackware.com>
+#             * Update to 3.3.0-rc2
+# 3.3.0.3-1:  14/jan/2011 by Eric Hameleers <alien@slackware.com>
+#             * Update to 3.3.0-rc3
+# 3.3.0.3-2:  15/jan/2011 by Eric Hameleers <alien@slackware.com>
+#             * Had to fix the menu entries (.desktop files) because the
+#               program names changed (like oowriter -> lowriter).
+# 3.3.0.4-1:  21/jan/2011 by Eric Hameleers <alien@slackware.com>
+#             * Updated to Release Candidate 4 of the upcoming 3.3.0.
+# 3.3.0-1:    25/jan/2011 by Eric Hameleers <alien@slackware.com>
+#             * Release 3.3.0, the first ever LibreOffice after the split-off
+#               from OpenOffice.org. In fact, this is the same code as the RC4.
+#               I rebuilt it anyway because I promised to add a couple of
+#               language packs.
+# 3.3.1-1:    24/feb/2011 by Eric Hameleers <alien@slackware.com>
+#             * Update to new release 3.3.1, added more language packs.
+#               Also this time, really add the dictionaries for some of the
+#               major world languages.
+# 3.3.1-2:    04/mar/2011 by Eric Hameleers <alien@slackware.com>
+#             * Not really a rebuild, but I uploaded the wrong 64bit packages,
+#               and had to change the BUILD number for when I upload the
+#               correct packages...
+# 3.3.2-1:    23/mar/2011 by Eric Hameleers <alien@slackware.com>
+#             * Update to a new release.
+#               The SlackBuild has been updated to use new LibreOffice menu
+#               icons instead of the old OOo versions.
+#               Also add italian dictionary (request).
+# 3.4.0-1:    03/jun/2011 by Eric Hameleers <alien@slackware.com>
+#             * A new major release. The source tarballs are identical to the
+#               second release candidate.
+#               Added german dictionary (dict-de-DE_frami) and polish pl-dict
+#               on request.  Added bundled scripting extensions.
+#               Stopped building from the 'build' tarball since that seems
+#               to be deprecated soon. Stupid decision folks! It makes proper
+#               packaging so much harder.
+# 3.4.1-1:    04/jul/2011 by Eric Hameleers <alien@slackware.com>
+#             * Bugfix release - 'still not ready for production use' but
+# 3.4.2-1:    01/aug/2011 by Eric Hameleers <alien@slackware.com>
+#             * New release says "Safe for production use by most users and
+#               enterprises".
+# 3.4.3-1:    31/aug/2011 by Eric Hameleers <alien@slackware.com>
+#             * New release.
+#               Split off the browser plugin to a separate package.
+# 3.4.4-1:    09/nov/2011 by Eric Hameleers <alien@slackware.com>
+#             * New release.
+# 3.4.4-2:    24/nov/2011 by Eric Hameleers <alien@slackware.com>
+#             * Apply two patches to fix annoying issues with KDE (black
+#               tooltips and non-movable horizontal scrollbar).
+# 3.4.5-1:    17/jan/2012 by Eric Hameleers <alien@slackware.com>
+#             * Added Swedish dictionary (requested by eXpander). Fixed the
+#               name of the Polish dictionary so that it gets really included.
+#               Moved a lot of language-specific files to their language packs.
+#               Thanks to Andrzej Szelachow for reporting about the dictionary
+#               and language files.
+# 3.5.2-1:    08/apr/2012 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 3.5.3-1:    03/may/2012 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 3.5.3-3:    08/may/2012 by Eric Hameleers <alien@slackware.com>
+#             * Fix general input/output error on save/open of a
+#               password-protected file
+# 3.5.3-4:    17/may/2012 by Eric Hameleers <alien@slackware.com>
+#             * I accidentally had the download of .oxt files commented out.
+#               Also, LO would not start on secondary monitor, see bug
+#               https://bugs.freedesktop.org/show_bug.cgi?id=49365
+# 3.5.4-1:    31/may/2012 by Eric Hameleers <alien@slackware.com>
+#             * Minor update.
+# 3.5.5-1:    11/jul/2012 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 3.5.6-1:    17/jul/2012 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 3.6.1-1:    02/oct/2012 by Eric Hameleers <alien@slackware.com>
+#             * New release, still built for Slackware 13.37.
+# 3.6.2-1:    05/oct/2012 by Eric Hameleers <alien@slackware.com>
+#             * New release, still built for Slackware 13.37.
+# 3.6.2-2:    10/oct/2012 by Eric Hameleers <alien@slackware.com>
+#             * Try to fix the "save with password" issue
+#               (general input/output error).
+# 3.6.3-1:    02/nov/2012 by Eric Hameleers <alien@slackware.com>
+#             * New release, still built for Slackware 13.37.
+# 3.6.4-1:    06/dec/2012 by Eric Hameleers <alien@slackware.com>
+#             * New release. Refreshed the swedish dictionary.
+# 4.0.0-1:    07/feb/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.0.0 release built for Slackware 14.
+# 4.0.1-1:    07/mar/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.0.1 release built for Slackware 14.
+# 4.0.2-1:    04/apr/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.0.2 release built for Slackware 14.
+# 4.0.3-1:    09/may/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.0.3 release built for Slackware 14 and newer.
+# 4.0.4-1:    29/jun/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.0.4 release built for Slackware 14 and newer.
+# 4.0.5-1:    07/aug/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.0.5 release built for Slackware 14 and newer.
+# 4.1.1-1:    09/sep/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.1.1 release built for Slackware 14 and newer (packages
+#               not released to the public).
+# 4.1.2-1:    05/oct/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.1.2 release built for Slackware 14 and newer.
+# 4.1.3-1:    01/nov/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.1.3 release built for Slackware 14 and newer.
+# 4.1.4-1:    18/dec/2013 by Eric Hameleers <alien@slackware.com>
+#             * New 4.1.4 release built for Slackware 14 and newer.
+# 4.2.0-1:    30/jan/2014 by Eric Hameleers <alien@slackware.com>
+#             * New 4.2.0 release built for Slackware 14.1 and newer!
+# 4.2.1-1:    20/feb/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.2.2-1:    13/mar/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.2.3-1:    11/apr/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update to 4.2.3.
+#               KDE integration libraries and SDK documentation have been
+#               split off the main package and into libreoffice-kde-integration
+#               and libreoffice-sdkdoc sub-packages.
+# 4.2.3-2:    20/apr/2014 by Eric Hameleers <alien@slackware.com>
+#             * Fix nasty bug on KDE.
+# 4.2.4-1:    12/may/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.2.5-1:    20/may/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.3.0-1:    04/aug/2014 by Eric Hameleers <alien@slackware.com>
+#             * New major release with lots of improvements.
+# 4.3.0-2:    07/aug/2014 by Eric Hameleers <alien@slackware.com>
+#             * Fix the issue with linking to libGLEW.so.1.9 which broke
+#               the package on slackware-current.
+#               Run "removepkg glew" before compiling if you build this
+#               on Slackware 14.1 but want to use it on slackware-current.
+# 4.3.1-1:    29/aug/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.3.2-1:    28/sep/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.3.3-1:    31/oct/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.3.4-1:    16/nov/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.3.5-1:    20/dec/2014 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.4.0-1:    30/jan/2015 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.4.1-1:    28/feb/2015 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 4.4.3-1:    23/apr/2015 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.0.0.rc1-1:24/jun/2015 by Eric Hameleers <alien@slackware.com>
+#             * First release candidate for 5.0.0
+# 5.0.0.rc2-1:04/jul/2015 by Eric Hameleers <alien@slackware.com>
+#             * Second release candidate for 5.0.0.
+# 5.0.0.rc3-1:21/jul/2015 by Eric Hameleers <alien@slackware.com>
+#             * Third release candidate for 5.0.0.
+# 5.0.0-1:    06/aug/2015 by Eric Hameleers <alien@slackware.com>
+#             * Release of 5.0.0 stable!
+# 5.0.1-1:    27/aug/2015 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.0.2-1:    24/sep/2015 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.0.3-1:    16/nov/2015 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.0.3-2:    20/nov/2015 by Eric Hameleers <alien@slackware.com>
+#             * Recompiled after -current update.
+# 5.0.4-1:    17/dec/2015 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.1.0-1:    11/feb/2016 by Eric Hameleers <alien@slackware.com>
+#             * First release of the 5.1 series.
+# 5.1.1-1:    16/feb/2016 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.1.2-1:    09/apr/2016 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.1.3-1:    14/may/2016 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.1.4-1:    02/jul/2016 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.2.0-1:    03/aug/2016 by Eric Hameleers <alien@slackware.com>
+#             * First release of the 5.2 series.
+# 5.2.1-1:    10/sep/2016 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.2.3-1:    08/nov/2016 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.2.4-1:    23/dec/2016 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.2.5-1:    30/jan/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.3.0-1:    03/feb/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.3.1-1:    18/mar/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.3.3-1:    14/may/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.3.4-1:    24/jun/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.4.1-1:    11/sep/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.4.1-2:    27/sep/2017 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt for slackware-current.
+# 5.4.2-1:    05/oct/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.4.3-1:    11/nov/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 5.4.3-2:    07/dec/2017 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt for slackware-current.
+# 5.4.4-2:    20/dec/2017 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.0.0-1:    07/feb/2018 by Eric Hameleers <alien@slackware.com>
+#             * New major release!
+# 6.0.1-1:    10/feb/2018 by Eric Hameleers <alien@slackware.com>
+#             * Bugfix release.
+# 6.0.2-1:    04/mar/2018 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.0.3-1:    28/mar/2018 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.0.3-2:    01/apr/2018 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt because of shared library updates in -current.
+# 6.0.3-3:    01/apr/2018 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt because of shared library updates in -current.
+# 6.0.4-1:    09/may/2018 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.0.4-2:    13/may/2018 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt for the new poppler in -current.
+# 6.0.5-1:    30/jun/2018 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.1.0-1:    16/aug/2018 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.1.2-1:    03/oct/2018 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.1.2-2:    22/oct/2018 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt against new icu4c on -current.
+# 6.1.3-1:    07/nov/2018 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.1.3-2:    15/dec/2018 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt against new boost on -current.
+# 6.1.4-1:    04/feb/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.2.3-1:    25/apr/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.2.4-1:    23/may/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.2.5-1:    04/jul/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.3.0-1:    25/aug/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.3.2-1:    07/oct/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.3.3-1:    05/nov/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.3.4-1:    27/dec/2019 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.4.0-1:    30/jan/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.4.1-1:    29/feb/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.4.2-1:    19/mar/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.4.3-1:    29/apr/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.4.4-1:    22/may/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 6.4.5-1:    02/jul/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.0.0-1:    09/aug/2020 by Eric Hameleers <alien@slackware.com>
+#             * New major release!
+# 7.0.1-1:    05/sep/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update. Make it compile and run on Slackware 14.2.
+# 7.0.2-1:    08/oct/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.0.3-1:    30/oct/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.0.3-2:    09/dec/2020 by Eric Hameleers <alien@slackware.com>
+#             * Rebuilt against the "Big Merge" of 7 Dec 2020 in -current.
+# 7.0.4-1:    17/dec/2020 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.1.0-1:    05/feb/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.1.1-1:    05/mar/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.1.2-1:    03/apr/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.1.3-1:    06/may/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.2.0-1:    24/aug/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.2.1-1:    13/oct/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.2.2-1:    14/oct/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.2.3-1:    25/nov/2021 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.2.5-1:    06/jan/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.3.0-1:    06/feb/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.3.1-1:    03/mar/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.3.2-1:    02/apr/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.3.3-1:    05/may/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.3.4-1:    11/jun/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.3.5-1:    23/jul/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update. Add icu4c-compat as a dependency. Since I compile
+#               the package on Slackware 15.0 it needs the older icu4c
+#               libraries when running on -current.
+# 7.4.0-1:    19/aug/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.4.1-1:    15/sep/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.4.2-1:    13/oct/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.4.3-1:    24/nov/2022 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+# 7.4.4-1:    12/jan/2023 by Eric Hameleers <alien@slackware.com>
+#             * Update.
+#
+# Run 'sh libreoffice.SlackBuild' to build a Slackware package.
+# The package (.txz) and .txt file as well as build logs are created in /tmp .
+# Install it using 'installpkg'.
+#
+# -----------------------------------------------------------------------------
+
+# Set initial variables:
+
+PRGNAM=libreoffice
+PRGNAM2=mozplugin
+PRGNAM3=dict
+PRGNAM4=sdkdoc
+PRGNAM5=kde-integration
+PRGNAM6=l10n
+
+BUILD=${BUILD:-1}
+TAG=${TAG:-_gcs}
+
+# Add support for KDE5:
+ADD_KDE5=${ADD_KDE5:-"NO"}
+ADD_KDE5=$(echo $ADD_KDE5 | tr 'a-z' 'A-Z')
+
+# Libreoffice >= 7 needs JDK 9 or higher:
+USE_JAVA=${USE_JAVA:="NO"}
+USE_JAVA=$(echo $USE_JAVA | tr 'a-z' 'A-Z')
+
+# SRCVER is the variable you control. It can be one of:
+# "HEAD" - in which case a new git # snapshot will be pulled,
+# "yyyymmdd" - like "20150704", if you downloaded a git snapshot before, or
+# "X.Y.Z" - like "5.0.0.2", meaning a release tarball is used.
+# **
+# ** NOTE: the script may be broken for GIT builds at the moment! **
+# **
+#SRCVER=${SRCVER:-20150704}
+#SRCVER=${SRCVER:-HEAD}
+#SRCVER=${SRCVER:-5.0.0.2git}
+#SRCVER=${SRCVER:-5.0.0.2}
+
+SRCVER=${SRCVER:-7.3.7}
+SUBVER=""
+PKG_SUBVER=""
+
+# Under what directory will the script download all sources:
+LOSRC_DIR="sources$(echo ${SRCVER} |cut -d'.' -f1,2 |tr -d '.')"
+mkdir -p ${LOSRC_DIR}
+
+# How many tarballs does this release consist of:
+LO_TARBALLS=4
+
+# If we pull a git shapshot, use today's date as the VERSION:
+# If we are building offline, we do not want git checks:
+if [ "$SRCVER" = "HEAD" ]; then
+  VERSION=$(date +%Y%m%d)
+  USE_GIT="yes"
+  USE_LOVER="yes"
+  COMPR="xz"
+elif [ "$(echo $SRCVER |cut -c1,2)" = "20" ]; then
+  VERSION=$SRCVER
+  USE_GIT="yes"
+  USE_LOVER="yes"
+  COMPR="xz"
+elif [ "${SRCVER%%git}" != "${SRCVER}" ]; then
+  VERSION=${SRCVER%%git}
+  USE_GIT="yes"
+  USE_LOVER="no"
+  COMPR="xz"
+else
+  VERSION=$SRCVER
+  USE_GIT="no"
+  USE_LOVER="no"
+  COMPR="xz"
+fi
+
+DOCS="COPYING* README*"
+
+PACKAGER="Eric Hameleers/Jay Lanagan"
+
+# Where do we look for sources?
+SRCDIR=$(cd $(dirname $0); pwd)
+
+# Select default langue for the libreoffice package:
+DEF_LANG=${DEF_LANG:-"en_US"}
+
+# If this variable is non-empty, we will build additional language packs;
+# otherwise LibreOffice will be built for one language, defined in DEF_LANG:
+# Note:
+#   The languages plus their descriptive names are kept in an external file
+#   called 'languages' in the same directory as the SlackBuild script.
+#    Edit that file if you want to add more languages.
+# Note:
+#   The packagenames use official language code like 'en_US' while LibreOffice
+#    uses 'en-US'.
+#
+#ADD_LANGUAGES=""
+ADD_LANGUAGES="$(cat $SRCDIR/languages |grep -v "^#" |cut -f1 -d= |tr '\n' ' ' |tr -s ' ' |sed -e 's/ *$//')"
+
+# Place to build (TMP) package (PKG) and output (OUTPUT) the program:
+TMP=${TMP:-/tmp/build}
+PKG=$TMP/package-$PRGNAM
+PKG2=$TMP/package-$PRGNAM-$PRGNAM2
+PKG3=$TMP/package-$PRGNAM-$PRGNAM3
+PKG4=$TMP/package-$PRGNAM-$PRGNAM4
+PKG5=$TMP/package-$PRGNAM-$PRGNAM5
+PKG6=$TMP/package-$PRGNAM-$PRGNAM6
+OUTPUT=${OUTPUT:-/tmp}
+
+# This package is built with Alien's Google API keys for LibreOffice.
+# The keys are contained in the file "libreoffice_apikeys",
+# which is not distributed.
+# If you want to rebuild this package, you can use your own API keys, see:
+#   http://www.chromium.org/developers/how-tos/api-keys
+# Or else the package compiles without API keys.
+# This will disable the ability to directly edit and save Google Drive Docs.
+# The following variables must be set:
+#   _gdrive_client_id
+#   _gdrive_client_secret
+if [ -f ${HOME}/.libreoffice_apikeys ]; then
+  . ${HOME}/.libreoffice_apikeys
+elif [ -f ${SRCDIR}/libreoffice_apikeys ]; then
+  . ${SRCDIR}/libreoffice_apikeys
+fi
+if [ -n "$_gdrive_client_id" -a -n "$_gdrive_client_secret" ]; then
+  GDRIVEOPTS=" --with-gdrive-client-id=${_gdrive_client_id} --with-gdrive-client-secret=${_gdrive_client_secret}"
+else
+  GDRIVEOPTS=" "
+fi
+
+# Base resource locators for tarballs and snapshots
+# - if you are building from git snapshots, it is wise to point GITBASE to
+#   a local directory where you keep clones of the remote repositories:
+SRCBASE="http://download.documentfoundation.org/libreoffice/src/${VERSION}"
+GITBASE="git://anongit.freedesktop.org/git/libreoffice"
+
+# Core components of LibreOffice (downloaded or checked-out) are:
+#   core dictionaries help translations
+
+# Use SRCURL for tarball releases and GITURI for git snapshots:
+
+SOURCE[0]="$SRCDIR/${LOSRC_DIR}/libreoffice-${VERSION}${SUBVER}.tar.${COMPR}"
+SRCURL[0]="$SRCBASE/libreoffice-${VERSION}${SUBVER}.tar.${COMPR}"
+GITURI[0]="$GITBASE/core"
+
+SOURCE[1]="$SRCDIR/${LOSRC_DIR}/libreoffice-dictionaries-${VERSION}${SUBVER}.tar.${COMPR}"
+SRCURL[1]="$SRCBASE/libreoffice-dictionaries-${VERSION}${SUBVER}.tar.${COMPR}"
+GITURI[1]="$GITBASE/dictionaries"
+
+SOURCE[2]="$SRCDIR/${LOSRC_DIR}/libreoffice-help-${VERSION}${SUBVER}.tar.${COMPR}"
+SRCURL[2]="$SRCBASE/libreoffice-help-${VERSION}${SUBVER}.tar.${COMPR}"
+GITURI[2]="$GITBASE/help"
+
+SOURCE[3]="$SRCDIR/${LOSRC_DIR}/libreoffice-translations-${VERSION}${SUBVER}.tar.${COMPR}"
+SRCURL[3]="$SRCBASE/libreoffice-translations-${VERSION}${SUBVER}.tar.${COMPR}"
+GITURI[3]="$GITBASE/translations"
+
+# Two files that are used to determine what needs to be downloaded:
+SOURCE[4]="$SRCDIR/${LOSRC_DIR}/download.lst-${VERSION}${SUBVER}"
+SRCURL[4]="http://cgit.freedesktop.org/libreoffice/core/plain/download.lst?id=libreoffice-${VERSION}${SUBVER}"
+GITURI[4]=""
+
+SOURCE[5]="$SRCDIR/${LOSRC_DIR}/Makefile.fetch-${VERSION}${SUBVER}"
+SRCURL[5]="http://cgit.freedesktop.org/libreoffice/core/plain/Makefile.fetch?id=libreoffice-${VERSION}${SUBVER}"
+GITURI[5]=""
+
+#
+# Extra libraries / binaries required to build LibreOffice from source:
+# Lots of tarballs of which I am not sure which one are really needed...
+#
+
+# --- Start of section generated by gensrc.sh ---
+# External sources for libreoffice-7.4.4.2
+
+SOURCE[6]="$SRCDIR/${LOSRC_DIR}/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf"
+SRCURL[6]="https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf"
+GITURI[6]=""
+
+SOURCE[7]="$SRCDIR/${LOSRC_DIR}/libabw-0.1.3.tar.xz"
+SRCURL[7]="https://dev-www.libreoffice.org/src/libabw-0.1.3.tar.xz"
+GITURI[7]=""
+
+SOURCE[8]="$SRCDIR/${LOSRC_DIR}/boost_1_79_0.tar.xz"
+SRCURL[8]="https://dev-www.libreoffice.org/src/boost_1_79_0.tar.xz"
+GITURI[8]=""
+
+SOURCE[9]="$SRCDIR/${LOSRC_DIR}/box2d-2.4.1.tar.gz"
+SRCURL[9]="https://dev-www.libreoffice.org/src/box2d-2.4.1.tar.gz"
+GITURI[9]=""
+
+SOURCE[10]="$SRCDIR/${LOSRC_DIR}/breakpad-b324760c7f53667af128a6b77b790323da04fcb9.tar.xz"
+SRCURL[10]="https://dev-www.libreoffice.org/src/breakpad-b324760c7f53667af128a6b77b790323da04fcb9.tar.xz"
+GITURI[10]=""
+
+SOURCE[11]="$SRCDIR/${LOSRC_DIR}/beeca87be45ec87d241ddd0e1bad80c1-bsh-2.0b6-src.zip"
+SRCURL[11]="https://dev-www.libreoffice.org/src/beeca87be45ec87d241ddd0e1bad80c1-bsh-2.0b6-src.zip"
+GITURI[11]=""
+
+SOURCE[12]="$SRCDIR/${LOSRC_DIR}/bzip2-1.0.8.tar.gz"
+SRCURL[12]="https://dev-www.libreoffice.org/src/bzip2-1.0.8.tar.gz"
+GITURI[12]=""
+
+SOURCE[13]="$SRCDIR/${LOSRC_DIR}/cairo-1.17.6.tar.xz"
+SRCURL[13]="https://dev-www.libreoffice.org/src/cairo-1.17.6.tar.xz"
+GITURI[13]=""
+
+SOURCE[14]="$SRCDIR/${LOSRC_DIR}/libcdr-0.1.7.tar.xz"
+SRCURL[14]="https://dev-www.libreoffice.org/src/libcdr-0.1.7.tar.xz"
+GITURI[14]=""
+
+SOURCE[15]="$SRCDIR/${LOSRC_DIR}/48d647fbd8ef8889e5a7f422c1bfda94-clucene-core-2.3.3.4.tar.gz"
+SRCURL[15]="https://dev-www.libreoffice.org/src/48d647fbd8ef8889e5a7f422c1bfda94-clucene-core-2.3.3.4.tar.gz"
+GITURI[15]=""
+
+SOURCE[16]="$SRCDIR/${LOSRC_DIR}/dragonbox-1.1.3.tar.gz"
+SRCURL[16]="https://dev-www.libreoffice.org/src/dragonbox-1.1.3.tar.gz"
+GITURI[16]=""
+
+SOURCE[17]="$SRCDIR/${LOSRC_DIR}/dtoa-20180411.tgz"
+SRCURL[17]="https://dev-www.libreoffice.org/src/dtoa-20180411.tgz"
+GITURI[17]=""
+
+SOURCE[18]="$SRCDIR/${LOSRC_DIR}/libcmis-0.5.2.tar.xz"
+SRCURL[18]="https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz"
+GITURI[18]=""
+
+SOURCE[19]="$SRCDIR/${LOSRC_DIR}/CoinMP-1.7.6.tgz"
+SRCURL[19]="https://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz"
+GITURI[19]=""
+
+SOURCE[20]="$SRCDIR/${LOSRC_DIR}/cppunit-1.15.1.tar.gz"
+SRCURL[20]="https://dev-www.libreoffice.org/src/cppunit-1.15.1.tar.gz"
+GITURI[20]=""
+
+SOURCE[21]="$SRCDIR/${LOSRC_DIR}/curl-7.86.0.tar.xz"
+SRCURL[21]="https://dev-www.libreoffice.org/src/curl-7.86.0.tar.xz"
+GITURI[21]=""
+
+SOURCE[22]="$SRCDIR/${LOSRC_DIR}/libe-book-0.1.3.tar.xz"
+SRCURL[22]="https://dev-www.libreoffice.org/src/libe-book-0.1.3.tar.xz"
+GITURI[22]=""
+
+SOURCE[23]="$SRCDIR/${LOSRC_DIR}/libepoxy-1.5.10.tar.gz"
+SRCURL[23]="https://dev-www.libreoffice.org/src/libepoxy-1.5.10.tar.gz"
+GITURI[23]=""
+
+SOURCE[24]="$SRCDIR/${LOSRC_DIR}/3ade8cfe7e59ca8e65052644fed9fca4-epm-3.7.tar.gz"
+SRCURL[24]="https://dev-www.libreoffice.org/src/3ade8cfe7e59ca8e65052644fed9fca4-epm-3.7.tar.gz"
+GITURI[24]=""
+
+SOURCE[25]="$SRCDIR/${LOSRC_DIR}/libepubgen-0.1.1.tar.xz"
+SRCURL[25]="https://dev-www.libreoffice.org/src/libepubgen-0.1.1.tar.xz"
+GITURI[25]=""
+
+SOURCE[26]="$SRCDIR/${LOSRC_DIR}/libetonyek-0.1.10.tar.xz"
+SRCURL[26]="https://dev-www.libreoffice.org/src/libetonyek-0.1.10.tar.xz"
+GITURI[26]=""
+
+SOURCE[27]="$SRCDIR/${LOSRC_DIR}/expat-2.5.0.tar.xz"
+SRCURL[27]="https://dev-www.libreoffice.org/src/expat-2.5.0.tar.xz"
+GITURI[27]=""
+
+SOURCE[28]="$SRCDIR/${LOSRC_DIR}/Firebird-3.0.7.33374-0.tar.bz2"
+SRCURL[28]="https://dev-www.libreoffice.org/src/Firebird-3.0.7.33374-0.tar.bz2"
+GITURI[28]=""
+
+SOURCE[29]="$SRCDIR/${LOSRC_DIR}/fontconfig-2.13.94.tar.xz"
+SRCURL[29]="https://dev-www.libreoffice.org/src/fontconfig-2.13.94.tar.xz"
+GITURI[29]=""
+
+SOURCE[30]="$SRCDIR/${LOSRC_DIR}/368f114c078f94214a308a74c7e991bc-crosextrafonts-20130214.tar.gz"
+SRCURL[30]="https://dev-www.libreoffice.org/src/368f114c078f94214a308a74c7e991bc-crosextrafonts-20130214.tar.gz"
+GITURI[30]=""
+
+SOURCE[31]="$SRCDIR/${LOSRC_DIR}/c74b7223abe75949b4af367942d96c7a-crosextrafonts-carlito-20130920.tar.gz"
+SRCURL[31]="https://dev-www.libreoffice.org/src/c74b7223abe75949b4af367942d96c7a-crosextrafonts-carlito-20130920.tar.gz"
+GITURI[31]=""
+
+SOURCE[32]="$SRCDIR/${LOSRC_DIR}/33e1e61fab06a547851ed308b4ffef42-dejavu-fonts-ttf-2.37.zip"
+SRCURL[32]="https://dev-www.libreoffice.org/src/33e1e61fab06a547851ed308b4ffef42-dejavu-fonts-ttf-2.37.zip"
+GITURI[32]=""
+
+SOURCE[33]="$SRCDIR/${LOSRC_DIR}/1725634df4bb3dcb1b2c91a6175f8789-GentiumBasic_1102.zip"
+SRCURL[33]="https://dev-www.libreoffice.org/src/1725634df4bb3dcb1b2c91a6175f8789-GentiumBasic_1102.zip"
+GITURI[33]=""
+
+SOURCE[34]="$SRCDIR/${LOSRC_DIR}/liberation-narrow-fonts-ttf-1.07.6.tar.gz"
+SRCURL[34]="https://dev-www.libreoffice.org/src/liberation-narrow-fonts-ttf-1.07.6.tar.gz"
+GITURI[34]=""
+
+SOURCE[35]="$SRCDIR/${LOSRC_DIR}/liberation-fonts-ttf-2.1.4.tar.gz"
+SRCURL[35]="https://dev-www.libreoffice.org/src/liberation-fonts-ttf-2.1.4.tar.gz"
+GITURI[35]=""
+
+SOURCE[36]="$SRCDIR/${LOSRC_DIR}/e7a384790b13c29113e22e596ade9687-LinLibertineG-20120116.zip"
+SRCURL[36]="https://dev-www.libreoffice.org/src/e7a384790b13c29113e22e596ade9687-LinLibertineG-20120116.zip"
+GITURI[36]=""
+
+SOURCE[37]="$SRCDIR/${LOSRC_DIR}/907d6e99f241876695c19ff3db0b8923-source-code-pro-2.030R-ro-1.050R-it.tar.gz"
+SRCURL[37]="https://dev-www.libreoffice.org/src/907d6e99f241876695c19ff3db0b8923-source-code-pro-2.030R-ro-1.050R-it.tar.gz"
+GITURI[37]=""
+
+SOURCE[38]="$SRCDIR/${LOSRC_DIR}/edc4d741888bc0d38e32dbaa17149596-source-sans-pro-2.010R-ro-1.065R-it.tar.gz"
+SRCURL[38]="https://dev-www.libreoffice.org/src/edc4d741888bc0d38e32dbaa17149596-source-sans-pro-2.010R-ro-1.065R-it.tar.gz"
+GITURI[38]=""
+
+SOURCE[39]="$SRCDIR/${LOSRC_DIR}/source-serif-pro-3.000R.tar.gz"
+SRCURL[39]="https://dev-www.libreoffice.org/src/source-serif-pro-3.000R.tar.gz"
+GITURI[39]=""
+
+SOURCE[40]="$SRCDIR/${LOSRC_DIR}/EmojiOneColor-SVGinOT-1.3.tar.gz"
+SRCURL[40]="https://dev-www.libreoffice.org/src/EmojiOneColor-SVGinOT-1.3.tar.gz"
+GITURI[40]=""
+
+SOURCE[41]="$SRCDIR/${LOSRC_DIR}/noto-fonts-20171024.tar.gz"
+SRCURL[41]="https://dev-www.libreoffice.org/src/noto-fonts-20171024.tar.gz"
+GITURI[41]=""
+
+SOURCE[42]="$SRCDIR/${LOSRC_DIR}/culmus-0.133.tar.gz"
+SRCURL[42]="https://dev-www.libreoffice.org/src/culmus-0.133.tar.gz"
+GITURI[42]=""
+
+SOURCE[43]="$SRCDIR/${LOSRC_DIR}/libre-hebrew-1.0.tar.gz"
+SRCURL[43]="https://dev-www.libreoffice.org/src/libre-hebrew-1.0.tar.gz"
+GITURI[43]=""
+
+SOURCE[44]="$SRCDIR/${LOSRC_DIR}/alef-1.001.tar.gz"
+SRCURL[44]="https://dev-www.libreoffice.org/src/alef-1.001.tar.gz"
+GITURI[44]=""
+
+SOURCE[45]="$SRCDIR/${LOSRC_DIR}/Amiri-0.117.zip"
+SRCURL[45]="https://dev-www.libreoffice.org/src/Amiri-0.117.zip"
+GITURI[45]=""
+
+SOURCE[46]="$SRCDIR/${LOSRC_DIR}/ttf-kacst_2.01+mry.tar.gz"
+SRCURL[46]="https://dev-www.libreoffice.org/src/ttf-kacst_2.01+mry.tar.gz"
+GITURI[46]=""
+
+SOURCE[47]="$SRCDIR/${LOSRC_DIR}/ReemKufi-1.2.zip"
+SRCURL[47]="https://dev-www.libreoffice.org/src/ReemKufi-1.2.zip"
+GITURI[47]=""
+
+SOURCE[48]="$SRCDIR/${LOSRC_DIR}/Scheherazade-2.100.zip"
+SRCURL[48]="https://dev-www.libreoffice.org/src/Scheherazade-2.100.zip"
+GITURI[48]=""
+
+SOURCE[49]="$SRCDIR/${LOSRC_DIR}/libfreehand-0.1.2.tar.xz"
+SRCURL[49]="https://dev-www.libreoffice.org/src/libfreehand-0.1.2.tar.xz"
+GITURI[49]=""
+
+SOURCE[50]="$SRCDIR/${LOSRC_DIR}/freetype-2.12.0.tar.xz"
+SRCURL[50]="https://dev-www.libreoffice.org/src/freetype-2.12.0.tar.xz"
+GITURI[50]=""
+
+SOURCE[51]="$SRCDIR/${LOSRC_DIR}/glm-0.9.9.8.zip"
+SRCURL[51]="https://dev-www.libreoffice.org/src/glm-0.9.9.8.zip"
+GITURI[51]=""
+
+SOURCE[52]="$SRCDIR/${LOSRC_DIR}/gpgme-1.16.0.tar.bz2"
+SRCURL[52]="https://dev-www.libreoffice.org/src/gpgme-1.16.0.tar.bz2"
+GITURI[52]=""
+
+SOURCE[53]="$SRCDIR/${LOSRC_DIR}/graphite2-minimal-1.3.14.tgz"
+SRCURL[53]="https://dev-www.libreoffice.org/src/graphite2-minimal-1.3.14.tgz"
+GITURI[53]=""
+
+SOURCE[54]="$SRCDIR/${LOSRC_DIR}/harfbuzz-4.3.0.tar.xz"
+SRCURL[54]="https://dev-www.libreoffice.org/src/harfbuzz-4.3.0.tar.xz"
+GITURI[54]=""
+
+SOURCE[55]="$SRCDIR/${LOSRC_DIR}/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip"
+SRCURL[55]="https://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip"
+GITURI[55]=""
+
+SOURCE[56]="$SRCDIR/${LOSRC_DIR}/hunspell-1.7.0.tar.gz"
+SRCURL[56]="https://dev-www.libreoffice.org/src/hunspell-1.7.0.tar.gz"
+GITURI[56]=""
+
+SOURCE[57]="$SRCDIR/${LOSRC_DIR}/5ade6ae2a99bc1e9e57031ca88d36dad-hyphen-2.8.8.tar.gz"
+SRCURL[57]="https://dev-www.libreoffice.org/src/5ade6ae2a99bc1e9e57031ca88d36dad-hyphen-2.8.8.tar.gz"
+GITURI[57]=""
+
+SOURCE[58]="$SRCDIR/${LOSRC_DIR}/icu4c-71_1-src.tgz"
+SRCURL[58]="https://dev-www.libreoffice.org/src/icu4c-71_1-src.tgz"
+GITURI[58]=""
+
+SOURCE[59]="$SRCDIR/${LOSRC_DIR}/icu4c-71_1-data.zip"
+SRCURL[59]="https://dev-www.libreoffice.org/src/icu4c-71_1-data.zip"
+GITURI[59]=""
+
+SOURCE[60]="$SRCDIR/${LOSRC_DIR}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip"
+SRCURL[60]="https://dev-www.libreoffice.org/src/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip"
+GITURI[60]=""
+
+SOURCE[61]="$SRCDIR/${LOSRC_DIR}/d8bd5eed178db6e2b18eeed243f85aa8-flute-1.1.6.zip"
+SRCURL[61]="https://dev-www.libreoffice.org/src/d8bd5eed178db6e2b18eeed243f85aa8-flute-1.1.6.zip"
+GITURI[61]=""
+
+SOURCE[62]="$SRCDIR/${LOSRC_DIR}/eeb2c7ddf0d302fba4bfc6e97eac9624-libbase-1.1.6.zip"
+SRCURL[62]="https://dev-www.libreoffice.org/src/eeb2c7ddf0d302fba4bfc6e97eac9624-libbase-1.1.6.zip"
+GITURI[62]=""
+
+SOURCE[63]="$SRCDIR/${LOSRC_DIR}/3bdf40c0d199af31923e900d082ca2dd-libfonts-1.1.6.zip"
+SRCURL[63]="https://dev-www.libreoffice.org/src/3bdf40c0d199af31923e900d082ca2dd-libfonts-1.1.6.zip"
+GITURI[63]=""
+
+SOURCE[64]="$SRCDIR/${LOSRC_DIR}/3404ab6b1792ae5f16bbd603bd1e1d03-libformula-1.1.7.zip"
+SRCURL[64]="https://dev-www.libreoffice.org/src/3404ab6b1792ae5f16bbd603bd1e1d03-libformula-1.1.7.zip"
+GITURI[64]=""
+
+SOURCE[65]="$SRCDIR/${LOSRC_DIR}/db60e4fde8dd6d6807523deb71ee34dc-liblayout-0.2.10.zip"
+SRCURL[65]="https://dev-www.libreoffice.org/src/db60e4fde8dd6d6807523deb71ee34dc-liblayout-0.2.10.zip"
+GITURI[65]=""
+
+SOURCE[66]="$SRCDIR/${LOSRC_DIR}/97b2d4dba862397f446b217e2b623e71-libloader-1.1.6.zip"
+SRCURL[66]="https://dev-www.libreoffice.org/src/97b2d4dba862397f446b217e2b623e71-libloader-1.1.6.zip"
+GITURI[66]=""
+
+SOURCE[67]="$SRCDIR/${LOSRC_DIR}/8ce2fcd72becf06c41f7201d15373ed9-librepository-1.1.6.zip"
+SRCURL[67]="https://dev-www.libreoffice.org/src/8ce2fcd72becf06c41f7201d15373ed9-librepository-1.1.6.zip"
+GITURI[67]=""
+
+SOURCE[68]="$SRCDIR/${LOSRC_DIR}/f94d9870737518e3b597f9265f4e9803-libserializer-1.1.6.zip"
+SRCURL[68]="https://dev-www.libreoffice.org/src/f94d9870737518e3b597f9265f4e9803-libserializer-1.1.6.zip"
+GITURI[68]=""
+
+SOURCE[69]="$SRCDIR/${LOSRC_DIR}/ace6ab49184e329db254e454a010f56d-libxml-1.1.7.zip"
+SRCURL[69]="https://dev-www.libreoffice.org/src/ace6ab49184e329db254e454a010f56d-libxml-1.1.7.zip"
+GITURI[69]=""
+
+SOURCE[70]="$SRCDIR/${LOSRC_DIR}/39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip"
+SRCURL[70]="https://dev-www.libreoffice.org/src/39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip"
+GITURI[70]=""
+
+SOURCE[71]="$SRCDIR/${LOSRC_DIR}/libjpeg-turbo-2.1.2.tar.gz"
+SRCURL[71]="https://dev-www.libreoffice.org/src/libjpeg-turbo-2.1.2.tar.gz"
+GITURI[71]=""
+
+SOURCE[72]="$SRCDIR/${LOSRC_DIR}/language-subtag-registry-2022-08-08.tar.bz2"
+SRCURL[72]="https://dev-www.libreoffice.org/src/language-subtag-registry-2022-08-08.tar.bz2"
+GITURI[72]=""
+
+SOURCE[73]="$SRCDIR/${LOSRC_DIR}/lcms2-2.12.tar.gz"
+SRCURL[73]="https://dev-www.libreoffice.org/src/lcms2-2.12.tar.gz"
+GITURI[73]=""
+
+SOURCE[74]="$SRCDIR/${LOSRC_DIR}/libassuan-2.5.5.tar.bz2"
+SRCURL[74]="https://dev-www.libreoffice.org/src/libassuan-2.5.5.tar.bz2"
+GITURI[74]=""
+
+SOURCE[75]="$SRCDIR/${LOSRC_DIR}/libatomic_ops-7.6.8.tar.gz"
+SRCURL[75]="https://dev-www.libreoffice.org/src/libatomic_ops-7.6.8.tar.gz"
+GITURI[75]=""
+
+SOURCE[76]="$SRCDIR/${LOSRC_DIR}/libeot-0.01.tar.bz2"
+SRCURL[76]="https://dev-www.libreoffice.org/src/libeot-0.01.tar.bz2"
+GITURI[76]=""
+
+SOURCE[77]="$SRCDIR/${LOSRC_DIR}/libexttextcat-3.4.6.tar.xz"
+SRCURL[77]="https://dev-www.libreoffice.org/src/libexttextcat-3.4.6.tar.xz"
+GITURI[77]=""
+
+SOURCE[78]="$SRCDIR/${LOSRC_DIR}/libffi-3.3.tar.gz"
+SRCURL[78]="https://dev-www.libreoffice.org/src/libffi-3.3.tar.gz"
+GITURI[78]=""
+
+SOURCE[79]="$SRCDIR/${LOSRC_DIR}/libgpg-error-1.43.tar.bz2"
+SRCURL[79]="https://dev-www.libreoffice.org/src/libgpg-error-1.43.tar.bz2"
+GITURI[79]=""
+
+SOURCE[80]="$SRCDIR/${LOSRC_DIR}/liblangtag-0.6.3.tar.bz2"
+SRCURL[80]="https://dev-www.libreoffice.org/src/liblangtag-0.6.3.tar.bz2"
+GITURI[80]=""
+
+SOURCE[81]="$SRCDIR/${LOSRC_DIR}/libnumbertext-1.0.11.tar.xz"
+SRCURL[81]="https://dev-www.libreoffice.org/src/libnumbertext-1.0.11.tar.xz"
+GITURI[81]=""
+
+SOURCE[82]="$SRCDIR/${LOSRC_DIR}/ltm-1.0.zip"
+SRCURL[82]="https://dev-www.libreoffice.org/src/ltm-1.0.zip"
+GITURI[82]=""
+
+SOURCE[83]="$SRCDIR/${LOSRC_DIR}/libwebp-1.2.4.tar.gz"
+SRCURL[83]="https://dev-www.libreoffice.org/src/libwebp-1.2.4.tar.gz"
+GITURI[83]=""
+
+SOURCE[84]="$SRCDIR/${LOSRC_DIR}/xmlsec1-1.2.34.tar.gz"
+SRCURL[84]="https://dev-www.libreoffice.org/src/xmlsec1-1.2.34.tar.gz"
+GITURI[84]=""
+
+SOURCE[85]="$SRCDIR/${LOSRC_DIR}/libxml2-2.10.3.tar.xz"
+SRCURL[85]="https://dev-www.libreoffice.org/src/libxml2-2.10.3.tar.xz"
+GITURI[85]=""
+
+SOURCE[86]="$SRCDIR/${LOSRC_DIR}/libxslt-1.1.35.tar.xz"
+SRCURL[86]="https://dev-www.libreoffice.org/src/libxslt-1.1.35.tar.xz"
+GITURI[86]=""
+
+SOURCE[87]="$SRCDIR/${LOSRC_DIR}/26b3e95ddf3d9c077c480ea45874b3b8-lp_solve_5.5.tar.gz"
+SRCURL[87]="https://dev-www.libreoffice.org/src/26b3e95ddf3d9c077c480ea45874b3b8-lp_solve_5.5.tar.gz"
+GITURI[87]=""
+
+SOURCE[88]="$SRCDIR/${LOSRC_DIR}/lxml-4.1.1.tgz"
+SRCURL[88]="https://dev-www.libreoffice.org/src/lxml-4.1.1.tgz"
+GITURI[88]=""
+
+SOURCE[89]="$SRCDIR/${LOSRC_DIR}/mariadb-connector-c-3.1.8-src.tar.gz"
+SRCURL[89]="https://dev-www.libreoffice.org/src/mariadb-connector-c-3.1.8-src.tar.gz"
+GITURI[89]=""
+
+SOURCE[90]="$SRCDIR/${LOSRC_DIR}/mdds-2.0.3.tar.bz2"
+SRCURL[90]="https://dev-www.libreoffice.org/src/mdds-2.0.3.tar.bz2"
+GITURI[90]=""
+
+SOURCE[91]="$SRCDIR/${LOSRC_DIR}/mDNSResponder-878.200.35.tar.gz"
+SRCURL[91]="https://dev-www.libreoffice.org/src/mDNSResponder-878.200.35.tar.gz"
+GITURI[91]=""
+
+SOURCE[92]="$SRCDIR/${LOSRC_DIR}/libmspub-0.1.4.tar.xz"
+SRCURL[92]="https://dev-www.libreoffice.org/src/libmspub-0.1.4.tar.xz"
+GITURI[92]=""
+
+SOURCE[93]="$SRCDIR/${LOSRC_DIR}/libmwaw-0.3.21.tar.xz"
+SRCURL[93]="https://dev-www.libreoffice.org/src/libmwaw-0.3.21.tar.xz"
+GITURI[93]=""
+
+SOURCE[94]="$SRCDIR/${LOSRC_DIR}/a8c2c5b8f09e7ede322d5c602ff6a4b6-mythes-1.2.4.tar.gz"
+SRCURL[94]="https://dev-www.libreoffice.org/src/a8c2c5b8f09e7ede322d5c602ff6a4b6-mythes-1.2.4.tar.gz"
+GITURI[94]=""
+
+SOURCE[95]="$SRCDIR/${LOSRC_DIR}/nss-3.86-with-nspr-4.35.tar.gz"
+SRCURL[95]="https://dev-www.libreoffice.org/src/nss-3.86-with-nspr-4.35.tar.gz"
+GITURI[95]=""
+
+SOURCE[96]="$SRCDIR/${LOSRC_DIR}/libodfgen-0.1.8.tar.xz"
+SRCURL[96]="https://dev-www.libreoffice.org/src/libodfgen-0.1.8.tar.xz"
+GITURI[96]=""
+
+SOURCE[97]="$SRCDIR/${LOSRC_DIR}/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar"
+SRCURL[97]="https://dev-www.libreoffice.org/extern/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar"
+GITURI[97]=""
+
+SOURCE[98]="$SRCDIR/${LOSRC_DIR}/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar"
+SRCURL[98]="https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar"
+GITURI[98]=""
+
+SOURCE[99]="$SRCDIR/${LOSRC_DIR}/openldap-2.4.59.tgz"
+SRCURL[99]="https://dev-www.libreoffice.org/src/openldap-2.4.59.tgz"
+GITURI[99]=""
+
+SOURCE[100]="$SRCDIR/${LOSRC_DIR}/openssl-1.1.1s.tar.gz"
+SRCURL[100]="https://dev-www.libreoffice.org/src/openssl-1.1.1s.tar.gz"
+GITURI[100]=""
+
+SOURCE[101]="$SRCDIR/${LOSRC_DIR}/liborcus-0.17.2.tar.bz2"
+SRCURL[101]="https://dev-www.libreoffice.org/src/liborcus-0.17.2.tar.bz2"
+GITURI[101]=""
+
+SOURCE[102]="$SRCDIR/${LOSRC_DIR}/libpagemaker-0.0.4.tar.xz"
+SRCURL[102]="https://dev-www.libreoffice.org/src/libpagemaker-0.0.4.tar.xz"
+GITURI[102]=""
+
+SOURCE[103]="$SRCDIR/${LOSRC_DIR}/pdfium-5058.tar.bz2"
+SRCURL[103]="https://dev-www.libreoffice.org/src/pdfium-5058.tar.bz2"
+GITURI[103]=""
+
+SOURCE[104]="$SRCDIR/${LOSRC_DIR}/pixman-0.42.2.tar.gz"
+SRCURL[104]="https://dev-www.libreoffice.org/src/pixman-0.42.2.tar.gz"
+GITURI[104]=""
+
+SOURCE[105]="$SRCDIR/${LOSRC_DIR}/libpng-1.6.39.tar.xz"
+SRCURL[105]="https://dev-www.libreoffice.org/src/libpng-1.6.39.tar.xz"
+GITURI[105]=""
+
+SOURCE[106]="$SRCDIR/${LOSRC_DIR}/tiff-4.5.0rc3.tar.xz"
+SRCURL[106]="https://dev-www.libreoffice.org/src/tiff-4.5.0rc3.tar.xz"
+GITURI[106]=""
+
+SOURCE[107]="$SRCDIR/${LOSRC_DIR}/poppler-22.12.0.tar.xz"
+SRCURL[107]="https://dev-www.libreoffice.org/src/poppler-22.12.0.tar.xz"
+GITURI[107]=""
+
+SOURCE[108]="$SRCDIR/${LOSRC_DIR}/poppler-data-0.4.11.tar.gz"
+SRCURL[108]="https://dev-www.libreoffice.org/src/poppler-data-0.4.11.tar.gz"
+GITURI[108]=""
+
+SOURCE[109]="$SRCDIR/${LOSRC_DIR}/postgresql-13.8.tar.bz2"
+SRCURL[109]="https://dev-www.libreoffice.org/src/postgresql-13.8.tar.bz2"
+GITURI[109]=""
+
+SOURCE[110]="$SRCDIR/${LOSRC_DIR}/Python-3.8.16.tar.xz"
+SRCURL[110]="https://dev-www.libreoffice.org/src/Python-3.8.16.tar.xz"
+GITURI[110]=""
+
+SOURCE[111]="$SRCDIR/${LOSRC_DIR}/libqxp-0.0.2.tar.xz"
+SRCURL[111]="https://dev-www.libreoffice.org/src/libqxp-0.0.2.tar.xz"
+GITURI[111]=""
+
+SOURCE[112]="$SRCDIR/${LOSRC_DIR}/a39f6c07ddb20d7dd2ff1f95fa21e2cd-raptor2-2.0.15.tar.gz"
+SRCURL[112]="https://dev-www.libreoffice.org/src/a39f6c07ddb20d7dd2ff1f95fa21e2cd-raptor2-2.0.15.tar.gz"
+GITURI[112]=""
+
+SOURCE[113]="$SRCDIR/${LOSRC_DIR}/1f5def51ca0026cd192958ef07228b52-rasqal-0.9.33.tar.gz"
+SRCURL[113]="https://dev-www.libreoffice.org/src/1f5def51ca0026cd192958ef07228b52-rasqal-0.9.33.tar.gz"
+GITURI[113]=""
+
+SOURCE[114]="$SRCDIR/${LOSRC_DIR}/e5be03eda13ef68aabab6e42aa67715e-redland-1.0.17.tar.gz"
+SRCURL[114]="https://dev-www.libreoffice.org/src/e5be03eda13ef68aabab6e42aa67715e-redland-1.0.17.tar.gz"
+GITURI[114]=""
+
+SOURCE[115]="$SRCDIR/${LOSRC_DIR}/librevenge-0.0.4.tar.bz2"
+SRCURL[115]="https://dev-www.libreoffice.org/src/librevenge-0.0.4.tar.bz2"
+GITURI[115]=""
+
+SOURCE[116]="$SRCDIR/${LOSRC_DIR}/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip"
+SRCURL[116]="https://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip"
+GITURI[116]=""
+
+SOURCE[117]="$SRCDIR/${LOSRC_DIR}/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz"
+SRCURL[117]="https://dev-www.libreoffice.org/src/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz"
+GITURI[117]=""
+
+SOURCE[118]="$SRCDIR/${LOSRC_DIR}/libstaroffice-0.0.7.tar.xz"
+SRCURL[118]="https://dev-www.libreoffice.org/src/libstaroffice-0.0.7.tar.xz"
+GITURI[118]=""
+
+SOURCE[119]="$SRCDIR/${LOSRC_DIR}/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip"
+SRCURL[119]="https://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip"
+GITURI[119]=""
+
+SOURCE[120]="$SRCDIR/${LOSRC_DIR}/twaindsm_2.4.1.orig.tar.gz"
+SRCURL[120]="https://dev-www.libreoffice.org/src/twaindsm_2.4.1.orig.tar.gz"
+GITURI[120]=""
+
+SOURCE[121]="$SRCDIR/${LOSRC_DIR}/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz"
+SRCURL[121]="https://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz"
+GITURI[121]=""
+
+SOURCE[122]="$SRCDIR/${LOSRC_DIR}/libvisio-0.1.7.tar.xz"
+SRCURL[122]="https://dev-www.libreoffice.org/src/libvisio-0.1.7.tar.xz"
+GITURI[122]=""
+
+SOURCE[123]="$SRCDIR/${LOSRC_DIR}/libwpd-0.10.3.tar.xz"
+SRCURL[123]="https://dev-www.libreoffice.org/src/libwpd-0.10.3.tar.xz"
+GITURI[123]=""
+
+SOURCE[124]="$SRCDIR/${LOSRC_DIR}/libwpg-0.3.3.tar.xz"
+SRCURL[124]="https://dev-www.libreoffice.org/src/libwpg-0.3.3.tar.xz"
+GITURI[124]=""
+
+SOURCE[125]="$SRCDIR/${LOSRC_DIR}/libwps-0.4.12.tar.xz"
+SRCURL[125]="https://dev-www.libreoffice.org/src/libwps-0.4.12.tar.xz"
+GITURI[125]=""
+
+SOURCE[126]="$SRCDIR/${LOSRC_DIR}/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip"
+SRCURL[126]="https://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip"
+GITURI[126]=""
+
+SOURCE[127]="$SRCDIR/${LOSRC_DIR}/zlib-1.2.13.tar.xz"
+SRCURL[127]="https://dev-www.libreoffice.org/src/zlib-1.2.13.tar.xz"
+GITURI[127]=""
+
+SOURCE[128]="$SRCDIR/${LOSRC_DIR}/libzmf-0.0.2.tar.xz"
+SRCURL[128]="https://dev-www.libreoffice.org/src/libzmf-0.0.2.tar.xz"
+GITURI[128]=""
+
+SOURCE[129]="$SRCDIR/${LOSRC_DIR}/zxing-cpp-1.2.0.tar.gz"
+SRCURL[129]="https://dev-www.libreoffice.org/src/zxing-cpp-1.2.0.tar.gz"
+GITURI[129]=""
+
+# --- End of section generated by gensrc.sh ---
+
+# Use the src_checkout() function if no downloadable tarball exists.
+# This function checks out sources from GIT and creates a tarball of them.
+src_checkout() {
+  # Param #1 : index in the SOURCE[] array.
+  # Param #2 : full path to where SOURCE[$1] tarball should be created.
+  # Determine the tarball extension:
+  PEXT=$(echo "${2}" | sed -r -e 's/.*[^.].(tar.xz|tar.gz|tar.bz2|tgz).*/\1/')
+  case "$PEXT" in
+    "tar.xz") TARCOMP="J" ;;
+    "tar.gz") TARCOMP="z" ;;
+    "tgz") TARCOMP="z" ;;
+    "tar.bz2") TARCOMP="j" ;;
+    *) echo "Archive can only have extension 'tar.xz', '.tar.gz' '.tar.bz2' or '.tgz'" ; exit 1 ;;
+  esac
+  # Determine the directory name to create for the archive root:
+  PBASE=$(basename ${2} .${PEXT})
+  # Determine the directory where we create our checkout:
+  CODIR=$(dirname ${2})
+  # LibreOffice checkout from git:
+  BRANCH=${BRANCH[$1]:-master}
+  # Checkout code from a certain branch and/or date; this will take a
+  # long time because we have to clone the complete git-repository first:
+  echo "Checking out $BRANCH at date $VERSION from '${GITURI[$1]}':"
+  RETDIR=$(pwd)
+  mkdir -p $CODIR/libreoffice_temp_checkout_$$ \
+    && cd $CODIR/libreoffice_temp_checkout_$$
+    if [ "$SRCVER" != "HEAD" ]; then
+      git clone ${GITURI[$1]} ${PBASE}
+      cd ${PBASE}
+      # Differentiate between a git release tag and a snapshot date:
+      if [ "$(echo $VERSION |cut -c1,2)" = "20" ]; then
+        git checkout $BRANCH \
+        && git checkout $(git rev-list -n 1 --before="`date -d $VERSION`" $BRANCH)
+      else
+        #git checkout $(echo "libreoffice-$VERSION" | tr 'a-z.-' 'A-Z_')
+        git checkout $(echo "libreoffice-$VERSION")
+      fi
+      cd ..
+    else
+      git clone --depth=1 ${GITURI[$1]} ${PBASE}
+    fi
+  if [ "$SRCVER" = "HEAD" ]; then
+    # Shallow clone, does not contain a lot in .git
+    tar -${TARCOMP}cf ${2} ${PBASE}
+  else
+    # Full clone, especially libreoffice-l10n is several GB in size:
+    tar --exclude .git -${TARCOMP}cf ${2} ${PBASE}
+  fi
+  cd $RETDIR
+  rm -rf $CODIR/libreoffice_temp_checkout_$$
+}
+
+##
+## --- with a little luck, you won't have to edit below this point --- ##
+##
+
+# Automatically determine the architecture we're building on:
+MARCH=$( uname -m )
+if [ -z "$ARCH" ]; then
+  case "$MARCH" in
+    i?86)    export ARCH=i586 ;;
+    armv7hl) export ARCH=$MARCH ;;
+    arm*)    export ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
+    *)       export ARCH=$MARCH ;;
+  esac
+fi
+
+case "$ARCH" in
+  i?86)      SLKCFLAGS="-march=${ARCH} -mtune=i686"
+             SLKLDFLAGS=""; LIBDIRSUFFIX=""
+             ;;
+  x86_64)    SLKCFLAGS="-fPIC"
+             SLKLDFLAGS=""; LIBDIRSUFFIX="64"
+             ;;
+  armv7hl)   SLKCFLAGS="-O2 -march=armv7-a -mfpu=vfpv3-d16 -std=c++98"
+             SLKLDFLAGS=""; LIBDIRSUFFIX=""
+             ;;
+  *)         SLKCFLAGS=""
+             SLKLDFLAGS=""; LIBDIRSUFFIX=""
+             ;;
+esac
+
+case "$ARCH" in
+    arm*) TARGET=$ARCH-slackware-linux-gnueabi ;;
+    *)    TARGET=$ARCH-slackware-linux ;;
+esac
+
+# Exit the script on errors:
+set -e
+trap 'echo "$0 FAILED at line ${LINENO}" | tee $OUTPUT/error-${PRGNAM}.log' ERR
+# Catch unitialized variables:
+set -u
+P1=${1:-1}
+
+# Save old umask and set to 0022:
+_UMASK_=$(umask)
+umask 0022
+
+if [ "$P1" == "--oldbuild" ]; then
+  echo "Re-using a previous compilation."
+else
+  # Create working directories:
+  mkdir -p $OUTPUT          # place for the package to be saved
+  mkdir -p $TMP/tmp-$PRGNAM # location to build the source
+  mkdir -p $PKG             # place for the package to be built
+  rm -rf $PKG/*             # always erase old package's contents
+  rm -rf $PKG2/*            # always erase old package's contents
+  rm -rf $PKG3-*/*          # always erase old package's contents
+  rm -rf $PKG4/*            # always erase old package's contents
+  rm -rf $PKG5/*            # always erase old package's contents
+  rm -rf $PKG6-*/*          # always erase old package's contents
+  rm -rf $TMP/tmp-$PRGNAM/* # remove the remnants of previous build
+  rm -rf $OUTPUT/{autoconf,configure,make,install,error,makepkg}-$PRGNAM.log
+                            # remove old log files
+fi
+
+# Make variables for the working directories absolute now that they exist:
+TMP=$(cd $TMP; pwd)
+PKG=$(cd $PKG; pwd)
+OUTPUT=$(cd $OUTPUT; pwd)
+
+# Source file availability:
+for (( i = 0; i < ${#SOURCE[*]}; i++ )) ; do
+  if ! [ -f ${SOURCE[$i]} ]; then
+    echo "Source '$(basename ${SOURCE[$i]})' not available yet..."
+    # Check if the $SRCDIR/sources is writable - if not, download to $OUTPUT
+    mkdir "$SRCDIR/sources" 2>/dev/null || true
+    [ -w "$SRCDIR/sources" ] || SOURCE[$i]="$OUTPUT/$(basename ${SOURCE[$i]})"
+    if [ -f ${SOURCE[$i]} ]; then echo "Ah, found it!"; continue; fi 
+    if [ "x${SRCURL[$i]}" != "x" -a "${USE_GIT}" == "no" ] || [ "x${SRCURL[$i]}" != "x" -a "x${GITURI[$i]}" == "x" ]; then
+      echo "Will download file to $(dirname $SOURCE[$i])"
+      wget --no-check-certificate -nv -T 20 -O "${SOURCE[$i]}" "${SRCURL[$i]}" || true
+      if [ $? -ne 0 -o ! -s "${SOURCE[$i]}" ]; then
+        echo "Fail to download '$(basename ${SOURCE[$i]})'. Aborting the build."
+        mv -f "${SOURCE[$i]}" "${SOURCE[$i]}".FAIL
+        exit 1
+      fi
+    else
+      # Try if we have a GIT download routine for ${SOURCE[$i]}
+      echo "Will checkout sources to $(dirname $SOURCE[$i])"
+      src_checkout $i "${SOURCE[$i]}" 2>&1 > $OUTPUT/checkout-$(basename ${SOURCE[$i]}).log
+    fi
+    if [ ! -f "${SOURCE[$i]}" -o ! -s "${SOURCE[$i]}" ]; then
+      echo "File '$(basename ${SOURCE[$i]})' not available. Aborting the build."
+      exit 1
+    fi
+  fi
+done
+
+# Maybe we need even more?
+echo "** Please examine the following output (enclosed in '-+-+-+' lines)."
+echo "** If you see any filenames there, it means that these are still missing."
+echo "** Since they will not be downloaded when LibreOffice starts compiling,"
+echo "** you may run into problems later."
+echo "** NOTE: this indicates that this SlackBuild needs to be updated."
+echo "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+TMP_DLLST=$(mktemp -t lo_XXXXXX)
+wget --no-check-certificate -q -O - "http://cgit.freedesktop.org/libreoffice/core/plain/download.lst?id=$(echo $PRGNAM-$VERSION$SUBVER)" > $TMP_DLLST
+echo "all:"  >> $TMP_DLLST
+cat $TMP_DLLST | grep -v " *#" | grep -w export | grep TARBALL | cut -f2 -d' ' | cut -f1 -d= | sed -e 's/.*/\t&=$(&)'/  >> $TMP_DLLST
+for FILE in $(make HAVE_JAVA6=TRUE -f $TMP_DLLST | cut -f2- -d=) ; do if [ ! -f $SRCDIR/${LOSRC_DIR}/$FILE ]; then echo $FILE; fi ; done;
+rm $TMP_DLLST
+echo "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+
+if [ "$P1" == "--download" ]; then
+  echo "Download complete."
+  exit 0
+fi
+
+# --- PACKAGE BUILDING ---
+
+echo "++"
+echo "|| $PRGNAM-$VERSION"
+echo "++"
+
+cd $TMP/tmp-$PRGNAM
+if [ "$P1" != "--oldbuild" ]; then
+  echo "Extracting source archive(s) for $PRGNAM..."
+  for (( i = 0; i < ${LO_TARBALLS}; i++ )) ; do
+    echo -n " ."
+    tar -xf ${SOURCE[$i]}
+  done
+  echo ""
+  # Remove multiple git-hooks directories:
+  find . -name git-hooks -type d -depth -exec rm -rf {} \;
+
+  echo "Symlinking all external archives into src directory for $PRGNAM..."
+  mkdir -p extsrc
+  for (( i = ${LO_TARBALLS}; i < ${#SOURCE[*]}; i++ )) ; do
+    ln -sf ${SOURCE[$i]} extsrc/
+  done
+fi
+
+chown -R root:root .
+chmod -R u+w,go+r-w,a+X-s .
+
+# Enter the build directory:
+BUILDDIR="$TMP/tmp-$PRGNAM/libreoffice-${VERSION}${SUBVER}"
+cd $BUILDDIR
+
+echo Building ...
+
+# Apply our own (or borrowed) patches.
+if [ "$P1" != "--oldbuild" ]; then
+  touch $OUTPUT/patch-$PRGNAM.log
+  # Add support for KDE5 destop session:
+  cat $SRCDIR/patches/libreoffice.kde5_mailer.patch \
+    | patch -p1 --verbose 2>&1 | tee -a $OUTPUT/patch-$PRGNAM.log
+  # GCC10 requirements:
+  sed -i external/libcdr/ExternalProject_libcdr.mk \
+   -e '/configure /i \\t\t&& sed -i "s/TRUE/true/g" src/lib/libcdr_utils.cpp \\'
+  sed -i external/libebook/ExternalProject_libebook.mk \
+    -e '/configure /i \\t\t&& sed -i "s/TRUE/true/g" src/lib/EBOOKCharsetConverter.cpp \\'
+  sed -i i18npool/source/calendar/calendar_gregorian.cxx -e 's/TRUE/true/'
+fi
+
+if [ "${USE_LOVER}" == "yes" ]; then
+  # Git build without a real VERSION; find out what this version of LibreOffice
+  # calls itself by looking for something like:
+  # AC_INIT(libreoffice-build, 3.2.99.2)
+  LOVER=$(cat configure.in | grep ^AC_INIT | sed -e 's/.*, \(.\+\))/\1/')_
+else
+  LOVER=""
+fi
+
+# Skip the CVE unit tests on 32bit:
+if [ "$ARCH" != "x86_64" ]; then
+  export DISABLE_CVE_TESTS=TRUE
+fi
+
+# Note about KDE5: you'll need the Frameworks packages, nothing more,
+# but this also needs Qt5 available. This build will fail
+# if you enable KDE5 support but did not install Qt5!
+# Add KDE related arguments:
+KDEOPTS="--disable-kf5 --disable-gtk3-kde5"
+QTOPTS="--disable-qt5"
+if [ "${ADD_KDE5}" = "YES" ]; then
+  if $(pkg-config Qt5Core --exists) ; then
+    KDEOPTS="--enable-kf5 --enable-gtk3-kde5"
+    QTOPTS="--enable-qt5"
+    unset CPLUS_INCLUDE_PATH
+    unset QT4DIR
+    export QTDIR="/usr/lib${LIBDIRSUFFIX}/qt5"
+  fi
+fi
+
+# Configure Java yes/no:
+if [ "$USE_JAVA" = "NO" ]; then
+  JAVAOPTS="--without-java"
+else
+  JAVAOPTS="--with-jdk-home=$JAVA_HOME --with-ant-home=/usr/share/ant"
+fi
+
+# If graphite2 is installed we can use the system harfbuzz:
+if /usr/bin/pkg-config --exists graphite2 ; then
+  HARFBUZZOPTS=" --with-system-boost \
+                 --with-system-icu \
+                 --with-system-graphite \
+                 --with-system-harfbuzz "
+else
+  HARFBUZZOPTS=" --without-system-boost \
+                 --without-system-icu \
+                 --without-system-graphite \
+                 --without-system-harfbuzz "
+fi
+
+# Determine whether we can use gstreamer 1.0:
+if /usr/bin/pkg-config --exists gstreamer-1.0 ; then
+  GSTOPTS="--enable-gstreamer-1-0"
+else
+  GSTOPTS="--disable-gstreamer-1-0"
+fi
+
+## Do not build postgresql-sdbc on -current with its new openssl-1.1:
+#if openssl-1.0 version 1>/dev/null 2>/dev/null ; then
+#  POSTGRESQLOPTS="--disable-postgresql-sdbc"
+#else
+#  POSTGRESQLOPTS=""
+#fi
+POSTGRESQLOPTS=""
+
+# Causes a lot of trouble otherwise:
+if ! which gpgme-config 1>/dev/null 2>/dev/null ; then
+  GPGMEOPTS="--without-system-gpgmepp"
+  SLKGPGMELDFLAGS=""
+elif [ $(gpgme-config --version |cut -d. -f1) -eq 1 -a $(gpgme-config --version |cut -d. -f2) -lt 9 ]; then
+  # gpgme < 1.9.0 so don't use the system libs:
+  GPGMEOPTS="--without-system-gpgmepp"
+  SLKGPGMELDFLAGS=""
+else
+  echo "Using system gpgme"
+  GPGMEOPTS="--with-system-gpgmepp"
+  SLKGPGMELDFLAGS="$(gpgme-config --libs)"
+fi
+
+# Make it install into proper directories:
+export OOInBase="/usr/lib${LIBDIRSUFFIX}/libreoffice"
+export OOInstall="/usr/lib${LIBDIRSUFFIX}/libreoffice"
+export OODESTDIR="$PKG"
+
+# Regular build flags:
+export LDFLAGS="${SLKGPGMELDFLAGS} -Wl,-rpath,/usr/lib${LIBDIRSUFFIX}/libreoffice/program/ $SLKLDFLAGS"
+if [ "${ADD_KDE5}" = "YES" ]; then
+  export CXXFLAGS="$(pkg-config --cflags Qt5Core) $SLKCFLAGS"
+else
+  export CXXFLAGS="$(pkg-config --cflags QtCore) $SLKCFLAGS"
+fi
+export CFLAGS="$SLKCFLAGS"
+export CPPFLAGS="-DU_USING_ICU_NAMESPACE=1"
+
+# If this local directory does not exist during configuration,
+# support for Open Clip Art will be disabled:
+mkdir -p /usr/share/openclipart
+
+# Do we generate language packs?
+if [ -z "$ADD_LANGUAGES" ]; then
+  # Actually the compilation breaks if we specify "en_US" explicitly as the
+  # one default language - in this case the string should be empty. The error:
+  # " Error: ../unxlngx6.pro/misc/sysui/dummy/localize.sdf 0 Bytes! "
+  [ "$DEF_LANG" = "en_US" ] && LANGUAGES="" || LANGUAGES="$DEF_LANG"
+else
+  LANGUAGES="${DEF_LANG} $(echo ${ADD_LANGUAGES} |sed -e "s/${DEF_LANG} *//")"
+fi
+
+# Don't build localized help which is not translated (taken from Fedora):
+POORHELPS=$(ls -d translations/source/*/helpcontent2 translations/source/*|cut -f 3 -d /|sort|uniq -u|xargs)
+# Don't build localized help which is poorly translated:
+POORHELPS="$POORHELPS $(grep 'msgstr .Working with Documents' translations/source/*/helpcontent2/source/text/swriter/guide.po| cut -f 3 -d / | xargs)"
+
+echo "Building for these languages: $LANGUAGES"
+
+if [ "$USE_GIT" = "yes"  ]; then
+  GITOPTS=" "
+else
+  GITOPTS="--disable-fetch-external" 
+fi
+
+# Never hurts:
+aclocal -I m4
+# We patch configure.ac:
+./autogen.sh \
+  --prefix=/usr \
+  --docdir=/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER} \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --mandir=/usr/man \
+  --with-extra-buildid="SlackBuild for ${LOVER}${VERSION}${PKG_SUBVER} by $PACKAGER" \
+  --with-external-tar="$TMP/tmp-$PRGNAM/extsrc" \
+  --with-lang="$(echo ${LANGUAGES} |tr _ -)" \
+  --with-vendor="Slackware Team ($PACKAGER)" \
+  ${GITOPTS} \
+  ${GSTOPTS} \
+  ${HARFBUZZOPTS} \
+  ${JAVAOPTS} \
+  ${KDEOPTS} \
+  ${GDRIVEOPTS} \
+  ${GPGMEOPTS} \
+  ${POSTGRESQLOPTS} \
+  ${QTOPTS} \
+  --enable-dbus \
+  --enable-eot \
+  --enable-epm \
+  --enable-ext-nlpsolver \
+  --enable-ext-wiki-publisher \
+  --enable-odk \
+  --enable-release-build \
+  --enable-scripting-beanshell \
+  --enable-scripting-javascript \
+  --enable-symbols \
+  --with-external-dict-dir=/usr/share/hunspell \
+  --with-external-hyph-dir=/usr/share/hyphen \
+  --with-external-thes-dir=/usr/share/mythes \
+  --with-fonts \
+  --with-help=html \
+  --with-system-cairo \
+  --with-system-curl \
+  --with-system-dicts \
+  --with-system-expat \
+  --with-system-nss \
+  --with-system-libxml \
+  --with-system-openssl \
+  --with-system-zlib \
+  --with-x \
+  --without-gssapi \
+  --without-junit \
+  --without-krb5 \
+  --without-myspell-dicts \
+  --without-system-jars \
+  --without-system-jpeg \
+  --without-system-lcms2 \
+  --without-system-libcmis \
+  --without-system-libvisio \
+  --without-system-mdds \
+  --without-system-poppler \
+  --without-system-redland \
+  --build=$TARGET \
+  2>&1 | tee $OUTPUT/configure-${PRGNAM}.log
+  #--enable-systray \
+  #--with-package-format="archive installed" \
+
+if [ "$USE_GIT" = "no"  ]; then
+  touch src.downloaded
+fi
+
+# Compile everything (takes many hours):
+touch $OUTPUT/make-${PRGNAM}.log
+sed -i -e 's/check-if-root //g' Makefile
+echo "Starting $PRGNAM compilation (takes a long time)..."
+# Temporarily skip all checks on x86 (many will fail):
+# The 'build-nocheck' target does not exist in LO 7.4.x:
+#make build-nocheck VERBOSE=yes 2>&1 | tee -a $OUTPUT/make-${PRGNAM}.log
+make build VERBOSE=yes 2>&1 | tee -a $OUTPUT/make-${PRGNAM}.log
+
+# Compile the dictionaries from source.
+# Resulting dict-* directories are placed in $INSTDIR :
+# **TODO** figure out how to install these? Looks like the install line below
+#          does not actually install the dictionaries.
+make -C dictionaries VERBOSE=yes 2>&1 | tee -a $OUTPUT/make-${PRGNAM}.log
+
+# Fix some wrong (directory) permissions:
+chmod -R u+w,go+r-w,a+X-s .
+
+# Install the lot:
+echo "Starting the packaging stage for $PRGNAM..."
+make DESTDIR=$PKG distro-pack-install \
+  2>&1 | tee $OUTPUT/install-${PRGNAM}.log
+
+# These files do not get installed (error during copy) although the target
+# directory does get created:
+echo "Installing XML files because 'make distro-pack-install' fails to do so..."
+mkdir -p $PKG/usr/share/appdata
+install -m644 sysui/desktop/appstream-appdata/*.xml $PKG/usr/share/appdata/
+
+# Triggered by Arch Linux (thanks Andreas Radke):
+# Make all i18n lang packages with help section ('1') available to
+# fix "F1" not opening translated offline help opening in browser
+# see also /usr/lib${LIBDIRSUFFFIX}/libreoffice/help/en-US/langnames.js
+mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}/libreoffice/help
+if [ ! -f $PKG/usr/lib${LIBDIRSUFFIX}/libreoffice/help/languages.js ]; then
+  echo "var languagesSet = new Set(['en-US', 'ar', 'bg', 'bn', 'bo', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en-GB', 'eo', 'es', 'et', 'eu', 'fi', 'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ko', 'lt', 'lv', 'nb', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'si', 'sk', 'sl', 'sv', 'ta', 'tr', 'uk', 'vi', 'zh-CN', 'zh-TW']);" \
+  > $PKG/usr/lib${LIBDIRSUFFIX}/libreoffice/help/languages.js
+fi
+
+# Remove cruft:
+rm -f $PKG/gid_Module*
+
+# We will be using these variables in the remainder of the script:
+set +u
+. ./bin/get_config_variables PRODUCTVERSIONSHORT PRODUCTVERSION ICONVERSION WORKDIR INSTDIR
+export PRODUCTVERSIONSHORT PRODUCTVERSION ICONVERSION WORKDIR INSTDIR
+set -u
+
+if [ ! -L $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk/classes ]; then
+  mkdir -p $PKG/usr/share/${PRGNAM}/sdk
+  mv $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk/classes \
+    $PKG/usr/share/${PRGNAM}/sdk/
+  ln -sf /usr/share/${PRGNAM}/sdk/classes \
+    $(readlink -f $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk)/
+fi
+
+if [ ! -L $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk/idl ]; then
+  mkdir -p $PKG/usr/share/idl
+  mv $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk/idl \
+    $PKG/usr/share/idl/${PRGNAM}
+  ln -sf /usr/share/idl/${PRGNAM} \
+    $(readlink -f $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk)/idl
+fi
+
+if [ ! -L $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk/include ]; then
+  mkdir -p $PKG/usr/include
+  mv $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk/include \
+    $PKG/usr/include/${PRGNAM}
+  ln -sf /usr/include/${PRGNAM} \
+    $(readlink -f $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/sdk)/include
+fi
+
+# Link the browser plugin into the mozilla plugins directory if we built one:
+if [ -f $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/libnpsoplugin.so ]; then
+  ( mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}/mozilla/plugins
+    cd $PKG/usr/lib${LIBDIRSUFFIX}/mozilla/plugins
+    ln -sf /usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/libnpsoplugin.so
+  )
+fi
+
+# Replace redundant fonts with symlinks to save space:
+( cd $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/share/fonts/truetype/
+  for FONT in DejaVu*.ttf Liberation*.ttf ; do
+    if [ -f /usr/share/fonts/TTF/$FONT ]; then
+      rm -f $FONT
+      ln -sf /usr/share/fonts/TTF/$FONT
+    fi
+  done
+)
+
+# Move SDK docs into a separate package - normal users do not need this:
+echo "Starting split-off of SDK docs from main $PRGNAM package..."
+mkdir -p \
+  $TMP/package-${PRGNAM}-sdkdoc/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}
+mv $PKG/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}/sdk \
+  $TMP/package-${PRGNAM}-sdkdoc/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}
+mkdir -p $TMP/package-${PRGNAM}-sdkdoc/install
+cat $SRCDIR/slack-desc.sdkdoc \
+  > $TMP/package-${PRGNAM}-sdkdoc/install/slack-desc
+cd $TMP/package-${PRGNAM}-sdkdoc
+  /sbin/makepkg -p -l y -c n $OUTPUT/${PRGNAM}-sdkdoc-${LOVER}${VERSION}${PKG_SUBVER}-noarch-${BUILD}${TAG}.${PKGTYPE:-txz}
+cd -
+cd $OUTPUT
+  md5sum ${PRGNAM}-sdkdoc-${LOVER}${VERSION}${PKG_SUBVER}-noarch-${BUILD}${TAG}.${PKGTYPE:-txz} > ${PRGNAM}-sdkdoc-${LOVER}${VERSION}${PKG_SUBVER}-noarch-${BUILD}${TAG}.${PKGTYPE:-txz}.md5
+cd -
+cat $TMP/package-${PRGNAM}-sdkdoc/install/slack-desc | grep "^${PRGNAM}-sdkdoc" > $OUTPUT/${PRGNAM}-sdkdoc-${LOVER}${VERSION}${PKG_SUBVER}-noarch-${BUILD}${TAG}.txt
+
+if [ "${ADD_KDE5}" = "YES" ]; then
+  # Move the KDE integration libraries into a separate package so that people
+  # have a choice to leave these libraries out:
+  echo "Starting split-off of KDE integration libraries from main $PRGNAM package..."
+  mkdir -p $TMP/package-${PRGNAM}-kde-integration/usr/lib${LIBDIRSUFFIX}/libreoffice/program
+  for KDEFILE in \
+   libvclplug*qt5*lo.so libvclplug*k*5*lo.so libk*5*be1lo.so lo_k*5*filepicker ;
+  do
+    mv $PKG/usr/lib${LIBDIRSUFFIX}/libreoffice/program/${KDEFILE} \
+      $TMP/package-${PRGNAM}-kde-integration/usr/lib${LIBDIRSUFFIX}/libreoffice/program/
+  done
+  mkdir -p $TMP/package-${PRGNAM}-kde-integration/install
+  cat $SRCDIR/slack-desc.kde \
+    > $TMP/package-${PRGNAM}-kde-integration/install/slack-desc
+  cd $TMP/package-${PRGNAM}-kde-integration
+    /sbin/makepkg -p -l y -c n $OUTPUT/${PRGNAM}-kde-integration-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}
+  cd -
+  cd $OUTPUT
+    md5sum ${PRGNAM}-kde-integration-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz} > ${PRGNAM}-kde-integration-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}.md5
+  cd -
+  cat $TMP/package-${PRGNAM}-kde-integration/install/slack-desc | grep "^${PRGNAM}-kde-integration" > $OUTPUT/${PRGNAM}-kde-integration-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.txt
+fi
+
+# If we have any dictionaries in the $INSTDIR (this variable is set already
+# by the build process), now is the time to copy them into the package:
+echo "Starting split-off of dictionaries from main $PRGNAM package..."
+DICTS="$(find $INSTDIR/share/extensions -name "dict-*" -type d -maxdepth 1 -mindepth 1 |rev |cut -d/ -f1 |rev |cut -d- -f2-)"
+echo "Found the following dictionaries in $INSTDIR: $(echo $DICTS)"
+for DICTLANG in $(cat $SRCDIR/languages.dict |grep -v "^ *#" |cut -d= -f1) ; do
+  DICTLANGDESC="$(grep ^${DICTLANG}= $SRCDIR/languages.dict |cut -f2 -d=)"
+  if [ -d $INSTDIR/share/extensions/dict-${DICTLANG} ]; then
+    mkdir -p $TMP/package-${PRGNAM}-dict-${DICTLANG}/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/share/extensions
+    cp -a $INSTDIR/share/extensions/dict-${DICTLANG} \
+      $TMP/package-${PRGNAM}-dict-${DICTLANG}/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/share/extensions/
+    chown -R root:root $TMP/package-${PRGNAM}-dict-${DICTLANG}/usr/lib${LIBDIRSUFFIX}/$PRGNAM/share/extensions
+    mkdir -p $TMP/package-${PRGNAM}-dict-${DICTLANG}/install
+    cat $SRCDIR/slack-desc.dict \
+      | sed -e "s/@LANG@/$DICTLANG/g"  -e "s/@LANGDESC@/$DICTLANGDESC/g" > \
+      $TMP/package-${PRGNAM}-dict-${DICTLANG}/install/slack-desc
+      cd $TMP/package-${PRGNAM}-dict-${DICTLANG}
+      /sbin/makepkg -p -l y -c n $OUTPUT/${PRGNAM}-dict-${DICTLANG}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}
+      cd -
+      cd $OUTPUT
+      md5sum ${PRGNAM}-dict-${DICTLANG}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz} > ${PRGNAM}-dict-$DICTLANG-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}.md5
+      cd -
+      cat $TMP/package-${PRGNAM}-dict-${DICTLANG}/install/slack-desc | grep "^${PRGNAM}-dict-$DICTLANG" > $OUTPUT/${PRGNAM}-dict-$DICTLANG-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.txt
+  else
+    echo "ERROR: could not find dictionary '$DICTLANG' for packageing..."
+  fi
+done
+# Remove the remaining ones, we do not package them:
+rm -rf $INSTDIR/share/extensions/dict-*
+
+# Create aliases for locales that have matching languages in LibreOffice.
+# This enables people with these locales to use the autocorrect function:
+#   (code taken from Fedora's libreoffice.spec)
+cd $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/share/autocorr
+  en_GB_aliases="en-AG en-AU en-BS en-BW en-BZ en-CA en-DK en-GH en-HK en-IE en-IN en-JM en-NG en-NZ en-SG en-TT"
+  for lang in $en_GB_aliases; do
+    ln -sf acor_en-GB.dat acor_$lang.dat
+  done
+  en_US_aliases="en-PH"
+  for lang in $en_US_aliases; do
+    ln -sf acor_en-US.dat acor_$lang.dat
+  done
+  # en-ZA exists and has a good autocorrect file with two or three extras
+  # that make sense for neighbouring english speaking territories
+  en_ZA_aliases="en-NA en-ZW"
+  for lang in $en_ZA_aliases; do
+    ln -sf acor_en-ZA.dat acor_$lang.dat
+  done
+  if [ ! -z "$ADD_LANGUAGES" ]; then
+    af_ZA_aliases="af-NA"
+    for lang in $af_ZA_aliases; do
+      ln -sf acor_af-ZA.dat acor_$lang.dat
+    done
+    nl_NL_aliases="nl-AW"
+    for lang in $nl_NL_aliases; do
+      ln -sf acor_nl-NL.dat acor_$lang.dat
+    done
+    sv_SE_aliases="sv-FI"
+    for lang in $sv_SE_aliases; do
+      ln -sf acor_sv-SE.dat acor_$lang.dat
+    done
+    [ -f acor_lt_LT.dat ] && mv acor_lt_LT.dat acor_lt-LT.dat
+  else
+    rm -f acor_[a-df-z]*.dat acor_e[lsu]*.dat
+  fi
+cd -
+
+# Split out language packs if we have built additional languages:
+if [ ! -z "${ADD_LANGUAGES}" ]; then
+  cd $PKG
+  for lang in $(echo ${ADD_LANGUAGES} |sed -e "s/${DEF_LANG} *//") ; do
+    langdesc="$(grep ^${lang}= $SRCDIR/languages |cut -f2 -d=)"
+    lolang=$(echo $lang | tr _ -)
+    echo "Splitting out '$lang' ($langdesc) - looking for '$lolang'..."
+    rm -rf ${PKG}-l10n-$lang
+    mkdir -p ${PKG}-l10n-$lang
+    tar cf - --remove-files \
+      $(find . -depth -name "README*$lolang*" \
+      -o -name "LICENSE*${lolang}*" \
+      -o -name "description_${lolang}.txt" \
+      -o -type d -name "${lolang}" \
+      -o -path "*/autocorr/*" -name "*${lolang}.dat" \
+      -o -path "*/resource/*" -name "*${lolang}.res" \
+      -o -path "*/registry/*" -name "*_${lolang}.xcd" \
+      -o -path "*/registry/*" -name "*-${lolang}.xcd" \
+      -o -path "*/wizards/*" -name "*_${lolang}.properties" \
+      -o -name "Langpack-${lolang}.xcu" \
+      -o -name "*${lolang}.oxt") \
+    | ( cd ${PKG}-l10n-$lang ; tar xf - )
+      # Breaks menu customization because several are mentioned in
+      # /usr/lib64/libreoffice/share/basic/Depot/script.xlb
+      #-o -name "Lang_*${lolang}.xba" \
+    # Create slack-desc and doinst.sh :
+    mkdir -p ${PKG}-l10n-$lang/install
+    cat $SRCDIR/slack-desc.l10n \
+      | sed -e "s/@LANG@/$lang/g" -e "s/@LANGDESC@/$langdesc/g" > \
+      ${PKG}-l10n-$lang/install/slack-desc
+    # Install per-language dictionary:
+    cat $SRCDIR/doinst.sh.l10n \
+      | sed -e "s/@LIBDIRSUFFIX@/${LIBDIRSUFFIX}/g" \
+            -e "s/@LANG@/${lolang}/g" -e "s/@PRGNAM@/$PRGNAM/" \
+      > ${PKG}-l10n-$lang/install/doinst.sh
+    cd ${PKG}-l10n-$lang
+    /sbin/makepkg -p -l y -c n $OUTPUT/${PRGNAM}-l10n-${lang}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}
+    cd -
+    cd $OUTPUT
+    md5sum ${PRGNAM}-l10n-${lang}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz} > ${PRGNAM}-l10n-$lang-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}.md5
+    cd -
+    cat $PKG-l10n-$lang/install/slack-desc | grep "^${PRGNAM}-l10n-$lang" > $OUTPUT/${PRGNAM}-l10n-$lang-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.txt
+  done
+fi # End of splitting out language packs
+
+# Back to base:
+cd $BUILDDIR
+
+# Install a menu icon for older desktops like XFCE:
+mkdir -p $PKG/usr/share/pixmaps
+for FILE in base calc draw impress math startcenter writer ; do
+  ln -s ../icons/hicolor/128x128/apps/${PRGNAM}-${FILE}.png \
+    $PKG/usr/share/pixmaps/
+done
+
+# Add an entry for the LibO extension manager which went missing:
+cat <<EOF > $PKG/usr/share/applications/${PRGNAM}-extension-manager.desktop
+[Desktop Entry]
+Version=1.0
+Terminal=false
+TryExec=unopkg
+Exec=unopkg gui %U
+Type=Application
+Icon=${PRGNAM}-startcenter
+StartupNotify=true
+Categories=Office;
+MimeType=application/vnd.openofficeorg.extension;
+Name=LibreOffice Extension Manager
+GenericName=Extension Manager
+Comment=Add and organize the LibreOffice extensions.
+EOF
+
+# Remove Gnome-specific stuff:
+rm -rf $PKG/usr/share/icons/{gnome,locolor} || true
+
+# Add a bash-completion script that was removed (?) after 3.3.2.2:
+if [ ! -f $PKG/etc/bash_completion.d/${PRGNAM}.sh ]; then
+  mkdir -p $PKG/etc/bash_completion.d
+  install -m0755 $SRCDIR/bash_completion.sh \
+    $PKG/etc/bash_completion.d/${PRGNAM}.sh
+fi
+
+# Add wrapper scripts (if they do not exist yet) that call the real binaries:
+( mkdir -p $PKG/usr/bin
+  cd $PKG/usr/bin
+  if ! [ -f ${PRGNAM} -o -L ${PRGNAM} ]; then
+    cat <<EOF > $PKG/usr/bin/${PRGNAM}
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/${PRGNAM}
+  fi
+  if ! [ -f loweb -o -L loweb ]; then
+    cat <<EOF > $PKG/usr/bin/loweb
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice --web "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/loweb
+  fi
+  if ! [ -f localc -o -L localc ]; then
+    cat <<EOF > $PKG/usr/bin/localc
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice --calc "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/localc
+  fi
+  if ! [ -f lobase -o -L lobase ]; then
+    cat <<EOF > $PKG/usr/bin/lobase
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice --base "\$@"-
+EOF
+    chmod 0755 $PKG/usr/bin/lobase
+  fi
+  if ! [ -f lofromtemplate -o -L lofromtemplate ]; then
+    cat <<EOF > $PKG/usr/bin/lofromtemplate
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice .uno:NewDoc "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/lofromtemplate
+  fi
+  if ! [ -f lowriter -o -L lowriter ]; then
+    cat <<EOF > $PKG/usr/bin/lowriter
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice --writer "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/lowriter
+  fi
+  if ! [ -f unopkg -o -L unopkg ]; then
+    cat <<EOF > $PKG/usr/bin/unopkg
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/unopkg "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/unopkg
+  fi
+  if ! [ -f lodraw -o -L lodraw ]; then
+    cat <<EOF > $PKG/usr/bin/lodraw
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice --draw "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/lodraw
+  fi
+  if ! [ -f lomath -o -L lomath ]; then
+    cat <<EOF > $PKG/usr/bin/lomath
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice --math "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/lomath
+  fi
+  if ! [ -f loimpress -o -L loimpress ]; then
+    cat <<EOF > $PKG/usr/bin/loimpress
+#!/bin/sh
+/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/program/soffice --impress "\$@"
+EOF
+    chmod 0755 $PKG/usr/bin/loimpress
+  fi
+)
+
+# Back to base:
+cd $BUILDDIR
+
+# Create the package's post-install script:
+mkdir -p $PKG/install
+cat <<EOT > $PKG/install/doinst.sh
+# Handle the incoming configuration files:
+config() {
+  for infile in \$1; do
+    NEW="\$infile"
+    OLD="\$(dirname \$NEW)/\$(basename \$NEW .new)"
+    # If there's no config file by that name, mv it over:
+    if [ ! -r \$OLD ]; then
+      mv \$NEW \$OLD
+    elif [ "\$(cat \$OLD | md5sum)" = "\$(cat \$NEW | md5sum)" ]; then
+      # toss the redundant copy
+      rm \$NEW
+    fi
+    # Otherwise, we leave the .new copy for the admin to consider...
+  done
+}
+config etc/profile.d/${PRGNAM}.sh.new
+config etc/profile.d/${PRGNAM}.csh.new
+
+EOT
+
+# Install language dictionary:
+cat $SRCDIR/doinst.sh.l10n \
+  | sed -e "s/@LIBDIRSUFFIX@/${LIBDIRSUFFIX}/g" \
+        -e "s/@LANG@/$(echo ${DEF_LANG} |tr _ -)/g" -e "s/@PRGNAM@/$PRGNAM/" \
+  >> ${PKG}/install/doinst.sh
+
+cat <<EOT >> $PKG/install/doinst.sh
+
+# Update the desktop database:
+if [ -x usr/bin/update-desktop-database ]; then
+  chroot . /usr/bin/update-desktop-database usr/share/applications 1> /dev/null 2> /dev/null
+fi
+
+# Update the mime database:
+if [ -x usr/bin/update-mime-database ]; then
+  chroot . /usr/bin/update-mime-database usr/share/mime 1> /dev/null 2> /dev/null
+fi
+
+# Update hicolor theme cache:
+if [ -d usr/share/icons/hicolor ]; then
+  if [ -x /usr/bin/gtk-update-icon-cache ]; then
+    chroot . /usr/bin/gtk-update-icon-cache -f -t usr/share/icons/hicolor 1> /dev/null 2> /dev/null
+  fi
+fi
+
+EOT
+
+# Add documentation:
+mkdir -p $PKG/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}
+cp -a $DOCS $PKG/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER} || true
+cat $SRCDIR/$(basename $0) > $PKG/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}/$PRGNAM.SlackBuild
+#cat $SRCDIR/Slackware.conf.in > $PKG/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}/Slackware.conf.in
+cp -ia $SRCDIR/patches $PKG/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}/ || true
+chown -R root:root $PKG/usr/doc/$PRGNAM-${LOVER}${VERSION}${PKG_SUBVER}
+find $PKG/usr/doc -type f -exec chmod 644 {} \;
+
+# Fix permissions of license files:
+chmod 0644 $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/*odt  || true
+chmod 0644 $PKG/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/{LICENSE,NOTICE} || true
+
+# Fix possible weird permissions:
+find ${PKG} -perm 444 -o -perm 640 -exec chmod 644 {} \; || true
+find ${PKG} -perm 555 -o -perm 750 -exec chmod 755 {} \; || true
+
+# Add the profile scripts:
+mkdir -p $PKG/etc/profile.d
+for file in $(ls $SRCDIR/profile.d/${PRGNAM}*) ; do
+  cat $file | sed -e "s#@LIBDIRSUFFIX@#${LIBDIRSUFFIX}#g" \
+    > $PKG/etc/profile.d/$(basename $file).new
+done
+chmod 755 $PKG/etc/profile.d/*
+
+# On Slackware older than 14.2+, also copy the libgcc_s.so and libstdc++.so
+# libraries into the package, because the LibreOffice binaries will
+# depend on it and a default Slackware will not contain this newer version
+# (we used a newer version of gcc to compile libreoffice):
+if [ -n "$(grep ^[^+]*$ /etc/slackware-version)" ]; then
+  if [ $(cat /etc/slackware-version |cut -d' ' -f2 |cut -d. -f1) -le 14 ]; then
+    cp -ia /usr/lib${LIBDIRSUFFIX}/libgcc_s.so.* \
+      $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/
+    GLIBCXXLIB=$(readlink -f /usr/lib${LIBDIRSUFFIX}/libstdc++.so.6)
+    cp -ia $GLIBCXXLIB $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/
+    ln -s $(basename $GLIBCXXLIB) \
+      $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/libstdc++.so.6
+  fi
+fi
+
+# Compress the man page(s):
+if [ -d $PKG/usr/man ]; then
+  find $PKG/usr/man -type f -name "*.?" -exec gzip -9f {} \;
+  for i in $(find $PKG/usr/man -type l -name "*.?") ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+fi
+
+# Strip binaries (if any):
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+# Split off the browser plugin if we built it, not everyone will want it:
+if [ -f $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/libnpsoplugin.so ]; then
+
+  echo -e "**\n**  splitting off the mozilla plugin ...\n**"
+  # Move the mozilla plugin:
+  mkdir -p $PKG2/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program
+  mv $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/libnpsoplugin.so \
+    $PKG2/usr/lib${LIBDIRSUFFIX}/$PRGNAM/program/
+  mkdir -p $PKG2/usr/lib${LIBDIRSUFFIX}/mozilla/
+  mv $PKG/usr/lib${LIBDIRSUFFIX}/mozilla/plugins \
+    $PKG2/usr/lib${LIBDIRSUFFIX}/mozilla/
+  rmdir $PKG/usr/lib${LIBDIRSUFFIX}/mozilla 2>/dev/null || true
+
+  # Add some package information:
+  mkdir -p $PKG2/install
+  cat $SRCDIR/slack-desc.$PRGNAM2 > $PKG2/install/slack-desc
+  cat $SRCDIR/slack-required.$PRGNAM2 > $PKG2/install/slack-required
+
+  # Create the package:
+  ( cd $PKG2
+    makepkg --linkadd y --chown n $OUTPUT/${PRGNAM}-${PRGNAM2}-${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz} 2>&1 | tee $OUTPUT/makepkg-${PRGNAM}_${PRGNAM2}.log
+  )
+  ( cd $OUTPUT
+    md5sum ${PRGNAM}-${PRGNAM2}-${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz} > ${PRGNAM}-${PRGNAM2}-${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}.md5
+  )
+  cat $PKG2/install/slack-desc | grep "^${PRGNAM}-${PRGNAM2}" > $OUTPUT/${PRGNAM}-${PRGNAM2}-${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.txt
+  cat $PKG2/install/slack-required > $OUTPUT/${PRGNAM}-${PRGNAM2}-${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.dep
+
+fi # End splitting off the mozplugin
+
+# Continuing with the main package:
+
+# Add a package description:
+mkdir -p $PKG/install
+cat $SRCDIR/slack-desc > $PKG/install/slack-desc
+cat $SRCDIR/slack-required > $PKG/install/slack-required
+
+# Build the package:
+cd $PKG
+/sbin/makepkg -p -l y -c n $OUTPUT/${PRGNAM}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz} 2>&1 | tee $OUTPUT/makepkg-${PRGNAM}.log
+cd $OUTPUT
+md5sum ${PRGNAM}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz} > ${PRGNAM}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.${PKGTYPE:-txz}.md5
+cd -
+cat $PKG/install/slack-desc | grep "^${PRGNAM}" > $OUTPUT/${PRGNAM}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.txt
+cat $PKG/install/slack-required > $OUTPUT/${PRGNAM}-${LOVER}${VERSION}${PKG_SUBVER}-${ARCH}-${BUILD}${TAG}.dep
+
+# Restore the original umask:
+umask ${_UMASK_}
+

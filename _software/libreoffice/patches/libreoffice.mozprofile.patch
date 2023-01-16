@@ -1,0 +1,52 @@
+From fff2d18a08a37c0fa6a370e56591117fc08664d2 Mon Sep 17 00:00:00 2001
+From: Markus Mohrhard <markus.mohrhard@googlemail.com>
+Date: Thu, 03 May 2012 21:03:50 +0000
+Subject: respect absolute paths for mozilla profile, fdo#45171, lp#919659
+
+Change-Id: I536238f1f3b05e0a942caa1f65444688d4d36704
+---
+diff --git a/connectivity/source/drivers/mozab/bootstrap/MNSProfileDiscover.cxx b/connectivity/source/drivers/mozab/bootstrap/MNSProfileDiscover.cxx
+index 959896a..9a4b211 100644
+--- a/connectivity/source/drivers/mozab/bootstrap/MNSProfileDiscover.cxx
++++ b/connectivity/source/drivers/mozab/bootstrap/MNSProfileDiscover.cxx
+@@ -202,13 +202,13 @@
+                 }
+                 if (profileName.getLength() != 0 || profilePath.getLength() != 0)
+                 {
+-#ifndef MINIMAL_PROFILEDISCOVER
+                     sal_Int32 isRelative = 0;
+                     if (sIsRelative.getLength() != 0)
+                     {
+                         isRelative = sIsRelative.toInt32();
+                     }
+ 
++#ifndef MINIMAL_PROFILEDISCOVER
+                     nsCOMPtr<nsILocalFile> rootDir;
+                     rv = NS_NewLocalFile(EmptyString(), PR_TRUE,
+                                             getter_AddRefs(rootDir));
+@@ -230,11 +230,21 @@ namespace connectivity
+                         rv = rootDir->SetPersistentDescriptor(filePath);
+                     }
+                     if (NS_FAILED(rv)) continue;
++#else
++                    rtl::OUString fullProfilePath;
++                    if(isRelative)
++                    {
++                        fullProfilePath = regDir + profilePath;
++                    }
++                    else
++                    {
++                        fullProfilePath = profilePath;
++                    }
+ #endif
+ 
+                     ProfileStruct*  profileItem     = new ProfileStruct(product,profileName,
+ #ifdef MINIMAL_PROFILEDISCOVER
+-                            regDir + profilePath
++                            fullProfilePath
+ #else
+                             rootDir
+ #endif
+--
+cgit v0.9.0.2-2-gbebe
+

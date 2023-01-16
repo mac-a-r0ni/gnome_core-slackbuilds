@@ -1,0 +1,31 @@
+--- sdext/source/presenter/makefile.mk.orig	2011-01-14 21:24:00.000000000 +0100
++++ sdext/source/presenter/makefile.mk	2011-02-25 10:45:11.393735117 +0100
+@@ -42,14 +42,14 @@
+ 
+ PACKAGE=com.sun.PresenterScreen-$(PLATFORMID)
+ 
+-.IF "$(L10N_framework)"==""
+-.INCLUDE :  $(PRJ)$/util$/makefile.pmk
+-
+ .IF "$(ENABLE_PRESENTER_SCREEN)" == "NO"
+ @all:
+     @echo "Presenter Screen build disabled."
+ .ELSE
+ 
++.IF "$(L10N_framework)"==""
++.INCLUDE :  $(PRJ)$/util$/makefile.pmk
++
+ DLLPRE=
+ common_build_zip=
+ 
+@@ -375,9 +375,9 @@
+     $(TYPE) description.xml | sed s/UPDATED_PLATFORM/$(PLATFORMID)/ > $@
+ 
+ 
+-.ENDIF # "$(ENABLE_PRESENTER_SCREEN)" != "NO"
+ .ELSE
+ ivo:
+     $(ECHO)
+ .ENDIF # L10N_framework
++.ENDIF # "$(ENABLE_PRESENTER_SCREEN)" != "NO"
+ 

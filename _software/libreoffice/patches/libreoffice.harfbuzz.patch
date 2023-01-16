@@ -1,0 +1,53 @@
+# Compile the internal harfbuzz with glib instead of icu as the backend.
+# Otherwise I can never get this to link correctly.
+
+--- libreoffice-4.4.0.3/external/harfbuzz/ExternalProject_harfbuzz.mk.orig	2015-01-22 21:05:28.000000000 +0100
++++ libreoffice-4.4.0.3/external/harfbuzz/ExternalProject_harfbuzz.mk	2015-02-01 22:44:14.309082268 +0100
+@@ -25,10 +25,10 @@
+ 			--enable-static \
+ 			--disable-shared \
+ 			--with-pic \
+-			--with-icu=yes \
+-			--with-freetype=no \
++			--with-icu=no \
++			--with-freetype=yes \
+ 			--with-cairo=no \
+-			--with-glib=no \
++			--with-glib=yes \
+ 			$(if $(CROSS_COMPILING),--build=$(BUILD_PLATFORM) --host=$(HOST_PLATFORM)) \
+ 		&& (cd $(EXTERNAL_WORKDIR)/src && $(MAKE)) \
+ 	)
+--- libreoffice-4.4.0.3/configure.ac.orig	2015-01-22 21:05:28.000000000 +0100
++++ libreoffice-4.4.0.3/configure.ac	2015-02-02 21:27:24.296120585 +0100
+@@ -8950,9 +8950,9 @@
+     AC_MSG_RESULT([yes])
+     ENABLE_HARFBUZZ="TRUE"
+     if $PKG_CONFIG --atleast-version 0.9.18 harfbuzz; then
+-        libo_CHECK_SYSTEM_MODULE([harfbuzz],[HARFBUZZ],[harfbuzz-icu >= 0.9.18],["-I${WORKDIR}/UnpackedTarball/harfbuzz/src"],["-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz -lharfbuzz-icu"])
++        libo_CHECK_SYSTEM_MODULE([harfbuzz],[HARFBUZZ],[harfbuzz-icu >= 0.9.18],["-I${WORKDIR}/UnpackedTarball/harfbuzz/src"],["-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz"])
+     else
+-        libo_CHECK_SYSTEM_MODULE([harfbuzz],[HARFBUZZ],[harfbuzz >= 0.9.10],[-I${WORKDIR}/UnpackedTarball/harfbuzz/src],["-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz -lharfbuzz-icu"])
++        libo_CHECK_SYSTEM_MODULE([harfbuzz],[HARFBUZZ],[harfbuzz >= 0.9.10],[-I${WORKDIR}/UnpackedTarball/harfbuzz/src],["-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz"])
+     fi
+ else
+     AC_MSG_RESULT([no])
+--- libreoffice-4.4.0.3/configure.orig	2015-01-22 21:11:24.000000000 +0100
++++ libreoffice-4.4.0.3/configure	2015-02-02 21:26:39.033121136 +0100
+@@ -28657,7 +28657,7 @@
+ $as_echo "internal" >&6; }
+     SYSTEM_HARFBUZZ=
+     HARFBUZZ_CFLAGS="-I${WORKDIR}/UnpackedTarball/harfbuzz/src"
+-    HARFBUZZ_LIBS="-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz -lharfbuzz-icu"
++    HARFBUZZ_LIBS="-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz"
+     BUILD_TYPE="$BUILD_TYPE HARFBUZZ"
+ fi
+ 
+@@ -28777,7 +28777,7 @@
+ $as_echo "internal" >&6; }
+     SYSTEM_HARFBUZZ=
+     HARFBUZZ_CFLAGS=-I${WORKDIR}/UnpackedTarball/harfbuzz/src
+-    HARFBUZZ_LIBS="-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz -lharfbuzz-icu"
++    HARFBUZZ_LIBS="-L${WORKDIR}/UnpackedTarball/harfbuzz/src/.libs -lharfbuzz"
+     BUILD_TYPE="$BUILD_TYPE HARFBUZZ"
+ fi
+ 

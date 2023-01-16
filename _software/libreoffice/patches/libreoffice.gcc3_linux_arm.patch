@@ -1,0 +1,41 @@
+From 4e679ee2501a0babcdce498732d68428d46481e3 Mon Sep 17 00:00:00 2001
+From: Jani Monoses <jani@ubuntu.com>
+Date: Fri, 03 Feb 2012 20:11:08 +0000
+Subject: Simplify code and use proper register names for linux armhf
+
+---
+diff --git a/bridges/source/cpp_uno/gcc3_linux_arm/uno2cpp.cxx b/bridges/source/cpp_uno/gcc3_linux_arm/uno2cpp.cxx
+index 9502b87..ac8ca23 100644
+--- a/bridges/source/cpp_uno/gcc3_linux_arm/uno2cpp.cxx
++++ b/bridges/source/cpp_uno/gcc3_linux_arm/uno2cpp.cxx
+@@ -152,11 +152,6 @@ namespace arm
+ 
+ void MapReturn(sal_uInt32 r0, sal_uInt32 r1, typelib_TypeDescriptionReference * pReturnType, sal_uInt32* pRegisterReturn)
+ {
+-#if !defined(__ARM_EABI__) && !defined(__SOFTFP__)
+-    register float fret asm("f0");
+-    register double dret asm("f0");
+-#endif
+-
+     switch( pReturnType->eTypeClass )
+     {
+         case typelib_TypeClass_HYPER:
+@@ -176,6 +171,7 @@ void MapReturn(sal_uInt32 r0, sal_uInt32 r1, typelib_TypeDescriptionReference *
+ #if !defined(__ARM_PCS_VFP) && (defined(__ARM_EABI__) || defined(__SOFTFP__))
+             pRegisterReturn[0] = r0;
+ #else
++            register float fret asm("s0");
+             *(float*)pRegisterReturn = fret;
+ #endif
+         break;
+@@ -184,6 +180,7 @@ void MapReturn(sal_uInt32 r0, sal_uInt32 r1, typelib_TypeDescriptionReference *
+             pRegisterReturn[1] = r1;
+             pRegisterReturn[0] = r0;
+ #else
++            register double dret asm("d0");
+             *(double*)pRegisterReturn = dret;
+ #endif
+             break;
+--
+cgit v0.9.0.2-2-gbebe
+

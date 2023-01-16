@@ -1,0 +1,15 @@
+# Install dictionary extensions for spellchecking
+if [ -x "usr/lib@LIBDIRSUFFIX@/@PRGNAM@/program/unopkg" ]; then
+  UNOPKGTMP=$(mktemp -d unopkg.XXXXXX) || UNOPKGTMP=/tmp/unopkg.$$
+  if [ -f "usr/lib@LIBDIRSUFFIX@/@PRGNAM@/share/extensions/install/dict-@LANG@.oxt" ]; then
+    echo "Installing shared version of 'dict-@LANG@.oxt' ..."
+    chroot . /usr/lib@LIBDIRSUFFIX@/@PRGNAM@/program/unopkg remove --shared \
+      dict-@LANG@.oxt 1>/dev/null 2>/dev/null
+    chroot . /usr/lib@LIBDIRSUFFIX@/@PRGNAM@/program/unopkg add \
+      --suppress-license --shared \
+      usr/lib@LIBDIRSUFFIX@/@PRGNAM@/share/extensions/install/dict-@LANG@.oxt \
+      "-env:UserInstallation=file:///$UNOPKGTMP" 1>/dev/null 2>/dev/null
+  fi
+  rm -rf $UNOPKGTMP
+fi
+

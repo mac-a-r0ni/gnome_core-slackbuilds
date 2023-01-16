@@ -1,0 +1,23 @@
+From 85211f1ef30b07927d768348ce28ac34ade62f03 Mon Sep 17 00:00:00 2001
+From: David Tardon <dtardon@redhat.com>
+Date: Wed, 02 May 2012 12:26:11 +0000
+Subject: fdo#49365 correctly map monitor index back to screen
+
+Change-Id: I396b34119a2686011640d5f15de616fe2a166237
+---
+diff --git a/vcl/unx/gtk/app/gtksys.cxx b/vcl/unx/gtk/app/gtksys.cxx
+index 3927dbf..538107f 100644
+--- a/vcl/unx/gtk/app/gtksys.cxx
++++ b/vcl/unx/gtk/app/gtksys.cxx
+@@ -92,7 +92,7 @@ GtkSalSystem::getScreenMonitorFromIdx (GdkDisplay *pDisplay, int nIdx, gint &nMo
+         pScreen = gdk_display_get_screen (pDisplay, i);
+         if (!pScreen)
+             break;
+-        if (nIdx > gdk_screen_get_n_monitors (pScreen))
++        if (nIdx >= gdk_screen_get_n_monitors (pScreen))
+             nIdx -= gdk_screen_get_n_monitors (pScreen);
+         else
+             break;
+--
+cgit v0.9.0.2-2-gbebe
+

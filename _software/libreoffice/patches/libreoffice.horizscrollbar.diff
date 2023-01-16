@@ -1,0 +1,59 @@
+Updated version of the following OpenSuse patch:
+
+Author: Luboš Luňák <l.lunak@suse.cz>
+Date:   Thu Oct 20 19:05:13 2011 +0200
+
+    fix horizontal scrollbars with KDE oxygen style (bnc#722918)
+    
+    Apparently there are two style flags for detecting the widget
+    is horizontal.
+
+--- vcl/unx/kde4/KDESalGraphics.cxx.orig	2011-05-20 18:06:22.000000000 +0200
++++ vcl/unx/kde4/KDESalGraphics.cxx	2011-11-24 22:28:12.471919042 +0100
+@@ -493,10 +493,9 @@
+             if (sbVal->mnVisibleSize < sbVal->mnMax)
+                 option.state = QStyle::State_MouseOver;
+             
+-            //horizontal or vertical
+-            if (part == PART_DRAW_BACKGROUND_VERT)
+-                option.orientation = Qt::Vertical;
+-            else
++            bool horizontal = ( part == PART_DRAW_BACKGROUND_HORZ ); //horizontal or vertical
++            option.orientation = horizontal ? Qt::Horizontal : Qt::Vertical;
++            if( horizontal )
+                 option.state |= QStyle::State_Horizontal;
+             
+             //setup parameters from the OO values
+@@ -592,7 +591,10 @@
+         option.maximum     = slVal->mnMax;
+         option.minimum     = slVal->mnMin;
+         option.sliderPosition = option.sliderValue = slVal->mnCur;
+-        option.orientation = (part == PART_TRACK_HORZ_AREA) ? Qt::Horizontal : Qt::Vertical;
++        bool horizontal = ( part == PART_TRACK_HORZ_AREA ); //horizontal or vertical
++        option.orientation = horizontal ? Qt::Horizontal : Qt::Vertical;
++        if( horizontal )
++            option.state |= QStyle::State_Horizontal;
+         
+         draw( QStyle::CC_Slider, &option, m_image, vclStateValue2StateFlag(nControlState, value) );
+     }
+@@ -903,7 +905,10 @@
+                 QStyleOptionSlider option;
+                 OSL_ASSERT( val.getType() == CTRL_SCROLLBAR );
+                 const ScrollbarValue* sbVal = static_cast<const ScrollbarValue *>(&val);
+-                option.orientation = ( part == PART_TRACK_HORZ_AREA ) ? Qt::Horizontal : Qt::Vertical;
++                bool horizontal = ( part == PART_TRACK_HORZ_AREA ); //horizontal or vertical
++                option.orientation = horizontal ? Qt::Horizontal : Qt::Vertical;
++                if( horizontal )
++                    option.state |= QStyle::State_Horizontal;
+                 option.minimum = sbVal->mnMin;
+                 option.maximum = sbVal->mnMax;
+                 option.sliderValue = sbVal->mnCur;
+@@ -971,6 +976,8 @@
+         rect.moveTo( 0, 0 );
+         QStyleOptionSlider options;
+         options.orientation = bHorizontal ? Qt::Horizontal : Qt::Vertical;
++        if( bHorizontal )
++            options.state |= QStyle::State_Horizontal;
+         options.rect = rect;
+         // some random sensible values, since we call this code only for scrollbar buttons,
+         // the slider position does not exactly matter
