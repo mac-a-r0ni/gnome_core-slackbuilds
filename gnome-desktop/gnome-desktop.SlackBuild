@@ -22,7 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Updated to version 40.2 by Igor Alexandrov <igor.alexandrov@outlook.com>
+wget -c https://download.gnome.org/sources/gnome-desktop/43/gnome-desktop-43.1.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
