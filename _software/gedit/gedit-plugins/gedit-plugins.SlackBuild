@@ -27,7 +27,7 @@
 
 # Special thanks to Brandon Pribula, who kindly handed over maintenance to me.
 
-wget -c https://download.gnome.org/sources/gedit-plugins/44/gedit-plugins-44.0.tar.xz
+wget -c https://download.gnome.org/sources/gedit-plugins/44/gedit-plugins-44.1.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
