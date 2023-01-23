@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
      |-----handy-ruler------------------------------------------------------|
-sushi: sushi
+sushi: sushi (quick previewer for nautilus)
 sushi:
+sushi: Sushi is a Gtk+ and Javascript-based quick previewer for Nautilus,
+sushi: the GNOME desktop file manager. Sushi is a DBus-activated service. It
+sushi: is capable of previewing documents, PDFs, sound and video files
+sushi: (using GStreamer), some text files, and possibly others in the future.
 sushi:
-sushi:
-sushi:
-sushi:
-sushi:
-sushi:
+sushi: Homepage: http://git.gnome.org/browse/sushi
 sushi:
 sushi:
 sushi:
