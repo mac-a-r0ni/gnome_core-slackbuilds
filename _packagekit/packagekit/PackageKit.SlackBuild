@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Slackware build script for gnome-packagekit
-
+# Slackware build script for PackageKit
+# Initial patches were adapted from dropline
+# along with my own choices about what I expect from
+# PackageKit support. *Testing*
+#
 # Copyright 2022 Jay Lanagan (j@lngn.net), Detroit, MI, USA
 # All rights reserved.
 #
@@ -22,11 +25,11 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/gnome-packagekit/43/gnome-packagekit-43.0.tar.xz
+wget -c https://www.freedesktop.org/software/PackageKit/releases/PackageKit-1.2.6.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=gnome-packagekit
+PRGNAM=PackageKit
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
@@ -79,6 +82,11 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
+
+# patch support for -current and libelogind
+patch -Np1 -i $CWD/PackageKit-Slackware-current-config-fix.patch || exit 1
+patch -Np1 -i $CWD/PackageKit-libelogind-name-fix.patch || exit 1
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -98,8 +106,11 @@ cd build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Dtests=false \
-    -Dsystemd=false
+    -Dpackaging_backend=slack \
+    -Delogind=true \
+    -Dsystemd=false \
+    -Doffline_update=false \
+    -Ddaemon_tests=false
 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
@@ -108,11 +119,29 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $(find $PKG/usr/man -type l); do ln -s $(readlink $i).gz $i.gz; rm $i; done
+# move mis-placed man pages
+mkdir -p $PKG/usr/man/man1
+mv $PKG/usr/share/man/man1/* $PKG/usr/man/man1
+rmdir $PKG/usr/share/man/man1
+rmdir $PKG/usr/share/man
+
+# Compress and link manpages, if any:
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+    for manpagedir in $(find . -type d -name "man*") ; do
+      ( cd $manpagedir
+        for eachpage in $( find . -type l -maxdepth 1) ; do
+          ln -s $( readlink $eachpage ).gz $eachpage.gz
+          rm $eachpage
+        done
+        gzip -9 *.*
+      )
+    done
+  )
+fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COMMITMENT COPYING MAINTAINERS README.md RELEASE \
+cp -a AUTHORS CODE_OF_CONDUCT.md COMMITMENT COPYING HACKING MAINTAINERS NEWS README RELEASE \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

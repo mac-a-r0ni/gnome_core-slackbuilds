@@ -1,0 +1,13 @@
+Binary files PackageKit-1.2.5.orig/backends/slack/.Slackware.conf.in.un~ and PackageKit-1.2.5/backends/slack/.Slackware.conf.in.un~ differ
+diff -uNr PackageKit-1.2.5.orig/backends/slack/Slackware.conf.in PackageKit-1.2.5/backends/slack/Slackware.conf.in
+--- PackageKit-1.2.5.orig/backends/slack/Slackware.conf.in	2022-07-30 23:23:34.591206164 -0300
++++ PackageKit-1.2.5/backends/slack/Slackware.conf.in	2022-07-30 23:34:23.884062804 -0300
+@@ -1,7 +1,7 @@
+ # It is a sample configuration.
+ 
+ [slackware]
+-Mirror=http://mirrors.slackware.com/slackware/@pkgmain@-14.2/
++Mirror=http://mirrors.slackware.com/slackware/@pkgmain@-15.0/
+ Priority=patches;@pkgmain@;extra;pasture;testing
+ #Blacklist=
+ 

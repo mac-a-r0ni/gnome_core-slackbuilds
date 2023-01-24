@@ -1,0 +1,13 @@
+Binary files PackageKit-1.2.5.orig/.meson.build.un~ and PackageKit-1.2.5/.meson.build.un~ differ
+diff -uNr PackageKit-1.2.5.orig/meson.build PackageKit-1.2.5/meson.build
+--- PackageKit-1.2.5.orig/meson.build	2022-07-30 23:23:34.585206332 -0300
++++ PackageKit-1.2.5/meson.build	2022-07-30 23:24:17.192016785 -0300
+@@ -45,7 +45,7 @@
+ 
+ elogind = []
+ if get_option('elogind')
+-  elogind = dependency('elogind', version: '>=229.4')
++  elogind = dependency('libelogind', version: '>=229.4')
+   add_project_arguments ('-DHAVE_SYSTEMD_SD_LOGIN_H=1', language: 'c')
+ endif
+ 
