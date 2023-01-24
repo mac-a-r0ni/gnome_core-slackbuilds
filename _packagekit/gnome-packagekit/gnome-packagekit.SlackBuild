@@ -108,6 +108,12 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+# move mis-placed man pages
+mkdir -p $PKG/usr/man/man1
+mv $PKG/usr/share/man/man1/* $PKG/usr/man/man1
+rmdir $PKG/usr/share/man/man1
+rmdir $PKG/usr/share/man
+
 # Compress and link manpages, if any:
 if [ -d $PKG/usr/man ]; then
   ( cd $PKG/usr/man
