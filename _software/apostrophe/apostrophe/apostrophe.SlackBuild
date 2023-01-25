@@ -27,7 +27,7 @@ wget -c https://gitlab.gnome.org/World/apostrophe/-/archive/v2.6.3/apostrophe-v2
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=apostrophe
-VERSION=${VERSION:-$(echo $PRGNAM-v*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+VERSION=${VERSION:-2.6.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
