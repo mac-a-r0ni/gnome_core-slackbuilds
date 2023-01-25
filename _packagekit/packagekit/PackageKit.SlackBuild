@@ -109,7 +109,7 @@ cd build
     -Dpackaging_backend=slack \
     -Delogind=true \
     -Dsystemd=false \
-    -Doffline_update=false \
+    -Doffline_update=true \
     -Ddaemon_tests=false
 
 "${NINJA:=ninja}"
