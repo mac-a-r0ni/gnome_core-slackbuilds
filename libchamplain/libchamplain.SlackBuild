@@ -22,6 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/libchamplain/0.12/libchamplain-0.12.21.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libchamplain
@@ -97,8 +99,6 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     --wrap-mode=nodownload \
-    -Dwidgetry=true \
-    -Dgtk_doc=false \
     -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
