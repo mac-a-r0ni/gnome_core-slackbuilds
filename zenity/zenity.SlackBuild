@@ -25,6 +25,8 @@
 
 # Originally written by Larry Hajali <larryhaja[at]gmail[dot]com>
 
+wget -c https://download.gnome.org/sources/zenity/3.44/zenity-3.44.0.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=zenity
