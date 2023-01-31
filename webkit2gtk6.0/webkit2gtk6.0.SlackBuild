@@ -22,7 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://webkitgtk.org/releases/webkitgtk-2.39.5.tar.xz
+wget -c https://webkitgtk.org/releases/webkitgtk-2.39.7.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
