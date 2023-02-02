@@ -97,6 +97,7 @@ CFLAGS="$SLKCFLAGS" \
     -Dvapi=true \
     -Dcompose=true \
     -Dapidocs=false \
+    -Dsystemd=false \
     -Dinstall-docs=false
 
 "${NINJA:=ninja}"
