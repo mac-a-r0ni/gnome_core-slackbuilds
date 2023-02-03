@@ -91,11 +91,11 @@ find -L . \
 # webkitgtk is an optional dependency (NOT included in slackware) which may be
 # enabled upon request.
 
-mkdir build
-cd build
-  CFLAGS="$SLKCFLAGS" \
-  CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+mkdir meson-build
+cd meson-build
+ CFLAGS="$SLKCFLAGS" \
+ CXXFLAGS="$SLKCFLAGS" \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
