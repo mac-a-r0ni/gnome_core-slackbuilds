@@ -60,8 +60,10 @@
 #
 # -----------------------------------------------------------------------------
 
+wget -c https://github.com/jackaudio/jack2/archive/refs/tags/v1.9.22.tar.gz
+
 PRGNAM=jack2
-VERSION=${VERSION:-1.9.20}
+VERSION=${VERSION:-1.9.22}
 BUILD=${BUILD:-1}
 NUMJOBS=${NUMJOBS:-" -j$(nproc) "}
 TAG=${TAG:-"_gcs"}
