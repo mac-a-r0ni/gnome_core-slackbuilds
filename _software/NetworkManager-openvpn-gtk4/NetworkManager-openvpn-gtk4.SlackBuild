@@ -80,8 +80,8 @@ mkdir -p $TMP $PKG
 
 cd $TMP
 rm -rf $SRCNAM-$VERSION
-tar xvf $CWD/$SRCNAM-$VERSION.tar.?z || exit 1
-cd $SRCNAM-$VERSION || exit 1
+tar xvf $CWD/$SRCNAM-$VERSION.tar.?z
+cd $SRCNAM-$VERSION
 # Run as nobody:nogroup:
 zcat $CWD/openvpn.nobody.nogroup.diff.gz | patch -p1 --verbose || exit 1
 cat $CWD/a790374f4c2e9e1657cbb8470357d72d4bd87916.patch | patch -p1 --verbose || exit 1
