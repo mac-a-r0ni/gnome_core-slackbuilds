@@ -96,7 +96,7 @@ meson setup \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --buildtype=release \
-  -Dgssapi=disabled \
+  -Dgssapi=enabled \
   -Dvapi=enabled \
   .. || exit 1
   "${NINJA:=ninja}" $NUMJOBS || exit 1
