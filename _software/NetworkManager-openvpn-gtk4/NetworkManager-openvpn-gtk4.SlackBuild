@@ -111,7 +111,7 @@ make install DESTDIR=$PKG || exit 1
 rm -fr $PKG/usr/share
 rm -fr $PKG/usr/lib
 rm -fr $PKG/usr/libexec
-rm -fr $PKG/usr/lib64/NetworkManager/libnm-vpn-plugin-openvpn-editor.la
+rm -fr $PKG/usr/lib64/NetworkManager/libnm-gtk4-vpn-plugin-openvpn-editor.la
 rm -fr $PKG/usr/lib64/NetworkManager/libnm-vpn-plugin-openvpn*
 
 mkdir -p $PKG/install
