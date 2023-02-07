@@ -98,7 +98,7 @@ meson setup .. \
  -Dprofiling=false \
  -Dtests=none
 
-ninja $JOBS || ninja
+ninja
 DESTDIR=$PKG ninja install
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
