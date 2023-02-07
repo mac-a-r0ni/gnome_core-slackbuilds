@@ -72,7 +72,7 @@ else
 fi
 
 TMP=${TMP:-/tmp/gcs}
-PKG=$TMP/package-${PKGNAM}
+PKG=$TMP/package-$PKGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 rm -rf $PKG
@@ -82,6 +82,9 @@ cd $TMP
 rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.?z || exit 1
 cd $SRCNAM-$VERSION || exit 1
+# Run as nobody:nogroup:
+zcat $CWD/openvpn.nobody.nogroup.diff.gz | patch -p1 --verbose || exit 1
+cat $CWD/a790374f4c2e9e1657cbb8470357d72d4bd87916.patch | patch -p1 --verbose || exit 1
 chown -R root:root .
 find . \
   \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -89,9 +92,6 @@ find . \
   \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
   -exec chmod 644 {} \+
 
-# Run as nobody:nogroup:
-zcat $CWD/openvpn.nobody.nogroup.diff.gz | patch -p1 --verbose || exit 1
-cat $CWD/a790374f4c2e9e1657cbb8470357d72d4bd87916.patch | patch -p1 --verbose || exit 1
 # Configure, build, and install:
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
