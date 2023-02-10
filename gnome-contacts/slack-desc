@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
               |-----handy-ruler------------------------------------------------------|
-gnome-contacts: gnome-contacts
+gnome-contacts: gnome-contacts (contact manager for GNOME)
 gnome-contacts:
-gnome-contacts: A contacts manager for GNOME.
-gnome-contacts:
+gnome-contacts: GNOME Contacts is a standalone application to view and manage contacts
+gnome-contacts: provided by all available contacts sources (Evolution, Empathy, etc).
 gnome-contacts:
 gnome-contacts: Homepage: https://gitlab.gnome.org/GNOME/gnome-contacts
 gnome-contacts:
