@@ -24,7 +24,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/nautilus/44/nautilus-44.alpha.tar.xz
+wget -c https://download.gnome.org/sources/nautilus/44/nautilus-44.beta.tar.xz
 
 PRGNAM=nautilus
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -43,7 +43,6 @@ CWD=$(pwd)
 TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
-JOBS=${JOBS:-" -j$(expr $(nproc) +1) "}
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -98,7 +97,7 @@ meson setup .. \
  -Dprofiling=false \
  -Dtests=none
 
-ninja $JOBS || ninja
+ninja
 DESTDIR=$PKG ninja install
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
