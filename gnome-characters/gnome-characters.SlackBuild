@@ -23,7 +23,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/gnome-characters/43/gnome-characters-43.1.tar.xz
+wget -c https://download.gnome.org/sources/gnome-characters/44/gnome-characters-44.beta.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -83,9 +83,9 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
-cd build
-  meson .. \
+mkdir meson-build
+cd meson-build
+  meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
