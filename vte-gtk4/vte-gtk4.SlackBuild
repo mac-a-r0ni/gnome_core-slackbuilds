@@ -20,14 +20,14 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/vte/0.70/vte-0.70.2.tar.xz
+wget -c https://download.gnome.org/sources/vte/0.70/vte-0.70.3.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 SRCNAM=vte
 PKGNAM=vte-gtk4
 VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
