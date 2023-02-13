@@ -22,7 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/gnome-control-center/42/gnome-control-center-42.5.tar.xz
+wget -c https://download.gnome.org/sources/gnome-control-center/42/gnome-control-center-42.9.tar.xz
 
 PRGNAM=gnome-control-center
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -78,12 +78,12 @@ chown -R root:root .
 #sed -i "s#'static=true',#'static=false','pkglibdir=/usr/lib${LIBDIRSUFFIX}',#" meson.build || exit 1
 #sed -i 's/alsa=false/alsa=true/' meson.build || exit 1
 
-mkdir -p build
-cd build
+mkdir -p meson-build
+cd meson-build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
