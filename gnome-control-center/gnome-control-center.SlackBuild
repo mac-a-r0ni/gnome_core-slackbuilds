@@ -41,7 +41,6 @@ CWD=$(pwd)
 TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/pkg-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
-JOBS=${JOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -78,8 +77,8 @@ chown -R root:root .
 #sed -i "s#'static=true',#'static=false','pkglibdir=/usr/lib${LIBDIRSUFFIX}',#" meson.build || exit 1
 #sed -i 's/alsa=false/alsa=true/' meson.build || exit 1
 
-mkdir -p build
-cd build
+mkdir -p meson-build
+cd meson-build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -99,7 +98,7 @@ meson setup .. \
  -Dtests=false \
  -Dmalcontent=true
 
-ninja $JOBS || ninja
+ninja
 DESTDIR=$PKG ninja install
 
 install -Dm 644 $CWD/slackware_logo_med.png -t $PKG/usr/share/pixmaps/
