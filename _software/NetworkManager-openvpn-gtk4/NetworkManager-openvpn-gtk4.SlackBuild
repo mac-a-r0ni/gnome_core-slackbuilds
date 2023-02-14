@@ -27,7 +27,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 PKGNAM=NetworkManager-openvpn-gtk4
 SRCNAM=NetworkManager-openvpn
 VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -106,6 +106,9 @@ CXXFLAGS="$SLKCFLAGS" \
 make $NUMJOBS || make || exit 1
 make install DESTDIR=$PKG || exit 1
 
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
 # Remove all extra bits included in the base Networkmanager-openvpn package
 # This package is _ONLY_ for the gtk4 lib
 rm -fr $PKG/usr/share
@@ -113,6 +116,9 @@ rm -fr $PKG/usr/lib
 rm -fr $PKG/usr/libexec
 rm -fr $PKG/usr/lib64/NetworkManager/libnm-gtk4-vpn-plugin-openvpn-editor.la
 rm -fr $PKG/usr/lib64/NetworkManager/libnm-vpn-plugin-openvpn*
+
+mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
+cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
