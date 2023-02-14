@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+               |-----handy-ruler------------------------------------------------------|
+python-anyascii: python-anyascii (Unicode to ASCII transliteration)
+python-anyascii:
+python-anyascii: Converts Unicode characters to their best ASCII representation.
+python-anyascii:
+python-anyascii: Homepage: https://github.com/anyascii/anyascii
+python-anyascii:
+python-anyascii:
+python-anyascii:
+python-anyascii:
+python-anyascii:
+python-anyascii:
