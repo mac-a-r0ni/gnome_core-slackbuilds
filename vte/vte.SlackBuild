@@ -20,6 +20,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/vte/0.71/vte-0.71.92.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=vte
@@ -102,7 +104,6 @@ meson setup \
   --localstatedir=/var \
   --buildtype=release \
   -D_systemd=false \
-  -Dgtk4=true \
   .. || exit 1
   "${NINJA:=ninja}" $NUMJOBS || exit 1
   DESTDIR=$PKG $NINJA install || exit 1
