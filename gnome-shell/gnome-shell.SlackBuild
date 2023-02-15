@@ -23,7 +23,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/gnome-shell/42/gnome-shell-42.7.tar.xz
+wget -c https://download.gnome.org/sources/gnome-shell/42/gnome-shell-42.8.tar.xz
 
 PRGNAM=gnome-shell
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -75,12 +75,12 @@ chown -R root:root .
 zcat $CWD/42.0-optional-bluetooth.patch.gz | patch -p1 || exit
 zcat $CWD/40.0-defaults.patch.gz | patch -p1 || exit
 
-mkdir -p build
-cd build
+mkdir -p meson-build
+cd meson-build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
