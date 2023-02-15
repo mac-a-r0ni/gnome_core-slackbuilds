@@ -23,6 +23,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/gnome-calendar/44/gnome-calendar-44.beta.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-calendar
@@ -81,9 +83,9 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
-cd build
-  meson .. \
+mkdir meson-build
+cd meson-build
+  meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
@@ -94,8 +96,8 @@ cd build
  --localstatedir=/var \
  -Ddefault_library=shared \
  -Dtracing=false \
- -Dprofile=default 
-  
+ -Dprofile=default
+
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..

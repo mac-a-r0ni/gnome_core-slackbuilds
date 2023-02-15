@@ -28,6 +28,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/gnome-settings-daemon/44/gnome-settings-daemon-44.beta.tar.xz
+
 PRGNAM=gnome-settings-daemon
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
@@ -98,12 +100,12 @@ sed -e 's/libsystemd/libelogind/' \
 sed -e 's/(backlight->logind_proxy)/(0)/' \
     -i plugins/power/gsd-backlight.c
 
-mkdir -p build
-cd build
+mkdir -p meson-build
+cd meson-build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
  --prefix=/usr \
  --buildtype=release \
  --libdir=lib${LIBDIRSUFFIX} \
