@@ -12,8 +12,8 @@ gnome-console: Console is supposed to be a simple terminal emulator for the
 gnome-console: average user to carry out simple cli tasks and aims to be a 
 gnome-console: ‘core’ app for GNOME/Phosh.
 gnome-console:
-gnome-console:
-gnome-console:
-gnome-console:
 gnome-console: https://gitlab.gnome.org/GNOME/console
+gnome-console:
+gnome-console:
+gnome-console:
 gnome-console:

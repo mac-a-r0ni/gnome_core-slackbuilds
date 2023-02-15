@@ -23,8 +23,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-browser-connector
-VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-VER=${VER:-42.1}
+VERSION=${VERSION:-42.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 ARCH=${ARCH:-noarch}
@@ -36,8 +35,6 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD.txz"
   exit 0
 fi
-
-NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
@@ -86,20 +83,21 @@ cd meson-build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc
-  "${NINJA:=ninja}" $NUMJOBS || exit 1
+  "${NINJA:=ninja}" || exit 1
   DESTDIR=$PKG $NINJA install || exit 1
 cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | \
   grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VER
-cp -a LICENSE NEWS README.md $PKG/usr/doc/$PRGNAM-$VER
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a LICENSE NEWS README.md $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # If there's a ChangeLog, installing at least part of the recent history
 # is useful, but don't let it get totally out of control:
 if [ -r ChangeLog ]; then
-  DOCSDIR=$(echo $PKG/usr/doc/${PRGNAM}-$VER)
+  DOCSDIR=$(echo $PKG/usr/doc/${PRGNAM}-$VERSION)
   cat ChangeLog | head -n 1000 > $DOCSDIR/ChangeLog
   touch -r ChangeLog $DOCSDIR/ChangeLog
 fi
@@ -109,4 +107,4 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VER-$ARCH-$BUILD$TAG.txz
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.txz
