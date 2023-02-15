@@ -22,6 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/gsettings-desktop-schemas/44/gsettings-desktop-schemas-44.beta.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=gsettings-desktop-schemas
@@ -83,8 +85,8 @@ zcat $CWD/gsettings-desktop-schemas.font.defaults.diff.gz | patch -p1 --verbose 
 
 export CFLAGS="$SLKCFLAGS"
 export CXXFLAGS="$SLKCFLAGS"
-mkdir build
-cd build
+mkdir meson-build
+cd meson-build
 meson setup \
   --prefix=/usr \
   --libdir=lib${LIBDIRSUFFIX} \
