@@ -83,8 +83,8 @@ find -L . \
 
 mkdir -p meson-build
 cd meson-build
-CFLAGS="$SLKCFLAGS" \
-  CXXFLAGS="$SLKCFLAGS" \
+ CFLAGS="$SLKCFLAGS" \
+ CXXFLAGS="$SLKCFLAGS" \
   meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
@@ -93,7 +93,7 @@ CFLAGS="$SLKCFLAGS" \
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Ddefault-library=shared
+    --default-library=shared
 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
