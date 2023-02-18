@@ -93,7 +93,7 @@ CFLAGS="$SLKCFLAGS" \
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Ddefault_library=shared
+    -Ddefault-library=shared
 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
