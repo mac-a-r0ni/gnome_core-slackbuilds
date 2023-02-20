@@ -10,12 +10,13 @@
 # - i486 => i586.
 # 20220611 jbl: Updated to latest version
 
+wget -c https://gitlab.gnome.org/GNOME/libdmapsharing/-/archive/LIBDMAPSHARING_3_9_11/libdmapsharing-LIBDMAPSHARING_3_9_11.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libdmapsharing
-SRCVER=${VERSION:-LIBDMAPSHARING_3_9_10}
-VERSION=${VERSION:-3.9.10}
+SRCVER=${VERSION:-LIBDMAPSHARING_3_9_11}
+VERSION=${VERSION:-3.9.11}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -90,7 +91,7 @@ make install-strip DESTDIR=$PKG
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS COPYING ChangeLog INSTALL README* TODO \
+  AUTHORS COPYING ChangeLog README* TODO \
   $PKG/usr/doc/$PRGNAM-$VERSION
 ln -s ../../share/gtk-doc/html/$PRGNAM $PKG/usr/doc/$PRGNAM-$VERSION/html
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

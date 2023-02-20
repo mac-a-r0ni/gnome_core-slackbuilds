@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-gnome-music: gnome-music
+gnome-music: gnome-music (simple GNOME music applcation)
 gnome-music:
-gnome-music: A music player for GNOME.
-gnome-music:
+gnome-music: Music is the new GNOME music playing application aiming at being a
+gnome-music: simple and elegant replacement for using Files to show the Music
+gnome-music: directory. Objectives includes listening to local and online/cloud
+gnome-music: collections, listen to music on attached devices, listen to music
+gnome-music: shared by friends, listen to audiobooks, a player for DLNA media
+gnome-music: servers, share music, upload music and select favorites. 
 gnome-music:
 gnome-music: Homepage: https://gitlab.gnome.org/GNOME/gnome-music
-gnome-music:
-gnome-music:
-gnome-music:
-gnome-music:
 gnome-music:

@@ -22,13 +22,13 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://webkitgtk.org/releases/webkitgtk-2.38.4.tar.xz
+wget -c https://webkitgtk.org/releases/webkitgtk-2.38.5.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=webkit2gtk4.1
 SRCNAM=webkitgtk
-VERSION=${VERSION:-2.38.4}
+VERSION=${VERSION:-2.38.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -82,7 +82,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-#patch -p1 < $CWD/unhide-deprecated-api.patch
+patch -p1 < $CWD/unhide-deprecated-api.patch
 #patch -p1 < $CWD/newruby.patch
 
 mkdir -p build
