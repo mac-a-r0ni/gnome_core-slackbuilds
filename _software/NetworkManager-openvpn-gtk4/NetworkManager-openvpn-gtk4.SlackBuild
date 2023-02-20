@@ -118,7 +118,7 @@ rm -fr $PKG/usr/lib64/NetworkManager/libnm-gtk4-vpn-plugin-openvpn-editor.la
 rm -fr $PKG/usr/lib64/NetworkManager/libnm-vpn-plugin-openvpn*
 
 mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
-cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAME-$VERSION/$PKGNAM.SlackBuild
+cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
