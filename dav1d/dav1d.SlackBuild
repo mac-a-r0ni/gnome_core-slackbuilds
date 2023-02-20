@@ -23,7 +23,7 @@
 #   SUCH DAMAGE.
 # ----------------------------------------------------------------------
 
-wget -c https://code.videolan.org/videolan/dav1d/-/archive/1.0.0/dav1d-1.0.0.tar.gz
+wget -c http://ftp.videolan.org/pub/videolan/dav1d/last/dav1d-1.1.0.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
