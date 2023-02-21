@@ -78,18 +78,36 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-meson build \
- --prefix=/usr \
- --libdir=/usr/lib${LIBDIRSUFFIX} \
- --sysconfdir=/etc \
- --localstatedir=/var \
- --libexecdir=/usr/libexec \
- --mandir=/usr/man \
- --buildtype=release
-meson compile -C build
-meson install -C build --destdir $PKG
+mkdir -p meson-build
+cd meson-build
+ CFLAGS="$SLKCFLAGS" \
+ CXXFLAGS="$SLKCFLAGS" \
+  meson setup .. \
+    --buildtype=release \
+    --infodir=/usr/info \
+    --libdir=/usr/lib${LIBDIRSUFFIX} \
+    --localstatedir=/var \
+    --mandir=/usr/man \
+    --prefix=/usr \
+    --sysconfdir=/etc
+
+"${NINJA:=ninja}"
+  DESTDIR=$PKG $NINJA install
+cd ..
+
+
+#CFLAGS="$SLKCFLAGS" \
+#CXXFLAGS="$SLKCFLAGS" \
+#meson build \
+# --prefix=/usr \
+# --libdir=/usr/lib${LIBDIRSUFFIX} \
+# --sysconfdir=/etc \
+# --localstatedir=/var \
+# --libexecdir=/usr/libexec \
+# --mandir=/usr/man \
+# --buildtype=release
+#meson compile -C build
+#meson install -C build --destdir $PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
