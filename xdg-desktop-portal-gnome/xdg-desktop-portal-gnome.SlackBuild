@@ -94,6 +94,7 @@ cd meson-build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    --datadir=/usr/share \
     -Ddbus_service_dir="/usr/share/dbus-1/system.d" \
     -Dsystemduserunitdir="/usr/lib/systemd/user" \
     -Dstrip=true
