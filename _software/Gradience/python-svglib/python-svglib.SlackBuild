@@ -87,6 +87,10 @@ python3 setup.py install --root=$PKG
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+mkdir -p $PKG/usr/man/man1
+mv $PKG/usr/share/man/man1/*.1 $PKG/usr/man/man1
+rmdir -p $PKG/usr/share/man/man1
+
 # Compress and link manpages, if any:
 if [ -d $PKG/usr/man ]; then
   ( cd $PKG/usr/man
