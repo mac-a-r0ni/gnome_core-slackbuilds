@@ -24,7 +24,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-wget -c https://download.gnome.org/core/43/43.2/sources/epiphany-43.0.tar.xz
+wget -c https://download.gnome.org/sources/epiphany/43/epiphany-43.1.tar.xz
 
 PRGNAM=epiphany
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -91,9 +91,6 @@ meson build \
 meson compile -C build
 meson install -C build --destdir $PKG
 
-#install -Dm 755 $CWD/epiphany.csh -t $PKG/etc/profile.d/
-#install -Dm 755 $CWD/epiphany.sh -t $PKG/etc/profile.d/
-
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
@@ -118,8 +115,8 @@ cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
 
 mkdir -p $PKG/install
-cp $CWD/slack-desc $PKG/install
-cp $CWD/doinst.sh $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-txz}
