@@ -98,6 +98,7 @@ mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cp -a \
   *.md *.rst docs/BUILDME docs/COPYING \
   $PKG/usr/doc/$PKGNAM-$VERSION
+cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
