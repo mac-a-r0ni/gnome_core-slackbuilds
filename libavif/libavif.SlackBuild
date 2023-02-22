@@ -22,16 +22,16 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://github.com/AOMediaCodec/libavif/archive/93035c1/libavif-93035c173c934813b16751872fbe2f535aa7086b.tar.gz
+wget -c https://github.com/AOMediaCodec/libavif/archive/refs/tags/v0.11.1.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libavif
-VERSION=${VERSION:-20221216_93035c1}
+VERSION=${VERSION:-0.11.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
-GITNAM=${GITNAM:-93035c173c934813b16751872fbe2f535aa7086b}
+#GITNAM=${GITNAM:-93035c173c934813b16751872fbe2f535aa7086b}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -77,9 +77,9 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-rm -rf $PRGNAM-$GITNAM
-tar xvf $CWD/$PRGNAM-$GITNAM.tar.gz
-cd $PRGNAM-$GITNAM
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z || tar xvf $CWD/$VERSION.tar.?z
+cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -92,7 +92,44 @@ if [ "$ARCH" = "x86_64" ]; then
 
 echo "Builing for x86_64 Architecture"
 
-cmake -B build -S $TMP/$PRGNAM-$GITNAM  \
+cmake -B build -S $TMP/$PRGNAM-$VERSION  \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DBUILD_SHARED_LIBS:BOOL=ON \
+    -DAVIF_ENABLE_WERROR:BOOL=ON \
+    -DAVIF_CODEC_AOM:BOOL=ON \
+    -DAVIF_CODEC_AOM_DECODE:BOOL=ON \
+    -DAVIF_CODEC_AOM_ENCODE:BOOL=ON \
+    -DAVIF_CODEC_DAV1D:BOOL=ON \
+    -DAVIF_CODEC_LIBGAV1:BOOL=OFF \
+    -DAVIF_CODEC_RAV1E:BOOL=OFF \
+    -DAVIF_CODEC_SVT:BOOL=ON \
+    -DAVIF_BUILD_APPS:BOOL=ON \
+    -DAVIF_BUILD_TESTS:BOOL=OFF \
+    -DAVIF_ENABLE_GTEST:BOOL=OFF \
+    -DAVIF_BUILD_MAN_PAGES:BOOL=ON \
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+    -DCMAKE_INSTALL_LIBDIR:PATH=/usr/lib${LIBDIRSUFFIX} \
+    -DCMAKE_INSTALL_BINDIR:PATH=/usr/bin \
+    -DCMAKE_INSTALL_MANDIR=/usr/man \
+    -DCMAKE_BUILD_TYPE=Release
+
+make -C build
+make -C build install DESTDIR=$PKG
+
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+
+elif [ "$ARCH" = "aarch64" ]; then
+
+echo "Builing for aarch64 Architecture"
+
+cmake -B build -S $TMP/$PRGNAM-$VERSION  \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DBUILD_SHARED_LIBS:BOOL=ON \
@@ -131,7 +168,7 @@ echo "Builing for x86 Architecture"
 echo "No man pages will be built for x86 architecture, Refer README and changelog for details"
 echo "If you need Man Pages for x86 architecture you have to build pandoc from sources"
 
-cmake -B build -S $TMP/$PRGNAM-$GITNAM  \
+cmake -B build -S $TMP/$PRGNAM-$VERSION  \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DBUILD_SHARED_LIBS:BOOL=ON \
