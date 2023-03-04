@@ -6,12 +6,12 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
               |-----handy-ruler------------------------------------------------------|
-gnome-software: gnome-software
+gnome-software: gnome-software (Software Center for GNOME)
 gnome-software:
 gnome-software: Software lets you install and update applications and system
-gnome-software: extensions.
-gnome-software:
-gnome-software:
+gnome-software: extensions. This package can be used to manage Flatpaks on 
+gnome-software: Slackware, there is no support for directly managing official
+gnome-software: Slackware binaries currently.
 gnome-software:
 gnome-software:
 gnome-software:
