@@ -83,10 +83,14 @@ find -L . \
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson \
+meson setup \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
+  --mandir=/usr/man \
+  -Dtests=false \
+  -Dstemmer=true \
+  -Dgtkdoc=false \
   build
 "${NINJA:=ninja}" -C build
 DESTDIR=$PKG $NINJA -C build install
