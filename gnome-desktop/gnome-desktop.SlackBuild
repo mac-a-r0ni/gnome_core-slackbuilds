@@ -95,7 +95,9 @@ cd meson-build
     --mandir=/usr/man \
     --infodir=/usr/info \
     --buildtype=release \
-    -Dsystemd=disabled
+    -Dsystemd=disabled \
+    -Ddesktop_docs=false \
+    -Dgtk_doc=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
