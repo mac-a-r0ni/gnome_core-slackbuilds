@@ -24,7 +24,7 @@
 
 # Updated to version 40.2 by Igor Alexandrov <igor.alexandrov@outlook.com>
 
-wget -c https://download.gnome.org/sources/gnome-desktop/44/gnome-desktop-44.beta.tar.xz
+wget -c https://download.gnome.org/sources/gnome-desktop/44/gnome-desktop-44.0.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
