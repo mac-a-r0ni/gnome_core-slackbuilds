@@ -8,7 +8,7 @@
 # ---------------------------------------------------
 #
 
-wget -c https://download.gnome.org/sources/libadwaita/1.3/libadwaita-1.3.beta.tar.xz
+wget -c https://download.gnome.org/sources/libadwaita/1.3/libadwaita-1.3.1.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -71,8 +71,8 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-mkdir -p build
-cd build
+mkdir -p meson-build
+cd meson-build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
