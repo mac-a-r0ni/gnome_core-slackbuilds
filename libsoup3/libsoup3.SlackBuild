@@ -23,7 +23,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/libsoup/3.3/libsoup-3.3.1.tar.xz
+wget -c https://download.gnome.org/sources/libsoup/3.4/libsoup-3.4.0.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
