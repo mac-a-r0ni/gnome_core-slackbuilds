@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|
-flatpak: flatpak (sandboxing desktop applications)
+flatpak: flatpak (Application deployment framework)
 flatpak:
-flatpak: flatpak is tools and an API for building, distributing and running
-flatpak: desktop applications in unprivileged sandboxes.
+flatpak: Flatpak installs, manages and runs sandboxed desktop application
+flatpak: bundles. Application bundles run partially isolated from the wider
+flatpak: system, using containerization techniques such as namespaces to
+flatpak: prevent direct access to system resources. Resources from outside the
+flatpak: sandbox can be accessed via "portal" services, which are responsible
+flatpak: for access control.
 flatpak:
-flatpak:
-flatpak:
-flatpak:
-flatpak:
-flatpak:
+flatpak: Homepage: https://flatpak.org/
 flatpak:
