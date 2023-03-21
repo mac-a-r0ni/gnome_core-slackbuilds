@@ -11,12 +11,12 @@
 # - include LICENSE in DOCDIR
 # - include 2 test .webp images in DOCDIR
 
-wget -c https://github.com/aruiz/webp-pixbuf-loader/archive/refs/tags/0.0.7.tar.gz
+wget -c https://github.com/aruiz/webp-pixbuf-loader/archive/refs/tags/0.2.2.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=webp-pixbuf-loader
-VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
+VERSION=${VERSION:-0.2.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -71,11 +71,11 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
 # in doinst.sh instead.
 sed -i '/gdk_pb_query_loaders/d' meson.build
 
-mkdir meson-build
+mkdir -p meson-build
 cd meson-build
   CFLAGS="-Wl,-s $SLKCFLAGS" \
   CXXFLAGS="-Wl,-s $SLKCFLAGS" \
-  meson setup.. \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
@@ -89,7 +89,7 @@ cd ..
 
 DOCDIR=$PKG/usr/doc/$PRGNAM-$VERSION
 mkdir -p $DOCDIR
-cp -a LICENSE* README.md tests/*.webp $DOCDIR
+cp -a LICENSE* README.md $DOCDIR
 cat $CWD/$PRGNAM.SlackBuild > $DOCDIR/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
