@@ -6,12 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
      |-----handy-ruler------------------------------------------------------|
-folks: folks
+folks: folks (a contact aggregation library)
 folks:
 folks: libfolks is a library that aggregates people from multiple sources
 folks: (eg, Telepathy connection managers for IM contacts, Evolution Data
-folks: Server for local contacts, libsocialweb for web service contacts, 
+folks: Server for local contacts, libsocialweb for web service contacts,
 folks: etc.) to create metacontacts. It's written in Vala, which generates C
 folks: code when compiled.
 folks:
-folks: https://gitlab.gnome.org/GNOME/folks
+folks: Homepage: https://gitlab.gnome.org/GNOME/folks
+folks:
+folks:
