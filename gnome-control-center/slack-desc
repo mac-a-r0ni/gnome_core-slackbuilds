@@ -6,7 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                     |-----handy-ruler------------------------------------------------------|
-gnome-control-center: GNOME Control Center
+gnome-control-center: GNOME Control Center (utilities to configure the GNOME desktop)
 gnome-control-center:
-gnome-control-center: The GNOME settings manager.
+gnome-control-center: This package contains configuration applets for the GNOME desktop,
+gnome-control-center: allowing to set accessibility configuration, desktop fonts, keyboard
+gnome-control-center: and mouse properties, sound setup, desktop theme and background, user
+gnome-control-center: interface properties, screen resolution, and other GNOME parameters.
+gnome-control-center:
+gnome-control-center: Homepage: https://gitlab.gnome.org/GNOME/gnome-control-center
+gnome-control-center:
+gnome-control-center:
 gnome-control-center:
