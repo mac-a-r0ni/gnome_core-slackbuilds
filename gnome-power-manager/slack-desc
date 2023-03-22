@@ -11,9 +11,9 @@ gnome-power-manager:
 gnome-power-manager: The GNOME Power Manager package contains a tool used to report
 gnome-power-manager: on power management on the system.
 gnome-power-manager:
+gnome-power-manager: Homepage: https://gitlab.gnome.org/GNOME/gnome-power-manager
 gnome-power-manager:
 gnome-power-manager:
 gnome-power-manager:
 gnome-power-manager:
-gnome-power-manager: https://gitlab.gnome.org/GNOME/gnome-power-manager
 gnome-power-manager:
