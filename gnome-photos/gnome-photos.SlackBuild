@@ -22,6 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/core/43/43.5/sources/gnome-photos-43.0.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -80,10 +81,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir -p build
-cd build
-CFLAGS="$SLKCFLAGS" \
-  CXXFLAGS="$SLKCFLAGS" \
+mkdir -p meson-build
+cd meson-build
+ CFLAGS="$SLKCFLAGS" \
+ CXXFLAGS="$SLKCFLAGS" \
   meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
@@ -92,6 +93,7 @@ CFLAGS="$SLKCFLAGS" \
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    -Ddogtail=false \
     -Dmanuals=false
 
 "${NINJA:=ninja}"
@@ -115,6 +117,9 @@ if [ -d $PKG/usr/man ]; then
     done
   )
 fi
+
+# remove rando created doc dir
+rmdir $PKG/usr/share/doc
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a ARTISTS AUTHORS COPYING NEWS README \
