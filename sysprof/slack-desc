@@ -6,8 +6,15 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|
-sysprof: sysprof
+sysprof: sysprof (system-wide Linux profiler)
 sysprof:
-sysprof: The sysprof package contains a statistical and system-wide profiler
-sysprof: for Linux. 
+sysprof: Sysprof is a sampling CPU profiler that uses a ptrace in Linux kernel
+sysprof: to profile the entire system, not just a single application. Sysprof
+sysprof: handles shared libraries and applications do not need to be
+sysprof: recompiled. In fact they don't even have to be restarted.
 sysprof:
+sysprof: Homepage: https://wiki.gnome.org/Apps/Sysprof
+sysprof:
+sysprof:
+sysprof:
+

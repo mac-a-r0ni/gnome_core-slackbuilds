@@ -24,6 +24,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/core/43/43.5/sources/sysprof-3.46.0.tar.xz
+
 PRGNAM=sysprof
 VERSION=${VERSION:-3.46.0}
 BUILD=${BUILD:-1}
@@ -76,10 +78,6 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# sed -i -e '/install/d' src/libsysprof-capture/meson.build || exit 1
-# sed -i -e 's/pkgconfig\.generate/subdir_done()\npkgconfig\.generate/' src/libsysprof-capture/meson.build || exit 1
-# sed -i -e "s|if get_option('libsysprof')|if false|g" src/meson.build || exit 1
-
 mkdir -p build
 cd build
 
@@ -116,7 +114,8 @@ cp -a AUTHORS *.md COPYING* NEWS \
 cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
 
 mkdir -p $PKG/install
-cp $CWD/slack-desc $PKG/install
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-txz}
