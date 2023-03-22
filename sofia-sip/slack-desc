@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+         |-----handy-ruler------------------------------------------------------|
+sofia-sip: sofia-sip (Sofia-SIP library runtime)
+sofia-sip:
+sofia-sip: Sofia-SIP is an open-source SIP User-Agent library, compliant with
+sofia-sip: the IETF RFC3261 specification. It can be used as a building block
+sofia-sip: for SIP client software for uses such as VoIP, IM, and many other
+sofia-sip: real-time and person-to-person communication services.
+sofia-sip:
+sofia-sip: Homepage: http://git.gnome.org/browse/sofia-sip
+sofia-sip:
+sofia-sip:
+sofia-sip:
