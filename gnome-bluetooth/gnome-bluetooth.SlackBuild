@@ -111,6 +111,8 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 # removing this bin as we pkg this file in newer "gnome-bluetooth3" pkg
 rm $PKG/usr/bin/bluetooth-sendto
 rmdir $PKG/usr/bin
+rm $PKG/usr/man/man1/bluetooth-sendto.1
+rmdir $PKG/usr/man
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a AUTHORS COPYING* ChangeLog* MAINTAINERS NEWS README.md \
