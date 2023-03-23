@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-libgnomekbd: libgnomekbd
+libgnomekbd: libgnomekbd (library to manage keyboard configuration)
 libgnomekbd:
-libgnomekbd:
-libgnomekbd:
+libgnomekbd: libgnomekbd offers an API to manage the keyboard in GNOME
+libgnomekbd: applications.
 libgnomekbd:
 libgnomekbd:
 libgnomekbd:
