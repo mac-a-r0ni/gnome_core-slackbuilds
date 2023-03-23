@@ -131,9 +131,9 @@ find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
-cp -a \
-  AUTHORS COPYING HACKING RELEASE COMMITMENT NEWS README \
+cp -a AUTHORS COPYING HACKING RELEASE COMMITMENT NEWS README \
   $PKG/usr/doc/$PKGNAM-$VERSION
+cp $CWD/$PKGNAM.SlackBuild  $PKG/usr/doc/$PKGNAM-$VERSION
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
