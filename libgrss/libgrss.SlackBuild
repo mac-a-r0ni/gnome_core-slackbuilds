@@ -22,6 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/sources/libgrss/0.7/libgrss-0.7.0.tar.xz
+
 PRGNAM=libgrss
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
@@ -100,7 +102,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 find $PKG -name '*.la' -delete
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog INSTALL NEWS README \
+cp -a AUTHORS COPYING ChangeLog NEWS README \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
 
