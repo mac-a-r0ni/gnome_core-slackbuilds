@@ -115,11 +115,14 @@ for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; r
 
 find $PKG/usr/share/info -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/share/info -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+mkdir $PKG/usr/info
+mv $PKG/usr/share/info/{dir.gz,liblouis.info.gz} $PKG/usr/info
+rmdir $PKG/usr/share/info
 
 find $PKG -name '*.la' -delete
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING* ChangeLog HACKING INSTALL NEWS README TODO \
+cp -a AUTHORS COPYING* ChangeLog HACKING NEWS README TODO \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
 
