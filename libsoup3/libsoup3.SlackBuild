@@ -100,6 +100,7 @@ meson setup \
   --buildtype=release \
   -Dgssapi=enabled \
   -Dvapi=enabled \
+  -Ddocs=disabled \
   .. || exit 1
   "${NINJA:=ninja}" $NUMJOBS || exit 1
   DESTDIR=$PKG $NINJA install || exit 1
