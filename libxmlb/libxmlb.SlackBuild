@@ -98,12 +98,6 @@ DESTDIR=$PKG $NINJA -C build install
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# MANDIR has been known to be ignored:
-if [ -d $PKG/usr/share/man ]; then
-  mv $PKG/usr/share/man $PKG/usr
-  rmdir $PKG/usr/share
-fi
-
 # Compress and link manpages, if any:
 if [ -d $PKG/usr/man ]; then
   ( cd $PKG/usr/man
