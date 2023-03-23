@@ -129,6 +129,7 @@ cp -a \
   AUTHORS COPYING* NEWS README* TODO \
   $PKG/usr/doc/librsvg-$VERSION
 ( cd $PKG/usr/doc/librsvg-$VERSION ; ln -s /usr/share/gtk-doc/html/rsvg-2.0/ html )
+cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
 
 # If there's a ChangeLog, installing at least part of the recent history
 # is useful, but don't let it get totally out of control:
