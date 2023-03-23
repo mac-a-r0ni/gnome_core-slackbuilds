@@ -5,11 +5,15 @@
 # You must make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
-       |-----handy-ruler------------------------------------------------------|
-tracker-miners: tracker-miners
+              |-----handy-ruler------------------------------------------------------|
+tracker-miners: tracker-miners (metadata database, indexer and search tool)
 tracker-miners:
-tracker-miners: The Tracker-miners package contains a set of data extractors 
-tracker-miners: for Tracker.  
-tracker-miners: 
-tracker-miners: https://gitlab.gnome.org/GNOME/tracker-miners 
+tracker-miners: Tracker is an advanced framework for first class objects with
+tracker-miners: associated metadata and tags. It provides a one stop solution for all
+tracker-miners: metadata, tags, shared object databases, search tools and indexing.
+tracker-miners:
+tracker-miners: Homepage: https://wiki.gnome.org/Projects/Tracker
+tracker-miners:
+tracker-miners:
+tracker-miners:
 tracker-miners:
