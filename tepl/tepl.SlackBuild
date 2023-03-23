@@ -103,7 +103,7 @@ rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
-  
+
 # Compress and link manpages, if any:
 if [ -d $PKG/usr/man ]; then
   ( cd $PKG/usr/man
@@ -113,7 +113,7 @@ if [ -d $PKG/usr/man ]; then
           ln -s $( readlink $eachpage ).gz $eachpage.gz
           rm $eachpage
         done
-        gzip -9 *.?  
+        gzip -9 *.?
       )
     done
   )
@@ -122,6 +122,7 @@ fi
 cd ..
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a NEWS README* $PKG/usr/doc/$PRGNAM-$VERSION
+cp $CWD/$PRGNAM.SlackBuild $PKG/usr/doc/$PRGNAM-$VERSION
 
 # If there's a ChangeLog, installing at least part of the recent history
 # is useful, but don't let it get totally out of control:
