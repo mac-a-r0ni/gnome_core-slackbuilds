@@ -99,7 +99,7 @@ make
 make install-strip DESTDIR=$PKG
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING.LIB ChangeLog NEWS README TODO \
+cp -a AUTHORS COPYING.LIB ChangeLog README TODO \
       $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a doc $PKG/usr/doc/$PRGNAM-$VERSION/html
 rm $PKG/usr/doc/$PRGNAM-$VERSION/html/{Makefile,Doxyfile}
