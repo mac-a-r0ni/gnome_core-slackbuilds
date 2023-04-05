@@ -10,13 +10,13 @@
 # - i486 => i586.
 # 20220611 jbl: Updated to latest version
 
-wget -c https://gitlab.gnome.org/GNOME/libdmapsharing/-/archive/LIBDMAPSHARING_3_9_11/libdmapsharing-LIBDMAPSHARING_3_9_11.tar.gz
+wget -c https://gitlab.gnome.org/GNOME/libdmapsharing/-/archive/LIBDMAPSHARING_3_9_12/libdmapsharing-LIBDMAPSHARING_3_9_12.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libdmapsharing
-SRCVER=${VERSION:-LIBDMAPSHARING_3_9_11}
-VERSION=${VERSION:-3.9.11}
+SRCVER=${VERSION:-LIBDMAPSHARING_3_9_12}
+VERSION=${VERSION:-3.9.12}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
