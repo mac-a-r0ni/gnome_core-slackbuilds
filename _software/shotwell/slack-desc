@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+        |-----handy-ruler------------------------------------------------------|
+shotwell: shotwell (digital photo organizer)
+shotwell:
+shotwell: Shotwell is a digital photo organizer designed for the GNOME desktop
+shotwell: environment. It allows you to import photos, pictures, images and
+shotwell: videos from disk or camera. Shotwell can organize them in collections
+shotwell: and in other various ways. The viewer shows them in full-window or
+shotwell: fullscreen mode and presents them as galleries or slideshows. The
+shotwell: integrated editor can rotate, flip, crop and tag the photos, adjust
+shotwell: the colors and remove red eyes.
+shotwell: Homepage: https://wiki.gnome.org/Apps/Shotwell
+shotwell:
