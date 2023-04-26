@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=xdg-desktop-portal-gnome
+Comment=Start the xdg-desktop-portal-gnome
+Exec=/usr/bin/daemon -frB --pidfiles=~/.run --name=xdg-desktop-portal-gnome /usr/libexec/xdg-desktop-portal-gnome
+Terminal=false
+Type=Application
+X-GNOME-Autostart-Phase=Initialization
