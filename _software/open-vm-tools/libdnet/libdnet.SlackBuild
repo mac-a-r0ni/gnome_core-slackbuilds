@@ -1,8 +1,8 @@
 #!/bin/bash
-#
-# Slackware build script for highlight
-#
-# Copyright 2011-2022  Erik W. Hanson, Minneapolis, MN, USA
+
+# Slackware build script for libdnet.
+
+# Copyright 2009-2010 Marco Bonetti <sid77@slackware.it>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,19 +22,15 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c http://www.andre-simon.de/zip/highlight-4.4.tar.bz2
+wget -c http://downloads.sourceforge.net/libdnet/libdnet-1.11.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=highlight
-VERSION=${VERSION:-4.4}
-BUILD=${BUILD:-2}
+PRGNAM=libdnet
+VERSION=${VERSION:-1.11}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
-
-TMP=${TMP:-/tmp/gcs}
-PKG=$TMP/package-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -52,51 +48,70 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-set -ue
+TMP=${TMP:-/tmp/gcs}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+DOCS="LICENSE README THANKS"
+
+if [ "$ARCH" = "i586" ]; then
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
- \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
-  -o -perm 511 \) -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
- -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
 
-#Patch so gui links with lua5.3 instead of lua5.1 and fail.
-patch -p1 < $CWD/lua-qt.patch
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --enable-shared \
+  --build=$ARCH-slackware-linux
 
-# if building using 'su' will fail to find qmake so we work around this
-# create symlink for build with qmake and remove after build
-ln -s /usr/bin/qmake-qt5 /usr/bin/qmake
-
-# removed gui app, we dont need this
-make cli
-make -j1 install DESTDIR=$PKG
-
-# remove qmake symlink
-rm /usr/bin/qmake
+make
+make install DESTDIR=$PKG
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
-  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mv $PKG/usr/share/man $PKG/usr/man
-
-mv $PKG/etc/$PRGNAM/filetypes.conf{,.new}
+( cd $PKG/usr/man
+  find . -type f -exec gzip -9 {} \;
+  for i in $( find . -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+)
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-mv $PKG/usr/share/doc/highlight/* $PKG/usr/doc/$PRGNAM-$VERSION
-rmdir $PKG/usr/share/doc/highlight $PKG/usr/share/doc
-
+cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+rm -f $PKG/usr/lib*/*.la
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

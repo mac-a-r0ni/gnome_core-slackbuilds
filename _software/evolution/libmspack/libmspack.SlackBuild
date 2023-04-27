@@ -22,16 +22,12 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# 20220418 bkw: Modified by SlackBuilds.org, BUILD=3:
-# - remove empty/useless docs.
-# - i486 => i586.
-
-wget -c https://www.cabextract.org.uk/libmspack/libmspack-0.10.1alpha.tar.gz
+wget -c https://www.cabextract.org.uk/libmspack/libmspack-0.11alpha.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libmspack
-VERSION=${VERSION:-0.10.1alpha}
+VERSION=${VERSION:-0.11alpha}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
