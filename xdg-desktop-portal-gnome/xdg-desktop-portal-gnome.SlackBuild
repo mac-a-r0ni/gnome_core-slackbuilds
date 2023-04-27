@@ -109,7 +109,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 
 # install xdg autostart file
 mkdir -p $PKG/etc/xdg/autostart
-cp $CWD/xdg-desktop-portal-gnome.desktop.new $PKG/etc/xdg/autostart
+cp $CWD/xdg-desktop-portal-gnome.desktop $PKG/etc/xdg/autostart
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a COPYING NEWS README.md \
@@ -118,7 +118,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-zcat $CWD/doinst.sh.gz > $PKG/install/doinst.sh
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
