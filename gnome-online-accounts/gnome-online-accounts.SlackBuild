@@ -92,7 +92,8 @@ meson setup .. \
  --libdir=/usr/lib${LIBDIRSUFFIX} \
  --sysconfdir=/etc \
  --localstatedir=/var \
- --mandir=/usr/man
+ --mandir=/usr/man \
+ -Dmedia-server=true
 
 ninja
 DESTDIR=$PKG ninja install
