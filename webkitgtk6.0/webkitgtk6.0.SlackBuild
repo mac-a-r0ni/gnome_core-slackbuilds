@@ -102,7 +102,7 @@ cd build
 	-DENABLE_BUBBLEWRAP_SANDBOX=OFF \
         -DUSE_SYSTEM_MALLOC=ON \
 	-DUSE_GTK4=ON \
-	-DUSE_AVIF=ON
+	-DUSE_AVIF=ON \
         -Wno-dev \
         -G Ninja \
         ..
