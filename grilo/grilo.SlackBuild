@@ -24,6 +24,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://download.gnome.org/core/43/43.7/sources/grilo-0.3.16.tar.xz
+
 PRGNAM=grilo
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
@@ -82,12 +84,12 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir -p build
-cd build
+mkdir -p meson-build
+cd meson-build
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+meson setup .. \
  --prefix=/usr \
  --libdir=/usr/lib${LIBDIRSUFFIX} \
  --includedir=/usr/lib${LIBDIRSUFFIX} \
