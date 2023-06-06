@@ -84,8 +84,6 @@ find -L . \
 
 # no one else enables this, why do we?
 #patch -p1 < $CWD/unhide-deprecated-api.patch
-# FIX GCC 13
-patch -p1 < $CWD/0001-Fix-build-of-SourceBrush.cpp.patch
 
 # changed to be more like arch
 mkdir -p build
