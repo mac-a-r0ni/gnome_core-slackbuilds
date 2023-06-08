@@ -6,6 +6,8 @@
 
 # Licensed under the WTFPL. See http://www.wtfpl.net/txt/copying/ for details.
 
+wget -c https://download.gnome.org/core/42/42.10/sources/libhandy-1.6.4.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libhandy

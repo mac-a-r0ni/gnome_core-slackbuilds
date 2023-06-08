@@ -22,7 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/gnome-control-center/42/gnome-control-center-42.9.tar.xz
+wget -c https://download.gnome.org/sources/gnome-control-center/42/gnome-control-center-42.10.tar.xz
 
 PRGNAM=gnome-control-center
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}

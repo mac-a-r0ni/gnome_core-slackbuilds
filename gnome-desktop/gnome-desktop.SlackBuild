@@ -24,7 +24,7 @@
 
 # Updated to version 40.2 by Igor Alexandrov <igor.alexandrov@outlook.com>
 
-wget -c https://download.gnome.org/sources/gnome-desktop/42/gnome-desktop-42.9.tar.xz
+wget -c https://download.gnome.org/sources/gnome-desktop/42/gnome-desktop-42.10.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
