@@ -22,10 +22,10 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://gstreamer.freedesktop.org/src/gst-editing-services/gst-editing-services-1.22.2.tar.xz
+wget -c https://gstreamer.freedesktop.org/src/gst-editing-services/gst-editing-services-1.22.5.tar.xz
 
 PRGNAM=gst-editing-services
-VERSION=${VERSION:-1.22.2}
+VERSION=${VERSION:-1.22.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 
