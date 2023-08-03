@@ -26,7 +26,7 @@ echo Downloading...
 wget -c https://download.gnome.org/sources/file-roller/43/file-roller-43.0.tar.xz
 echo Done!
 
-PRGNAM=$(basename $0 | cut -f1 -d.)
+PRGNAM=file-roller
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}

@@ -22,10 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://gitlab.gnome.org/jwestman/blueprint-compiler/-/archive/v0.10.0/blueprint-compiler-v0.10.0.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=blueprint-compiler
-VERSION=${VERSION:-0.6.0}
+VERSION=${VERSION:-0.10.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
