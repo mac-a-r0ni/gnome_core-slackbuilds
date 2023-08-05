@@ -21,7 +21,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://github.com/flatpak/xdg-desktop-portal/releases/download/1.16.0/xdg-desktop-portal-1.16.0.tar.xz
+wget -c https://github.com/flatpak/xdg-desktop-portal/releases/download/1.17.0/xdg-desktop-portal-1.17.0.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
