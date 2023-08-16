@@ -26,7 +26,7 @@
 # - fix PRINT_PACKAGE_NAME (PKGTYPE wasn't set).
 # - remove useless ABOUT-NLS and INSTALL from doc dir.
 
-wget -c https://download.gnome.org/core/43/43.7/sources/gspell-1.12.1.tar.xz
+wget -c https://download.gnome.org/core/43/43.9/sources/gspell-1.12.2.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
@@ -97,7 +97,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --disable-debug \
   --disable-static \
-  --enable-gtk-doc \
+  --disable-gtk-doc \
   --build=$ARCH-slackware-linux
 make
 make install DESTDIR=$PKG

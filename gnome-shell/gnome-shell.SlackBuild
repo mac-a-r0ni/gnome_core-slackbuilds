@@ -3,7 +3,7 @@
 # Slackware build script for gnome-shell
 
 # Copyright 2016, 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Optional Bluetooth patch by Leio from Gentoo
+# Additional updates 2022-23 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/gnome-shell/43/gnome-shell-43.6.tar.xz
+wget -c https://download.gnome.org/core/43/43.9/sources/gnome-shell-43.7.tar.xz
 
 PRGNAM=gnome-shell
 VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -42,7 +42,6 @@ TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 CWD=$(pwd)
-JOBS=${JOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
