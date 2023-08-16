@@ -24,7 +24,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://download.gnome.org/sources/gnome-bluetooth/42/gnome-bluetooth-42.5.tar.xz
+wget -c https://download.gnome.org/sources/gnome-bluetooth/42/gnome-bluetooth-42.6.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
