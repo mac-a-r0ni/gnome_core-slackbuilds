@@ -57,10 +57,10 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
+  SLKCFLAGS="-O2 -fPIC -g1"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
+  SLKCFLAGS="-O2 -fPIC -g1"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -93,9 +93,9 @@ cd build
 	-DCMAKE_SKIP_RPATH=ON \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DLIB_INSTALL_DIR=/usr/lib${LIBDIRSUFFIX} \
-	-DLIBEXEC_INSTALL_DIR=/usr/lib${LIBDIRSUFFIX}/webkit2gtk-4.0 \
 	-DENABLE_GAMEPAD=OFF \
 	-DENABLE_MINIBROWSER=ON \
+	-DUSE_AVIF=ON \
         -DUSE_SOUP2=ON \
         -DENABLE_JOURNALD_LOG=OFF \
         -Wno-dev \
@@ -107,12 +107,6 @@ cd build
 # lets not and say we did. It'll take a century to build
 "${NINJA:=ninja}" -j$(expr $(nproc) + 1)
 DESTDIR=$PKG $NINJA -j1 install
-
-mkdir -p $PKG/usr/share/gtk-doc/html/webkit{2,dom}gtk-4.0
-install -m 0644 ../Documentation/webkit2gtk-4.0/html/* \
-  $PKG/usr/share/gtk-doc/html/webkit2gtk-4.0
-install -m 0644 ../Documentation/webkitdomgtk-4.0/html/* \
-  $PKG/usr/share/gtk-doc/html/webkitdomgtk-4.0
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a ../NEWS $PKG/usr/doc/$PRGNAM-$VERSION
