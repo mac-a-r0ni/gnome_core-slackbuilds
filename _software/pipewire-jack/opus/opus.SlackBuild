@@ -41,7 +41,7 @@
 # -----------------------------------------------------------------------------
 
 PRGNAM=opus
-VERSION=${VERSION:-1.1}
+VERSION=${VERSION:-1.4}
 BUILD=${BUILD:-1}
 NUMJOBS=${NUMJOBS:" -j4 "}
 TAG=${TAG:-_gcs}
