@@ -22,10 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://gitlab.gnome.org/World/libcloudproviders/-/archive/0.3.2/libcloudproviders-0.3.2.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libcloudproviders
-VERSION=${VERSION:-0.3.1}
+VERSION=${VERSION:-0.3.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -86,7 +88,7 @@ mkdir -p build
 cd build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --prefix /usr \
     --mandir /usr/man \
     --libdir /usr/lib${LIBDIRSUFFIX}
