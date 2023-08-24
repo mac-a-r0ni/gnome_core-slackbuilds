@@ -22,12 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://github.com/hughsie/libxmlb/releases/download/0.3.11/libxmlb-0.3.11.tar.xz
+wget -c https://github.com/hughsie/libxmlb/releases/download/0.3.13/libxmlb-0.3.13.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libxmlb
-VERSION=${VERSION:-0.3.11}
+VERSION=${VERSION:-0.3.13}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -81,19 +81,24 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+mkdir -p meson-build
+cd meson-build
+
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson setup \
+meson setup .. \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
   --mandir=/usr/man \
   -Dtests=false \
   -Dstemmer=true \
-  -Dgtkdoc=false \
-  build
-"${NINJA:=ninja}" -C build
-DESTDIR=$PKG $NINJA -C build install
+  -Dgtkdoc=false
+
+"${NINJA:=ninja}"
+DESTDIR=$PKG $NINJA install
+
+cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
