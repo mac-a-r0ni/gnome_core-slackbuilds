@@ -22,12 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://gitlab.gnome.org/World/libcloudproviders/-/archive/0.3.2/libcloudproviders-0.3.2.tar.gz
+wget -c https://download.gnome.org/sources/libcloudproviders/0.3/libcloudproviders-0.3.4.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libcloudproviders
-VERSION=${VERSION:-0.3.2}
+VERSION=${VERSION:-0.3.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -75,7 +75,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
