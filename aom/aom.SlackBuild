@@ -23,14 +23,15 @@
 #   SUCH DAMAGE.
 # ----------------------------------------------------------------------
 
-wget -c http://www.andrews-corner.org/downloads/aom-87460cef80fb03def7d97df1b47bad5432e5e2e4.tar.gz
+wget -c https://storage.googleapis.com/aom-releases/libaom-3.7.0.tar.gz
+#wget -c http://www.andrews-corner.org/downloads/aom-87460cef80fb03def7d97df1b47bad5432e5e2e4.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=aom
 # The 'official' archive for the aom 3.3.0 release has the git commit in
 # the filename, so adjustments are required for a sane Slackware build:
-VERSION=${VERSION:-3.3.0}
+VERSION=${VERSION:-3.7.0}
 GITCOMMIT=${GITCOMMIT:-87460cef80fb03def7d97df1b47bad5432e5e2e4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
@@ -80,8 +81,8 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$GITCOMMIT.tar.gz -C $TMP/$PRGNAM-$VERSION
-cd $PRGNAM-$VERSION
+tar xvf $CWD/libaom-$VERSION.tar.gz
+cd libaom-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -109,6 +110,7 @@ cd build
     -DBUILD_SHARED_LIBS=1 \
     -DENABLE_TESTS=0 \
     ../
+
   make -j1
   make install DESTDIR=$PKG
 cd ..
