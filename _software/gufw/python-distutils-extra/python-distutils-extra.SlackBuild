@@ -22,10 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://snapshot.debian.org/archive/debian/20230214T212225Z/pool/main/p/python-distutils-extra/python-distutils-extra_2.50.tar.xz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=python-distutils-extra
-VERSION=${VERSION:-2.45}
+VERSION=${VERSION:-2.50}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}

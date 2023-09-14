@@ -22,7 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c --no-check-certificate https://github.com/hughsie/libgusb/releases/download/0.4.4/libgusb-0.4.4.tar.xz
+wget -c --no-check-certificate https://github.com/hughsie/libgusb/releases/download/0.4.6/libgusb-0.4.6.tar.xz
 
 cd $(dirname $0) ; CWD=$(pwd)
 

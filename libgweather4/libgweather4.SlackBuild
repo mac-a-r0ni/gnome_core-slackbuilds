@@ -22,9 +22,9 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
+wget -c https://download.gnome.org/sources/libgweather/4.2/libgweather-4.2.0.tar.xz
 
-wget -c --no-check-certificate https://download.gnome.org/sources/libgweather/4.2/libgweather-4.2.0.tar.xz
+cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=libgweather4
 SRCNAM=libgweather
