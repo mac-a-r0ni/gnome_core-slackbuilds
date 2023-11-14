@@ -10,13 +10,13 @@
 # - i486 => i586.
 # 20220611 jbl: Updated to latest version
 
-wget -c https://gitlab.gnome.org/GNOME/libdmapsharing/-/archive/LIBDMAPSHARING_3_9_12/libdmapsharing-LIBDMAPSHARING_3_9_12.tar.gz
+wget -c https://www.flyn.org/projects/libdmapsharing/libdmapsharing-2.9.42.tar.gz
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libdmapsharing
-SRCVER=${VERSION:-LIBDMAPSHARING_3_9_12}
-VERSION=${VERSION:-3.9.12}
+PKGNAM=libdmapsharing
+VERSION=${VERSION:-2.9.42}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -60,9 +60,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$SRCVER
-tar xvf $CWD/$PRGNAM-$SRCVER.tar.gz
-cd $PRGNAM-$SRCVER
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -89,12 +89,12 @@ CXXFLAGS="$SLKCFLAGS" \
 make
 make install-strip DESTDIR=$PKG
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cp -a \
   AUTHORS COPYING ChangeLog README* TODO \
-  $PKG/usr/doc/$PRGNAM-$VERSION
-ln -s ../../share/gtk-doc/html/$PRGNAM $PKG/usr/doc/$PRGNAM-$VERSION/html
-cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+  $PKG/usr/doc/$PKGNAM-$VERSION
+ln -s ../../share/gtk-doc/html/$PRGNAM $PKG/usr/doc/$PKGNAM-$VERSION/html
+cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
 
 rm -f $PKG/usr/lib*/*.la
 
@@ -102,4 +102,4 @@ mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
