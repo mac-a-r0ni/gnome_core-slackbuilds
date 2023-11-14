@@ -2,7 +2,8 @@
 
 # Slackware build script for gui-ufw
 
-# Copyright 2022 Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Copyright 2022-23 Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Previous script by Skaendo w/ bkw patches, this replaces it.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,10 +23,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://github.com/costales/gufw/releases/download/24.04/gui-ufw-24.04.0.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gui-ufw
-VERSION=${VERSION:-22.04.0}
+VERSION=${VERSION:-24.04.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -70,7 +73,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -78,19 +81,18 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-cd bin
-patch -p0 < $CWD/gufw-open-wayland.diff
-patch -p0 < $CWD/pkexec-path-fix.diff
-cd ..
-python3 setup.py install --prefix=/usr --root=$PKG
-# fix installation of files in odd places
-rm -R $PKG/usr/share/doc
-mkdir -p $PKG/usr/man/man8
-mv $PKG/usr/share/man/man8/gufw.8 $PKG/usr/man/man8
-rm -R $PKG/usr/share/man
 
-find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
-  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+# path & opening app fixes from ubuntu
+patch -p1 < $CWD/gufw-open.diff
+patch -p1 < $CWD/path-fix.diff
+
+python3 setup.py install --prefix=/usr --root=$PKG
+
+# Move the manpage to a sane directory.
+mv $PKG/usr/share/man $PKG/usr
+
+# Clean up some duplicates
+rm -rf $PKG/usr/share/doc
 
 # Compress and link manpages, if any:
 if [ -d $PKG/usr/man ]; then
@@ -107,8 +109,11 @@ if [ -d $PKG/usr/man ]; then
   )
 fi
 
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a COPYING* README \
+cp -a COPYING* README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
@@ -117,4 +122,4 @@ cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-noarch-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

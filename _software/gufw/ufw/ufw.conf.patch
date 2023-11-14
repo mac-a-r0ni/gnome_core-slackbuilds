@@ -1,0 +1,12 @@
+--- a/conf/ufw.conf
++++ b/conf/ufw.conf
+@@ -3,7 +3,7 @@
+ 
+ # Set to yes to start on boot. If setting this remotely, be sure to add a rule
+ # to allow your remote connection before starting ufw. Eg: 'ufw allow 22/tcp'
+-ENABLED=no
++ENABLED=yes
+ 
+ # Please use the 'ufw' command to set the loglevel. Eg: 'ufw logging medium'.
+ # See 'man ufw' for details.
+

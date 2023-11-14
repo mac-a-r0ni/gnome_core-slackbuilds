@@ -1,0 +1,7 @@
+gui-ufw (GUI for Uncomplicated Firewall)
+
+A very user-friendly and uncomplicated way to manage ufw.
+
+This version requires webkit2gtk. If you would rather not have to
+build webkit2gtk, you can still use the 12.04.1 version of gui-ufw:
+https://slackbuilds.org/repository/14.1/network/gui-ufw/
