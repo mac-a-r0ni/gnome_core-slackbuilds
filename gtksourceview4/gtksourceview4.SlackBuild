@@ -26,6 +26,8 @@
 
 wget -c http://ftp.gnome.org/pub/GNOME/sources/gtksourceview/4.8/gtksourceview-4.8.4.tar.xz
 
+cd $(dirname $0) ; CWD=$(pwd)
+
 PRGNAM=gtksourceview4
 SRCNAM=gtksourceview
 VERSION=${VERSION:-$(echo $SRCNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
@@ -40,7 +42,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-CWD=$(pwd)
 TMP=${TMP:-/tmp/gcs}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
