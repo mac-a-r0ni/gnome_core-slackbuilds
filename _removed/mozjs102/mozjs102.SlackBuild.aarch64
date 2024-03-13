@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for mozjs102
+# Slackware build script for mozjs115
 
 # Copyright 2022 Bob Funk, Winnipeg Canada
 # All rights reserved.
@@ -24,11 +24,11 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-wget -c https://archive.mozilla.org/pub/firefox/releases/102.6.0esr/source/firefox-102.6.0esr.source.tar.xz | exit 1
+wget -c https://archive.mozilla.org/pub/firefox/releases/115.8.0esr/source/firefox-115.8.0esr.source.tar.xz | exit 1
 
-PRGNAM=mozjs102
+PRGNAM=mozjs115
 SRCNAM=firefox
-VERSION=${VERSION:-102.6.0}
+VERSION=${VERSION:-115.8.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_gcs}
 PKGTYPE=${PKGTYPE:-txz}
@@ -82,7 +82,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Patch mozjs102 build to install ProfilingCategoryList.h.
+# Patch mozjs115 build to install ProfilingCategoryList.h.
 # https://hg.mozilla.org/integration/autoland/rev/eb2b21f037a5
 #patch -Np1 -i $CWD/install_ProfilingCategoryList.h.patch
 
@@ -114,7 +114,7 @@ ac_add_options --disable-lto
 EOF
 
 export MOZBUILD_STATE_PATH="$(pwd)/.mozbuild"
-#export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none
+export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none
 export MACH_USE_SYSTEM_PYTHON=1
 export CARGO_PROFILE_RELEASE_LTO=true
 
@@ -135,10 +135,10 @@ rm -f $PKG/usr/lib${LIBDIRSUFFIX}/libjs_static.*
 rm -f $PKG/usr/bin/js*-config
 
 # Rename shared library to have a proper soname:
-mv $PKG/usr/lib${LIBDIRSUFFIX}/libmozjs-102.so $PKG/usr/lib${LIBDIRSUFFIX}/libmozjs-102.so.0.0.0
+mv $PKG/usr/lib${LIBDIRSUFFIX}/libmozjs-115.so $PKG/usr/lib${LIBDIRSUFFIX}/libmozjs-115.so.0.0.0
 ( cd $PKG/usr/lib${LIBDIRSUFFIX}
-  ln -sf libmozjs-102.so.0.0.0 libmozjs-102.so.0
-  ln -sf libmozjs-102.so.0 libmozjs-102.so
+  ln -sf libmozjs-115.so.0.0.0 libmozjs-115.so.0
+  ln -sf libmozjs-115.so.0 libmozjs-115.so
 )
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
