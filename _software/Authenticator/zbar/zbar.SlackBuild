@@ -22,15 +22,14 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=zbar
-VERSION=${VERSION:-0.23.90}
+VERSION=${VERSION:-0.23.93}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_gcs}
+TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
-
+wget -c https://github.com/mchehab/$PRGNAM/archive/$VERSION/$PRGNAM-$VERSION.tar.gz
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i586 ;;
@@ -47,7 +46,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/gcs}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
