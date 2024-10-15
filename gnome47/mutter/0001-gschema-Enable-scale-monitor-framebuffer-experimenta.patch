@@ -1,0 +1,29 @@
+From 4a82121b6c90df48b474bce31ca16e15f55368dc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jonas=20=C3=85dahl?= <jadahl@gmail.com>
+Date: Mon, 4 Sep 2023 10:22:49 +0200
+Subject: [PATCH] gschema: Enable 'scale-monitor-framebuffer' experimental
+ feature
+
+Enabling this by default was the consensus in a previous meeting[1].
+
+[1] https://pagure.io/fedora-workstation/issue/357#comment-848857
+---
+ data/org.gnome.mutter.gschema.xml.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/org.gnome.mutter.gschema.xml.in b/data/org.gnome.mutter.gschema.xml.in
+index 5d56ae2d37..8052032c51 100644
+--- a/data/org.gnome.mutter.gschema.xml.in
++++ b/data/org.gnome.mutter.gschema.xml.in
+@@ -103,7 +103,7 @@
+ 
+     <key name="experimental-features"
+         flags='org.gnome.mutter.MetaExperimentalFeature'>
+-      <default>[]</default>
++      <default>["scale-monitor-framebuffer"]</default>
+       <summary>Enable experimental features</summary>
+       <description>
+         To enable experimental features, add the feature keyword to the list.
+-- 
+2.41.0
+

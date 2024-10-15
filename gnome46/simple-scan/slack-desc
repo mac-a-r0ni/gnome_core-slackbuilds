@@ -1,0 +1,20 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+           |-----handy-ruler------------------------------------------------------|
+simple-scan: simple-scan (simple scanning utility)
+simple-scan:
+simple-scan: A really easy way to scan both text and images. You can crop out the
+simple-scan: bad parts of an image and rotate it if it is the wrong way round. You
+simple-scan: can print your scans, export them to pdf, or save them in a range of
+simple-scan: image formats.
+simple-scan: This app uses the SANE framework to support most existing scanners.
+simple-scan:
+simple-scan: Homepage: https://apps.gnome.org/app/simple-scan/
+simple-scan:
+simple-scan:
+

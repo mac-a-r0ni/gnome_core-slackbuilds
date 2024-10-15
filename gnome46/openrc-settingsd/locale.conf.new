@@ -1,0 +1,8 @@
+# /etc/locale.conf
+
+# This file was automatically generated for openrc-settingsd.
+
+FONT=
+KEYMAP=
+LANG=en_US.UTF-8
+LC_COLLATE=C

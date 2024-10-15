@@ -1,0 +1,5 @@
+gnome-app-list (AppStream flatpak data sync)
+
+This project provides app recommendation data for the GNOME project,
+in the form of AppStream data which is installed in the standard
+system location. This is mainly used by the Software app.

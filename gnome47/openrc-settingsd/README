@@ -1,0 +1,20 @@
+openrc-settingsd (D-Bus services for OpenRC-based systems)
+
+OpenRC-settingsd provides an implementation of the the hostnamed,
+localed, and timedated D-Bus services for OpenRC-based systems - in
+particular, for typical installations of Gentoo or Slackware Linux.
+
+Once installed, to enable upon boot you must add this to 
+/etc/rc.d/rc.local:
+
+# Start openrc-settingsd:
+if [ -x /etc/rc.d/rc.openrc-settingsd ]; then
+  /etc/rc.d/rc.openrc-settingsd start
+fi
+
+and this to /etc/rc.d/rc.local_shutdown:
+
+# Stop openrc-settingsd:
+if [ -x /etc/rc.d/rc.openrc-settingsd ]; then
+  /etc/rc.d/rc.openrc-settingsd stop
+fi

@@ -1,0 +1,17 @@
+diff --git a/src/font-view-window.c b/src/font-view-window.c
+index 639ac33309b871351373d431c15aed9526facd31..24461f7f195c84f95c7b4591c0b3bc9532bf45ee 100644
+--- a/src/font-view-window.c
++++ b/src/font-view-window.c
+@@ -758,8 +758,11 @@ font_view_window_show_overview (FontViewWindow *self)
+ }
+ 
+ static void
+-action_toggle_search_cb (FontViewWindow *self)
++action_toggle_search_cb (GtkWidget  *widget,
++                         const char *action_name,
++                         GVariant   *parameter)
+ {
++  FontViewWindow *self = FONT_VIEW_WINDOW (widget);
+ 
+  gtk_toggle_button_set_active (self->search_button,
+                                !gtk_toggle_button_get_active (self->search_button));

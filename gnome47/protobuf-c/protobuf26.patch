@@ -1,0 +1,28 @@
+--- a/protoc-c/c_file.cc
++++ b/protoc-c/c_file.cc
+@@ -118,7 +118,9 @@
+   std::string filename_identifier = FilenameIdentifier(file_->name());
+ 
+   int min_header_version = 1000000;
+-#if GOOGLE_PROTOBUF_VERSION >= 4023000
++#if GOOGLE_PROTOBUF_VERSION >= 5026000
++  if (FileDescriptorLegacy(file_).edition() == Edition::EDITION_PROTO3) {
++#elif GOOGLE_PROTOBUF_VERSION >= 4023000
+   if (FileDescriptorLegacy(file_).syntax() == FileDescriptorLegacy::SYNTAX_PROTO3) {
+ #else
+   if (file_->syntax() == FileDescriptor::SYNTAX_PROTO3) {
+
+--- a/protoc-c/c_helpers.h
++++ b/protoc-c/c_helpers.h
+@@ -175,7 +175,9 @@
+ // Return the syntax version of the file containing the field.
+ // This wrapper is needed to be able to compile against protobuf2.
+ inline int FieldSyntax(const FieldDescriptor* field) {
+-#if GOOGLE_PROTOBUF_VERSION >= 4023000
++#if GOOGLE_PROTOBUF_VERSION >= 5026000
++  return FileDescriptorLegacy(field->file()).edition() == Edition::EDITION_PROTO3 ? 3 : 2;
++#elif GOOGLE_PROTOBUF_VERSION >= 4023000
+   return FileDescriptorLegacy(field->file()).syntax() == FileDescriptorLegacy::SYNTAX_PROTO3 ? 3 : 2;
+ #else
+   return field->file()->syntax() == FileDescriptor::SYNTAX_PROTO3 ? 3 : 2;
+

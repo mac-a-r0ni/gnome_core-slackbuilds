@@ -1,0 +1,24 @@
+diff --git a/pkcs11/seahorse-pkcs11-backend.c b/pkcs11/seahorse-pkcs11-backend.c
+index b7ea21e1fdb1df7cc5059a3591434932e726d0db..31d7cb81510a003b6285f2ac2c8feabd92b5c81f 100644
+--- a/pkcs11/seahorse-pkcs11-backend.c
++++ b/pkcs11/seahorse-pkcs11-backend.c
+@@ -43,8 +43,6 @@ enum {
+ 	PROP_LOADED,
+ };
+ 
+-void  seahorse_pkcs11_backend_initialize (void);
+-
+ static SeahorsePkcs11Backend *pkcs11_backend = NULL;
+ 
+ struct _SeahorsePkcs11Backend {
+diff --git a/pkcs11/seahorse-pkcs11-backend.h b/pkcs11/seahorse-pkcs11-backend.h
+index ddcfd2fcc54c43e95d0f3482830cbb1f02e2cc1f..65efbd0a04ba970056745062f3a56fecfc05746f 100644
+--- a/pkcs11/seahorse-pkcs11-backend.h
++++ b/pkcs11/seahorse-pkcs11-backend.h
+@@ -43,4 +43,6 @@ SeahorsePkcs11Backend *  seahorse_pkcs11_backend_get           (void);
+ GcrCollection *          seahorse_pkcs11_backend_get_writable_tokens (SeahorsePkcs11Backend *self,
+                                                                       gulong with_mechanism);
+ 
++void  seahorse_pkcs11_backend_initialize (void);
++
+ #endif /* SEAHORSE_PKCS11_BACKEND_H_ */

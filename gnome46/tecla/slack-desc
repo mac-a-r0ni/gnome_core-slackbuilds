@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+     |-----handy-ruler------------------------------------------------------|
+tecla: tecla (Keyboard layout viewer)
+tecla:
+tecla: Tecla is a keyboard layout viewer.
+tecla:
+tecla: Tecla uses GTK/Libadwaita for UI, and libxkbcommon to deal with 
+tecla: keyboard maps.
+tecla:
+tecla:
+tecla:
+tecla: https://gitlab.gnome.org/GNOME/tecla
+tecla:

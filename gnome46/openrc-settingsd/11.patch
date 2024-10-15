@@ -1,0 +1,133 @@
+From c460f47f73eb40a54866f752a2ac7e20fdc62411 Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Mon, 8 Jul 2024 02:31:13 +0000
+Subject: [PATCH]  Implement Slackware specific information for rc.ntpd
+
+---
+ src/timedated.c | 73 +++++++++++++++++++++++++++++++------------------
+ 1 file changed, 47 insertions(+), 26 deletions(-)
+
+diff --git a/src/timedated.c b/src/timedated.c
+index 5f7eb3c..23bc0f4 100644
+--- a/src/timedated.c
++++ b/src/timedated.c
+@@ -186,26 +186,6 @@ set_timezone (const gchar *identifier,
+     return TRUE;
+ }
+ 
+-#if TIME_STYLE_SLACKWARE
+-// Function to check if the NTP service is running
+-bool ntp_is_running() {
+-    FILE* fp = popen("pgrep ntpd", "r"); // Check if the ntpd process is running
+-    if (fp == NULL) {
+-        perror("popen");
+-        return false; // Assume NTP is not running if an error occurs
+-    }
+-
+-    char buf[128];
+-    if (fgets(buf, sizeof(buf), fp) != NULL) {
+-        pclose(fp);
+-        return true; // NTP process found, so it is running
+-    }
+-
+-    pclose(fp);
+-    return false; // NTP process not found, so it is not running
+-}
+-#endif
+-
+ /* Return the ntp rc service we will use; return value should NOT be freed */
+ static const gchar *
+ ntp_service ()
+@@ -233,12 +213,21 @@ ntp_service ()
+ 
+     return service;
+ #elif TIME_STYLE_SLACKWARE
+-    // Check if NTP service is already running
+-    // Add your logic here to check if the NTP program is running
+-    if (ntp_is_running()) {
+-        return "ntpd"; // Assuming "ntp" is the default service name when NTP is running
++    const char *rc_ntpd = "/etc/rc.d/rc.ntpd";
++    struct stat st;
++    
++    if (stat(rc_ntpd, &st) == 0) {
++        if ((st.st_mode & S_IFMT) == S_IFREG) {
++            if ((st.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO)) == 0755) {
++                g_debug("Starting ntpd: rc.ntpd has appropriate permissions (0755).");
++                return "ntpd";
++            }
++            else if ((st.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO)) == 0644) {
++                g_debug("Unable to start ntpd: rc.ntpd has insufficient permissions (0644).");
++                return NULL;
++            }
++        }
+     }
+-    return NULL;
+ #else
+     return NULL;
+ #endif
+@@ -260,6 +249,9 @@ service_started (const gchar *service,
+ 
+     state = rc_service_state (service);
+     return state == RC_SERVICE_STARTED || state == RC_SERVICE_STARTING || state == RC_SERVICE_INACTIVE;
++#elif TIME_STYLE_SLACKWARE
++    int ret = system("/etc/rc.d/rc.ntpd status");
++    return (ret == 0);
+ #else
+     return FALSE;
+ #endif
+@@ -313,7 +305,20 @@ service_disable (const gchar *service,
+     if (service_script != NULL)
+         free (service_script);
+     return ret;
++#elif TIME_STYLE_SLACKWARE
++    int stop_ret = system("/etc/rc.d/rc.ntpd stop");
++    if (stop_ret != 0) {
++        g_set_error(error, G_IO_ERROR, G_IO_ERROR_FAILED, "Failed to stop NTP service with ntpd using sudo");
++        return FALSE;
++    } else {
++        use_ntp = FALSE;
++        if (timedate1 != NULL) {
++            openrc_settingsd_timedated_timedate1_set_ntp(timedate1, use_ntp);
++        }
++        return TRUE;
++    }
+ #else
++    g_set_error(error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED, "NTP service management not supported on this system");
+     return FALSE;
+ #endif
+ }
+@@ -360,13 +365,29 @@ service_enable (const gchar *service,
+     }
+     ret = TRUE;
+ 
+-  out:
++out:
+     if (runlevel != NULL)
+         free (runlevel);
+     if (service_script != NULL)
+         free (service_script);
+     return ret;
++
++#elif TIME_STYLE_SLACKWARE
++    int ret = system("/etc/rc.d/rc.ntpd start");
++    if (ret == 0) {
++        use_ntp = TRUE;
++    } else {
++        g_set_error(error, G_IO_ERROR, G_IO_ERROR_FAILED, "Failed to start NTP service with ntpd using sudo");
++        return FALSE;
++    }
++
++    if (timedate1 != NULL) {
++        openrc_settingsd_timedated_timedate1_set_ntp(timedate1, use_ntp);
++    }
++
++    return TRUE;
+ #else
++    g_set_error(error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED, "NTP service management not supported on this system");
+     return FALSE;
+ #endif
+ }
+-- 
+GitLab
+
+

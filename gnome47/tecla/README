@@ -1,0 +1,3 @@
+Tecla is a keyboard layout viewer that uses GTK/Libadwaita for UI, and
+libxkbcommon to deal with keyboard maps.
+

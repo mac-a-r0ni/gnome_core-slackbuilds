@@ -1,0 +1,7 @@
+gnome-applets (applets for GNOME Panel)
+
+Includes: Keyboard Accessibility Status, Battery Charge Monitor,
+Brightness, Character palettes, Command, CPUFreq, Disk Mounter, Eyes,
+Weather Report, Inhibit, Command Line, System Monitor, Network
+Monitor, Sticky Notes, Search Bar, Timer, Trash, Window Buttons,
+Window Picker, and Window Title applets.

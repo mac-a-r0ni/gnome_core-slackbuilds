@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+              |-----handy-ruler------------------------------------------------------|
+gtksourceview5: gtksourceview5 (a GTK+ framework for source code editing)
+gtksourceview5:
+gtksourceview5: GtkSourceView is a portable C library that extends the standard
+gtksourceview5: GTK+ framework for multiline text editing with support for
+gtksourceview5: configurable syntax highlighting, unlimited undo/redo, UTF-8
+gtksourceview5: compliant caseless searching, printing and other features
+gtksourceview5: typical of a source code editor.
+gtksourceview5:
+gtksourceview5: Homepage: http://projects.gnome.org/gtksourceview/
+gtksourceview5:
+gtksourceview5:

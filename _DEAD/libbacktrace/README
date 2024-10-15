@@ -1,0 +1,8 @@
+libbacktrace (library to produce symbolic backtraces)
+
+The libbacktrace library may be linked into a program or library and
+used to produce symbolic backtraces. Sample uses would be to print a
+detailed backtrace when an error occurs or to gather detailed
+profiling information. In general the functions provided by this
+library are async-signal-safe, meaning that they may be safely
+called from a signal handler.

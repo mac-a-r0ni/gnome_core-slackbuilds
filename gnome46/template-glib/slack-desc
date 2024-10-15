@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+             |-----handy-ruler------------------------------------------------------|
+template-glib: template-glib (A templating library for GLib)
+template-glib:
+template-glib: template-glib is a library for template expansion which supports 
+template-glib: calling into GObject Introspection from templates.
+template-glib:
+template-glib:
+template-glib:
+template-glib:
+template-glib:
+template-glib: https://gitlab.gnome.org/GNOME/template-glib
+template-glib:

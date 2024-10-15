@@ -1,0 +1,7 @@
+simple-scan (simple scanning utility)
+
+A really easy way to scan both text and images. You can crop out the
+bad parts of an image and rotate it if it is the wrong way round. You
+can print your scans, export them to pdf, or save them in a range of
+image formats.
+This app uses the SANE framework to support most existing scanners.

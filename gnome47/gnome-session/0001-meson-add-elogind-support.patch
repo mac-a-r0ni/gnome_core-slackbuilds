@@ -1,0 +1,183 @@
+From e1115e8d183f1be77db7e7ddbf590dc48f3620b4 Mon Sep 17 00:00:00 2001
+From: Dudemanguy <random342@airmail.cc>
+Date: Mon, 25 Mar 2024 12:03:18 -0500
+Subject: [PATCH] meson: add logind-provider option
+
+The session provider can work with anything that implements the logind
+API. Add an option for elogind users.
+---
+ data/meson.build  | 112 +++++++++++++++++++++++-----------------------
+ meson.build       |  14 ++++--
+ meson_options.txt |   1 +
+ 3 files changed, 68 insertions(+), 59 deletions(-)
+
+diff --git a/data/meson.build b/data/meson.build
+index 006000e9..13215c38 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -111,65 +111,67 @@ install_data(
+ unit_conf = configuration_data()
+ unit_conf.set('libexecdir', session_libexecdir)
+ 
+-systemd_service = ['gnome-session-manager@.service',
+-                    'gnome-session-signal-init.service',
+-                    'gnome-session-restart-dbus.service',
+-                    'gnome-session-monitor.service',
+-                    'gnome-session-failed.service']
+-
+-foreach service: systemd_service
+-  configure_file(
+-    input: service + '.in',
+-    output: service,
+-    install: true,
+-    install_dir: systemd_userunitdir,
+-    configuration: unit_conf
+-  )
+-endforeach
+-
+-systemd_target = files('gnome-session-wayland@.target',
+-                        'gnome-session-wayland.target',
+-                        'gnome-session-x11@.target',
+-                        'gnome-session-x11.target',
+-                        'gnome-session-x11-services.target',
+-                        'gnome-session-x11-services-ready.target',
+-                        'gnome-session@.target',
+-                        'gnome-session.target',
+-                        'gnome-session-pre.target',
+-                        'gnome-session-manager.target',
+-                        'gnome-session-initialized.target',
+-                        'gnome-session-shutdown.target',
+-                        'gnome-session-failed.target',
+-                        )
++if use_systemd
++  systemd_service = ['gnome-session-manager@.service',
++                     'gnome-session-signal-init.service',
++                     'gnome-session-restart-dbus.service',
++                     'gnome-session-monitor.service',
++                     'gnome-session-failed.service']
++
++  foreach service: systemd_service
++    configure_file(
++      input: service + '.in',
++      output: service,
++      install: true,
++      install_dir: systemd_userunitdir,
++      configuration: unit_conf
++    )
++  endforeach
+ 
+-install_data(
+-  systemd_target,
+-  install_dir: systemd_userunitdir
+-)
++  systemd_target = files('gnome-session-wayland@.target',
++                         'gnome-session-wayland.target',
++                         'gnome-session-x11@.target',
++                         'gnome-session-x11.target',
++                         'gnome-session-x11-services.target',
++                         'gnome-session-x11-services-ready.target',
++                         'gnome-session@.target',
++                         'gnome-session.target',
++                         'gnome-session-pre.target',
++                         'gnome-session-manager.target',
++                         'gnome-session-initialized.target',
++                         'gnome-session-shutdown.target',
++                         'gnome-session-failed.target',
++                         )
++
++  install_data(
++    systemd_target,
++    install_dir: systemd_userunitdir
++  )
+ 
+-install_data(
+-  'gnome-launched-override.scope.conf',
+-  rename: 'override.conf',
+-  install_dir : join_paths(systemd_userunitdir, 'gnome-launched-.scope.d')
+-)
++  install_data(
++    'gnome-launched-override.scope.conf',
++    rename: 'override.conf',
++    install_dir : join_paths(systemd_userunitdir, 'gnome-launched-.scope.d')
++  )
+ 
+-foreach session, req_components: required_components
+-  wanted_targets = []
+-  foreach component: req_components
+-    wanted_targets += 'Wants=@0@.target'.format(component)
++  foreach session, req_components: required_components
++    wanted_targets = []
++    foreach component: req_components
++      wanted_targets += 'Wants=@0@.target'.format(component)
++    endforeach
++
++    configure_file(
++      input: session + '.session.conf.in',
++      output: session + '.session.conf',
++      configuration: {
++        'requires_component': shell_component[session],
++        'wants_required_components': '\n'.join(wanted_targets),
++      },
++      install_dir: systemd_userunitdir / 'gnome-session@@0@.target.d'.format(
++        session),
++    )
+   endforeach
+-
+-  configure_file(
+-    input: session + '.session.conf.in',
+-    output: session + '.session.conf',
+-    configuration: {
+-      'requires_component': shell_component[session],
+-      'wants_required_components': '\n'.join(wanted_targets),
+-    },
+-    install_dir: systemd_userunitdir / 'gnome-session@@0@.target.d'.format(
+-      session),
+-  )
+-endforeach
++endif
+ 
+ data = files('hardware-compatibility')
+ 
+diff --git a/meson.build b/meson.build
+index 58447657..acb6af13 100644
+--- a/meson.build
++++ b/meson.build
+@@ -106,16 +106,22 @@ enable_session_selector = get_option('session_selector')
+ session_bin_deps += dependency('gio-unix-2.0', version: glib_req_version)
+ 
+ # Check for systemd
++use_systemd = get_option('logind_provider') == 'systemd'
++if use_systemd
++  libsystemd_dep = dependency('libsystemd', version: '>= 209', required: true)
++  session_bin_deps += libsystemd_dep
++elif get_option('logind_provider') == 'elogind'
++  libelogind_dep = dependency('libelogind', version: '>= 209', required: true)
++  session_bin_deps += libelogind_dep
++endif
++
+ systemd_userunitdir = get_option('systemduserunitdir')
+-if systemd_userunitdir == ''
++if systemd_userunitdir == '' and use_systemd
+   systemd_dep = dependency('systemd', version: '>= 242', required: true)
+   systemd_userunitdir = systemd_dep.get_variable(pkgconfig: 'systemduserunitdir',
+                                                  pkgconfig_define: ['prefix', session_prefix])
+ endif
+ 
+-libsystemd_dep = dependency('libsystemd', version: '>= 209', required: true)
+-session_bin_deps += libsystemd_dep
+-
+ configure_file(
+   output: 'config.h',
+   configuration: config_h
+diff --git a/meson_options.txt b/meson_options.txt
+index f146c55c..e4ddc365 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -1,4 +1,5 @@
+ option('deprecation_flags', type: 'boolean', value: false, description: 'use *_DISABLE_DEPRECATED flags')
++option('logind_provider', type: 'combo', choices: ['systemd', 'elogind'], value: 'systemd', description: 'logind implementation')
+ option('session_selector', type: 'boolean', value: false, description: 'enable building a custom session selector dialog')
+ option('systemduserunitdir', type: 'string', description: 'Directory for systemd user service files')
+ option('docbook', type: 'boolean', value: true, description: 'build documentation')
+-- 
+GitLab

@@ -1,0 +1,25 @@
+From 109bd9718ce7e0a5f93eb11320e0f38cf9ec6d04 Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Thu, 29 Feb 2024 01:45:26 +0000
+Subject: [PATCH] Allow Tweaks to work python3.11
+
+---
+ meson.build | 6 +++---
+ 3 file changed, 13 insertions(+), 9 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index b0121b61..ddd331ba 100644
+--- a/meson.build
++++ b/meson.build
+@@ -23,7 +23,7 @@ dependency('gobject-introspection-1.0', version: '>= 1.78.0')
+ dependency('gtk4', version: '>= 4.10.0')
+ dependency('libadwaita-1', version: '>= 1.4.0')
+ dependency('pygobject-3.0', version: '>= 3.46.0')
+-dependency('gudev-1.0', version: '>= 238')
++dependency('gudev-1.0', version: '>= 237')
+ dependency('gsettings-desktop-schemas', version: '>= 46.0')
+ 
+ prefix = get_option('prefix')
+-- 
+GitLab
+

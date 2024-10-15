@@ -79,7 +79,7 @@ find . \
  -exec chmod 644 {} \+
 
 # Don't override font defaults with fonts that we don't have:
-zcat $CWD/gsettings-desktop-schemas.font.defaults.diff.gz | patch -p1 --verbose || exit 1
+#zcat $CWD/gsettings-desktop-schemas.font.defaults.diff.gz | patch -p1 --verbose || exit 1
 
 export CFLAGS="$SLKCFLAGS"
 export CXXFLAGS="$SLKCFLAGS"

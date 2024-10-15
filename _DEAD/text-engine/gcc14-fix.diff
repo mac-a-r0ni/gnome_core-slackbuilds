@@ -1,0 +1,596 @@
+diff -ur a/com.mattjakeman.TextEngine.Demo.json b/com.mattjakeman.TextEngine.Demo.json
+--- a/com.mattjakeman.TextEngine.Demo.json	2024-06-18 02:24:58.413183544 -0400
++++ b/com.mattjakeman.TextEngine.Demo.json	2024-06-18 02:27:10.951878725 -0400
+@@ -1,7 +1,7 @@
+ {
+     "app-id" : "com.mattjakeman.TextEngine.Demo",
+     "runtime" : "org.gnome.Platform",
+-    "runtime-version" : "42",
++    "runtime-version" : "46",
+     "sdk" : "org.gnome.Sdk",
+     "command" : "text-engine-demo",
+     "finish-args" : [
+diff -ur a/demo/demo.c b/demo/demo.c
+--- a/demo/demo.c	2024-06-18 02:24:58.413183544 -0400
++++ b/demo/demo.c	2024-06-18 02:27:10.951878725 -0400
+@@ -106,7 +106,7 @@
+     gsize contents_length;
+ 
+     GtkWidget *header_bar;
+-    GtkWidget *vbox;
++    GtkWidget *toolbar_view;
+     GtkWidget *inspector_btn;
+     GtkWidget *scroll_area;
+ 
+@@ -115,8 +115,8 @@
+ 
+     error = NULL;
+ 
+-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+-    adw_application_window_set_content (ADW_APPLICATION_WINDOW (self), vbox);
++    toolbar_view = adw_toolbar_view_new ();
++    adw_application_window_set_content (ADW_APPLICATION_WINDOW (self), toolbar_view);
+ 
+     // Example rich text document (uses html subset)
+     file = g_file_new_for_uri ("resource:///com/mattjakeman/TextEngine/Demo/demo.html");
+@@ -165,11 +165,11 @@
+     scroll_area = gtk_scrolled_window_new();
+     display = text_display_new (document);
+ 
+-    gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scroll_area), display);
++    gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scroll_area), GTK_WIDGET (display));
+     gtk_widget_set_vexpand (scroll_area, TRUE);
+ 
+-    gtk_box_append (GTK_BOX (vbox), header_bar);
+-    gtk_box_append (GTK_BOX (vbox), GTK_WIDGET (scroll_area));
++    adw_toolbar_view_add_top_bar (ADW_TOOLBAR_VIEW (toolbar_view), header_bar);
++    adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbar_view), GTK_WIDGET (scroll_area));
+ 
+     inspector_btn = gtk_button_new_with_label ("Inspector");
+     g_signal_connect_swapped (inspector_btn,
+@@ -190,14 +190,6 @@
+     // Initialise text-engine for inspector page
+     text_engine_init ();
+ 
+-    // Add CSS Stylesheet
+-    GtkCssProvider *css_provider = gtk_css_provider_new ();
+-    gtk_css_provider_load_from_resource (css_provider, "/com/mattjakeman/TextEngine/Demo/style.css");
+-
+-    GdkDisplay *display = gdk_display_get_default ();
+-    gtk_style_context_add_provider_for_display (display, GTK_STYLE_PROVIDER (css_provider),
+-                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+-
+     // Get the current window or create one if necessary.
+     window = gtk_application_get_active_window (GTK_APPLICATION (app));
+ 
+@@ -218,7 +210,7 @@
+     AdwApplication *app;
+     int ret;
+ 
+-    app = adw_application_new ("com.mattjakeman.TextEngine.Demo", G_APPLICATION_FLAGS_NONE);
++    app = adw_application_new ("com.mattjakeman.TextEngine.Demo", G_APPLICATION_DEFAULT_FLAGS);
+ 
+     g_signal_connect (app, "activate", G_CALLBACK (demo_activate), NULL);
+ 
+diff -ur a/src/editor/editor.c b/src/editor/editor.c
+--- a/src/editor/editor.c	2024-06-18 02:24:58.413183544 -0400
++++ b/src/editor/editor.c	2024-06-18 02:27:10.955212028 -0400
+@@ -595,7 +595,7 @@
+     {
+         paragraph = text_paragraph_new ();
+         text_frame_append_block (document_frame, TEXT_BLOCK (paragraph));
+-        text_paragraph_append_fragment(paragraph, text_run_new(""));
++        text_paragraph_append_fragment(paragraph, TEXT_FRAGMENT (text_run_new ("")));
+     }
+ }
+ 
+@@ -1631,8 +1631,8 @@
+     // Check if start and end indices are in the same run
+     if (iter == last)
+     {
+-        TextFragment *first_split;
+-        TextFragment *second_split;
++        TextRun *first_split;
++        TextRun *second_split;
+         int start_index_offset;
+         int end_index_offset;
+ 
+@@ -1642,7 +1642,7 @@
+         end_index_offset = end->index - end_run_index;
+ 
+         // Split first run
+-        split_run_in_place (iter, &first_split, start_index_offset);
++        split_run_in_place (TEXT_RUN (iter), &first_split, start_index_offset);
+ 
+         // Calculate offset into new run and split again
+         end_index_offset -= start_index_offset;
+@@ -1656,22 +1656,22 @@
+     // Check if we need to split the first run
+     if (start->index - start_run_index != 0)
+     {
+-        TextFragment *new_run;
+-        split_run_in_place (iter, &new_run, start->index - start_run_index);
++        TextRun *new_run;
++        split_run_in_place (TEXT_RUN (iter), &new_run, start->index - start_run_index);
+ 
+         // Apply format to new run
+         set_run_format (new_run, format, in_use);
+-        iter = new_run;
++        iter = TEXT_FRAGMENT (new_run);
+     }
+ 
+     // Check if we need to split the last run
+     if (end->index - end_run_index != 0)
+     {
+         TextRun *new_run;
+-        split_run_in_place (last, &new_run, end->index - end_run_index);
++        split_run_in_place (TEXT_RUN (last), &new_run, end->index - end_run_index);
+ 
+         // Apply format to old run
+-        set_run_format (last, format, in_use);
++        set_run_format (TEXT_RUN (last), format, in_use);
+     }
+ 
+     while (iter != NULL)
+@@ -1679,7 +1679,7 @@
+         if (iter == last)
+             break;
+ 
+-        set_run_format (iter, format, in_use);
++        set_run_format (TEXT_RUN (iter), format, in_use);
+ 
+         iter = walk_until_next_fragment(TEXT_ITEM(iter));
+     }
+diff -ur a/src/format/import-html.c b/src/format/import-html.c
+--- a/src/format/import-html.c	2024-06-18 02:24:58.413183544 -0400
++++ b/src/format/import-html.c	2024-06-18 02:27:10.955212028 -0400
+@@ -92,7 +92,7 @@
+             text_run_set_style_bold (new_run, is_bold);
+             text_run_set_style_italic (new_run, is_italic);
+             text_run_set_style_underline (new_run, is_underline);
+-            text_paragraph_append_fragment(*current, new_run);
++            text_paragraph_append_fragment(*current, TEXT_FRAGMENT (new_run));
+         }
+ 
+         // PROCESS CHILDREN
+diff -ur a/src/ui/display.c b/src/ui/display.c
+--- a/src/ui/display.c	2024-06-18 02:24:58.416516852 -0400
++++ b/src/ui/display.c	2024-06-18 02:27:10.955212028 -0400
+@@ -24,7 +24,7 @@
+     TextDocument *document;
+     TextEditor *editor;
+     TextLayout *layout;
+-    TextLayoutBox *layout_tree;
++    TextNode *layout_tree;
+ 
+     GtkIMContext *context;
+ 
+@@ -229,10 +229,10 @@
+     if (self->layout_tree)
+         text_node_clear (&self->layout_tree);
+ 
+-    self->layout_tree = text_layout_build_layout_tree (self->layout,
+-                                                       gtk_widget_get_pango_context (GTK_WIDGET (self)),
+-                                                       self->document->frame,
+-                                                       width);
++    self->layout_tree = TEXT_NODE (text_layout_build_layout_tree (self->layout,
++                                                                  gtk_widget_get_pango_context (GTK_WIDGET (self)),
++                                                                  self->document->frame,
++                                                                  width));
+ }
+ 
+ static void
+@@ -353,7 +353,7 @@
+     index = cursor->index;
+ 
+     inline_item = text_paragraph_get_item_at_index (item, index, NULL);
+-    block = TEXT_LAYOUT_BLOCK (text_item_get_attachment (item));
++    block = TEXT_LAYOUT_BLOCK (text_item_get_attachment (TEXT_ITEM (item)));
+ 
+     if (TEXT_IS_LAYOUT_BOX (block))
+     {
+@@ -361,7 +361,7 @@
+         const TextDimensions *bbox;
+         PangoLayout *layout;
+ 
+-        bbox = text_layout_box_get_bbox (block);
++        bbox = text_layout_box_get_bbox (TEXT_LAYOUT_BOX (block));
+ 
+         // if (TEXT_IS_RUN (inline_item))
+         {
+@@ -691,7 +691,7 @@
+ 
+     // Draw layout tree
+     gtk_snapshot_save (snapshot);
+-    draw_box_recursive(widget, self->layout_tree, snapshot, &fg_color, &delta_height);
++    draw_box_recursive (widget, TEXT_LAYOUT_BOX (self->layout_tree), snapshot, &fg_color, &delta_height);
+     gtk_snapshot_restore (snapshot);
+ 
+     // Draw cursors
+@@ -728,12 +728,12 @@
+         if (self->layout_tree)
+             text_node_clear (&self->layout_tree);
+ 
+-        self->layout_tree = text_layout_build_layout_tree (self->layout,
+-                                                           context,
+-                                                           self->document->frame,
+-                                                           for_size);
++        self->layout_tree = TEXT_NODE (text_layout_build_layout_tree (self->layout,
++                                                                      context,
++                                                                      self->document->frame,
++                                                                      for_size));
+ 
+-        *minimum = *natural = text_layout_box_get_bbox (self->layout_tree)->height;
++        *minimum = *natural = text_layout_box_get_bbox (TEXT_LAYOUT_BOX (self->layout_tree))->height;
+ 
+         g_debug ("Height: %d\n", *minimum);
+     }
+@@ -765,7 +765,7 @@
+ 
+     _rebuild_layout_tree (self, widget_width - self->margin_start - self->margin_end);
+ 
+-    bbox = text_layout_box_get_bbox (self->layout_tree);
++    bbox = text_layout_box_get_bbox (TEXT_LAYOUT_BOX (self->layout_tree));
+ 
+     content_height = bbox->height + self->margin_top + self->margin_bottom;
+     content_height = MAX (content_height, widget_height);
+@@ -1308,7 +1308,7 @@
+ 
+         y -= displacement;
+ 
+-        box = text_layout_pick (self->layout_tree, x - self->margin_start, y - self->margin_top);
++        box = text_layout_pick (TEXT_LAYOUT_BOX (self->layout_tree), x - self->margin_start, y - self->margin_top);
+ 
+         if (box) {
+             TextItem *item;
+diff -ur a/src/ui/inspector.c b/src/ui/inspector.c
+--- a/src/ui/inspector.c	2024-06-18 02:24:58.416516852 -0400
++++ b/src/ui/inspector.c	2024-06-18 02:27:10.955212028 -0400
+@@ -241,7 +241,7 @@
+     gtk_label_set_xalign (GTK_LABEL (tag), 0.5f);
+     gtk_widget_add_css_class (tag, "inspector-tag");
+     gtk_box_append (GTK_BOX (hbox), tag);
+-    gtk_widget_hide (tag);
++    gtk_widget_set_visible (tag, FALSE);
+ 
+     label = gtk_label_new ("");
+     gtk_label_set_xalign (GTK_LABEL (label), 0);
+@@ -271,7 +271,7 @@
+     g_assert (GTK_IS_TREE_LIST_ROW (row));
+     g_assert (TEXT_IS_ITEM (item));
+ 
+-    gtk_widget_hide (tag);
++    gtk_widget_set_visible (tag, FALSE);
+ 
+     if (TEXT_IS_RUN (item))
+     {
+@@ -287,7 +287,7 @@
+         g_object_get (item, "src", &src, NULL);
+         gtk_label_set_text (GTK_LABEL (label), src);
+ 
+-        gtk_widget_show (tag);
++        gtk_widget_set_visible (tag, TRUE);
+         gtk_label_set_text (GTK_LABEL (tag), "image");
+     }
+     else
+@@ -387,20 +387,38 @@
+ {
+     GtkWidget *infobar;
+     GtkWidget *label;
++    GtkWidget *button;
++    GtkWidget *separator;
+     GtkWidget *scroll_area;
+ 
+     self->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+     gtk_widget_set_parent (self->vbox, GTK_WIDGET (self));
+ 
++    infobar = g_object_new (GTK_TYPE_BOX,
++                            "orientation", GTK_ORIENTATION_HORIZONTAL,
++                            "margin-start", 6,
++                            "margin-end", 6,
++                            "margin-top", 6,
++                            "margin-bottom", 6,
++                            NULL);
++
+     label = gtk_label_new ("Select a TextDisplay widget to view its document");
+     gtk_label_set_xalign (GTK_LABEL (label), 0);
++    gtk_widget_set_hexpand (label, TRUE);
++    gtk_widget_add_css_class (GTK_WIDGET (label), "heading");
++
++    button = gtk_button_new_with_label ("Refresh Model");
++    g_signal_connect_swapped (button, "clicked", G_CALLBACK (populate_data_from_frame), self);
++
++    separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
++
++    gtk_box_append (GTK_BOX (infobar), label);
++    gtk_box_append (GTK_BOX (infobar), button);
+ 
+-    infobar = gtk_info_bar_new ();
+-    gtk_info_bar_add_child (GTK_INFO_BAR (infobar), label);
+-    gtk_info_bar_add_button (GTK_INFO_BAR (infobar), "Refresh Model", GTK_BUTTONS_OK);
+-    g_signal_connect_swapped (infobar, "response", G_CALLBACK (populate_data_from_frame), self);
+     gtk_box_append (GTK_BOX (self->vbox), infobar);
+ 
++    gtk_box_append (GTK_BOX (self->vbox), separator);
++
+     scroll_area = gtk_scrolled_window_new ();
+     gtk_box_append (GTK_BOX (self->vbox), scroll_area);
+ 
+diff -ur a/test/delete.c b/test/delete.c
+--- a/test/delete.c	2024-06-18 02:24:58.416516852 -0400
++++ b/test/delete.c	2024-06-18 02:27:10.955212028 -0400
+@@ -50,19 +50,19 @@
+     run1 = text_run_new (RUN1);
+     run2 = text_run_new (RUN2);
+     run3 = text_run_new (RUN3);
+-    text_paragraph_append_fragment(para1, run1);
+-    text_paragraph_append_fragment(para1, run2);
+-    text_paragraph_append_fragment(para1, run3);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run2));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run3));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     para2 = text_paragraph_new ();
+     run4 = text_run_new (RUN4);
+-    text_paragraph_append_fragment(para2, run4);
++    text_paragraph_append_fragment(para2, TEXT_FRAGMENT (run4));
+     text_frame_append_block (frame, TEXT_BLOCK (para2));
+ 
+     para3 = text_paragraph_new ();
+     run5 = text_run_new (RUN5);
+-    text_paragraph_append_fragment(para3, run5);
++    text_paragraph_append_fragment(para3, TEXT_FRAGMENT (run5));
+     text_frame_append_block (frame, TEXT_BLOCK (para3));
+ 
+     fixture->doc = text_document_new ();
+@@ -115,7 +115,7 @@
+     text_editor_delete (fixture->editor, TEXT_EDITOR_CURSOR, 10);
+ 
+     // run 2 should no longer exist
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run1);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run1));
+     g_assert_cmpint (fixture->doc->cursor->index, ==, 10);
+ 
+     // check length
+@@ -150,7 +150,7 @@
+     g_assert_cmpint (length, ==, 0);
+ 
+     // check cursor position
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run4);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run4));
+     g_assert_cmpint (fixture->doc->cursor->index, ==, 0);
+ 
+     // check text
+diff -ur a/test/insert.c b/test/insert.c
+--- a/test/insert.c	2024-06-18 02:24:58.416516852 -0400
++++ b/test/insert.c	2024-06-18 02:27:10.955212028 -0400
+@@ -42,13 +42,13 @@
+     para1 = text_paragraph_new ();
+     run1 = text_run_new (RUN1);
+     run2 = text_run_new (RUN2);
+-    text_paragraph_append_fragment(para1, run1);
+-    text_paragraph_append_fragment(para1, run2);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run2));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     para2 = text_paragraph_new ();
+     run3 = text_run_new (RUN3);
+-    text_paragraph_append_fragment(para2, run3);
++    text_paragraph_append_fragment(para2, TEXT_FRAGMENT (run3));
+     text_frame_append_block (frame, TEXT_BLOCK (para2));
+ 
+     fixture->doc = text_document_new ();
+diff -ur a/test/mark.c b/test/mark.c
+--- a/test/mark.c	2024-06-18 02:24:58.416516852 -0400
++++ b/test/mark.c	2024-06-18 02:27:10.955212028 -0400
+@@ -50,19 +50,19 @@
+     run1 = text_run_new (RUN1);
+     run2 = text_run_new (RUN2);
+     run3 = text_run_new (RUN3);
+-    text_paragraph_append_fragment(para1, run1);
+-    text_paragraph_append_fragment(para1, run2);
+-    text_paragraph_append_fragment(para1, run3);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run2));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run3));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     para2 = text_paragraph_new ();
+     run4 = text_run_new (RUN4);
+-    text_paragraph_append_fragment(para2, run4);
++    text_paragraph_append_fragment(para2, TEXT_FRAGMENT (run4));
+     text_frame_append_block (frame, TEXT_BLOCK (para2));
+ 
+     para3 = text_paragraph_new ();
+     run5 = text_run_new (RUN5);
+-    text_paragraph_append_fragment(para3, run5);
++    text_paragraph_append_fragment(para3, TEXT_FRAGMENT (run5));
+     text_frame_append_block (frame, TEXT_BLOCK (para3));
+ 
+     fixture->doc = text_document_new ();
+diff -ur a/test/move.c b/test/move.c
+--- a/test/move.c	2024-06-18 02:24:58.416516852 -0400
++++ b/test/move.c	2024-06-18 02:27:10.955212028 -0400
+@@ -43,7 +43,7 @@
+ 
+     para1 = text_paragraph_new ();
+     run1 = text_run_new (RUN1);
+-    text_paragraph_append_fragment(para1, run1);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     fixture->doc = text_document_new ();
+@@ -77,9 +77,9 @@
+     run1 = text_run_new (RUN5);
+     run2 = text_run_new (RUN6);
+     run3 = text_run_new (RUN7);
+-    text_paragraph_append_fragment(para1, run1);
+-    text_paragraph_append_fragment(para1, run2);
+-    text_paragraph_append_fragment(para1, run3);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run2));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run3));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     fixture->doc = text_document_new ();
+@@ -108,18 +108,18 @@
+     para1 = text_paragraph_new ();
+     run1 = text_run_new (RUN1);
+     run2 = text_run_new (RUN2);
+-    text_paragraph_append_fragment(para1, run1);
+-    text_paragraph_append_fragment(para1, run2);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run2));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     para2 = text_paragraph_new ();
+     run3 = text_run_new (RUN3);
+-    text_paragraph_append_fragment(para2, run3);
++    text_paragraph_append_fragment(para2, TEXT_FRAGMENT (run3));
+     text_frame_append_block (frame, TEXT_BLOCK (para2));
+ 
+     para3 = text_paragraph_new ();
+     run4 = text_run_new (RUN4);
+-    text_paragraph_append_fragment(para3, run4);
++    text_paragraph_append_fragment(para3, TEXT_FRAGMENT (run4));
+     text_frame_append_block (frame, TEXT_BLOCK (para3));
+ 
+     fixture->doc = text_document_new ();
+@@ -195,11 +195,11 @@
+ 
+     // go to index 29 (run two)
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, 29);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run2);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run2));
+ 
+     // test moving left by amount
+     text_editor_move_left (fixture->editor, TEXT_EDITOR_CURSOR, amount);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run1);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run1));
+ 
+     g_assert_cmpint (fixture->doc->cursor->index, ==, 29 - amount);
+ }
+@@ -213,11 +213,11 @@
+ 
+     // go to index 28 (run one)
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, 28);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run1);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run1));
+ 
+     // test moving right by amount
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, amount);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run2);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run2));
+ 
+     g_assert_cmpint (fixture->doc->cursor->index, ==, 28 + amount);
+ }
+@@ -247,12 +247,12 @@
+ 
+     // move to start of p2 (run3)
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, 65);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run3);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run3));
+     g_assert_cmpint (fixture->doc->cursor->index, ==, 0);
+ 
+     // move backwards by amount
+     text_editor_move_left (fixture->editor, TEXT_EDITOR_CURSOR, amount);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run2);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run2));
+ 
+     // check index
+     g_assert_cmpint (fixture->doc->cursor->index, ==, (64 - (amount - 1)));
+@@ -267,11 +267,11 @@
+ 
+     // move to end of p1 (run2)
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, 64);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run2);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run2));
+ 
+     // move forwards by amount
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, amount);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run3);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run3));
+ 
+     // check index
+     g_assert_cmpint (fixture->doc->cursor->index, ==, amount - 1);
+@@ -283,11 +283,11 @@
+ {
+     // move to start of p3 (run4)
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, 85);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run4);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run4));
+ 
+     // move left by 62 characters (to run1)
+     text_editor_move_left (fixture->editor, TEXT_EDITOR_CURSOR, 62);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run1);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run1));
+ 
+     // check index is 23 in p1
+     g_assert_cmpint (fixture->doc->cursor->index, ==, 23);
+@@ -299,7 +299,7 @@
+ {
+     // move to p3, index 2 (run4)
+     text_editor_move_right (fixture->editor, TEXT_EDITOR_CURSOR, 87);
+-    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == fixture->run4);
++    g_assert_true (text_editor_get_item (fixture->editor, TEXT_EDITOR_CURSOR) == TEXT_FRAGMENT (fixture->run4));
+ 
+     // check index is 2 in p3
+     g_assert_cmpint (fixture->doc->cursor->index, ==, 2);
+diff -ur a/test/replace.c b/test/replace.c
+--- a/test/replace.c	2024-06-18 02:24:58.416516852 -0400
++++ b/test/replace.c	2024-06-18 02:27:10.955212028 -0400
+@@ -50,19 +50,19 @@
+     run1 = text_run_new (RUN1);
+     run2 = text_run_new (RUN2);
+     run3 = text_run_new (RUN3);
+-    text_paragraph_append_fragment(para1, run1);
+-    text_paragraph_append_fragment(para1, run2);
+-    text_paragraph_append_fragment(para1, run3);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run2));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run3));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     para2 = text_paragraph_new ();
+     run4 = text_run_new (RUN4);
+-    text_paragraph_append_fragment(para2, run4);
++    text_paragraph_append_fragment(para2, TEXT_FRAGMENT (run4));
+     text_frame_append_block (frame, TEXT_BLOCK (para2));
+ 
+     para3 = text_paragraph_new ();
+     run5 = text_run_new (RUN5);
+-    text_paragraph_append_fragment(para3, run5);
++    text_paragraph_append_fragment(para3, TEXT_FRAGMENT (run5));
+     text_frame_append_block (frame, TEXT_BLOCK (para3));
+ 
+     fixture->doc = text_document_new ();
+diff -ur a/test/split.c b/test/split.c
+--- a/test/split.c	2024-06-18 02:24:58.416516852 -0400
++++ b/test/split.c	2024-06-18 02:27:10.955212028 -0400
+@@ -50,19 +50,19 @@
+     run1 = text_run_new (RUN1);
+     run2 = text_run_new (RUN2);
+     run3 = text_run_new (RUN3);
+-    text_paragraph_append_fragment(para1, run1);
+-    text_paragraph_append_fragment(para1, run2);
+-    text_paragraph_append_fragment(para1, run3);
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run1));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run2));
++    text_paragraph_append_fragment(para1, TEXT_FRAGMENT (run3));
+     text_frame_append_block (frame, TEXT_BLOCK (para1));
+ 
+     para2 = text_paragraph_new ();
+     run4 = text_run_new (RUN4);
+-    text_paragraph_append_fragment(para2, run4);
++    text_paragraph_append_fragment(para2, TEXT_FRAGMENT (run4));
+     text_frame_append_block (frame, TEXT_BLOCK (para2));
+ 
+     para3 = text_paragraph_new ();
+     run5 = text_run_new (RUN5);
+-    text_paragraph_append_fragment(para3, run5);
++    text_paragraph_append_fragment(para3, TEXT_FRAGMENT (run5));
+     text_frame_append_block (frame, TEXT_BLOCK (para3));
+ 
+     fixture->doc = text_document_new ();

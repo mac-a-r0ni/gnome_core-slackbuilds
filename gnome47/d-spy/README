@@ -1,0 +1,5 @@
+D-Spy is an easy to use D-Bus debugger written in C. It can be used to 
+inspect D-Bus interfaces of running programs and invoke methods on 
+those interfaces.
+
+Also comes with a library for IDE integration.

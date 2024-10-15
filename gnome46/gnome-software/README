@@ -1,0 +1,6 @@
+gnome-software (Software Center for GNOME)
+
+Software lets you install and update applications and system
+extensions. This package can be used to manage Flatpaks on
+Slackware, there is no support for directly managing official
+Slackware binaries currently.

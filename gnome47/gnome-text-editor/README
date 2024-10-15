@@ -1,0 +1,17 @@
+GNOME Text Editor is a simple text editor that focuses on session
+management. It works hard to keep track of changes and state even if you
+quit the application. You can come back to your work even if you've 
+never saved it to a file.
+
+Features:
+
+ - A simple editor focused on a solid default experience
+ - Syntax highlighting for common programming languages
+ - Search & Replace including support for PCRE2-based regular 
+   expressions
+ - Inline spell checking
+ - Document printing
+ - Desktop integration including dark-mode and saving session state
+ - Support for .editorconfig and modelines
+ - Integrated support for Vim keybindings
+

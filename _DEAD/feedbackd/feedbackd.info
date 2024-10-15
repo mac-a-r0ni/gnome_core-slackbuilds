@@ -1,0 +1,12 @@
+PRGNAM="feedbackd"
+VERSION="v0.4.0"
+HOMEPAGE="https://source.puri.sm/Librem5/feedbackd"
+DOWNLOAD="https://source.puri.sm/Librem5/feedbackd/-/archive/v0.4.0/feedbackd-v0.4.0.tar.gz \
+          https://gitlab.gnome.org/World/Phosh/gmobile/-/archive/v0.2.1/gmobile-v0.2.1.tar.gz"
+MD5SUM="0cd3f87901b2d86f220f54b5efa12a1d \
+        e866deb04c7a8be39be7b7564a138664"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="gsound umockdev"
+MAINTAINER="Bob Funk"
+EMAIL="bobfunk11@gmail.com"

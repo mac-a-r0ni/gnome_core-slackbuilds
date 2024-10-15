@@ -1,0 +1,464 @@
+diff -Naur gnome-bluetooth-42.5/docs/reference/libgnome-bluetooth/gnome-bluetooth-sections.txt gnome-bluetooth-42.5-patched/docs/reference/libgnome-bluetooth/gnome-bluetooth-sections.txt
+--- gnome-bluetooth-42.5/docs/reference/libgnome-bluetooth/gnome-bluetooth-sections.txt	2022-12-13 13:12:38.000000000 +0000
++++ gnome-bluetooth-42.5-patched/docs/reference/libgnome-bluetooth/gnome-bluetooth-sections.txt	2023-02-20 04:22:26.570960012 +0000
+@@ -23,7 +23,6 @@
+ BLUETOOTH_TYPE_AUDIO
+ BLUETOOTH_TYPE_INPUT
+ BluetoothType
+-BluetoothBatteryType
+ </SECTION>
+ 
+ <SECTION>
+diff -Naur gnome-bluetooth-42.5/lib/bluetooth-client.c gnome-bluetooth-42.5-patched/lib/bluetooth-client.c
+--- gnome-bluetooth-42.5/lib/bluetooth-client.c	2022-12-13 13:12:38.000000000 +0000
++++ gnome-bluetooth-42.5-patched/lib/bluetooth-client.c	2023-02-20 04:37:17.916925092 +0000
+@@ -39,7 +39,6 @@
+ #include <string.h>
+ #include <glib/gi18n-lib.h>
+ #include <gio/gio.h>
+-#include <libupower-glib/upower.h>
+ 
+ #include "bluetooth-client.h"
+ #include "bluetooth-client-private.h"
+@@ -65,8 +64,6 @@
+ 	guint num_adapters;
+ 	/* Prevent concurrent enabling or disabling discoveries */
+ 	gboolean discovery_started;
+-	UpClient *up_client;
+-	gboolean bluez_devices_coldplugged;
+ 	GList *removed_devices_queue;
+ 	guint removed_devices_queue_id;
+ };
+@@ -94,8 +91,6 @@
+ 
+ #define DEVICE_REMOVAL_TIMEOUT_MSECS 50
+ 
+-static void up_client_coldplug (BluetoothClient *client);
+-
+ static BluetoothDevice *
+ get_device_for_path (BluetoothClient *client,
+ 		     const char      *path)
+@@ -114,26 +109,6 @@
+ 	return NULL;
+ }
+ 
+-static BluetoothDevice *
+-get_device_for_bdaddr (BluetoothClient *client,
+-		       const char      *bdaddr)
+-{
+-	guint n_items, i;
+-
+-	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+-	for (i = 0; i < n_items; i++) {
+-		g_autoptr(BluetoothDevice) d = NULL;
+-		g_autofree char *s = NULL;
+-
+-		d = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+-		g_object_get (G_OBJECT (d), "address", &s, NULL);
+-		if (g_ascii_strncasecmp (bdaddr, s, BDADDR_STR_LEN) == 0) {
+-			return g_steal_pointer (&d);
+-		}
+-	}
+-	return NULL;
+-}
+-
+ static char **
+ device_list_uuids (const gchar * const *uuids)
+ {
+@@ -477,9 +452,6 @@
+ {
+ 	GList *object_list, *l;
+ 	const char *default_adapter_path;
+-	gboolean coldplug_upower;
+-
+-	coldplug_upower = !client->bluez_devices_coldplugged && client->up_client;
+ 
+ 	g_debug ("Emptying list store as default adapter changed");
+ 	g_list_store_remove_all (client->list_store);
+@@ -487,7 +459,6 @@
+ 	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
+ 
+ 	g_debug ("Coldplugging devices for new default adapter");
+-	client->bluez_devices_coldplugged = TRUE;
+ 	object_list = g_dbus_object_manager_get_objects (client->manager);
+ 	for (l = object_list; l != NULL; l = l->next) {
+ 		GDBusObject *object = l->data;
+@@ -540,9 +511,6 @@
+ 		g_signal_emit (G_OBJECT (client), signals[DEVICE_ADDED], 0, device_obj);
+ 	}
+ 	g_list_free_full (object_list, g_object_unref);
+-
+-	if (coldplug_upower)
+-		up_client_coldplug (client);
+ }
+ 
+ static void
+@@ -914,193 +882,6 @@
+ 		adapter_added (client->manager, l->data, client);
+ }
+ 
+-static void
+-device_set_up_device (BluetoothDevice *device,
+-		      UpDevice        *up_device)
+-{
+-	g_object_set_data_full (G_OBJECT (device), "up-device", up_device ? g_object_ref (up_device) : NULL, g_object_unref);
+-}
+-
+-static UpDevice *
+-device_get_up_device (BluetoothDevice *device)
+-{
+-	return g_object_get_data (G_OBJECT (device), "up-device");
+-}
+-
+-static void
+-up_device_notify_cb (GObject    *gobject,
+-		     GParamSpec *pspec,
+-		     gpointer    user_data)
+-{
+-	UpDevice *up_device = UP_DEVICE (gobject);
+-	BluetoothDevice *device = user_data;
+-	UpDeviceLevel battery_level;
+-	double percentage;
+-	BluetoothBatteryType battery_type;
+-
+-	g_object_get (up_device,
+-		      "battery-level", &battery_level,
+-		      "percentage", &percentage,
+-		      NULL);
+-
+-	if (battery_level == UP_DEVICE_LEVEL_NONE)
+-		battery_type = BLUETOOTH_BATTERY_TYPE_PERCENTAGE;
+-	else
+-		battery_type = BLUETOOTH_BATTERY_TYPE_COARSE;
+-	g_debug ("Updating battery information for %s", bluetooth_device_get_object_path (device));
+-	g_object_set (device,
+-		      "battery-type", battery_type,
+-		      "battery-level", battery_level,
+-		      "battery-percentage", percentage,
+-		      NULL);
+-}
+-
+-static BluetoothDevice *
+-get_bluetooth_device_for_up_device (BluetoothClient *client,
+-				    const char      *path)
+-{
+-	guint n_items, i;
+-
+-	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+-	for (i = 0; i < n_items; i++) {
+-		g_autoptr(BluetoothDevice) d = NULL;
+-		UpDevice *up_device;
+-
+-		d = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+-		up_device = device_get_up_device (d);
+-		if (!up_device)
+-			continue;
+-		if (g_str_equal (path, up_device_get_object_path (up_device)))
+-			return g_steal_pointer (&d);
+-	}
+-	return NULL;
+-}
+-
+-static void
+-up_device_removed_cb (UpClient   *up_client,
+-		      const char *object_path,
+-		      gpointer    user_data)
+-{
+-	BluetoothClient *client = user_data;
+-	BluetoothDevice *device;
+-
+-	device = get_bluetooth_device_for_up_device (client, object_path);
+-	if (device == NULL)
+-		return;
+-	g_debug ("Removing UpDevice %s for BluetoothDevice %s",
+-		 object_path, bluetooth_device_get_object_path (device));
+-	device_set_up_device (device, NULL);
+-	g_object_set (device,
+-		      "battery-type", BLUETOOTH_BATTERY_TYPE_NONE,
+-		      "battery-level", UP_DEVICE_LEVEL_UNKNOWN,
+-		      "battery-percentage", 0.0f,
+-		      NULL);
+-}
+-
+-static void
+-up_device_added_cb (UpClient *up_client,
+-		    UpDevice *up_device,
+-		    gpointer  user_data)
+-{
+-	BluetoothClient *client = user_data;
+-	g_autofree char *serial = NULL;
+-	g_autoptr(BluetoothDevice) device = NULL;
+-	UpDeviceLevel battery_level;
+-	double percentage;
+-	BluetoothBatteryType battery_type;
+-
+-	g_debug ("Considering UPower device %s", up_device_get_object_path (up_device));
+-
+-	g_object_get (up_device,
+-		      "serial", &serial,
+-		      "battery-level", &battery_level,
+-		      "percentage", &percentage,
+-		      NULL);
+-
+-	if (!serial || !bluetooth_verify_address(serial))
+-		return;
+-	device = get_device_for_bdaddr (client, serial);
+-	if (!device) {
+-		g_debug ("Could not find bluez device for upower device with serial %s", serial);
+-		return;
+-	}
+-	g_signal_connect (G_OBJECT (up_device), "notify::battery-level",
+-			  G_CALLBACK (up_device_notify_cb), device);
+-	g_signal_connect (G_OBJECT (up_device), "notify::percentage",
+-			  G_CALLBACK (up_device_notify_cb), device);
+-	device_set_up_device (device, up_device);
+-	if (battery_level == UP_DEVICE_LEVEL_NONE)
+-		battery_type = BLUETOOTH_BATTERY_TYPE_PERCENTAGE;
+-	else
+-		battery_type = BLUETOOTH_BATTERY_TYPE_COARSE;
+-	g_debug ("Applying battery information for %s", serial);
+-	g_object_set (device,
+-		      "battery-type", battery_type,
+-		      "battery-level", battery_level,
+-		      "battery-percentage", percentage,
+-		      NULL);
+-}
+-
+-static void
+-up_client_get_devices_cb (GObject      *source_object,
+-			  GAsyncResult *res,
+-			  gpointer      user_data)
+-{
+-	GPtrArray *devices;
+-	g_autoptr(GError) error = NULL;
+-	BluetoothClient *client;
+-	guint i;
+-
+-	devices = up_client_get_devices_finish (UP_CLIENT (source_object), res, &error);
+-	if (!devices) {
+-		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+-			g_debug ("Could not get UPower devices: %s", error->message);
+-		return;
+-	}
+-	g_debug ("Got initial list of %d UPower devices", devices->len);
+-	client = user_data;
+-	for (i = 0; i < devices->len; i++) {
+-		UpDevice *device = g_ptr_array_index (devices, i);
+-		up_device_added_cb (client->up_client, device, client);
+-	}
+-	g_ptr_array_unref (devices);
+-}
+-
+-static void
+-up_client_coldplug (BluetoothClient *client)
+-{
+-	g_return_if_fail (client->up_client != NULL);
+-	up_client_get_devices_async (client->up_client, client->cancellable,
+-				     up_client_get_devices_cb, client);
+-}
+-
+-static void
+-up_client_new_cb (GObject      *source_object,
+-		  GAsyncResult *res,
+-		  gpointer      user_data)
+-{
+-	g_autoptr(GError) error = NULL;
+-	BluetoothClient *client;
+-	UpClient *up_client;
+-
+-	up_client = up_client_new_finish (res, &error);
+-	if (!up_client) {
+-		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+-			g_debug ("Could not create UpClient: %s", error->message);
+-		return;
+-	}
+-
+-	g_debug ("Successfully created UpClient");
+-	client = user_data;
+-	client->up_client = up_client;
+-	g_signal_connect_object (G_OBJECT (up_client), "device-added",
+-				 G_CALLBACK (up_device_added_cb), client, 0);
+-	g_signal_connect_object (G_OBJECT (up_client), "device-removed",
+-				 G_CALLBACK (up_device_removed_cb), client, 0);
+-	if (client->bluez_devices_coldplugged)
+-		up_client_coldplug (client);
+-}
+-
+ static void bluetooth_client_init(BluetoothClient *client)
+ {
+ 	client->cancellable = g_cancellable_new ();
+@@ -1115,9 +896,6 @@
+ 						  NULL, NULL,
+ 						  client->cancellable,
+ 						  object_manager_new_callback, client);
+-	up_client_new_async (client->cancellable,
+-			     up_client_new_cb,
+-			     client);
+ }
+ 
+ GDBusProxy *
+@@ -1344,7 +1122,6 @@
+ 	g_object_unref (client->list_store);
+ 
+ 	g_clear_object (&client->default_adapter);
+-	g_clear_object (&client->up_client);
+ 
+ 	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize (object);
+ }
+diff -Naur gnome-bluetooth-42.5/lib/bluetooth-device.c gnome-bluetooth-42.5-patched/lib/bluetooth-device.c
+--- gnome-bluetooth-42.5/lib/bluetooth-device.c	2022-12-13 13:12:38.000000000 +0000
++++ gnome-bluetooth-42.5-patched/lib/bluetooth-device.c	2023-02-20 04:20:37.871964271 +0000
+@@ -7,7 +7,6 @@
+ #include "config.h"
+ 
+ #include <glib-object.h>
+-#include <libupower-glib/upower.h>
+ 
+ #include "bluetooth-device.h"
+ #include "bluetooth-utils.h"
+@@ -26,9 +25,6 @@
+ 	PROP_LEGACYPAIRING,
+ 	PROP_UUIDS,
+ 	PROP_CONNECTABLE,
+-	PROP_BATTERY_TYPE,
+-	PROP_BATTERY_PERCENTAGE,
+-	PROP_BATTERY_LEVEL
+ };
+ 
+ struct _BluetoothDevice {
+@@ -46,9 +42,6 @@
+ 	gboolean legacy_pairing;
+ 	char **uuids;
+ 	gboolean connectable;
+-	BluetoothBatteryType battery_type;
+-	double battery_percentage;
+-	UpDeviceLevel battery_level;
+ };
+ 
+ static const char *connectable_uuids[] = {
+@@ -134,15 +127,6 @@
+ 	case PROP_CONNECTABLE:
+ 		g_value_set_boolean (value, device->connectable);
+ 		break;
+-	case PROP_BATTERY_TYPE:
+-		g_value_set_enum (value, device->battery_type);
+-		break;
+-	case PROP_BATTERY_PERCENTAGE:
+-		g_value_set_double (value, device->battery_percentage);
+-		break;
+-	case PROP_BATTERY_LEVEL:
+-		g_value_set_uint (value, device->battery_level);
+-		break;
+ 	default:
+ 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+ 		break;
+@@ -198,15 +182,6 @@
+ 		device->uuids = g_value_dup_boxed (value);
+ 		update_connectable (device);
+ 		break;
+-	case PROP_BATTERY_TYPE:
+-		device->battery_type = g_value_get_enum (value);
+-		break;
+-	case PROP_BATTERY_PERCENTAGE:
+-		device->battery_percentage = g_value_get_double (value);
+-		break;
+-	case PROP_BATTERY_LEVEL:
+-		device->battery_level = g_value_get_uint (value);
+-		break;
+ 	default:
+ 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+ 		break;
+@@ -271,16 +246,6 @@
+ 	g_object_class_install_property (object_class, PROP_CONNECTABLE,
+ 					 g_param_spec_boolean ("connectable", NULL, "Connectable",
+ 							       FALSE, G_PARAM_READABLE));
+-	g_object_class_install_property (object_class, PROP_BATTERY_TYPE,
+-					 g_param_spec_enum ("battery-type", NULL, "Battery Type",
+-							    BLUETOOTH_TYPE_BATTERY_TYPE, BLUETOOTH_BATTERY_TYPE_NONE, G_PARAM_READWRITE));
+-	g_object_class_install_property (object_class, PROP_BATTERY_PERCENTAGE,
+-					 g_param_spec_double ("battery-percentage", NULL, "Battery Percentage",
+-							    0.0, 100.f, 0.0, G_PARAM_READWRITE));
+-	g_object_class_install_property (object_class, PROP_BATTERY_LEVEL,
+-					 g_param_spec_uint ("battery-level", NULL, "Battery Level",
+-							    UP_DEVICE_LEVEL_UNKNOWN, UP_DEVICE_LEVEL_LAST - 1, UP_DEVICE_LEVEL_UNKNOWN,
+-							    G_PARAM_READWRITE));
+ }
+ 
+ static void
+@@ -313,10 +278,6 @@
+ 	g_string_append_printf (str, "\tD-Bus Path: %s\n", device->proxy ? g_dbus_proxy_get_object_path (device->proxy) : "(none)");
+ 	g_string_append_printf (str, "\tType: %s Icon: %s\n", bluetooth_type_to_string (device->type), device->icon);
+ 	g_string_append_printf (str, "\tPaired: %s Trusted: %s Connected: %s\n", BOOL_STR(device->paired), BOOL_STR(device->trusted), BOOL_STR(device->connected));
+-	if (device->battery_type == BLUETOOTH_BATTERY_TYPE_PERCENTAGE)
+-		g_string_append_printf (str, "\tBattery: %.02g%%\n", device->battery_percentage);
+-	else if (device->battery_type == BLUETOOTH_BATTERY_TYPE_COARSE)
+-		g_string_append_printf (str, "\tBattery: %s\n", up_device_level_to_string (device->battery_level));
+ 	if (device->uuids != NULL) {
+ 		guint i;
+ 		g_string_append_printf (str, "\tUUIDs: ");
+diff -Naur gnome-bluetooth-42.5/lib/bluetooth-enums.h gnome-bluetooth-42.5-patched/lib/bluetooth-enums.h
+--- gnome-bluetooth-42.5/lib/bluetooth-enums.h	2022-12-13 13:12:38.000000000 +0000
++++ gnome-bluetooth-42.5-patched/lib/bluetooth-enums.h	2023-02-20 04:23:30.426957511 +0000
+@@ -100,20 +100,6 @@
+ #define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO | BLUETOOTH_TYPE_SPEAKERS)
+ 
+ /**
+- * BluetoothBatteryType:
+- * @BLUETOOTH_BATTERY_TYPE_NONE: no battery reporting
+- * @BLUETOOTH_BATTERY_TYPE_PERCENTAGE: battery reported in percentage
+- * @BLUETOOTH_BATTERY_TYPE_COARSE: battery reported coarsely
+- *
+- * The type of battery reporting supported by the device.
+- **/
+-typedef enum {
+-	BLUETOOTH_BATTERY_TYPE_NONE,
+-	BLUETOOTH_BATTERY_TYPE_PERCENTAGE,
+-	BLUETOOTH_BATTERY_TYPE_COARSE
+-} BluetoothBatteryType;
+-
+-/**
+  * BluetoothAdapterState:
+  * @BLUETOOTH_ADAPTER_STATE_ABSENT: Bluetooth adapter is missing.
+  * @BLUETOOTH_ADAPTER_STATE_ON: Bluetooth adapter is on.
+diff -Naur gnome-bluetooth-42.5/lib/bluetooth-utils.h gnome-bluetooth-42.5-patched/lib/bluetooth-utils.h
+--- gnome-bluetooth-42.5/lib/bluetooth-utils.h	2022-12-13 13:12:38.000000000 +0000
++++ gnome-bluetooth-42.5-patched/lib/bluetooth-utils.h	2023-02-20 04:37:34.187924455 +0000
+@@ -27,8 +27,6 @@
+ #include <gio/gio.h>
+ #include <bluetooth-enums.h>
+ 
+-#define BDADDR_STR_LEN                         17
+-
+ BluetoothType  bluetooth_class_to_type         (guint32 class);
+ BluetoothType  bluetooth_appearance_to_type    (guint16 appearance);
+ const gchar   *bluetooth_type_to_string        (guint type);
+diff -Naur gnome-bluetooth-42.5/lib/meson.build gnome-bluetooth-42.5-patched/lib/meson.build
+--- gnome-bluetooth-42.5/lib/meson.build	2022-12-13 13:12:38.000000000 +0000
++++ gnome-bluetooth-42.5-patched/lib/meson.build	2023-02-20 04:21:19.297962648 +0000
+@@ -66,7 +66,6 @@
+   gio_unix_dep,
+   libudev_dep,
+   m_dep,
+-  upower_dep,
+ ]
+ 
+ ui_deps = [
+@@ -80,7 +79,6 @@
+   gsound_dep,
+   libnotify_dep,
+   libudev_dep,
+-  upower_dep,
+   m_dep,
+ ]
+ 
+diff -Naur gnome-bluetooth-42.5/meson.build gnome-bluetooth-42.5-patched/meson.build
+--- gnome-bluetooth-42.5/meson.build	2022-12-13 13:12:38.000000000 +0000
++++ gnome-bluetooth-42.5-patched/meson.build	2023-02-20 04:21:33.985962072 +0000
+@@ -107,7 +107,6 @@
+ )
+ libnotify_dep = dependency('libnotify', version: '>= 0.7.0')
+ libudev_dep = dependency('libudev')
+-upower_dep = dependency('upower-glib', version: '>= 0.99.14')
+ 
+ m_dep = cc.find_library('m')
+ 

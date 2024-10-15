@@ -1,0 +1,4 @@
+Snapshot is the GNOME projects webcam application for taking pictures
+and videos. It is built pn GTK4 and GStreamer Libraries and intended 
+to replace GNOME's previous webcam application Cheese.
+

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=openrc-listener
+Comment=Start the openrc-listener
+Exec=/usr/bin/daemon -frB --pidfiles=~/.run --name=openrc-listener /bin/openrc-listener
+Terminal=false
+Type=Application
+X-GNOME-Autostart-Delay=6

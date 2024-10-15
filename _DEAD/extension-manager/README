@@ -1,0 +1,4 @@
+extension-manager (tool for managing GNOME Shell Extensions)
+
+A native tool for browsing, installing, and managing GNOME Shell
+Extensions. Written with GTK 4 and libadwaita.

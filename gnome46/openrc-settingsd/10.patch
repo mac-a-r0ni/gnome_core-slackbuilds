@@ -1,0 +1,332 @@
+From c0def65125f460489b9a03e0cb5cf0909203438c Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Tue, 20 Feb 2024 02:40:00 +0000
+Subject: [PATCH 1/5]  Implement Slackware specific information
+
+---
+ meson.build       |  9 +++++++++
+ meson_options.txt |  5 +++--
+ src/hostnamed.c   | 13 +++++++++++++
+ src/localed.c     |  4 ++++
+ src/timedated.c   | 48 +++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 77 insertions(+), 2 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 5fc1174..70a4e6c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -57,6 +57,15 @@ endif
+ if get_option('locale-style') == 'gentoo'
+   conf_data.set('LOCALE_STYLE_GENTOO', 1)
+ endif
++if get_option('hostname-style') == 'slackware'
++  conf_data.set('HOSTNAME_STYLE_SLACKWARE', 1)
++endif
++if get_option('locale-style') == 'slackware'
++  conf_data.set('LOCALE_STYLE_SLACKWARE', 1)
++endif
++if get_option('time-style') == 'slackware'
++  conf_data.set('TIME_STYLE_SLACKWARE', 1)
++endif
+ 
+ conf_data.set('PACKAGE_STRING', '"' + meson.project_name() + ' ' + meson.project_version() + '"')
+ conf_data.set10('HAVE_OPENRC', openrc_dep.found())
+diff --git a/meson_options.txt b/meson_options.txt
+index 306e633..e7e586e 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -1,4 +1,5 @@
+ option('openrc', type : 'feature', value : 'enabled')
+ option('env-update', type : 'string', value : '/usr/sbin/env-update', description : 'path to env-update executable')
+-option('hostname-style', type : 'combo', choices : ['default', 'gentoo'], value : 'default')
+-option('locale-style', type : 'combo', choices : ['default', 'gentoo'], value : 'default')
++option('hostname-style', type : 'combo', choices : ['default', 'gentoo', 'slackware'], value : 'default')
++option('locale-style', type : 'combo', choices : ['default', 'gentoo', 'slackware'], value : 'default')
++option('time-style', type : 'combo', choices : ['slackware'], value : 'slackware')
+diff --git a/src/hostnamed.c b/src/hostnamed.c
+index 81327f3..e08be44 100644
+--- a/src/hostnamed.c
++++ b/src/hostnamed.c
+@@ -733,6 +733,15 @@ hostnamed_init (gboolean _read_only)
+         g_error_free (err);
+         err = NULL;
+     }
++#elif HOSTNAME_STYLE_SLACKWARE
++    static_hostname_file = g_file_new_for_path (SYSCONFDIR "/HOSTNAME");
++
++    if (!g_file_load_contents (static_hostname_file, NULL, &static_hostname, NULL, NULL, &err)) {
++         g_debug ("%s", err->message);
++         g_error_free (err);
++         err = NULL;
++        static_hostname = NULL;
++    }
+ #else
+     static_hostname_file = g_file_new_for_path (SYSCONFDIR "/hostname");
+ 
+@@ -749,7 +758,11 @@ hostnamed_init (gboolean _read_only)
+         g_strstrip (static_hostname);
+ #endif
+ 
++#if HOSTNAME_STYLE_SLACKWARE
++    machine_info_file = g_file_new_for_path (SYSCONFDIR "/os-release");
++#else
+     machine_info_file = g_file_new_for_path (SYSCONFDIR "/machine-info");
++#endif
+ 
+     pretty_hostname = shell_source_var (machine_info_file, "${PRETTY_HOSTNAME}", &err);
+     if (pretty_hostname == NULL)
+diff --git a/src/localed.c b/src/localed.c
+index ed07dba..2739875 100644
+--- a/src/localed.c
++++ b/src/localed.c
+@@ -1288,6 +1288,10 @@ localed_init (gboolean _read_only)
+     kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/kbd-model-map");
+     locale_file = g_file_new_for_path (SYSCONFDIR "/env.d/02locale");
+     keymaps_file = g_file_new_for_path (SYSCONFDIR "/conf.d/keymaps");
++#elif LOCALE_STYLE_SLACKWARE
++    kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/openrc-settingsd/kbd-model-map");
++    locale_file = g_file_new_for_path (SYSCONFDIR "/profile.d/locale.sh");
++    keymaps_file = g_file_new_for_path (SYSCONFDIR "/conf.d/keymaps");
+ #else
+     kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/openrc-settingsd/kbd-model-map");
+     locale_file = g_file_new_for_path (SYSCONFDIR "/profile.d/locale.sh");
+diff --git a/src/timedated.c b/src/timedated.c
+index 54636e6..5f7eb3c 100644
+--- a/src/timedated.c
++++ b/src/timedated.c
+@@ -24,6 +24,8 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
++#include <stdio.h>
++#include <stdbool.h>
+ 
+ #include <dbus/dbus-protocol.h>
+ #include <glib.h>
+@@ -69,10 +71,23 @@ get_local_rtc (GError **error)
+     gchar *clock = NULL;
+     gboolean ret = FALSE;
+ 
++#if TIME_STYLE_SLACKWARE
++    gsize length = 0;
++    gchar *fileContent = NULL;
++
++    if (g_file_load_contents (hwclock_file, NULL, &fileContent, &length, NULL, error)) {
++        if (fileContent != NULL && strstr(fileContent, "localtime") != NULL) {
++            ret = TRUE;
++        }
++        g_free(fileContent);
++    }
++#else
+     clock = shell_source_var (hwclock_file, "${clock}", error);
+     if (!g_strcmp0 (clock, "local"))
+         ret = TRUE;
+     g_free (clock);
++#endif
++
+     return ret;
+ }
+ 
+@@ -171,6 +186,26 @@ set_timezone (const gchar *identifier,
+     return TRUE;
+ }
+ 
++#if TIME_STYLE_SLACKWARE
++// Function to check if the NTP service is running
++bool ntp_is_running() {
++    FILE* fp = popen("pgrep ntpd", "r"); // Check if the ntpd process is running
++    if (fp == NULL) {
++        perror("popen");
++        return false; // Assume NTP is not running if an error occurs
++    }
++
++    char buf[128];
++    if (fgets(buf, sizeof(buf), fp) != NULL) {
++        pclose(fp);
++        return true; // NTP process found, so it is running
++    }
++
++    pclose(fp);
++    return false; // NTP process not found, so it is not running
++}
++#endif
++
+ /* Return the ntp rc service we will use; return value should NOT be freed */
+ static const gchar *
+ ntp_service ()
+@@ -197,6 +232,13 @@ ntp_service ()
+     free (runlevel);
+ 
+     return service;
++#elif TIME_STYLE_SLACKWARE
++    // Check if NTP service is already running
++    // Add your logic here to check if the NTP program is running
++    if (ntp_is_running()) {
++        return "ntpd"; // Assuming "ntp" is the default service name when NTP is running
++    }
++    return NULL;
+ #else
+     return NULL;
+ #endif
+@@ -732,9 +774,15 @@ timedated_init (gboolean _read_only,
+     read_only = _read_only;
+     ntp_preferred_service = _ntp_preferred_service;
+ 
++#if TIME_STYLE_SLACKWARE
++    hwclock_file = g_file_new_for_path (SYSCONFDIR "/hardwareclock");
++    timezone_file = g_file_new_for_path (SYSCONFDIR "/timezone");
++    localtime_file = g_file_new_for_path (SYSCONFDIR "/localtime");
++#else
+     hwclock_file = g_file_new_for_path (SYSCONFDIR "/conf.d/hwclock");
+     timezone_file = g_file_new_for_path (SYSCONFDIR "/timezone");
+     localtime_file = g_file_new_for_path (SYSCONFDIR "/localtime");
++#endif
+ 
+     local_rtc = get_local_rtc (&err);
+     if (err != NULL) {
+-- 
+GitLab
+
+
+From 5cc5e2ce61afcefefab8b336894afa58f91a8bc9 Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Sat, 6 Jul 2024 19:16:51 +0000
+Subject: [PATCH 2/5] Update localed.c to Add in the file permission 0755 and
+ resourcing of the /etc/profile
+
+---
+ src/localed.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/src/localed.c b/src/localed.c
+index 2739875..cd259cf 100644
+--- a/src/localed.c
++++ b/src/localed.c
+@@ -1292,6 +1292,20 @@ localed_init (gboolean _read_only)
+     kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/openrc-settingsd/kbd-model-map");
+     locale_file = g_file_new_for_path (SYSCONFDIR "/profile.d/locale.sh");
+     keymaps_file = g_file_new_for_path (SYSCONFDIR "/conf.d/keymaps");
++
++    const char *locale_path = g_file_get_path(locale_file);
++    if (locale_path) {
++        if (chmod(locale_path, 0755) != 0) {
++            g_printerr("Failed to set permissions on locale_file\n");
++        }
++        g_free((gpointer)locale_path);
++    } else {
++        g_printerr("Failed to get path for locale_file\n");
++    }
++
++    if (system("source /etc/profile") != 0) {
++        g_printerr("Failed to source /etc/profile\n");
++    }
+ #else
+     kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/openrc-settingsd/kbd-model-map");
+     locale_file = g_file_new_for_path (SYSCONFDIR "/profile.d/locale.sh");
+-- 
+GitLab
+
+
+From 5cbf0b6d066ffbd6a7720bf7898cada9aa7744fc Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Sat, 6 Jul 2024 19:29:46 +0000
+Subject: [PATCH 3/5] Update localed.c
+
+---
+ src/localed.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/localed.c b/src/localed.c
+index cd259cf..ec63227 100644
+--- a/src/localed.c
++++ b/src/localed.c
+@@ -24,6 +24,7 @@
+ #include <dbus/dbus-protocol.h>
+ #include <glib.h>
+ #include <gio/gio.h>
++#include <sys/stat.h>
+ 
+ #include "localed.h"
+ #include "locale1-generated.h"
+-- 
+GitLab
+
+
+From 5ebdb54c261599cec020da4c5c009ba0ba72cad3 Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Sun, 7 Jul 2024 23:51:15 +0000
+Subject: [PATCH 4/5] Fixed the way the hostname was showing up in Slackware:
+ instead of "-" it is supposed to be a "."
+
+---
+ src/hostnamed.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/hostnamed.c b/src/hostnamed.c
+index e08be44..c133560 100644
+--- a/src/hostnamed.c
++++ b/src/hostnamed.c
+@@ -306,6 +306,8 @@ on_handle_set_static_hostname_authorized_cb (GObject *source_object,
+ 
+ #ifdef HOSTNAME_STYLE_GENTOO
+     if (!shell_parser_set_and_save (static_hostname_file, &err, "hostname", "HOSTNAME", data->name, NULL)) {
++#elif HOSTNAME_STYLE_SLACKWARE
++    if (!shell_parser_set_and_save (static_hostname_file, &err, "hostname", "HOSTNAME", data->name, NULL)) {
+ #else
+     hostname_file_content = g_strdup_printf ("%s\n", data->name);
+     if (!g_file_replace_contents (static_hostname_file, hostname_file_content, strlen (hostname_file_content), NULL, FALSE, 0, NULL, NULL, &err)) {
+-- 
+GitLab
+
+
+From 3c9fde454dc561656de65e85d6cef0759109fc1d Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Tue, 9 Jul 2024 01:55:37 +0000
+Subject: [PATCH 5/5] Fix the \n in the StaticHostname
+
+---
+ src/hostnamed.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/src/hostnamed.c b/src/hostnamed.c
+index c133560..b89d65c 100644
+--- a/src/hostnamed.c
++++ b/src/hostnamed.c
+@@ -739,11 +739,14 @@ hostnamed_init (gboolean _read_only)
+     static_hostname_file = g_file_new_for_path (SYSCONFDIR "/HOSTNAME");
+ 
+     if (!g_file_load_contents (static_hostname_file, NULL, &static_hostname, NULL, NULL, &err)) {
+-         g_debug ("%s", err->message);
+-         g_error_free (err);
+-         err = NULL;
++        g_debug ("%s", err->message);
++        g_error_free (err);
++        err = NULL;
+         static_hostname = NULL;
+     }
++
++    if (static_hostname != NULL)
++        g_strstrip (static_hostname);
+ #else
+     static_hostname_file = g_file_new_for_path (SYSCONFDIR "/hostname");
+ 
+-- 
+GitLab
+
+
+diff --git a/src/localed.c b/src/localed.c
+index ec63227..5360585 100644
+--- a/src/localed.c
++++ b/src/localed.c
+@@ -1304,9 +1304,6 @@ localed_init (gboolean _read_only)
+         g_printerr("Failed to get path for locale_file\n");
+     }
+ 
+-    if (system("source /etc/profile") != 0) {
+-        g_printerr("Failed to source /etc/profile\n");
+-    }
+ #else
+     kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/openrc-settingsd/kbd-model-map");
+     locale_file = g_file_new_for_path (SYSCONFDIR "/profile.d/locale.sh");
+-- 
+GitLab

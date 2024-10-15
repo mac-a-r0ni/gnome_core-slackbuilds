@@ -1,0 +1,3 @@
+Glycin allows to decode images into gdk::Textures and to extract image
+metadata. The decoding happens in sandboxed modular image loaders.
+
