@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evolution-data-server
-VERSION=${VERSION:-3.54.0}
+VERSION=${VERSION:-3.54.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -130,10 +130,10 @@ cd build
     -DENABLE_INSTALLED_TESTS="$TESTSP" \
     -DENABLE_GTK_DOC="$GTKDOCP" \
     -DWITH_SYSTEMDUSERUNITDIR=no \
-    -DWITH_WEATHER=ON \
     -DENABLE_EXAMPLES=OFF \
     -DBUILD_TESTING=OFF \
-    -DCMAKE_BUILD_TYPE=Release ..\
+    -DCMAKE_BUILD_TYPE=Release \
+    -Wno-dev ..\
     -G Ninja
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
@@ -156,4 +156,4 @@ cat $CWD/slack-required > $PKG/install/slack-required
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n --remove-tmp-rpaths $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
